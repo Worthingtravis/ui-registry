@@ -1,0 +1,89 @@
+import { useState, useCallback, type ReactNode } from "react";
+
+/**
+ * Makes its children clickable-to-copy. Shows a subtle hover highlight
+ * and a copy→check icon transition on click.
+ */
+export function CopyableRow({
+  text,
+  children,
+  className = "",
+  style,
+}: {
+  text: string;
+  children: ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }, [text]);
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      className={`group/copy -mx-1.5 flex w-[calc(100%+12px)] cursor-pointer items-start gap-1 rounded-md px-1.5 py-0.5 text-left transition-colors hover:bg-white/5 ${className}`}
+      style={style}
+    >
+      {children}
+      <span className="relative ml-auto h-3 w-3 shrink-0 self-center opacity-0 transition-opacity group-hover/copy:opacity-100">
+        {/* Copy icon */}
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="absolute inset-0 text-zinc-500 transition-all duration-200"
+          style={{
+            opacity: copied ? 0 : 1,
+            transform: copied ? "scale(0.5)" : "scale(1)",
+          }}
+        >
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+        {/* Check icon */}
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="absolute inset-0 text-green-400 transition-all duration-300"
+          style={{
+            opacity: copied ? 1 : 0,
+            transform: copied ? "scale(1)" : "scale(0.5)",
+            strokeDasharray: 24,
+            strokeDashoffset: copied ? 0 : 24,
+            transitionProperty: "opacity, transform, stroke-dashoffset",
+          }}
+        >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </span>
+    </button>
+  );
+}

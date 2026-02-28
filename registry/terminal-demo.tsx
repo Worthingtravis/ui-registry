@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TerminalChrome } from "./terminal-chrome";
 import { TypingText } from "./typing-text";
 import { ToolCallBlock } from "./tool-call-block";
+import { CopyableRow } from "./copyable-row";
 
 // ---------------------------------------------------------------------------
 // Data model
@@ -21,24 +22,16 @@ export type TerminalEntry =
 // ---------------------------------------------------------------------------
 export function buildScript(mcpEndpoint: string): TerminalEntry[] {
   return [
-  // Phase 1 — Setup
+  // Setup
   { kind: "phase", label: "Setup", pauseAfter: 300 },
-  { kind: "input", text: `claude mcp add --transport http twitch ${mcpEndpoint}`, prompt: "$", typingMs: 1200, pauseAfter: 600 },
-  { kind: "output", text: "✓ Added twitch (143 tools)", color: "green", pauseAfter: 800 },
-
-  // Phase 2 — Authenticate
-  { kind: "phase", label: "Authenticate", pauseAfter: 300 },
+  { kind: "input", text: `claude mcp add --transport http twitch ${mcpEndpoint}`, prompt: "$", typingMs: 1200, pauseAfter: 400 },
+  { kind: "output", text: "✓ Added twitch (143 tools)", color: "green", pauseAfter: 600 },
   { kind: "input", text: "/mcp", prompt: "$", typingMs: 400, pauseAfter: 400 },
-  { kind: "output", text: "> twitch → Authenticate", color: "zinc", pauseAfter: 500 },
-  { kind: "output", text: "✓ Connected as @your_channel", color: "green", pauseAfter: 800 },
+  { kind: "output", text: "✓ Connected as @your_channel", color: "green", pauseAfter: 600 },
 
-  // Phase 3 — First stream: Claude doesn't know your preferences yet
-  { kind: "phase", label: "Stream 1 — First Time", pauseAfter: 300 },
-  { kind: "input", text: "add a poll, what game should I play?", prompt: ">", typingMs: 1000, pauseAfter: 300 },
-  { kind: "claude", text: "What are your go-to game choices? I'll remember for next time.", pauseAfter: 300 },
-  { kind: "ask", question: "Poll choices:", options: ["Enter custom choices", "Let viewers suggest", "Use recent games"], pauseAfter: 500 },
-  { kind: "input", text: "Elden Ring, Minecraft, and always include Viewer's Choice", prompt: ">", typingMs: 1400, pauseAfter: 200 },
-  { kind: "thinking", text: "Creating poll…", durationMs: 800, pauseAfter: 0 },
+  // Use it
+  { kind: "phase", label: "Stream", pauseAfter: 300 },
+  { kind: "input", text: "add a poll, what game should I play? Elden Ring, Minecraft, and always include Viewer's Choice", prompt: ">", typingMs: 1400, pauseAfter: 200 },
   {
     kind: "tool-call",
     toolName: "create_poll",
@@ -50,24 +43,7 @@ export function buildScript(mcpEndpoint: string): TerminalEntry[] {
     result: "✓ Poll created — 60s, 3 choices",
     pauseAfter: 400,
   },
-  { kind: "memory", text: "Game poll choices: Elden Ring, Minecraft, and always Viewer's Choice.", pauseAfter: 600 },
-
-  // Phase 4 — Next stream: Claude remembers
-  { kind: "phase", label: "Stream 2 — Claude Remembers", pauseAfter: 300 },
-  { kind: "input", text: "add a poll, what game should I play?", prompt: ">", typingMs: 700, pauseAfter: 100 },
-  { kind: "thinking", text: "Recalling preferences…", durationMs: 500, pauseAfter: 0 },
-  {
-    kind: "tool-call",
-    toolName: "create_poll",
-    args: {
-      title: "What game should I play next?",
-      choices: ["Elden Ring", "Minecraft", "Viewer's Choice"],
-      duration: 60,
-    },
-    result: "✓ Poll created — 60s, 3 choices",
-    pauseAfter: 300,
-  },
-  { kind: "claude", text: "Same three as always: Elden Ring, Minecraft, and Viewer's Choice.", pauseAfter: 0 },
+  { kind: "memory", text: "Game poll prefs: Elden Ring, Minecraft, always Viewer's Choice.", pauseAfter: 0 },
 ];
 }
 
@@ -137,14 +113,16 @@ export function TerminalDemo({
 
             case "input":
               return (
-                <div key={i} className="flex items-center gap-1 min-w-0">
-                  <span
-                    className="shrink-0 select-none text-green-400"
-                    style={{
-                      opacity: 0,
-                      animation: `fade-in 100ms ${entry.startMs}ms forwards`,
-                    }}
-                  >
+                <CopyableRow
+                  key={i}
+                  text={entry.text}
+                  className="items-center text-zinc-100"
+                  style={{
+                    opacity: 0,
+                    animation: `fade-in 100ms ${entry.startMs}ms forwards`,
+                  }}
+                >
+                  <span className="shrink-0 select-none text-green-400">
                     {entry.prompt ?? "$"}{" "}
                   </span>
                   <TypingText
@@ -153,7 +131,7 @@ export function TerminalDemo({
                     duration={entry.typingMs}
                     className="text-zinc-100"
                   />
-                </div>
+                </CopyableRow>
               );
 
             case "output":

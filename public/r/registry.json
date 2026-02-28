@@ -73,14 +73,75 @@
       }
     },
     {
+      "name": "copyable-row",
+      "type": "registry:component",
+      "title": "Copyable Row",
+      "description": "Click-to-copy wrapper with hover highlight and copy/check icon transition.",
+      "files": [
+        {
+          "path": "registry/copyable-row.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "scroll-prompt",
+      "type": "registry:component",
+      "title": "Scroll Prompt",
+      "description": "Animated scroll-down prompt that appears when a target section is out of view.",
+      "files": [
+        {
+          "path": "registry/scroll-prompt.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "mini-terminal-demo",
+      "type": "registry:component",
+      "title": "Mini Terminal Demo",
+      "description": "Compact animated terminal card showing a single MCP tool interaction. Exports DemoEntry and DemoScenario types.",
+      "registryDependencies": [
+        "tool-call-block"
+      ],
+      "files": [
+        {
+          "path": "registry/mini-terminal-demo.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "css": {
+        "@keyframes fade-in": {
+          "from": { "opacity": "0", "transform": "translateY(4px)" },
+          "to": { "opacity": "1", "transform": "translateY(0)" }
+        }
+      }
+    },
+    {
+      "name": "demo-carousel",
+      "type": "registry:component",
+      "title": "Demo Carousel",
+      "description": "Filterable masonry grid / horizontal scroll of mini terminal demos with staggered reveal animation.",
+      "registryDependencies": [
+        "mini-terminal-demo"
+      ],
+      "files": [
+        {
+          "path": "registry/demo-carousel.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "terminal-demo",
       "type": "registry:block",
       "title": "Terminal Demo",
-      "description": "Full animated terminal session showing an MCP interaction with typing, tool calls, thinking indicators, and memory blocks.",
+      "description": "Full animated terminal session with typing, tool calls, thinking indicators, memory blocks, and copyable rows.",
       "registryDependencies": [
         "terminal-chrome",
         "typing-text",
-        "tool-call-block"
+        "tool-call-block",
+        "copyable-row"
       ],
       "files": [
         {
