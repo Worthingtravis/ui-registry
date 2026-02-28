@@ -1,0 +1,103 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "worthingtravis",
+  "homepage": "https://github.com/Worthingtravis/ui-registry",
+  "items": [
+    {
+      "name": "terminal-chrome",
+      "type": "registry:component",
+      "title": "Terminal Chrome",
+      "description": "macOS-style terminal window shell with traffic light buttons and optional title bar.",
+      "files": [
+        {
+          "path": "registry/terminal-chrome.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "typing-text",
+      "type": "registry:component",
+      "title": "Typing Text",
+      "description": "CSS-only typewriter animation with blinking cursor.",
+      "files": [
+        {
+          "path": "registry/typing-text.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "css": {
+        "@keyframes typing": {
+          "from": { "width": "0" },
+          "to": { "width": "var(--chars)" }
+        },
+        "@keyframes fade-in": {
+          "from": { "opacity": "0", "transform": "translateY(4px)" },
+          "to": { "opacity": "1", "transform": "translateY(0)" }
+        },
+        "@keyframes blink": {
+          "0%, 100%": { "border-color": "currentColor" },
+          "50%": { "border-color": "transparent" }
+        },
+        "@keyframes cursor-hide": {
+          "to": { "border-color": "transparent" }
+        },
+        "@keyframes typing-settle": {
+          "to": { "width": "fit-content" }
+        },
+        ".scrollbar-none": {
+          "scrollbar-width": "none",
+          "-ms-overflow-style": "none"
+        },
+        ".scrollbar-none::-webkit-scrollbar": {
+          "display": "none"
+        }
+      }
+    },
+    {
+      "name": "tool-call-block",
+      "type": "registry:component",
+      "title": "Tool Call Block",
+      "description": "MCP tool call display with name, arguments, and result.",
+      "files": [
+        {
+          "path": "registry/tool-call-block.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "css": {
+        "@keyframes fade-in": {
+          "from": { "opacity": "0", "transform": "translateY(4px)" },
+          "to": { "opacity": "1", "transform": "translateY(0)" }
+        }
+      }
+    },
+    {
+      "name": "terminal-demo",
+      "type": "registry:block",
+      "title": "Terminal Demo",
+      "description": "Full animated terminal session showing an MCP interaction with typing, tool calls, thinking indicators, and memory blocks.",
+      "registryDependencies": [
+        "terminal-chrome",
+        "typing-text",
+        "tool-call-block"
+      ],
+      "files": [
+        {
+          "path": "registry/terminal-demo.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "css": {
+        "@keyframes thinking-dot": {
+          "0%, 20%": { "opacity": "0.2" },
+          "50%": { "opacity": "1" },
+          "80%, 100%": { "opacity": "0.2" }
+        },
+        "@keyframes thinking-hide": {
+          "to": { "display": "none", "height": "0", "margin": "0", "padding": "0", "overflow": "hidden" }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "terminal-chrome",
+  "title": "Terminal Chrome",
+  "description": "macOS-style terminal window shell with traffic light buttons and optional title bar.",
+  "files": [
+    {
+      "path": "registry/terminal-chrome.tsx",
+      "content": "import type { ReactNode } from \"react\";\n\nexport function TerminalChrome({\n  title,\n  children,\n  rightSlot,\n}: {\n  title?: string;\n  children: ReactNode;\n  rightSlot?: ReactNode;\n}) {\n  return (\n    <div className=\"overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900\">\n      {/* Title bar */}\n      <div className=\"flex items-center justify-between border-b border-zinc-700/60 bg-zinc-800 px-3 py-1.5\">\n        <div className=\"flex items-center gap-3\">\n          <div className=\"flex items-center gap-1.5\">\n            <span className=\"h-2.5 w-2.5 rounded-full bg-red-500/80\" />\n            <span className=\"h-2.5 w-2.5 rounded-full bg-yellow-500/80\" />\n            <span className=\"h-2.5 w-2.5 rounded-full bg-green-500/80\" />\n          </div>\n          {title && (\n            <span className=\"text-xs font-medium text-zinc-400\">{title}</span>\n          )}\n        </div>\n        {rightSlot}\n      </div>\n      {/* Body */}\n      <div className=\"p-4 font-mono text-[13px] leading-relaxed\">{children}</div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

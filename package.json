@@ -1,0 +1,14 @@
+{
+  "name": "@worthingtravis/ui-registry",
+  "private": true,
+  "scripts": {
+    "build": "npx shadcn@latest build"
+  },
+  "devDependencies": {
+    "shadcn": "^3",
+    "react": "^19",
+    "react-dom": "^19",
+    "@types/react": "^19",
+    "typescript": "^5"
+  }
+}
