@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import { ToolCallBlock } from "./tool-call-block";
 
@@ -14,6 +16,7 @@ export type DemoScenario = {
   id: string;
   title: string;
   category: string;
+  streamCategory?: string;
   entries: DemoEntry[];
 };
 
@@ -42,14 +45,50 @@ const colorClass: Record<string, string> = {
 };
 
 // ---------------------------------------------------------------------------
+// Pin icons (11x11, matching existing icon style)
+// ---------------------------------------------------------------------------
+function PinOutlineIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 17v5" />
+      <path d="M9 2h6l-1 7h4l-5 6H7l2-6H5l1-7z" />
+    </svg>
+  );
+}
+
+function PinFilledIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 17v5" />
+      <path d="M9 2h6l-1 7h4l-5 6H7l2-6H5l1-7z" />
+    </svg>
+  );
+}
+
+function UnpinIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
 export function MiniTerminalDemo({
   scenario,
   play,
+  playDelay = 0,
+  isPinned = false,
+  onTogglePin,
 }: {
   scenario: DemoScenario;
   play: boolean;
+  playDelay?: number;
+  isPinned?: boolean;
+  onTogglePin?: () => void;
 }) {
   const [sessionKey, setSessionKey] = useState(0);
   const [hasPlayed, setHasPlayed] = useState(false);
@@ -60,16 +99,22 @@ export function MiniTerminalDemo({
   // Total duration = last entry's startMs + its fade-in (300ms)
   const totalMs = timed.length > 0 ? timed[timed.length - 1].startMs + 300 : 0;
 
-  // Trigger replay when `play` goes from false to true
+  // Trigger replay when `play` goes from false to true, respecting playDelay
   const prevPlay = useRef(false);
   useEffect(() => {
     if (play && !prevPlay.current) {
       setSessionKey((k) => k + 1);
-      setHasPlayed(true);
       setDone(false);
+      if (playDelay > 0) {
+        const timer = setTimeout(() => setHasPlayed(true), playDelay);
+        prevPlay.current = play;
+        return () => clearTimeout(timer);
+      } else {
+        setHasPlayed(true);
+      }
     }
     prevPlay.current = play;
-  }, [play]);
+  }, [play, playDelay]);
 
   // Mark done after all animations complete
   useEffect(() => {
@@ -101,16 +146,59 @@ export function MiniTerminalDemo({
     setTimeout(() => setCopied(false), 1500);
   }, [promptText]);
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleCopy();
+      }
+    },
+    [handleCopy]
+  );
+
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={handleCopy}
+      onKeyDown={handleKeyDown}
       className="group/card flex w-[340px] shrink-0 cursor-pointer flex-col overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 text-left transition-colors hover:border-zinc-600 lg:w-full"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       {/* Title bar */}
       <div className="flex items-center gap-3 border-b border-zinc-700/60 bg-zinc-800 px-3 py-1.5">
+        {/* Pin button — before traffic lights */}
+        {onTogglePin && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onTogglePin();
+            }}
+            className={`group/pin flex h-4 w-4 shrink-0 items-center justify-center transition-opacity ${
+              isPinned
+                ? "opacity-100"
+                : "opacity-0 group-hover/card:opacity-100"
+            }`}
+            aria-label={isPinned ? "Unpin scenario" : "Pin scenario"}
+          >
+            {isPinned ? (
+              <>
+                <span className="text-[#9147ff] group-hover/pin:hidden">
+                  <PinFilledIcon />
+                </span>
+                <span className="hidden text-zinc-400 group-hover/pin:block">
+                  <UnpinIcon />
+                </span>
+              </>
+            ) : (
+              <span className="text-zinc-500 hover:text-zinc-300">
+                <PinOutlineIcon />
+              </span>
+            )}
+          </button>
+        )}
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-red-500/80" />
           <span className="h-2 w-2 rounded-full bg-yellow-500/80" />
@@ -227,6 +315,6 @@ export function MiniTerminalDemo({
           })}
         </div>
       </div>
-    </button>
+    </div>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useCallback, type ReactNode } from "react";
 
 /**

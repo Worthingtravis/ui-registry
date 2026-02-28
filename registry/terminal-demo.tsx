@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { TerminalChrome } from "./terminal-chrome";
 import { TypingText } from "./typing-text";
