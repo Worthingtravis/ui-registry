@@ -154,15 +154,26 @@ If either fails, fix before committing. Never commit broken state.
 
 All have fixtures, demos, and proper registry.json entries. The PreviewLab harness supports fixture cycling, variant tabs, code/fixture/props inspection, and install commands.
 
+## What's Done
+
+- All imports use `@/registry/new-york/...` paths
+- All `registryDependencies` and `dependencies` complete in registry.json
+- All fixtures use BASE + fx() override pattern with exported fixture types
+- All demos import fixture types from fixture files
+- All propsMeta entries match exported Props interfaces
+- No dead code or re-export shims — lib/ has only types.ts, registry.ts, utils.ts
+- CSS keyframes declared for all items that use custom animations
+- `pnpm build` (registry + next) passes clean
+- No `any` types anywhere
+
 ## What To Work On
 
 Look at what's incomplete or could be improved:
 1. New components that need the full cycle (registry + fixtures + demo + registration)
-2. Existing components missing variants
-3. Missing `registryDependencies` or `dependencies` in registry.json
-4. Import paths not using `@/registry/new-york/...` pattern
-5. Fixtures not following BASE + override pattern
-6. Components with inline demo data instead of pure props
+2. Existing components missing variants (only step-flow and tool-call-block have variants)
+3. Component JSDoc quality — ensure every prop has a JSDoc comment
+4. README or documentation for the registry
+5. Accessibility audit — keyboard navigation, aria labels
 
 Pick the highest-impact incomplete item, do the work, verify, commit.
 
