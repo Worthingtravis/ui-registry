@@ -17,13 +17,14 @@ export function ToolCallBlock({
   result,
   delay,
 }: ToolCallBlockProps) {
+  const animStyle: React.CSSProperties = delay > 0
+    ? { opacity: 0, animation: `fade-in 300ms ${delay}ms forwards` }
+    : {};
+
   return (
     <div
       className="rounded-md border border-zinc-700 border-l-2 border-l-[#9147ff] bg-zinc-800/50 px-3 py-2"
-      style={{
-        opacity: 0,
-        animation: `fade-in 300ms ${delay}ms forwards`,
-      }}
+      style={animStyle}
     >
       <div className="flex items-center gap-1.5 text-xs">
         <span className="text-zinc-500">{"┌"}</span>

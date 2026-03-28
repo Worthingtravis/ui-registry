@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { TerminalChrome } from "./terminal-chrome";
 import { ToolCallBlock } from "./tool-call-block";
 import { computeTimings, TERMINAL_COLORS } from "@/lib/terminal";
 import { useCopy } from "@/lib/use-copy";
@@ -23,7 +24,7 @@ export type DemoScenario = {
 };
 
 // ---------------------------------------------------------------------------
-// Pin icons (11x11, matching existing icon style)
+// Pin icons (11x11)
 // ---------------------------------------------------------------------------
 function PinOutlineIcon() {
   return (
@@ -82,10 +83,8 @@ export function MiniTerminalDemo({
   const [hovered, setHovered] = useState(false);
   const timed = computeTimings(scenario.entries);
 
-  // Total duration = last entry's startMs + its fade-in (300ms)
   const totalMs = timed.length > 0 ? timed[timed.length - 1].startMs + 300 : 0;
 
-  // Trigger replay when `play` goes from false to true, respecting playDelay
   const prevPlay = useRef(false);
   useEffect(() => {
     if (play && !prevPlay.current) {
@@ -102,7 +101,6 @@ export function MiniTerminalDemo({
     prevPlay.current = play;
   }, [play, playDelay]);
 
-  // Mark done after all animations complete
   useEffect(() => {
     if (!hasPlayed) return;
     const timer = setTimeout(() => setDone(true), totalMs + 200);
@@ -110,10 +108,7 @@ export function MiniTerminalDemo({
   }, [hasPlayed, sessionKey, totalMs]);
 
   const shouldAnimate = hasPlayed;
-
-  // The primary prompt text — first input entry
   const promptText = scenario.entries.find((e) => e.kind === "input")?.text ?? "";
-
   const [copied, copy] = useCopy();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -123,101 +118,78 @@ export function MiniTerminalDemo({
     }
   };
 
+  // Pin button for leftSlot
+  const pinButton = onTogglePin ? (
+    <button
+      type="button"
+      onClick={(e) => { e.stopPropagation(); onTogglePin(); }}
+      className={`group/pin flex h-4 w-4 shrink-0 items-center justify-center transition-opacity ${
+        isPinned ? "opacity-100" : "opacity-0 group-hover/card:opacity-100"
+      }`}
+      aria-label={isPinned ? "Unpin scenario" : "Pin scenario"}
+    >
+      {isPinned ? (
+        <>
+          <span className="text-[#9147ff] group-hover/pin:hidden"><PinFilledIcon /></span>
+          <span className="hidden text-zinc-400 group-hover/pin:block"><UnpinIcon /></span>
+        </>
+      ) : (
+        <span className="text-zinc-500 hover:text-zinc-300"><PinOutlineIcon /></span>
+      )}
+    </button>
+  ) : undefined;
+
+  // Category badge + copy indicator for rightSlot
+  const rightContent = (
+    <div className="flex items-center gap-2">
+      <span className="rounded-full bg-zinc-700/50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-zinc-500">
+        {scenario.category}
+      </span>
+      <span className="relative h-3 w-3 shrink-0 opacity-0 transition-opacity group-hover/card:opacity-100">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          className="absolute inset-0 text-zinc-500 transition-all duration-200"
+          style={{ opacity: copied ? 0 : 1, transform: copied ? "scale(0.5)" : "scale(1)" }}>
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          className="absolute inset-0 text-green-400 transition-all duration-300"
+          style={{
+            opacity: copied ? 1 : 0, transform: copied ? "scale(1)" : "scale(0.5)",
+            strokeDasharray: 24, strokeDashoffset: copied ? 0 : 24,
+            transitionProperty: "opacity, transform, stroke-dashoffset",
+          }}>
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </span>
+    </div>
+  );
+
   return (
     <div
       role="button"
       tabIndex={0}
       onClick={() => copy(promptText)}
       onKeyDown={handleKeyDown}
-      className="group/card flex w-[340px] shrink-0 cursor-pointer flex-col overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 text-left transition-colors hover:border-zinc-600 lg:w-full"
+      className="group/card w-[340px] shrink-0 cursor-pointer text-left transition-colors hover:border-zinc-600 lg:w-full"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Title bar */}
-      <div className="flex items-center gap-3 border-b border-zinc-700/60 bg-zinc-800 px-3 py-1.5">
-        {/* Pin button — before traffic lights */}
-        {onTogglePin && (
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onTogglePin();
-            }}
-            className={`group/pin flex h-4 w-4 shrink-0 items-center justify-center transition-opacity ${
-              isPinned
-                ? "opacity-100"
-                : "opacity-0 group-hover/card:opacity-100"
-            }`}
-            aria-label={isPinned ? "Unpin scenario" : "Pin scenario"}
-          >
-            {isPinned ? (
-              <>
-                <span className="text-[#9147ff] group-hover/pin:hidden">
-                  <PinFilledIcon />
-                </span>
-                <span className="hidden text-zinc-400 group-hover/pin:block">
-                  <UnpinIcon />
-                </span>
-              </>
-            ) : (
-              <span className="text-zinc-500 hover:text-zinc-300">
-                <PinOutlineIcon />
-              </span>
-            )}
-          </button>
-        )}
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-red-500/80" />
-          <span className="h-2 w-2 rounded-full bg-yellow-500/80" />
-          <span className="h-2 w-2 rounded-full bg-green-500/80" />
-        </div>
-        <span className="text-[11px] font-medium text-zinc-400">
-          {scenario.title}
-        </span>
-        <span className="rounded-full bg-zinc-700/50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-zinc-500">
-          {scenario.category}
-        </span>
-        {/* Copy indicator */}
-        <span className="relative ml-auto h-3 w-3 shrink-0 opacity-0 transition-opacity group-hover/card:opacity-100">
-          <svg
-            width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            className="absolute inset-0 text-zinc-500 transition-all duration-200"
-            style={{ opacity: copied ? 0 : 1, transform: copied ? "scale(0.5)" : "scale(1)" }}
-          >
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-          </svg>
-          <svg
-            width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            className="absolute inset-0 text-green-400 transition-all duration-300"
-            style={{
-              opacity: copied ? 1 : 0,
-              transform: copied ? "scale(1)" : "scale(0.5)",
-              strokeDasharray: 24,
-              strokeDashoffset: copied ? 0 : 24,
-              transitionProperty: "opacity, transform, stroke-dashoffset",
-            }}
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </span>
-      </div>
-
-      {/* Body — always rendered for stable height; entries fade in on play */}
-      <div className="p-3 font-mono text-[12px] leading-relaxed" key={sessionKey}>
-        <div className="space-y-1.5">
+      <TerminalChrome
+        title={scenario.title}
+        leftSlot={pinButton}
+        rightSlot={rightContent}
+      >
+        <div key={sessionKey} className="space-y-1.5 text-[12px]">
           {timed.map((entry, i) => {
             const isInput = entry.kind === "input";
             const dimmed = done && !isInput && !hovered;
 
             let entryStyle: React.CSSProperties;
             if (done) {
-              entryStyle = {
-                opacity: dimmed ? 0.4 : 1,
-                transition: "opacity 400ms ease-out",
-              };
+              entryStyle = { opacity: dimmed ? 0.4 : 1, transition: "opacity 400ms ease-out" };
             } else if (shouldAnimate) {
               entryStyle = { opacity: 0, animation: `fade-in 300ms ${entry.startMs}ms forwards` };
             } else {
@@ -227,61 +199,36 @@ export function MiniTerminalDemo({
             switch (entry.kind) {
               case "input":
                 return (
-                  <div
-                    key={i}
-                    className="flex items-start gap-1 min-w-0 text-zinc-100"
-                    style={entryStyle}
-                  >
-                    <span className="shrink-0 select-none text-green-400">
-                      {entry.prompt ?? ">"}{" "}
-                    </span>
-                    <span className="flex-1" style={{ wordBreak: "break-word" }}>
-                      {entry.text}
-                    </span>
+                  <div key={i} className="flex items-start gap-1 min-w-0 text-zinc-100" style={entryStyle}>
+                    <span className="shrink-0 select-none text-green-400">{entry.prompt ?? ">"}{" "}</span>
+                    <span className="flex-1" style={{ wordBreak: "break-word" }}>{entry.text}</span>
                   </div>
                 );
-
               case "output":
                 return (
-                  <div
-                    key={i}
-                    className={TERMINAL_COLORS[entry.color ?? "zinc"] ?? "text-zinc-400"}
-                    style={entryStyle}
-                  >
+                  <div key={i} className={TERMINAL_COLORS[entry.color ?? "zinc"] ?? "text-zinc-400"} style={entryStyle}>
                     {entry.text}
                   </div>
                 );
-
               case "tool-call":
                 return (
                   <div key={i} style={entryStyle}>
-                    <ToolCallBlock
-                      toolName={entry.toolName}
-                      args={entry.args}
-                      result={entry.result}
-                      delay={0}
-                    />
+                    <ToolCallBlock toolName={entry.toolName} args={entry.args} result={entry.result} delay={0} />
                   </div>
                 );
-
               case "claude":
                 return (
-                  <div
-                    key={i}
-                    className="flex items-start gap-2 text-zinc-300"
-                    style={entryStyle}
-                  >
+                  <div key={i} className="flex items-start gap-2 text-zinc-300" style={entryStyle}>
                     <span className="shrink-0 text-[#9147ff]/60">✦</span>
                     <span>{entry.text}</span>
                   </div>
                 );
-
               default:
                 return null;
             }
           })}
         </div>
-      </div>
+      </TerminalChrome>
     </div>
   );
 }

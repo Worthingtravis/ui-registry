@@ -5,20 +5,27 @@ export interface TerminalChromeProps {
   title?: string;
   /** Terminal body content */
   children: ReactNode;
+  /** Slot rendered before the traffic lights (e.g. pin button) */
+  leftSlot?: ReactNode;
   /** Slot rendered on the right side of the title bar */
   rightSlot?: ReactNode;
+  /** Additional class names for the outer container */
+  className?: string;
 }
 
 export function TerminalChrome({
   title,
   children,
+  leftSlot,
   rightSlot,
+  className = "",
 }: TerminalChromeProps) {
   return (
-    <div className="overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900">
+    <div className={`overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 ${className}`}>
       {/* Title bar */}
       <div className="flex items-center justify-between border-b border-zinc-700/60 bg-zinc-800 px-3 py-1.5">
         <div className="flex items-center gap-3">
+          {leftSlot}
           <div className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
             <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
