@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import type { ComponentType, ReactNode } from "react";
 
 // ---------------------------------------------------------------------------
 // Registry types — shared across the entire preview system
@@ -38,7 +38,7 @@ export interface PreviewLabConfig<TFixture> {
    * When variants are defined, the active variant is passed as the second arg.
    * This follows the Sacred v3 ExperimentLab pattern: render(fixture, Variant).
    */
-  render: (fixture: TFixture, Variant?: ComponentType<TFixture>) => React.ReactNode;
+  render: (fixture: TFixture, Variant?: ComponentType<TFixture>) => ReactNode;
   /** Visual variants of the same component (optional) */
   variants?: Variant<TFixture>[];
   /** Raw source code string for code tab */

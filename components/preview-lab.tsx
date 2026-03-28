@@ -174,7 +174,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
   const availableTabs = TABS.filter((tab) => {
     if (tab === "preview") return true;
     if (tab === "code") return !!sourceCode;
-    if (tab === "fixtures") return !!fixtureCode;
+    if (tab === "fixtures") return true; // always show — renders active fixture as JSON
     if (tab === "props") return propsMeta && propsMeta.length > 0;
     return false;
   });
@@ -251,8 +251,8 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
 
         {activeTab === "preview" && activeFixture !== undefined && (
-          <div className="rounded-b-lg border border-t-0 border-border bg-background p-6 min-h-[140px]">
-            {render(activeFixture, activeVariant)}
+          <div className="rounded-b-lg border border-t-0 border-border bg-background p-8 min-h-[140px] flex items-center justify-center">
+            <div className="w-full">{render(activeFixture, activeVariant)}</div>
           </div>
         )}
 
@@ -262,9 +262,25 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
           </div>
         )}
 
-        {activeTab === "fixtures" && fixtureCode && (
-          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
-            <CodeBlock code={fixtureCode} />
+        {activeTab === "fixtures" && (
+          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden space-y-0">
+            {/* Live fixture data */}
+            <div className="relative rounded-none border-b border-border/30 bg-zinc-950">
+              <div className="flex items-center justify-between border-b border-border/30 px-4 py-2">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  Active: {activeFixtureKey}
+                </span>
+              </div>
+              <CopyButton
+                text={JSON.stringify(activeFixture, null, 2)}
+                className="absolute top-2 right-3"
+              />
+              <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-zinc-300 max-h-[400px] overflow-y-auto">
+                <code>{JSON.stringify(activeFixture, null, 2)}</code>
+              </pre>
+            </div>
+            {/* Source code (if provided) */}
+            {fixtureCode && <CodeBlock code={fixtureCode} label="Source" />}
           </div>
         )}
 
