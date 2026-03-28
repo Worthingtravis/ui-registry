@@ -5,10 +5,10 @@ import { ALL_FIXTURES, type TerminalChromeFixture } from "@/fixtures/terminal-ch
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
 const colorMap: Record<string, string> = {
-  green: "text-[var(--term-success)]",
-  zinc: "text-[var(--term-text-muted)]",
-  cyan: "text-[var(--term-accent)]",
-  muted: "text-[var(--term-text-muted)]",
+  green: "text-term-success",
+  zinc: "text-term-text-muted",
+  cyan: "text-term-accent",
+  muted: "text-term-text-muted",
 };
 
 const propsMeta: PropMeta[] = [
@@ -27,20 +27,20 @@ export const config: PreviewLabConfig<TerminalChromeFixture> = {
       title={fixture.title}
       rightSlot={
         fixture.hasRightSlot ? (
-          <span className="text-[10px] font-mono text-[var(--term-success)] px-2 py-0.5 rounded bg-[var(--term-success)]/10">
+          <span className="text-[10px] font-mono text-term-success px-2 py-0.5 rounded bg-term-success/10">
             running
           </span>
         ) : undefined
       }
     >
       {fixture.bodyLines.length === 0 ? (
-        <p className="text-[var(--term-text-muted)]">
-          $ <span className="border-r border-[var(--term-text-muted)] animate-pulse">&nbsp;</span>
+        <p className="text-term-text-muted">
+          $ <span className="border-r border-term-text-muted animate-pulse">&nbsp;</span>
         </p>
       ) : (
-        <div className="space-y-1 text-[var(--term-text)]">
+        <div className="space-y-1 text-term-text">
           {fixture.bodyLines.map((line, i) => (
-            <p key={i} className={line.color ? colorMap[line.color] : "text-[var(--term-text)]"}>
+            <p key={i} className={line.color ? colorMap[line.color] : "text-term-text"}>
               {line.text}
             </p>
           ))}

@@ -23,26 +23,26 @@ export function ToolCallBlock({
 
   return (
     <div
-      className="terminal rounded-md border border-[var(--term-border)] border-l-2 border-l-[var(--term-accent)] bg-[var(--term-bg-muted)] px-3 py-2"
+      className="terminal rounded-md border border-term-border border-l-2 border-l-term-accent bg-term-bg-muted px-3 py-2"
       style={animStyle}
     >
       <div className="flex items-center gap-1.5 text-xs">
-        <span className="text-[var(--term-text-muted)]">{"\u250C"}</span>
-        <span className="font-semibold text-[var(--term-accent)]">{toolName}</span>
+        <span className="text-term-text-muted">{"\u250C"}</span>
+        <span className="font-semibold text-term-accent">{toolName}</span>
       </div>
-      <div className="ml-3 border-l border-[var(--term-border)] pl-2">
+      <div className="ml-3 border-l border-term-border pl-2">
         {Object.entries(args).map(([key, value]) => (
-          <div key={key} className="text-xs text-[var(--term-text-muted)]">
-            <span className="text-[var(--term-text-muted)]">{key}:</span>{" "}
-            <span className="text-[var(--term-text)]">
+          <div key={key} className="text-xs text-term-text-muted">
+            <span className="text-term-text-muted">{key}:</span>{" "}
+            <span className="text-term-text">
               {typeof value === "string" ? `"${value}"` : JSON.stringify(value)}
             </span>
           </div>
         ))}
       </div>
       <div className="flex items-center gap-1.5 text-xs">
-        <span className="text-[var(--term-text-muted)]">{"\u2514"}</span>
-        <span className="text-[var(--term-success)]">{result}</span>
+        <span className="text-term-text-muted">{"\u2514"}</span>
+        <span className="text-term-success">{result}</span>
       </div>
     </div>
   );

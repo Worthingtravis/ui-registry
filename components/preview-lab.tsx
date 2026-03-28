@@ -29,14 +29,14 @@ export function CopyButton({ text, className }: { text: string; className?: stri
 
 export function CodeBlock({ code, label }: { code: string; label?: string }) {
   return (
-    <div className="relative rounded-lg border border-border/40 bg-zinc-950 overflow-hidden">
+    <div className="relative rounded-lg border border-border/40 bg-code-bg overflow-hidden">
       {label && (
         <div className="flex items-center justify-between border-b border-border/30 px-4 py-2">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</span>
         </div>
       )}
       <CopyButton text={code} className="absolute top-3 right-3" />
-      <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-zinc-300">
+      <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
         <code>{code}</code>
       </pre>
     </div>
@@ -63,7 +63,7 @@ function InstallTabs({ baseCommand }: { baseCommand: string }) {
   })();
 
   return (
-    <div className="rounded-lg border border-border/40 bg-zinc-950 overflow-hidden">
+    <div className="rounded-lg border border-border/40 bg-code-bg overflow-hidden">
       <div className="flex items-center border-b border-border/30">
         <div className="flex items-center gap-0 px-1">
           {PACKAGE_MANAGERS.map((p) => (
@@ -73,7 +73,7 @@ function InstallTabs({ baseCommand }: { baseCommand: string }) {
               className={cn(
                 "px-3 py-2 text-xs font-medium transition-colors rounded-t",
                 pm === p
-                  ? "text-foreground bg-zinc-800"
+                  ? "text-foreground bg-accent"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
@@ -83,7 +83,7 @@ function InstallTabs({ baseCommand }: { baseCommand: string }) {
         </div>
         <CopyButton text={command} className="ml-auto mr-2" />
       </div>
-      <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-zinc-300">
+      <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
         <code>{command}</code>
       </pre>
     </div>
@@ -293,7 +293,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         {activeTab === "fixtures" && (
           <div className="border border-t-0 border-border rounded-b-lg overflow-hidden space-y-0">
             {/* Live fixture data */}
-            <div className="relative rounded-none border-b border-border/30 bg-zinc-950">
+            <div className="relative rounded-none border-b border-border/30 bg-code-bg">
               <div className="flex items-center justify-between border-b border-border/30 px-4 py-2">
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                   Active: {activeFixtureKey}
@@ -303,7 +303,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
                 text={JSON.stringify(activeFixture, null, 2)}
                 className="absolute top-2 right-3"
               />
-              <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-zinc-300 max-h-[400px] overflow-y-auto">
+              <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text max-h-[400px] overflow-y-auto">
                 <code>{JSON.stringify(activeFixture, null, 2)}</code>
               </pre>
             </div>
@@ -313,7 +313,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
 
         {activeTab === "props" && propsMeta && propsMeta.length > 0 && (
-          <div className="border border-t-0 border-border rounded-b-lg bg-zinc-950 overflow-hidden">
+          <div className="border border-t-0 border-border rounded-b-lg bg-code-bg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -333,8 +333,8 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
                           <p className="text-muted-foreground mt-0.5 text-[11px]">{prop.description}</p>
                         )}
                       </td>
-                      <td className="px-4 py-2.5 font-mono text-zinc-400 text-xs">{prop.type}</td>
-                      <td className="px-4 py-2.5 font-mono text-zinc-500 text-xs">{prop.defaultValue ?? "—"}</td>
+                      <td className="px-4 py-2.5 font-mono text-muted-foreground text-xs">{prop.type}</td>
+                      <td className="px-4 py-2.5 font-mono text-muted-foreground text-xs">{prop.defaultValue ?? "—"}</td>
                     </tr>
                   ))}
                 </tbody>

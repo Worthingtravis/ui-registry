@@ -19,6 +19,29 @@
   --radius: 0.625rem;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Terminal palette — always-dark context for terminal components */
+  --color-term-bg: var(--term-bg);
+  --color-term-bg-header: var(--term-bg-header);
+  --color-term-bg-muted: var(--term-bg-muted);
+  --color-term-border: var(--term-border);
+  --color-term-border-muted: var(--term-border-muted);
+  --color-term-text: var(--term-text);
+  --color-term-text-muted: var(--term-text-muted);
+  --color-term-text-bright: var(--term-text-bright);
+  --color-term-accent: var(--term-accent);
+  --color-term-accent-muted: var(--term-accent-muted);
+  --color-term-success: var(--term-success);
+  --color-term-warning: var(--term-warning);
+  --color-term-warning-muted: var(--term-warning-muted);
+  --color-term-dot-red: var(--term-dot-red);
+  --color-term-dot-yellow: var(--term-dot-yellow);
+  --color-term-dot-green: var(--term-dot-green);
+
+  /* Code block palette */
+  --color-code-bg: var(--term-bg);
+  --color-code-text: var(--term-text);
+  --color-code-border: var(--term-border);
 }
 
 @layer base {

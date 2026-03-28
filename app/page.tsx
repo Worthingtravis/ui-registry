@@ -41,11 +41,11 @@ export default function HomePage() {
         <p className="text-sm text-muted-foreground">
           Install any component using the shadcn CLI:
         </p>
-        <div className="relative rounded-lg border border-border/40 bg-zinc-950 overflow-hidden">
+        <div className="relative rounded-lg border border-border/40 bg-code-bg overflow-hidden">
           <div className="flex items-center border-b border-border/30 px-4 py-2">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Command</span>
           </div>
-          <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-zinc-300">
+          <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
             <code>{installCommand("[component-name]")}</code>
           </pre>
         </div>
