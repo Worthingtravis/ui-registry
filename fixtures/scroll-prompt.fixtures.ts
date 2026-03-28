@@ -7,12 +7,15 @@ const BASE: ScrollPromptFixture = {
   label: "Scroll to explore",
 };
 
-const fx = (overrides: Partial<ScrollPromptProps>): ScrollPromptProps => ({
+const fx = (overrides: Partial<ScrollPromptFixture>): ScrollPromptFixture => ({
   ...BASE,
   ...overrides,
 });
 
-export const ALL_FIXTURES: Record<string, ScrollPromptProps> = {
+export const ALL_FIXTURES: Record<string, ScrollPromptFixture> = {
   "Default": BASE,
-  "Custom label": fx({ label: "See more below", targetId: "scroll-demo-target" }),
+  "See more": fx({ label: "See more below" }),
+  "Jump to section": fx({ label: "Jump to features", targetId: "features-section" }),
+  "Back to top": fx({ label: "Back to top", targetId: "page-top" }),
+  "View results": fx({ label: "View results", targetId: "results-section" }),
 };
