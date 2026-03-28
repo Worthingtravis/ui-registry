@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 /**
  * Hook for clipboard copy with copied-state feedback.
@@ -8,11 +8,13 @@ import { useState, useCallback } from "react";
  */
 export function useCopy(timeout = 1500): [boolean, (text: string) => void] {
   const [copied, setCopied] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
 
   const copy = useCallback(
     (text: string) => {
       navigator.clipboard.writeText(text).catch(() => {
-        // Fallback for older browsers
         const textarea = document.createElement("textarea");
         textarea.value = text;
         textarea.style.position = "fixed";
@@ -23,7 +25,8 @@ export function useCopy(timeout = 1500): [boolean, (text: string) => void] {
         document.body.removeChild(textarea);
       });
       setCopied(true);
-      setTimeout(() => setCopied(false), timeout);
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setCopied(false), timeout);
     },
     [timeout],
   );

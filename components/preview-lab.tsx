@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Copy, Check } from "lucide-react";
 import { useCopy } from "@/lib/use-copy";
@@ -8,12 +8,11 @@ import { CodeHighlight } from "@/components/code-highlight";
 import type { PreviewLabConfig } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
-// Shared sub-components (exported for reuse)
+// CopyButton — used by InstallTabs (dark-bg context)
 // ---------------------------------------------------------------------------
 
-export function CopyButton({ text, className }: { text: string; className?: string }) {
+function CopyButton({ text, className }: { text: string; className?: string }) {
   const [copied, copy] = useCopy();
-
   return (
     <button
       onClick={() => copy(text)}
@@ -28,24 +27,8 @@ export function CopyButton({ text, className }: { text: string; className?: stri
   );
 }
 
-export function CodeBlock({ code, label }: { code: string; label?: string }) {
-  return (
-    <div className="relative rounded-lg border border-border/40 bg-code-bg overflow-hidden">
-      {label && (
-        <div className="flex items-center justify-between border-b border-border/30 px-4 py-2">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</span>
-        </div>
-      )}
-      <CopyButton text={code} className="absolute top-3 right-3" />
-      <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
-        <code>{code}</code>
-      </pre>
-    </div>
-  );
-}
-
 // ---------------------------------------------------------------------------
-// Package manager install tabs
+// Install tabs
 // ---------------------------------------------------------------------------
 
 const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const;
@@ -53,15 +36,15 @@ const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const;
 function InstallTabs({ baseCommand }: { baseCommand: string }) {
   const [pm, setPm] = useState<(typeof PACKAGE_MANAGERS)[number]>("pnpm");
 
-  // The base command is "npx shadcn@latest add ..." — adapt per package manager
-  const command = (() => {
+  const suffix = baseCommand.replace(/^npx shadcn@latest add /, "");
+  const command = useMemo(() => {
     switch (pm) {
-      case "pnpm": return `pnpm dlx shadcn@latest add ${baseCommand.replace(/^npx shadcn@latest add /, "")}`;
-      case "npm": return baseCommand; // npx is npm's runner
-      case "yarn": return `npx shadcn@latest add ${baseCommand.replace(/^npx shadcn@latest add /, "")}`;
-      case "bun": return `bunx --bun shadcn@latest add ${baseCommand.replace(/^npx shadcn@latest add /, "")}`;
+      case "pnpm": return `pnpm dlx shadcn@latest add ${suffix}`;
+      case "npm": return baseCommand;
+      case "yarn": return `npx shadcn@latest add ${suffix}`;
+      case "bun": return `bunx --bun shadcn@latest add ${suffix}`;
     }
-  })();
+  }, [pm, baseCommand, suffix]);
 
   return (
     <div className="rounded-lg border border-border/40 bg-code-bg overflow-hidden">
@@ -92,15 +75,18 @@ function InstallTabs({ baseCommand }: { baseCommand: string }) {
 }
 
 // ---------------------------------------------------------------------------
-// Tab types
+// PreviewLab
 // ---------------------------------------------------------------------------
 
 const TABS = ["preview", "code", "fixtures", "props"] as const;
 type Tab = (typeof TABS)[number];
 
-// ---------------------------------------------------------------------------
-// PreviewLab
-// ---------------------------------------------------------------------------
+const TAB_LABELS: Record<Tab, string> = {
+  preview: "Preview",
+  code: "Code",
+  fixtures: "Fixtures",
+  props: "Props",
+};
 
 interface PreviewLabComponentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -110,30 +96,22 @@ interface PreviewLabComponentProps {
 
 export function PreviewLab({ config, installCommand }: PreviewLabComponentProps) {
   const {
-    title,
-    description,
-    tags,
-    fixtures,
-    render,
-    variants,
-    sourceCode,
-    fixtureCode,
-    propsMeta,
+    title, description, tags, fixtures, render, variants,
+    sourceCode, fixtureCode, propsMeta,
   } = config;
 
-  const fixtureKeys = Object.keys(fixtures);
+  const fixtureKeys = useMemo(() => Object.keys(fixtures), [fixtures]);
   const [fixtureIndex, setFixtureIndex] = useState(0);
   const [variantIndex, setVariantIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<Tab>("preview");
 
   const activeFixtureKey = fixtureKeys[fixtureIndex] ?? fixtureKeys[0];
   const activeFixture = activeFixtureKey ? fixtures[activeFixtureKey] : undefined;
+  const fixtureJson = useMemo(() => JSON.stringify(activeFixture, null, 2), [activeFixture]);
 
-  // Keyboard navigation: Up/Down = fixtures, Left/Right = variants
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-
       switch (e.key) {
         case "ArrowUp":
           e.preventDefault();
@@ -165,34 +143,31 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  // Active variant component (if any)
   const activeVariant =
     variants && variants.length > 0 && variantIndex < variants.length
       ? variants[variantIndex]!.component
       : undefined;
 
-  // Available tabs (only show tabs that have content)
-  const availableTabs = TABS.filter((tab) => {
-    if (tab === "preview") return true;
-    if (tab === "code") return !!sourceCode;
-    if (tab === "fixtures") return true; // always show — renders active fixture as JSON
-    if (tab === "props") return propsMeta && propsMeta.length > 0;
-    return false;
-  });
+  const availableTabs = useMemo(() =>
+    TABS.filter((tab) => {
+      if (tab === "preview") return true;
+      if (tab === "code") return !!sourceCode;
+      if (tab === "fixtures") return true;
+      if (tab === "props") return propsMeta && propsMeta.length > 0;
+      return false;
+    }),
+    [sourceCode, propsMeta],
+  );
 
   return (
     <div className="space-y-10">
-      {/* Header — shadcn style */}
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
         <p className="text-base text-muted-foreground max-w-2xl">{description}</p>
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 pt-2">
             {tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground"
-              >
+              <span key={tag} className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
                 {tag}
               </span>
             ))}
@@ -200,7 +175,6 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
       </div>
 
-      {/* Variant selector */}
       {variants && variants.length > 1 && (
         <div className="space-y-3">
           <div className="flex items-center gap-2">
@@ -229,7 +203,6 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
       )}
 
-      {/* Fixture selector */}
       {fixtureKeys.length > 1 && (
         <div className="space-y-3">
           <div className="flex items-center gap-2">
@@ -255,7 +228,6 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
       )}
 
-      {/* Preview / Code Tabs — shadcn style */}
       <div className="space-y-0">
         <div className="flex items-center border-b border-border">
           {availableTabs.map((tab) => (
@@ -269,7 +241,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
                   : "text-muted-foreground/80 hover:text-foreground",
               )}
             >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              {TAB_LABELS[tab]}
               {activeTab === tab && (
                 <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground" />
               )}
@@ -293,14 +265,12 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
 
         {activeTab === "fixtures" && (
           <div className="border border-t-0 border-border rounded-b-lg overflow-hidden space-y-0">
-            {/* Live fixture JSON */}
             <CodeHighlight
-              code={JSON.stringify(activeFixture, null, 2)}
+              code={fixtureJson}
               language="json"
               label={`Active: ${activeFixtureKey}`}
               className="rounded-none border-0 border-b border-code-border/30 max-h-[400px] overflow-y-auto"
             />
-            {/* Fixture source */}
             {fixtureCode && (
               <CodeHighlight code={fixtureCode} language="tsx" label="Source" className="rounded-none border-0" />
             )}
@@ -339,13 +309,11 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
       </div>
 
-      {/* Installation — with package manager tabs */}
       <div className="space-y-3">
         <h2 className="text-lg font-semibold">Installation</h2>
         <InstallTabs baseCommand={installCommand} />
       </div>
 
-      {/* All fixtures matrix */}
       {fixtureKeys.length > 1 && (
         <div className="space-y-4">
           <h2 className="text-lg font-semibold">All States</h2>

@@ -2,14 +2,8 @@
 
 import { TerminalChrome } from "@/registry/terminal-chrome";
 import { ALL_FIXTURES, type TerminalChromeFixture } from "@/fixtures/terminal-chrome.fixtures";
+import { TERMINAL_COLORS } from "@/lib/terminal";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
-
-const colorMap: Record<string, string> = {
-  green: "text-term-success",
-  zinc: "text-term-text-muted",
-  cyan: "text-term-accent",
-  muted: "text-term-text-muted",
-};
 
 const propsMeta: PropMeta[] = [
   { name: "title", type: "string", required: false, description: "Window title shown next to traffic lights" },
@@ -40,7 +34,7 @@ export const config: PreviewLabConfig<TerminalChromeFixture> = {
       ) : (
         <div className="space-y-1 text-term-text">
           {fixture.bodyLines.map((line, i) => (
-            <p key={i} className={line.color ? colorMap[line.color] : "text-term-text"}>
+            <p key={i} className={line.color ? TERMINAL_COLORS[line.color] : "text-term-text"}>
               {line.text}
             </p>
           ))}

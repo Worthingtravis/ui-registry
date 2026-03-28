@@ -25,4 +25,6 @@ export const TERMINAL_COLORS: Record<string, string> = {
   green: "text-term-success",
   zinc: "text-term-text-muted",
   purple: "text-term-accent",
+  cyan: "text-term-accent",
+  muted: "text-term-text-muted",
 };

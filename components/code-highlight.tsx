@@ -1,9 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useCopy } from "@/lib/use-copy";
 import { Copy, Check } from "lucide-react";
+import type { Highlighter } from "shiki";
+
+// Singleton highlighter — created once, reused for all highlights
+let highlighterPromise: Promise<Highlighter> | null = null;
+function getHighlighter(): Promise<Highlighter> {
+  if (!highlighterPromise) {
+    highlighterPromise = import("shiki").then((m) =>
+      m.createHighlighter({
+        themes: ["github-dark-default"],
+        langs: ["tsx", "typescript", "json", "bash"],
+      }),
+    );
+  }
+  return highlighterPromise;
+}
 
 interface CodeHighlightProps {
   code: string;
@@ -17,12 +32,16 @@ export function CodeHighlight({ code, language = "tsx", label, className }: Code
   const [copied, copy] = useCopy();
 
   useEffect(() => {
-    import("shiki").then(({ codeToHtml }) => {
-      codeToHtml(code, {
+    let cancelled = false;
+    getHighlighter().then((highlighter) => {
+      if (cancelled) return;
+      const result = highlighter.codeToHtml(code, {
         lang: language,
         theme: "github-dark-default",
-      }).then(setHtml);
+      });
+      setHtml(result);
     });
+    return () => { cancelled = true; };
   }, [code, language]);
 
   return (
