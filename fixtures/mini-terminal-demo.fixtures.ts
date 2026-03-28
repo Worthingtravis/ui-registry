@@ -57,4 +57,30 @@ export const ALL_FIXTURES: Record<string, MiniTerminalDemoFixture> = {
       ],
     },
   }),
+  "Staggered delay": fx({
+    playDelay: 800,
+    scenario: {
+      id: "git-push",
+      title: "Git push",
+      category: "git",
+      entries: [
+        { kind: "input", text: "git push origin main", prompt: ">", typingMs: 700, pauseAfter: 400 },
+        { kind: "output", text: "Enumerating objects: 12, done.", color: "zinc", pauseAfter: 200 },
+        { kind: "output", text: "Compressing objects: 100% (8/8)", color: "zinc", pauseAfter: 200 },
+        { kind: "output", text: "To github.com:user/repo.git", color: "green", pauseAfter: 0 },
+      ],
+    },
+  }),
+  "Claude conversation": fx({
+    scenario: {
+      id: "claude-chat",
+      title: "Claude Code",
+      category: "ai",
+      entries: [
+        { kind: "input", text: "explain this error in auth.ts", prompt: ">", typingMs: 900, pauseAfter: 300 },
+        { kind: "claude", text: "The JWT token is expired. The refresh logic on line 42 doesn't handle clock skew.", pauseAfter: 200 },
+        { kind: "output", text: "→ auth.ts:42", color: "purple", pauseAfter: 0 },
+      ],
+    },
+  }),
 };
