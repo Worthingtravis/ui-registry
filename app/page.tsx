@@ -1,57 +1,57 @@
 import Link from "next/link";
 import { REGISTRY, installCommand } from "@/lib/registry";
 
+function kebabToTitle(name: string) {
+  return name.split("-").map(w => w[0]!.toUpperCase() + w.slice(1)).join(" ");
+}
+
 export default function HomePage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-16 space-y-12">
+    <div className="max-w-3xl px-6 lg:px-8 py-10 space-y-10">
       {/* Header */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold tracking-tight">UI Registry</h1>
-          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-            {REGISTRY.length} components
-          </span>
-        </div>
-        <p className="text-muted-foreground text-sm max-w-lg">
-          Installable components for shadcn/ui. Click any component to see a live preview
-          with multiple examples, then copy the install command.
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">Components</h1>
+        <p className="text-muted-foreground text-base max-w-2xl">
+          Beautifully designed components built with Tailwind CSS. Installable via the shadcn CLI.
         </p>
       </div>
 
-      {/* Component grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {/* Component list — shadcn style */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {REGISTRY.map((entry) => (
           <Link
             key={entry.name}
             href={`/preview/${entry.name}`}
-            className="group rounded-xl border border-border/40 bg-card/40 p-5 transition-all hover:border-border/80 hover:bg-card/60 hover:shadow-lg hover:shadow-primary/5"
+            className="group relative rounded-lg border border-border/50 bg-card p-4 transition-all hover:border-border hover:shadow-md hover:shadow-primary/5"
           >
-            <h2 className="text-sm font-bold tracking-tight group-hover:text-primary transition-colors">
-              {entry.name.split("-").map(w => w[0]!.toUpperCase() + w.slice(1)).join(" ")}
-            </h2>
-            <div className="flex flex-wrap gap-1.5 mt-3">
-              {entry.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground"
-                >
-                  {tag}
-                </span>
-              ))}
+            {/* Preview placeholder */}
+            <div className="mb-3 rounded-md border border-border/30 bg-muted/20 p-6 flex items-center justify-center min-h-[80px]">
+              <span className="text-xs text-muted-foreground/50 font-mono">{`<${kebabToTitle(entry.name).replace(/ /g, "")} />`}</span>
             </div>
+            <h3 className="text-sm font-semibold group-hover:text-primary transition-colors">
+              {kebabToTitle(entry.name)}
+            </h3>
+            <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+              {entry.tags.join(" / ")}
+            </p>
           </Link>
         ))}
       </div>
 
-      {/* Install info */}
-      <div className="rounded-xl border border-border/40 bg-card/40 p-6 space-y-3">
-        <h2 className="text-sm font-bold tracking-tight">Quick Install</h2>
-        <p className="text-xs text-muted-foreground">
-          Install any component by name:
+      {/* Install section */}
+      <div className="space-y-4 pt-4 border-t border-border/30">
+        <h2 className="text-lg font-semibold">Installation</h2>
+        <p className="text-sm text-muted-foreground">
+          Install any component using the shadcn CLI:
         </p>
-        <pre className="text-xs font-mono bg-muted/30 rounded-lg p-3 overflow-x-auto">
-          {installCommand("[name]")}
-        </pre>
+        <div className="relative rounded-lg border border-border/40 bg-zinc-950 overflow-hidden">
+          <div className="flex items-center border-b border-border/30 px-4 py-2">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Command</span>
+          </div>
+          <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-zinc-300">
+            <code>{installCommand("[component-name]")}</code>
+          </pre>
+        </div>
       </div>
     </div>
   );

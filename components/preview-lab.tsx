@@ -49,6 +49,53 @@ export function CodeBlock({ code, label }: { code: string; label?: string }) {
 }
 
 // ---------------------------------------------------------------------------
+// Package manager install tabs
+// ---------------------------------------------------------------------------
+
+const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const;
+
+function InstallTabs({ baseCommand }: { baseCommand: string }) {
+  const [pm, setPm] = useState<(typeof PACKAGE_MANAGERS)[number]>("pnpm");
+
+  // The base command is "npx shadcn@latest add ..." — adapt per package manager
+  const command = (() => {
+    switch (pm) {
+      case "pnpm": return `pnpm dlx shadcn@latest add ${baseCommand.replace(/^npx shadcn@latest add /, "")}`;
+      case "npm": return baseCommand; // npx is npm's runner
+      case "yarn": return `npx shadcn@latest add ${baseCommand.replace(/^npx shadcn@latest add /, "")}`;
+      case "bun": return `bunx --bun shadcn@latest add ${baseCommand.replace(/^npx shadcn@latest add /, "")}`;
+    }
+  })();
+
+  return (
+    <div className="rounded-lg border border-border/40 bg-zinc-950 overflow-hidden">
+      <div className="flex items-center border-b border-border/30">
+        <div className="flex items-center gap-0 px-1">
+          {PACKAGE_MANAGERS.map((p) => (
+            <button
+              key={p}
+              onClick={() => setPm(p)}
+              className={cn(
+                "px-3 py-2 text-xs font-medium transition-colors rounded-t",
+                pm === p
+                  ? "text-foreground bg-zinc-800"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+        <CopyButton text={command} className="ml-auto mr-2" />
+      </div>
+      <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-zinc-300">
+        <code>{command}</code>
+      </pre>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Tab types
 // ---------------------------------------------------------------------------
 
@@ -138,13 +185,13 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
   });
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
+    <div className="space-y-10">
+      {/* Header — shadcn style */}
       <div className="space-y-2">
-        <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
+        <p className="text-base text-muted-foreground max-w-2xl">{description}</p>
         {tags && tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-1">
+          <div className="flex flex-wrap gap-1.5 pt-2">
             {tags.map((tag) => (
               <span
                 key={tag}
@@ -157,19 +204,12 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
       </div>
 
-      {/* Install */}
-      <CodeBlock code={installCommand} label="Install" />
-
       {/* Variant selector */}
       {variants && variants.length > 1 && (
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-              Variants
-            </span>
-            <span className="text-[10px] text-muted-foreground/60">
-              (Left/Right arrows)
-            </span>
+            <h2 className="text-sm font-semibold">Variants</h2>
+            <span className="text-[10px] text-muted-foreground/60">(Left/Right arrows)</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {variants.map((v, i) => (
@@ -177,10 +217,10 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
                 key={v.name}
                 onClick={() => setVariantIndex(i)}
                 className={cn(
-                  "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border",
+                  "px-3 py-1.5 rounded-md text-xs font-medium transition-all border",
                   i === variantIndex
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-muted/30 text-muted-foreground border-border/40 hover:bg-muted/60 hover:border-border",
+                    ? "bg-foreground text-background border-foreground"
+                    : "bg-transparent text-muted-foreground border-border hover:bg-muted/60 hover:border-border",
                 )}
               >
                 {v.name}
@@ -188,100 +228,74 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
             ))}
           </div>
           {variants[variantIndex]?.description && (
-            <p className="text-xs text-muted-foreground">
-              {variants[variantIndex].description}
-            </p>
+            <p className="text-xs text-muted-foreground">{variants[variantIndex].description}</p>
           )}
         </div>
       )}
 
-      {/* Fixture selector */}
-      {fixtureKeys.length > 1 && (
-        <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-              Fixtures
-            </span>
-            <span className="text-[10px] text-muted-foreground/60">
-              (Up/Down arrows)
-            </span>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {fixtureKeys.map((key, i) => (
-              <button
-                key={key}
-                onClick={() => setFixtureIndex(i)}
-                className={cn(
-                  "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border",
-                  i === fixtureIndex
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-muted/30 text-muted-foreground border-border/40 hover:bg-muted/60 hover:border-border",
-                )}
-              >
-                {key}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Tabs: Preview / Code / Fixtures / Props */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-1 border-b border-border/30 pb-px">
+      {/* Preview / Code Tabs — shadcn style */}
+      <div className="space-y-0">
+        <div className="flex items-center border-b border-border">
           {availableTabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors rounded-t-lg -mb-px border-b-2",
+                "relative px-4 py-2 text-sm font-medium transition-colors",
                 activeTab === tab
-                  ? "text-foreground border-primary"
-                  : "text-muted-foreground border-transparent hover:text-foreground",
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
-              {tab}
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              {activeTab === tab && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground" />
+              )}
             </button>
           ))}
         </div>
 
         {activeTab === "preview" && activeFixture !== undefined && (
-          <div className="rounded-xl border border-border/40 bg-card/20 p-6 min-h-[120px]">
+          <div className="rounded-b-lg border border-t-0 border-border bg-background p-6 min-h-[140px]">
             {render(activeFixture, activeVariant)}
           </div>
         )}
 
         {activeTab === "code" && sourceCode && (
-          <CodeBlock code={sourceCode} />
+          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
+            <CodeBlock code={sourceCode} />
+          </div>
         )}
 
         {activeTab === "fixtures" && fixtureCode && (
-          <CodeBlock code={fixtureCode} label="Fixtures" />
+          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
+            <CodeBlock code={fixtureCode} />
+          </div>
         )}
 
         {activeTab === "props" && propsMeta && propsMeta.length > 0 && (
-          <div className="rounded-xl border border-border/40 bg-zinc-950 overflow-hidden">
-            <div className="border-b border-border/30 px-4 py-2">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Props</span>
-            </div>
+          <div className="border border-t-0 border-border rounded-b-lg bg-zinc-950 overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-xs">
+              <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border/20 text-left">
-                    <th className="px-4 py-2 font-semibold text-muted-foreground">Name</th>
-                    <th className="px-4 py-2 font-semibold text-muted-foreground">Type</th>
-                    <th className="px-4 py-2 font-semibold text-muted-foreground">Required</th>
-                    <th className="px-4 py-2 font-semibold text-muted-foreground">Default</th>
-                    <th className="px-4 py-2 font-semibold text-muted-foreground">Description</th>
+                    <th className="px-4 py-3 font-medium text-muted-foreground">Prop</th>
+                    <th className="px-4 py-3 font-medium text-muted-foreground">Type</th>
+                    <th className="px-4 py-3 font-medium text-muted-foreground">Default</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {propsMeta.map((prop) => (
                     <tr key={prop.name} className="border-b border-border/10">
-                      <td className="px-4 py-2 font-mono text-primary">{prop.name}</td>
-                      <td className="px-4 py-2 font-mono text-zinc-400">{prop.type}</td>
-                      <td className="px-4 py-2">{prop.required ? "Yes" : "No"}</td>
-                      <td className="px-4 py-2 font-mono text-zinc-500">{prop.defaultValue ?? "—"}</td>
-                      <td className="px-4 py-2 text-muted-foreground">{prop.description ?? "—"}</td>
+                      <td className="px-4 py-2.5">
+                        <code className="font-mono text-primary text-xs">{prop.name}</code>
+                        {prop.required && <span className="text-destructive ml-1">*</span>}
+                        {prop.description && (
+                          <p className="text-muted-foreground mt-0.5 text-[11px]">{prop.description}</p>
+                        )}
+                      </td>
+                      <td className="px-4 py-2.5 font-mono text-zinc-400 text-xs">{prop.type}</td>
+                      <td className="px-4 py-2.5 font-mono text-zinc-500 text-xs">{prop.defaultValue ?? "—"}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -291,17 +305,47 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
       </div>
 
-      {/* All fixtures matrix */}
+      {/* Fixture selector */}
       {fixtureKeys.length > 1 && (
         <div className="space-y-3">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-            All Fixtures
-          </span>
-          <div className="space-y-6">
+          <div className="flex items-center gap-2">
+            <h2 className="text-sm font-semibold">Fixtures</h2>
+            <span className="text-[10px] text-muted-foreground/60">(Up/Down arrows)</span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {fixtureKeys.map((key, i) => (
+              <button
+                key={key}
+                onClick={() => setFixtureIndex(i)}
+                className={cn(
+                  "px-2.5 py-1 rounded-md text-xs font-medium transition-all border",
+                  i === fixtureIndex
+                    ? "bg-foreground text-background border-foreground"
+                    : "bg-transparent text-muted-foreground border-border hover:bg-muted/60",
+                )}
+              >
+                {key}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Installation — with package manager tabs */}
+      <div className="space-y-3">
+        <h2 className="text-lg font-semibold">Installation</h2>
+        <InstallTabs baseCommand={installCommand} />
+      </div>
+
+      {/* All fixtures matrix */}
+      {fixtureKeys.length > 1 && (
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold">All States</h2>
+          <div className="space-y-4">
             {fixtureKeys.map((key) => (
-              <div key={key} className="space-y-2">
-                <span className="text-xs font-semibold">{key}</span>
-                <div className="rounded-xl border border-border/40 bg-card/20 p-6">
+              <div key={key} className="space-y-1.5">
+                <span className="text-xs font-medium text-muted-foreground">{key}</span>
+                <div className="rounded-lg border border-border bg-background p-6">
                   {render(fixtures[key], activeVariant)}
                 </div>
               </div>
