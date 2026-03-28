@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Copy, Check } from "lucide-react";
-import { useCopy } from "@/lib/use-copy";
+import { useCopy } from "@/registry/new-york/use-copy/use-copy";
 import { CodeHighlight } from "@/components/code-highlight";
 import type { PreviewLabConfig } from "@/lib/types";
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useCopy } from "@/lib/use-copy";
+import { useCopy } from "@/registry/new-york/use-copy/use-copy";
 import { Copy, Check } from "lucide-react";
 import type { Highlighter } from "shiki";
 
