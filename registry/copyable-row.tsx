@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback, type ReactNode } from "react";
+import { type ReactNode } from "react";
+import { useCopy } from "@/lib/use-copy";
 
 export interface CopyableRowProps {
   /** Text to copy to clipboard on click */
@@ -23,29 +24,12 @@ export function CopyableRow({
   className = "",
   style,
 }: CopyableRowProps) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = text;
-      textarea.style.position = "fixed";
-      textarea.style.opacity = "0";
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  }, [text]);
+  const [copied, copy] = useCopy();
 
   return (
     <button
       type="button"
-      onClick={handleCopy}
+      onClick={() => copy(text)}
       className={`group/copy -mx-1.5 flex w-[calc(100%+12px)] cursor-pointer items-start gap-1 rounded-md px-1.5 py-0.5 text-left transition-colors hover:bg-white/5 ${className}`}
       style={style}
     >

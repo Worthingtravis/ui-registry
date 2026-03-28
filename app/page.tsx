@@ -1,9 +1,6 @@
 import Link from "next/link";
 import { REGISTRY, installCommand } from "@/lib/registry";
-
-function kebabToTitle(name: string) {
-  return name.split("-").map(w => w[0]!.toUpperCase() + w.slice(1)).join(" ");
-}
+import { kebabToTitle } from "@/lib/utils";
 
 export default function HomePage() {
   return (

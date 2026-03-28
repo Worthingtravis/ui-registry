@@ -2,12 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn, kebabToTitle } from "@/lib/utils";
 import { REGISTRY } from "@/lib/registry";
-
-function kebabToTitle(name: string) {
-  return name.split("-").map(w => w[0]!.toUpperCase() + w.slice(1)).join(" ");
-}
 
 export function SidebarNav() {
   const pathname = usePathname();

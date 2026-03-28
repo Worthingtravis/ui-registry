@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ToolCallBlock } from "./tool-call-block";
 import { computeTimings, TERMINAL_COLORS } from "@/lib/terminal";
+import { useCopy } from "@/lib/use-copy";
 
 // ---------------------------------------------------------------------------
 // Types — exported so consumers can define their own scenarios
@@ -113,39 +114,20 @@ export function MiniTerminalDemo({
   // The primary prompt text — first input entry
   const promptText = scenario.entries.find((e) => e.kind === "input")?.text ?? "";
 
-  const [copied, setCopied] = useState(false);
-  const handleCopy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(promptText);
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = promptText;
-      textarea.style.position = "fixed";
-      textarea.style.opacity = "0";
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  }, [promptText]);
+  const [copied, copy] = useCopy();
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        handleCopy();
-      }
-    },
-    [handleCopy]
-  );
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      copy(promptText);
+    }
+  };
 
   return (
     <div
       role="button"
       tabIndex={0}
-      onClick={handleCopy}
+      onClick={() => copy(promptText)}
       onKeyDown={handleKeyDown}
       className="group/card flex w-[340px] shrink-0 cursor-pointer flex-col overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 text-left transition-colors hover:border-zinc-600 lg:w-full"
       onMouseEnter={() => setHovered(true)}

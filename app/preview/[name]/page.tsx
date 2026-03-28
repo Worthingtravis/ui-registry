@@ -1,11 +1,8 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { REGISTRY, getEntry } from "@/lib/registry";
+import { kebabToTitle } from "@/lib/utils";
 import { PreviewClient } from "./preview-client";
-
-function kebabToTitle(name: string) {
-  return name.split("-").map(w => w[0]!.toUpperCase() + w.slice(1)).join(" ");
-}
 
 export function generateStaticParams() {
   return REGISTRY.map((entry) => ({ name: entry.name }));

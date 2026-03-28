@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { Copy, Check } from "lucide-react";
+import { useCopy } from "@/lib/use-copy";
 import type { PreviewLabConfig } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
@@ -10,17 +11,11 @@ import type { PreviewLabConfig } from "@/lib/types";
 // ---------------------------------------------------------------------------
 
 export function CopyButton({ text, className }: { text: string; className?: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  };
+  const [copied, copy] = useCopy();
 
   return (
     <button
-      onClick={handleCopy}
+      onClick={() => copy(text)}
       className={cn(
         "p-1.5 rounded-md bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors",
         className,
