@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///mnt/ssd/development/ui-registry/demos/terminal-demo.tsx"],"sourcesContent":["import { TerminalDemo } from \"@/registry/terminal-demo\";\n\nexport default function TerminalDemoDemo() {\n  return (\n    <div className=\"max-w-2xl\">\n      <TerminalDemo />\n    </div>\n  );\n}\n"],"names":["TerminalDemoDemo","className"],"mappings":";;;;;AAAA;;;AAEe,SAASA;IACtB,qBACE,+YAAC;QAAIC,WAAU;kBACb,cAAA,+YAAC,6IAAY;;;;;;;;;;AAGnB"}}]
+}

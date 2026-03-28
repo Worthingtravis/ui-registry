@@ -116,6 +116,16 @@
           "to": { "display": "none", "height": "0", "margin": "0", "padding": "0", "overflow": "hidden" }
         }
       }
+    },
+    {
+      "name": "step-flow",
+      "type": "registry:component",
+      "title": "Step Flow",
+      "description": "Interactive multi-step flow visualizer with clickable step buttons, arrow connectors, detail panel, and back/next navigation. Great for checkout flows, onboarding wizards, or any sequential process.",
+      "registryDependencies": ["button"],
+      "files": [
+        { "path": "registry/step-flow.tsx", "type": "registry:component" }
+      ]
     }
   ]
 }
