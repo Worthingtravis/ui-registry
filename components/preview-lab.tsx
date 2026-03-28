@@ -18,7 +18,7 @@ export function CopyButton({ text, className }: { text: string; className?: stri
     <button
       onClick={() => copy(text)}
       className={cn(
-        "p-1.5 rounded-md bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors",
+        "p-1.5 rounded-md bg-term-bg-muted hover:bg-term-bg-header text-term-text-muted hover:text-term-text transition-colors",
         className,
       )}
       aria-label="Copy to clipboard"
@@ -263,10 +263,10 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "relative px-4 py-2 text-sm font-medium transition-colors",
+                "relative px-4 py-2.5 text-sm font-medium transition-colors",
                 activeTab === tab
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground",
+                  ? "text-foreground font-semibold"
+                  : "text-muted-foreground/80 hover:text-foreground",
               )}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -278,7 +278,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
 
         {activeTab === "preview" && activeFixture !== undefined && (
-          <div className="rounded-b-lg border border-t-0 border-border bg-background p-8 min-h-[140px] flex items-center justify-center">
+          <div className="rounded-b-lg border border-t-0 border-border bg-background p-4 sm:p-6 min-h-[100px]">
             <div className="w-full" key={`${fixtureIndex}-${variantIndex}`}>
               {render(activeFixture, activeVariant)}
             </div>
