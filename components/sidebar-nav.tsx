@@ -9,8 +9,8 @@ export function SidebarNav() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:block w-[220px] shrink-0">
-      <div className="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto py-8 pr-4">
+    <aside className="hidden lg:block w-[220px] shrink-0 border-r border-border/40">
+      <div className="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto py-8 px-4">
         <div className="space-y-6">
           {/* Getting Started */}
           <div>

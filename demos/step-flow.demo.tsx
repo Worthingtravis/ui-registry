@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type { ComponentType } from "react";
 import { StepFlow, type StepFlowProps } from "@/registry/step-flow";
 import { StepFlowVertical } from "@/registry/step-flow-vertical";
 import { ALL_FIXTURES } from "@/fixtures/step-flow.fixtures";
@@ -33,8 +33,8 @@ export const config: PreviewLabConfig<Fixture> = {
     );
   },
   variants: [
-    { name: "Horizontal", component: StepFlow as React.ComponentType<Fixture>, description: "Default horizontal step row with arrow connectors." },
-    { name: "Vertical Timeline", component: StepFlowVertical as React.ComponentType<Fixture>, description: "Vertical timeline layout with dots and connecting lines." },
+    { name: "Horizontal", component: StepFlow as ComponentType<Fixture>, description: "Default horizontal step row with arrow connectors." },
+    { name: "Vertical Timeline", component: StepFlowVertical as ComponentType<Fixture>, description: "Vertical timeline layout with dots and connecting lines." },
   ],
   propsMeta,
   sourceCode: `export interface StepFlowStep {
@@ -44,7 +44,7 @@ export const config: PreviewLabConfig<Fixture> = {
 
 export interface StepFlowProps {
   steps: StepFlowStep[];
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   title?: string;
   initialStep?: number;
   onStepChange?: (index: number) => void;

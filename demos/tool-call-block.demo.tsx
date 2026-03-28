@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type { ComponentType } from "react";
 import { ToolCallBlock, type ToolCallBlockProps } from "@/registry/tool-call-block";
 import { ToolCallBlockInline } from "@/registry/tool-call-block-inline";
 import { ALL_FIXTURES } from "@/fixtures/tool-call-block.fixtures";
@@ -31,8 +31,8 @@ export const config: PreviewLabConfig<Fixture> = {
     );
   },
   variants: [
-    { name: "Block", component: ((props: Fixture) => <ToolCallBlock {...props} delay={0} />) as React.ComponentType<Fixture>, description: "Full block with indented args and result." },
-    { name: "Inline", component: ((props: Fixture) => <ToolCallBlockInline {...props} delay={0} />) as React.ComponentType<Fixture>, description: "Compact single-line display." },
+    { name: "Block", component: ((props: Fixture) => <ToolCallBlock {...props} delay={0} />) as ComponentType<Fixture>, description: "Full block with indented args and result." },
+    { name: "Inline", component: ((props: Fixture) => <ToolCallBlockInline {...props} delay={0} />) as ComponentType<Fixture>, description: "Compact single-line display." },
   ],
   propsMeta,
   sourceCode: `export interface ToolCallBlockProps {
