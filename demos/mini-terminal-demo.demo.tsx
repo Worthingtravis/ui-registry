@@ -1,6 +1,6 @@
 "use client";
 
-import { MiniTerminalDemo } from "@/registry/mini-terminal-demo";
+import { MiniTerminalDemo } from "@/registry/new-york/mini-terminal-demo/mini-terminal-demo";
 import { ALL_FIXTURES, type MiniTerminalDemoFixture } from "@/fixtures/mini-terminal-demo.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 

@@ -1,6 +1,7 @@
-import type { StepFlowProps } from "@/registry/step-flow";
+import type { StepFlowProps } from "@/registry/new-york/step-flow/step-flow";
 
-type Fixture = Omit<StepFlowProps, "onStepChange" | "className">;
+export type StepFlowFixture = Omit<StepFlowProps, "onStepChange" | "className">;
+type Fixture = StepFlowFixture;
 
 const BASE: Fixture = {
   title: "Checkout Flow",
@@ -32,13 +33,14 @@ export const ALL_FIXTURES: Record<string, Fixture> = {
       { label: "Go", description: "You're all set — start exploring!" },
     ],
   }),
-  "Minimal (no title)": {
+  "Minimal (no title)": fx({
+    title: undefined,
     steps: [
       { label: "Upload", description: "Select files from your device." },
       { label: "Process", description: "Files are being analyzed." },
       { label: "Complete", description: "Processing finished." },
     ],
-  },
+  }),
   "Two steps": fx({
     title: "Toggle",
     steps: [

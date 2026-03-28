@@ -1,7 +1,7 @@
 "use client";
 
-import { ScrollPrompt, type ScrollPromptProps } from "@/registry/scroll-prompt";
-import { ALL_FIXTURES } from "@/fixtures/scroll-prompt.fixtures";
+import { ScrollPrompt } from "@/registry/new-york/scroll-prompt/scroll-prompt";
+import { ALL_FIXTURES, type ScrollPromptFixture } from "@/fixtures/scroll-prompt.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
 const propsMeta: PropMeta[] = [
@@ -9,7 +9,7 @@ const propsMeta: PropMeta[] = [
   { name: "label", type: "string", required: true, description: "Label text shown above the arrow" },
 ];
 
-export const config: PreviewLabConfig<ScrollPromptProps> = {
+export const config: PreviewLabConfig<ScrollPromptFixture> = {
   title: "Scroll Prompt",
   description: "Animated scroll-down prompt that appears when a target section is out of view.",
   tags: ["animation", "scroll", "navigation"],

@@ -1,6 +1,6 @@
 "use client";
 
-import { TerminalDemo } from "@/registry/terminal-demo";
+import { TerminalDemo } from "@/registry/new-york/terminal-demo/terminal-demo";
 import { ALL_FIXTURES, type TerminalDemoFixture } from "@/fixtures/terminal-demo.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 

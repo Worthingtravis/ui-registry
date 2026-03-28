@@ -1,4 +1,4 @@
-import type { TerminalChromeProps } from "@/registry/terminal-chrome";
+import type { TerminalChromeProps } from "@/registry/new-york/terminal-chrome/terminal-chrome";
 
 /** Terminal chrome fixtures use a simplified shape since children is ReactNode */
 export interface TerminalChromeFixture {

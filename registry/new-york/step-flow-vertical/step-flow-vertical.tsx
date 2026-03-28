@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import type { StepFlowProps } from "./step-flow";
+import type { StepFlowProps } from "@/registry/new-york/step-flow/step-flow";
 
 /**
  * Vertical variant of StepFlow — same props, vertical timeline layout.

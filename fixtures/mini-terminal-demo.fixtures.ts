@@ -1,4 +1,4 @@
-import type { DemoScenario } from "@/registry/mini-terminal-demo";
+import type { DemoScenario } from "@/registry/new-york/mini-terminal-demo/mini-terminal-demo";
 
 const BASE_SCENARIO: DemoScenario = {
   id: "install",

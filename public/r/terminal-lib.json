@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "terminal-lib",
+  "title": "Terminal Utilities",
+  "description": "Shared terminal utilities — timing computation and color class map.",
+  "files": [
+    {
+      "path": "registry/new-york/terminal-lib/terminal.ts",
+      "content": "// ---------------------------------------------------------------------------\n// Shared terminal utilities — used by terminal-demo and mini-terminal-demo\n// ---------------------------------------------------------------------------\n\n/** Compute cumulative start times from sequential entry timings. */\nexport function computeTimings<T extends { kind: string; pauseAfter: number }>(\n  entries: T[],\n): Array<T & { startMs: number }> {\n  let cursor = 0;\n  return entries.map((entry) => {\n    const startMs = cursor;\n    if (\"typingMs\" in entry && typeof entry.typingMs === \"number\") {\n      cursor += entry.typingMs + entry.pauseAfter;\n    } else if (\"durationMs\" in entry && typeof entry.durationMs === \"number\") {\n      cursor += entry.durationMs + entry.pauseAfter;\n    } else {\n      cursor += entry.pauseAfter;\n    }\n    return { ...entry, startMs };\n  });\n}\n\n/** Shared color class map for terminal output lines. */\nexport const TERMINAL_COLORS: Record<string, string> = {\n  green: \"text-term-success\",\n  zinc: \"text-term-text-muted\",\n  purple: \"text-term-accent\",\n  cyan: \"text-term-accent\",\n  muted: \"text-term-text-muted\",\n};\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { CopyableRow } from "@/registry/copyable-row";
+import { CopyableRow } from "@/registry/new-york/copyable-row/copyable-row";
 import { ALL_FIXTURES, type CopyableRowFixture } from "@/fixtures/copyable-row.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 

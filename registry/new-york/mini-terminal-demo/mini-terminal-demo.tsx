@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { TerminalChrome } from "./terminal-chrome";
-import { ToolCallBlock } from "./tool-call-block";
-import { computeTimings, TERMINAL_COLORS } from "@/lib/terminal";
-import { useCopy } from "@/lib/use-copy";
+import { TerminalChrome } from "@/registry/new-york/terminal-chrome/terminal-chrome";
+import { ToolCallBlock } from "@/registry/new-york/tool-call-block/tool-call-block";
+import { computeTimings, TERMINAL_COLORS } from "@/registry/new-york/terminal-lib/terminal";
+import { useCopy } from "@/registry/new-york/use-copy/use-copy";
 
 // ---------------------------------------------------------------------------
 // Types — exported so consumers can define their own scenarios

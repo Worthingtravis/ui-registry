@@ -1,12 +1,12 @@
 "use client";
 
 import type { ComponentType } from "react";
-import { ToolCallBlock, type ToolCallBlockProps } from "@/registry/tool-call-block";
-import { ToolCallBlockInline } from "@/registry/tool-call-block-inline";
-import { ALL_FIXTURES } from "@/fixtures/tool-call-block.fixtures";
+import { ToolCallBlock } from "@/registry/new-york/tool-call-block/tool-call-block";
+import { ToolCallBlockInline } from "@/registry/new-york/tool-call-block-inline/tool-call-block-inline";
+import { ALL_FIXTURES, type ToolCallBlockFixture } from "@/fixtures/tool-call-block.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
-type Fixture = Omit<ToolCallBlockProps, "delay">;
+type Fixture = ToolCallBlockFixture;
 
 const propsMeta: PropMeta[] = [
   { name: "toolName", type: "string", required: true, description: "Name of the tool being called" },

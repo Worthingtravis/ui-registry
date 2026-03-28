@@ -31,7 +31,7 @@ export default async function PreviewPage({ params }: { params: Promise<{ name: 
   if (!entry) notFound();
 
   // Load real source files server-side
-  const sourceCode = readFile(`registry/${name}.tsx`);
+  const sourceCode = readFile(`registry/new-york/${name}/${name}.tsx`);
   const fixtureCode = readFile(`fixtures/${name}.fixtures.ts`);
 
   return (
@@ -42,7 +42,7 @@ export default async function PreviewPage({ params }: { params: Promise<{ name: 
 
       <div className="mt-12 pt-6 border-t border-border/20 flex items-center justify-between text-xs text-muted-foreground">
         <a
-          href={`https://github.com/Worthingtravis/ui-registry/blob/main/registry/${name}.tsx`}
+          href={`https://github.com/Worthingtravis/ui-registry/blob/main/registry/new-york/${name}/${name}.tsx`}
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-foreground transition-colors"

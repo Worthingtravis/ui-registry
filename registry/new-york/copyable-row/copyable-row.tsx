@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { useCopy } from "@/lib/use-copy";
+import { useCopy } from "@/registry/new-york/use-copy/use-copy";
 
 export interface CopyableRowProps {
   /** Text to copy to clipboard on click */

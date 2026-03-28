@@ -4,12 +4,30 @@
   "homepage": "https://github.com/Worthingtravis/ui-registry",
   "items": [
     {
+      "name": "use-copy",
+      "type": "registry:hook",
+      "title": "useCopy",
+      "description": "Clipboard copy hook with copied-state feedback timer.",
+      "files": [
+        { "path": "registry/new-york/use-copy/use-copy.ts", "type": "registry:hook" }
+      ]
+    },
+    {
+      "name": "terminal-lib",
+      "type": "registry:lib",
+      "title": "Terminal Utilities",
+      "description": "Shared terminal utilities — timing computation and color class map.",
+      "files": [
+        { "path": "registry/new-york/terminal-lib/terminal.ts", "type": "registry:lib" }
+      ]
+    },
+    {
       "name": "terminal-chrome",
       "type": "registry:component",
       "title": "Terminal Chrome",
       "description": "macOS-style terminal window shell with traffic light buttons and optional title bar.",
       "files": [
-        { "path": "registry/terminal-chrome.tsx", "type": "registry:component" }
+        { "path": "registry/new-york/terminal-chrome/terminal-chrome.tsx", "type": "registry:component" }
       ]
     },
     {
@@ -18,7 +36,7 @@
       "title": "Typing Text",
       "description": "CSS-only typewriter animation with blinking cursor.",
       "files": [
-        { "path": "registry/typing-text.tsx", "type": "registry:component" }
+        { "path": "registry/new-york/typing-text/typing-text.tsx", "type": "registry:component" }
       ],
       "css": {
         "@keyframes typing": {
@@ -54,7 +72,23 @@
       "title": "Tool Call Block",
       "description": "MCP tool call display with name, arguments, and result.",
       "files": [
-        { "path": "registry/tool-call-block.tsx", "type": "registry:component" }
+        { "path": "registry/new-york/tool-call-block/tool-call-block.tsx", "type": "registry:component" }
+      ],
+      "css": {
+        "@keyframes fade-in": {
+          "from": { "opacity": "0", "transform": "translateY(4px)" },
+          "to": { "opacity": "1", "transform": "translateY(0)" }
+        }
+      }
+    },
+    {
+      "name": "tool-call-block-inline",
+      "type": "registry:component",
+      "title": "Tool Call Block Inline",
+      "description": "Inline single-line variant of ToolCallBlock — compact tool call display.",
+      "registryDependencies": ["tool-call-block"],
+      "files": [
+        { "path": "registry/new-york/tool-call-block-inline/tool-call-block-inline.tsx", "type": "registry:component" }
       ],
       "css": {
         "@keyframes fade-in": {
@@ -68,8 +102,9 @@
       "type": "registry:component",
       "title": "Copyable Row",
       "description": "Click-to-copy wrapper with hover highlight and copy/check icon transition.",
+      "registryDependencies": ["use-copy"],
       "files": [
-        { "path": "registry/copyable-row.tsx", "type": "registry:component" }
+        { "path": "registry/new-york/copyable-row/copyable-row.tsx", "type": "registry:component" }
       ]
     },
     {
@@ -78,17 +113,39 @@
       "title": "Scroll Prompt",
       "description": "Animated scroll-down prompt that appears when a target section is out of view.",
       "files": [
-        { "path": "registry/scroll-prompt.tsx", "type": "registry:component" }
+        { "path": "registry/new-york/scroll-prompt/scroll-prompt.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "step-flow",
+      "type": "registry:component",
+      "title": "Step Flow",
+      "description": "Interactive multi-step flow visualizer with clickable step buttons, arrow connectors, detail panel, and back/next navigation. Great for checkout flows, onboarding wizards, or any sequential process.",
+      "registryDependencies": ["button"],
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/step-flow/step-flow.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "step-flow-vertical",
+      "type": "registry:component",
+      "title": "Step Flow Vertical",
+      "description": "Vertical timeline variant of StepFlow — same props, vertical layout with connecting lines.",
+      "registryDependencies": ["button", "step-flow"],
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/step-flow-vertical/step-flow-vertical.tsx", "type": "registry:component" }
       ]
     },
     {
       "name": "mini-terminal-demo",
-      "type": "registry:component",
+      "type": "registry:block",
       "title": "Mini Terminal Demo",
       "description": "Compact animated terminal card with copy-to-clipboard, pin support, and stagger delay. Exports DemoEntry and DemoScenario types.",
-      "registryDependencies": ["tool-call-block"],
+      "registryDependencies": ["terminal-chrome", "tool-call-block", "terminal-lib", "use-copy"],
       "files": [
-        { "path": "registry/mini-terminal-demo.tsx", "type": "registry:component" }
+        { "path": "registry/new-york/mini-terminal-demo/mini-terminal-demo.tsx", "type": "registry:component" }
       ],
       "css": {
         "@keyframes fade-in": {
@@ -102,11 +159,15 @@
       "type": "registry:block",
       "title": "Terminal Demo",
       "description": "Full animated terminal session with typing, tool calls, thinking indicators, memory blocks, and copyable rows.",
-      "registryDependencies": ["terminal-chrome", "typing-text", "tool-call-block", "copyable-row"],
+      "registryDependencies": ["terminal-chrome", "typing-text", "tool-call-block", "copyable-row", "terminal-lib"],
       "files": [
-        { "path": "registry/terminal-demo.tsx", "type": "registry:component" }
+        { "path": "registry/new-york/terminal-demo/terminal-demo.tsx", "type": "registry:component" }
       ],
       "css": {
+        "@keyframes fade-in": {
+          "from": { "opacity": "0", "transform": "translateY(4px)" },
+          "to": { "opacity": "1", "transform": "translateY(0)" }
+        },
         "@keyframes thinking-dot": {
           "0%, 20%": { "opacity": "0.2" },
           "50%": { "opacity": "1" },
@@ -116,16 +177,6 @@
           "to": { "display": "none", "height": "0", "margin": "0", "padding": "0", "overflow": "hidden" }
         }
       }
-    },
-    {
-      "name": "step-flow",
-      "type": "registry:component",
-      "title": "Step Flow",
-      "description": "Interactive multi-step flow visualizer with clickable step buttons, arrow connectors, detail panel, and back/next navigation. Great for checkout flows, onboarding wizards, or any sequential process.",
-      "registryDependencies": ["button"],
-      "files": [
-        { "path": "registry/step-flow.tsx", "type": "registry:component" }
-      ]
     }
   ]
 }

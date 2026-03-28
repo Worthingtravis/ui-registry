@@ -1,6 +1,8 @@
-import type { ScrollPromptProps } from "@/registry/scroll-prompt";
+import type { ScrollPromptProps } from "@/registry/new-york/scroll-prompt/scroll-prompt";
 
-const BASE: ScrollPromptProps = {
+export type ScrollPromptFixture = ScrollPromptProps;
+
+const BASE: ScrollPromptFixture = {
   targetId: "scroll-demo-target",
   label: "Scroll to explore",
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import type { ToolCallBlockProps } from "./tool-call-block";
+import type { ToolCallBlockProps } from "@/registry/new-york/tool-call-block/tool-call-block";
 
 /**
  * Inline variant of ToolCallBlock — single-line compact display.

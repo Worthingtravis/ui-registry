@@ -1,6 +1,7 @@
-import type { TypingTextProps } from "@/registry/typing-text";
+import type { TypingTextProps } from "@/registry/new-york/typing-text/typing-text";
 
-type Fixture = Omit<TypingTextProps, "className">;
+export type TypingTextFixture = Omit<TypingTextProps, "className">;
+type Fixture = TypingTextFixture;
 
 const BASE: Fixture = {
   text: "npx shadcn@latest add step-flow",

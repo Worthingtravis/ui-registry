@@ -1,7 +1,7 @@
 "use client";
 
-import { TypingText, type TypingTextProps } from "@/registry/typing-text";
-import { ALL_FIXTURES } from "@/fixtures/typing-text.fixtures";
+import { TypingText } from "@/registry/new-york/typing-text/typing-text";
+import { ALL_FIXTURES, type TypingTextFixture } from "@/fixtures/typing-text.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
 const propsMeta: PropMeta[] = [
@@ -11,7 +11,7 @@ const propsMeta: PropMeta[] = [
   { name: "className", type: "string", required: false, description: "Additional CSS classes" },
 ];
 
-export const config: PreviewLabConfig<Omit<TypingTextProps, "className">> = {
+export const config: PreviewLabConfig<TypingTextFixture> = {
   title: "Typing Text",
   description: "CSS-only typewriter animation with blinking cursor. Uses CSS keyframes — no JS animation loop.",
   tags: ["animation", "text", "typewriter"],

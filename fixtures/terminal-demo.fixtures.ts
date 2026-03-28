@@ -1,4 +1,4 @@
-import type { TerminalEntry } from "@/registry/terminal-demo";
+import type { TerminalEntry } from "@/registry/new-york/terminal-demo/terminal-demo";
 
 /** Fixture shape: the actual script entries that drive the terminal animation. */
 export interface TerminalDemoFixture {

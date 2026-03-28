@@ -1,13 +1,13 @@
 "use client";
 
 import type { ComponentType } from "react";
-import { StepFlow, type StepFlowProps } from "@/registry/step-flow";
-import { StepFlowVertical } from "@/registry/step-flow-vertical";
-import { ALL_FIXTURES } from "@/fixtures/step-flow.fixtures";
+import { StepFlow } from "@/registry/new-york/step-flow/step-flow";
+import { StepFlowVertical } from "@/registry/new-york/step-flow-vertical/step-flow-vertical";
+import { ALL_FIXTURES, type StepFlowFixture } from "@/fixtures/step-flow.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 import { ShoppingCart } from "lucide-react";
 
-type Fixture = Omit<StepFlowProps, "onStepChange" | "className">;
+type Fixture = StepFlowFixture;
 
 const propsMeta: PropMeta[] = [
   { name: "steps", type: "StepFlowStep[]", required: true, description: "Ordered array of steps to display" },

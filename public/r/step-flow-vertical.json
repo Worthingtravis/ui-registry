@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "step-flow-vertical",
+  "title": "Step Flow Vertical",
+  "description": "Vertical timeline variant of StepFlow — same props, vertical layout with connecting lines.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button",
+    "step-flow"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/step-flow-vertical/step-flow-vertical.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { Button } from \"@/components/ui/button\";\nimport type { StepFlowProps } from \"@/registry/new-york/step-flow/step-flow\";\n\n/**\n * Vertical variant of StepFlow — same props, vertical timeline layout.\n */\nexport function StepFlowVertical({\n  steps,\n  icon,\n  title,\n  initialStep = 0,\n  onStepChange,\n  className,\n}: StepFlowProps) {\n  const [step, setStep] = useState(initialStep);\n\n  const goTo = (index: number) => {\n    setStep(index);\n    onStepChange?.(index);\n  };\n\n  if (steps.length === 0) return null;\n\n  return (\n    <div className={cn(\"space-y-6 p-4 sm:p-6 rounded-2xl border border-border/40 bg-card/40\", className)}>\n      {(icon || title) && (\n        <div className=\"flex items-center gap-2\">\n          {icon && <span className=\"text-primary\">{icon}</span>}\n          {title && (\n            <span className=\"text-xs font-semibold uppercase tracking-widest text-muted-foreground\">\n              {title}\n            </span>\n          )}\n        </div>\n      )}\n\n      <div className=\"space-y-0\">\n        {steps.map((s, i) => (\n          <button\n            key={s.label}\n            onClick={() => goTo(i)}\n            className=\"flex items-start gap-3 w-full text-left group\"\n          >\n            {/* Timeline dot + line */}\n            <div className=\"flex flex-col items-center\">\n              <div\n                className={cn(\n                  \"h-3 w-3 rounded-full border-2 shrink-0 transition-colors mt-0.5\",\n                  i <= step\n                    ? \"bg-primary border-primary\"\n                    : \"bg-transparent border-muted-foreground/30\",\n                )}\n              />\n              {i < steps.length - 1 && (\n                <div\n                  className={cn(\n                    \"w-0.5 h-10 transition-colors\",\n                    i < step ? \"bg-primary/40\" : \"bg-muted-foreground/10\",\n                  )}\n                />\n              )}\n            </div>\n            {/* Content */}\n            <div className=\"pb-4 -mt-0.5\">\n              <p\n                className={cn(\n                  \"text-xs font-semibold uppercase tracking-wider transition-colors\",\n                  i <= step ? \"text-primary\" : \"text-muted-foreground/40\",\n                )}\n              >\n                {s.label}\n              </p>\n              {i === step && (\n                <p className=\"text-xs text-muted-foreground mt-1\">{s.description}</p>\n              )}\n            </div>\n          </button>\n        ))}\n      </div>\n\n      <div className=\"flex gap-2\">\n        <Button\n          variant=\"outline\"\n          size=\"sm\"\n          className=\"rounded-xl text-[10px] font-semibold uppercase tracking-wider\"\n          onClick={() => goTo(Math.max(0, step - 1))}\n          disabled={step === 0}\n        >\n          Back\n        </Button>\n        <Button\n          size=\"sm\"\n          className=\"rounded-xl text-[10px] font-semibold uppercase tracking-wider\"\n          onClick={() => goTo(Math.min(steps.length - 1, step + 1))}\n          disabled={step === steps.length - 1}\n        >\n          Next\n        </Button>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

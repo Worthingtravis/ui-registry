@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { TerminalChrome } from "./terminal-chrome";
-import { TypingText } from "./typing-text";
-import { ToolCallBlock } from "./tool-call-block";
-import { CopyableRow } from "./copyable-row";
-import { computeTimings, TERMINAL_COLORS } from "@/lib/terminal";
+import { TerminalChrome } from "@/registry/new-york/terminal-chrome/terminal-chrome";
+import { TypingText } from "@/registry/new-york/typing-text/typing-text";
+import { ToolCallBlock } from "@/registry/new-york/tool-call-block/tool-call-block";
+import { CopyableRow } from "@/registry/new-york/copyable-row/copyable-row";
+import { computeTimings, TERMINAL_COLORS } from "@/registry/new-york/terminal-lib/terminal";
 
 // ---------------------------------------------------------------------------
 // Data model

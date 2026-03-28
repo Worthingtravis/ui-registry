@@ -1,8 +1,8 @@
 "use client";
 
-import { TerminalChrome } from "@/registry/terminal-chrome";
+import { TerminalChrome } from "@/registry/new-york/terminal-chrome/terminal-chrome";
 import { ALL_FIXTURES, type TerminalChromeFixture } from "@/fixtures/terminal-chrome.fixtures";
-import { TERMINAL_COLORS } from "@/lib/terminal";
+import { TERMINAL_COLORS } from "@/registry/new-york/terminal-lib/terminal";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
 const propsMeta: PropMeta[] = [

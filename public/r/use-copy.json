@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-copy",
+  "title": "useCopy",
+  "description": "Clipboard copy hook with copied-state feedback timer.",
+  "files": [
+    {
+      "path": "registry/new-york/use-copy/use-copy.ts",
+      "content": "\"use client\";\n\nimport { useState, useCallback, useRef, useEffect } from \"react\";\n\n/**\n * Hook for clipboard copy with copied-state feedback.\n * Returns [copied, copy] — call copy(text) to write to clipboard.\n */\nexport function useCopy(timeout = 1500): [boolean, (text: string) => void] {\n  const [copied, setCopied] = useState(false);\n  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);\n\n  useEffect(() => () => clearTimeout(timerRef.current), []);\n\n  const copy = useCallback(\n    (text: string) => {\n      navigator.clipboard.writeText(text).catch(() => {\n        const textarea = document.createElement(\"textarea\");\n        textarea.value = text;\n        textarea.style.position = \"fixed\";\n        textarea.style.opacity = \"0\";\n        document.body.appendChild(textarea);\n        textarea.select();\n        document.execCommand(\"copy\");\n        document.body.removeChild(textarea);\n      });\n      setCopied(true);\n      clearTimeout(timerRef.current);\n      timerRef.current = setTimeout(() => setCopied(false), timeout);\n    },\n    [timeout],\n  );\n\n  return [copied, copy];\n}\n",
+      "type": "registry:hook"
+    }
+  ],
+  "type": "registry:hook"
+}

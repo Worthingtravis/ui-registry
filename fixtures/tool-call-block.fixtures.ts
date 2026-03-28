@@ -1,6 +1,7 @@
-import type { ToolCallBlockProps } from "@/registry/tool-call-block";
+import type { ToolCallBlockProps } from "@/registry/new-york/tool-call-block/tool-call-block";
 
-type Fixture = Omit<ToolCallBlockProps, "delay">;
+export type ToolCallBlockFixture = Omit<ToolCallBlockProps, "delay">;
+type Fixture = ToolCallBlockFixture;
 
 const BASE: Fixture = {
   toolName: "search_docs",
