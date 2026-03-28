@@ -8,7 +8,9 @@ import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 const propsMeta: PropMeta[] = [
   { name: "title", type: "string", required: false, description: "Window title shown next to traffic lights" },
   { name: "children", type: "ReactNode", required: true, description: "Terminal body content" },
+  { name: "leftSlot", type: "ReactNode", required: false, description: "Slot rendered before the traffic lights" },
   { name: "rightSlot", type: "ReactNode", required: false, description: "Slot on right side of title bar" },
+  { name: "className", type: "string", required: false, description: "Additional class names for the outer container" },
 ];
 
 export const config: PreviewLabConfig<TerminalChromeFixture> = {
