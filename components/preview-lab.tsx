@@ -228,6 +228,32 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
       )}
 
+      {/* Fixture selector */}
+      {fixtureKeys.length > 1 && (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <h2 className="text-sm font-semibold">Fixtures</h2>
+            <span className="text-[10px] text-muted-foreground/60">(Up/Down arrows)</span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {fixtureKeys.map((key, i) => (
+              <button
+                key={key}
+                onClick={() => setFixtureIndex(i)}
+                className={cn(
+                  "px-2.5 py-1 rounded-md text-xs font-medium transition-all border",
+                  i === fixtureIndex
+                    ? "bg-foreground text-background border-foreground"
+                    : "bg-transparent text-muted-foreground border-border hover:bg-muted/60",
+                )}
+              >
+                {key}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Preview / Code Tabs — shadcn style */}
       <div className="space-y-0">
         <div className="flex items-center border-b border-border">
@@ -317,32 +343,6 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
           </div>
         )}
       </div>
-
-      {/* Fixture selector */}
-      {fixtureKeys.length > 1 && (
-        <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <h2 className="text-sm font-semibold">Fixtures</h2>
-            <span className="text-[10px] text-muted-foreground/60">(Up/Down arrows)</span>
-          </div>
-          <div className="flex flex-wrap gap-1.5">
-            {fixtureKeys.map((key, i) => (
-              <button
-                key={key}
-                onClick={() => setFixtureIndex(i)}
-                className={cn(
-                  "px-2.5 py-1 rounded-md text-xs font-medium transition-all border",
-                  i === fixtureIndex
-                    ? "bg-foreground text-background border-foreground"
-                    : "bg-transparent text-muted-foreground border-border hover:bg-muted/60",
-                )}
-              >
-                {key}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Installation — with package manager tabs */}
       <div className="space-y-3">
