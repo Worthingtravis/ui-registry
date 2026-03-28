@@ -39,4 +39,21 @@ export const ALL_FIXTURES: Record<string, CopyableRowFixture> = {
       { text: "npm install", prefix: "$", prefixColor: "text-term-success", display: "npm install" },
     ],
   }),
+  "File paths": fx({
+    label: "Project files",
+    rows: [
+      { text: "src/index.ts", prefix: "entry:", prefixColor: "text-term-text-muted", display: "src/index.ts", displayColor: "text-term-accent" },
+      { text: "src/utils.ts", prefix: "utils:", prefixColor: "text-term-text-muted", display: "src/utils.ts", displayColor: "text-term-accent" },
+      { text: "tsconfig.json", prefix: "config:", prefixColor: "text-term-text-muted", display: "tsconfig.json", displayColor: "text-term-accent" },
+      { text: "package.json", prefix: "pkg:", prefixColor: "text-term-text-muted", display: "package.json", displayColor: "text-term-accent" },
+    ],
+  }),
+  "Output lines": fx({
+    label: "Build output",
+    rows: [
+      { text: "✓ Compiled 42 files", display: "✓ Compiled 42 files", displayColor: "text-term-success" },
+      { text: "✓ No type errors", display: "✓ No type errors", displayColor: "text-term-success" },
+      { text: "⚠ 2 unused imports", display: "⚠ 2 unused imports", displayColor: "text-term-warning" },
+    ],
+  }),
 };
