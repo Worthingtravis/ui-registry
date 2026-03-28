@@ -122,15 +122,11 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  // Active variant's render function
-  const activeRender =
+  // Active variant component (if any)
+  const activeVariant =
     variants && variants.length > 0 && variantIndex < variants.length
-      ? (fixture: unknown) => {
-          const Comp = variants[variantIndex]!.component;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          return <Comp {...(fixture as any)} />;
-        }
-      : render;
+      ? variants[variantIndex]!.component
+      : undefined;
 
   // Available tabs (only show tabs that have content)
   const availableTabs = TABS.filter((tab) => {
@@ -250,7 +246,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
 
         {activeTab === "preview" && activeFixture !== undefined && (
           <div className="rounded-xl border border-border/40 bg-card/20 p-6 min-h-[120px]">
-            {activeRender(activeFixture)}
+            {render(activeFixture, activeVariant)}
           </div>
         )}
 
@@ -306,7 +302,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
               <div key={key} className="space-y-2">
                 <span className="text-xs font-semibold">{key}</span>
                 <div className="rounded-xl border border-border/40 bg-card/20 p-6">
-                  {activeRender(fixtures[key])}
+                  {render(fixtures[key], activeVariant)}
                 </div>
               </div>
             ))}

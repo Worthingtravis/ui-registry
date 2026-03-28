@@ -20,4 +20,24 @@ export const config: PreviewLabConfig<TerminalDemoProps> = {
     </div>
   ),
   propsMeta,
+  sourceCode: `export type TerminalEntry =
+  | { kind: "input"; text: string; prompt?: string; typingMs: number; pauseAfter: number }
+  | { kind: "output"; text: string; color?: "green" | "zinc" | "purple"; pauseAfter: number }
+  | { kind: "tool-call"; toolName: string; args: Record<...>; result: string; pauseAfter: number }
+  | { kind: "phase"; label: string; pauseAfter: number }
+  | { kind: "thinking"; text: string; durationMs: number; pauseAfter: number }
+  | { kind: "claude"; text: string; pauseAfter: number }
+  | { kind: "ask"; question: string; options: string[]; pauseAfter: number }
+  | { kind: "memory"; text: string; pauseAfter: number };
+
+export interface TerminalDemoProps {
+  mcpEndpoint?: string;
+  script?: TerminalEntry[];
+}
+
+export function TerminalDemo({ mcpEndpoint, script }: TerminalDemoProps) {
+  // Full animated terminal with TerminalChrome wrapper, TypingText,
+  // ToolCallBlock, CopyableRow, thinking dots, memory blocks.
+  // Uses computeTimings() and TERMINAL_COLORS from lib/terminal.ts
+}`,
 };

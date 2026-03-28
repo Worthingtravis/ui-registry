@@ -33,8 +33,12 @@ export interface PreviewLabConfig<TFixture> {
   tags?: string[];
   /** Named fixtures — key is display name, value is the fixture data */
   fixtures: Record<string, TFixture>;
-  /** Render function: takes fixture data and returns JSX */
-  render: (fixture: TFixture) => React.ReactNode;
+  /**
+   * Render function: takes fixture data and an optional variant component.
+   * When variants are defined, the active variant is passed as the second arg.
+   * This follows the Sacred v3 ExperimentLab pattern: render(fixture, Variant).
+   */
+  render: (fixture: TFixture, Variant?: ComponentType<TFixture>) => React.ReactNode;
   /** Visual variants of the same component (optional) */
   variants?: Variant<TFixture>[];
   /** Raw source code string for code tab */

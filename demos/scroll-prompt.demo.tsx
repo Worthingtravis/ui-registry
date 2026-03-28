@@ -31,4 +31,31 @@ export const config: PreviewLabConfig<ScrollPromptProps> = {
     </div>
   ),
   propsMeta,
+  sourceCode: `export interface ScrollPromptProps {
+  targetId: string; // DOM id of the element to observe
+  label: string;    // Label text shown above the arrow
+}
+
+export function ScrollPrompt({ targetId, label }: ScrollPromptProps) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [targetId]);
+
+  if (!visible) return null;
+  return (
+    <a href={\`#\${targetId}\`} className="flex flex-col items-center gap-1 py-2">
+      <span className="text-xs font-medium">{label}</span>
+      <ChevronDown className="animate-bounce" />
+    </a>
+  );
+}`,
 };

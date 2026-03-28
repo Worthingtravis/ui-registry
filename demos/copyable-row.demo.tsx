@@ -32,4 +32,30 @@ export const config: PreviewLabConfig<CopyableRowFixture> = {
     </div>
   ),
   propsMeta,
+  sourceCode: `export interface CopyableRowProps {
+  text: string;        // Text to copy to clipboard on click
+  children: ReactNode; // Row content
+  className?: string;
+  style?: CSSProperties;
+}
+
+export function CopyableRow({ text, children, className, style }: CopyableRowProps) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  return (
+    <button onClick={handleCopy}
+      className="group/copy flex w-full items-start gap-1 rounded-md px-1.5 py-0.5 hover:bg-white/5"
+      style={style}>
+      {children}
+      <span className="ml-auto opacity-0 group-hover/copy:opacity-100">
+        {copied ? <CheckIcon /> : <CopyIcon />}
+      </span>
+    </button>
+  );
+}`,
 };

@@ -27,4 +27,26 @@ export const config: PreviewLabConfig<MiniTerminalDemoFixture> = {
     </div>
   ),
   propsMeta,
+  sourceCode: `export type DemoEntry =
+  | { kind: "input"; text: string; prompt: ">"; typingMs: number; pauseAfter: number }
+  | { kind: "tool-call"; toolName: string; args: Record<...>; result: string; pauseAfter: number }
+  | { kind: "claude"; text: string; pauseAfter: number }
+  | { kind: "output"; text: string; color: "green" | "zinc" | "purple"; pauseAfter: number };
+
+export type DemoScenario = {
+  id: string; title: string; category: string; entries: DemoEntry[];
+};
+
+export interface MiniTerminalDemoProps {
+  scenario: DemoScenario;
+  play: boolean;
+  playDelay?: number;
+  isPinned?: boolean;
+  onTogglePin?: () => void;
+}
+
+export function MiniTerminalDemo({ scenario, play, playDelay, isPinned, onTogglePin }: MiniTerminalDemoProps) {
+  // Animated terminal card with typing, tool calls, pin/copy support
+  // Uses computeTimings() from lib/terminal.ts for staggered fade-ins
+}`,
 };
