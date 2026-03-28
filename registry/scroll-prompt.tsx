@@ -2,13 +2,17 @@
 
 import { useEffect, useState } from "react";
 
+export interface ScrollPromptProps {
+  /** DOM id of the element to observe */
+  targetId: string;
+  /** Label text shown above the arrow */
+  label: string;
+}
+
 export function ScrollPrompt({
   targetId,
   label,
-}: {
-  targetId: string;
-  label: string;
-}) {
+}: ScrollPromptProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

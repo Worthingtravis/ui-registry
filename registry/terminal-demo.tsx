@@ -5,6 +5,7 @@ import { TerminalChrome } from "./terminal-chrome";
 import { TypingText } from "./typing-text";
 import { ToolCallBlock } from "./tool-call-block";
 import { CopyableRow } from "./copyable-row";
+import { computeTimings, TERMINAL_COLORS } from "@/lib/terminal";
 
 // ---------------------------------------------------------------------------
 // Data model
@@ -12,7 +13,7 @@ import { CopyableRow } from "./copyable-row";
 export type TerminalEntry =
   | { kind: "input"; text: string; prompt?: string; typingMs: number; pauseAfter: number }
   | { kind: "output"; text: string; color?: "green" | "zinc" | "purple"; pauseAfter: number }
-  | { kind: "tool-call"; toolName: string; args: Record<string, unknown>; result: string; pauseAfter: number }
+  | { kind: "tool-call"; toolName: string; args: Record<string, string | number | boolean | string[]>; result: string; pauseAfter: number }
   | { kind: "phase"; label: string; pauseAfter: number }
   | { kind: "thinking"; text: string; durationMs: number; pauseAfter: number }
   | { kind: "claude"; text: string; pauseAfter: number }
@@ -50,44 +51,20 @@ export function buildScript(mcpEndpoint: string): TerminalEntry[] {
 }
 
 // ---------------------------------------------------------------------------
-// Compute cumulative start times
-// ---------------------------------------------------------------------------
-type TimedEntry = TerminalEntry & { startMs: number };
-
-function computeTimings(entries: TerminalEntry[]): TimedEntry[] {
-  let cursor = 0;
-  return entries.map((entry) => {
-    const startMs = cursor;
-    if (entry.kind === "input") {
-      cursor += entry.typingMs + entry.pauseAfter;
-    } else if (entry.kind === "thinking") {
-      cursor += entry.durationMs + entry.pauseAfter;
-    } else {
-      cursor += entry.pauseAfter;
-    }
-    return { ...entry, startMs };
-  });
-}
-
-// ---------------------------------------------------------------------------
-// Color helpers
-// ---------------------------------------------------------------------------
-const colorClass: Record<string, string> = {
-  green: "text-green-400",
-  zinc: "text-zinc-400",
-  purple: "text-[#9147ff]",
-};
-
-// ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
+
+export interface TerminalDemoProps {
+  /** MCP endpoint URL used in the default script */
+  mcpEndpoint?: string;
+  /** Custom script entries (overrides default) */
+  script?: TerminalEntry[];
+}
+
 export function TerminalDemo({
   mcpEndpoint = "https://your-app.vercel.app/api/mcp",
   script,
-}: {
-  mcpEndpoint?: string;
-  script?: TerminalEntry[];
-}) {
+}: TerminalDemoProps) {
   const [sessionKey, setSessionKey] = useState(0);
   const timed = computeTimings(script ?? buildScript(mcpEndpoint));
 
@@ -140,7 +117,7 @@ export function TerminalDemo({
               return (
                 <div
                   key={i}
-                  className={colorClass[entry.color ?? "zinc"] ?? "text-zinc-400"}
+                  className={TERMINAL_COLORS[entry.color ?? "zinc"] ?? "text-zinc-400"}
                   style={{
                     opacity: 0,
                     animation: `fade-in 300ms ${entry.startMs}ms forwards`,

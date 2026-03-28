@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { ToolCallBlock } from "./tool-call-block";
+import { computeTimings, TERMINAL_COLORS } from "@/lib/terminal";
 
 // ---------------------------------------------------------------------------
 // Types — exported so consumers can define their own scenarios
 // ---------------------------------------------------------------------------
 export type DemoEntry =
   | { kind: "input"; text: string; prompt: ">"; typingMs: number; pauseAfter: number }
-  | { kind: "tool-call"; toolName: string; args: Record<string, unknown>; result: string; pauseAfter: number }
+  | { kind: "tool-call"; toolName: string; args: Record<string, string | number | boolean | string[]>; result: string; pauseAfter: number }
   | { kind: "claude"; text: string; pauseAfter: number }
   | { kind: "output"; text: string; color: "green" | "zinc" | "purple"; pauseAfter: number };
 
@@ -18,30 +19,6 @@ export type DemoScenario = {
   category: string;
   streamCategory?: string;
   entries: DemoEntry[];
-};
-
-// ---------------------------------------------------------------------------
-// Timing
-// ---------------------------------------------------------------------------
-type TimedEntry = DemoEntry & { startMs: number };
-
-function computeTimings(entries: DemoEntry[]): TimedEntry[] {
-  let cursor = 0;
-  return entries.map((entry) => {
-    const startMs = cursor;
-    if (entry.kind === "input") {
-      cursor += entry.typingMs + entry.pauseAfter;
-    } else {
-      cursor += entry.pauseAfter;
-    }
-    return { ...entry, startMs };
-  });
-}
-
-const colorClass: Record<string, string> = {
-  green: "text-green-400",
-  zinc: "text-zinc-400",
-  purple: "text-[#9147ff]",
 };
 
 // ---------------------------------------------------------------------------
@@ -77,19 +54,27 @@ function UnpinIcon() {
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
+
+export interface MiniTerminalDemoProps {
+  /** The scenario data to render */
+  scenario: DemoScenario;
+  /** Whether to start/restart the animation */
+  play: boolean;
+  /** Delay in ms before animation starts */
+  playDelay?: number;
+  /** Whether this card is pinned */
+  isPinned?: boolean;
+  /** Callback to toggle pin state */
+  onTogglePin?: () => void;
+}
+
 export function MiniTerminalDemo({
   scenario,
   play,
   playDelay = 0,
   isPinned = false,
   onTogglePin,
-}: {
-  scenario: DemoScenario;
-  play: boolean;
-  playDelay?: number;
-  isPinned?: boolean;
-  onTogglePin?: () => void;
-}) {
+}: MiniTerminalDemoProps) {
   const [sessionKey, setSessionKey] = useState(0);
   const [hasPlayed, setHasPlayed] = useState(false);
   const [done, setDone] = useState(false);
@@ -278,7 +263,7 @@ export function MiniTerminalDemo({
                 return (
                   <div
                     key={i}
-                    className={colorClass[entry.color ?? "zinc"] ?? "text-zinc-400"}
+                    className={TERMINAL_COLORS[entry.color ?? "zinc"] ?? "text-zinc-400"}
                     style={entryStyle}
                   >
                     {entry.text}

@@ -2,17 +2,23 @@
 
 import { useEffect, useRef } from "react";
 
+export interface TypingTextProps {
+  /** The text string to type out */
+  text: string;
+  /** Delay in ms before typing starts */
+  delay: number;
+  /** Duration in ms for the typing animation */
+  duration: number;
+  /** Additional CSS classes */
+  className?: string;
+}
+
 export function TypingText({
   text,
   delay,
   duration,
   className = "",
-}: {
-  text: string;
-  delay: number;
-  duration: number;
-  className?: string;
-}) {
+}: TypingTextProps) {
   const chars = text.length;
   const doneAt = delay + duration;
   const outerRef = useRef<HTMLSpanElement>(null);

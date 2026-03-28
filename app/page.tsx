@@ -1,15 +1,20 @@
 import Link from "next/link";
-import { REGISTRY } from "@/lib/registry-config";
+import { REGISTRY, installCommand } from "@/lib/registry";
 
 export default function HomePage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-16 space-y-12">
+    <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-16 space-y-12">
       {/* Header */}
       <div className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight">UI Registry</h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-3xl font-bold tracking-tight">UI Registry</h1>
+          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+            {REGISTRY.length} components
+          </span>
+        </div>
         <p className="text-muted-foreground text-sm max-w-lg">
-          Installable components for shadcn/ui. Click any component to see a live preview,
-          then copy the install command.
+          Installable components for shadcn/ui. Click any component to see a live preview
+          with multiple examples, then copy the install command.
         </p>
       </div>
 
@@ -22,11 +27,8 @@ export default function HomePage() {
             className="group rounded-xl border border-border/40 bg-card/40 p-5 transition-all hover:border-border/80 hover:bg-card/60 hover:shadow-lg hover:shadow-primary/5"
           >
             <h2 className="text-sm font-bold tracking-tight group-hover:text-primary transition-colors">
-              {entry.title}
+              {entry.name.split("-").map(w => w[0]!.toUpperCase() + w.slice(1)).join(" ")}
             </h2>
-            <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-              {entry.description}
-            </p>
             <div className="flex flex-wrap gap-1.5 mt-3">
               {entry.tags.map((tag) => (
                 <span
@@ -45,10 +47,10 @@ export default function HomePage() {
       <div className="rounded-xl border border-border/40 bg-card/40 p-6 space-y-3">
         <h2 className="text-sm font-bold tracking-tight">Quick Install</h2>
         <p className="text-xs text-muted-foreground">
-          Add the registry to your project, then install any component by name:
+          Install any component by name:
         </p>
         <pre className="text-xs font-mono bg-muted/30 rounded-lg p-3 overflow-x-auto">
-          npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/[name].json
+          {installCommand("[name]")}
         </pre>
       </div>
     </div>

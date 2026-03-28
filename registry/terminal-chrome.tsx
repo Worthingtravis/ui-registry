@@ -1,14 +1,19 @@
 import type { ReactNode } from "react";
 
+export interface TerminalChromeProps {
+  /** Window title shown next to traffic lights */
+  title?: string;
+  /** Terminal body content */
+  children: ReactNode;
+  /** Slot rendered on the right side of the title bar */
+  rightSlot?: ReactNode;
+}
+
 export function TerminalChrome({
   title,
   children,
   rightSlot,
-}: {
-  title?: string;
-  children: ReactNode;
-  rightSlot?: ReactNode;
-}) {
+}: TerminalChromeProps) {
   return (
     <div className="overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900">
       {/* Title bar */}

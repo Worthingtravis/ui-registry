@@ -2,21 +2,27 @@
 
 import { useState, useCallback, type ReactNode } from "react";
 
+export interface CopyableRowProps {
+  /** Text to copy to clipboard on click */
+  text: string;
+  /** Row content */
+  children: ReactNode;
+  /** Additional CSS classes */
+  className?: string;
+  /** Inline styles */
+  style?: React.CSSProperties;
+}
+
 /**
  * Makes its children clickable-to-copy. Shows a subtle hover highlight
- * and a copy→check icon transition on click.
+ * and a copy/check icon transition on click.
  */
 export function CopyableRow({
   text,
   children,
   className = "",
   style,
-}: {
-  text: string;
-  children: ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
+}: CopyableRowProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(async () => {

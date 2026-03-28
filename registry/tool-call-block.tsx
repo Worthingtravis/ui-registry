@@ -1,16 +1,22 @@
 "use client";
 
+export interface ToolCallBlockProps {
+  /** Name of the tool being called */
+  toolName: string;
+  /** Key-value argument pairs */
+  args: Record<string, string | number | boolean | string[]>;
+  /** Result text shown at the bottom */
+  result: string;
+  /** Fade-in delay in ms */
+  delay: number;
+}
+
 export function ToolCallBlock({
   toolName,
   args,
   result,
   delay,
-}: {
-  toolName: string;
-  args: Record<string, unknown>;
-  result: string;
-  delay: number;
-}) {
+}: ToolCallBlockProps) {
   return (
     <div
       className="rounded-md border border-zinc-700 border-l-2 border-l-[#9147ff] bg-zinc-800/50 px-3 py-2"

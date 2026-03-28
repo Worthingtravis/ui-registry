@@ -1,34 +1,28 @@
 "use client";
 
-import { useEffect, useState, type ComponentType } from "react";
-import { getEntry } from "@/lib/registry-config";
+import { useEffect, useState } from "react";
+import { getEntry, installCommand } from "@/lib/registry";
+import type { PreviewLabConfig } from "@/lib/types";
+import { PreviewLab } from "@/components/preview-lab";
 
-/**
- * Client component that dynamically imports the demo for a given registry name.
- * This keeps the preview page a Server Component while the demo renders client-side.
- */
 export function PreviewClient({ name }: { name: string }) {
-  const [Demo, setDemo] = useState<ComponentType | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [labConfig, setLabConfig] = useState<PreviewLabConfig<any> | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const entry = getEntry(name);
     if (!entry) {
-      setError(`No demo found for "${name}"`);
+      setError(`No component found for "${name}"`);
       return;
     }
-    entry.demo()
-      .then((mod) => setDemo(() => mod.default))
+    entry.lab()
+      .then((mod) => setLabConfig(mod.config))
       .catch(() => setError(`Failed to load demo for "${name}"`));
   }, [name]);
 
-  if (error) {
-    return <p className="text-sm text-destructive">{error}</p>;
-  }
+  if (error) return <p className="text-sm text-destructive">{error}</p>;
+  if (!labConfig) return <div className="text-sm text-muted-foreground animate-pulse">Loading...</div>;
 
-  if (!Demo) {
-    return <div className="text-sm text-muted-foreground animate-pulse">Loading...</div>;
-  }
-
-  return <Demo />;
+  return <PreviewLab config={labConfig} installCommand={installCommand(name)} />;
 }
