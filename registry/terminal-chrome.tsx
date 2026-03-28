@@ -21,7 +21,7 @@ export function TerminalChrome({
   className = "",
 }: TerminalChromeProps) {
   return (
-    <div className={`terminal overflow-hidden rounded-lg border border-term-border bg-term-bg ${className}`}>
+    <div className={`overflow-hidden rounded-lg border border-term-border bg-term-bg ${className}`}>
       {/* Title bar */}
       <div className="flex items-center justify-between border-b border-term-border-muted bg-term-bg-header px-3 py-1.5">
         <div className="flex items-center gap-3">

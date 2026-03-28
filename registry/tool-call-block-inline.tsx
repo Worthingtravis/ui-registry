@@ -22,7 +22,7 @@ export function ToolCallBlockInline({
 
   return (
     <div
-      className="terminal flex items-center gap-2 rounded-md border border-term-border border-l-2 border-l-term-accent bg-term-bg-muted px-3 py-1.5 text-xs font-mono"
+      className="flex items-center gap-2 rounded-md border border-term-border border-l-2 border-l-term-accent bg-term-bg-muted px-3 py-1.5 text-xs font-mono"
       style={animStyle}
     >
       <span className="font-semibold text-term-accent">{toolName}</span>

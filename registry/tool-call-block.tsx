@@ -23,7 +23,7 @@ export function ToolCallBlock({
 
   return (
     <div
-      className="terminal rounded-md border border-term-border border-l-2 border-l-term-accent bg-term-bg-muted px-3 py-2"
+      className="rounded-md border border-term-border border-l-2 border-l-term-accent bg-term-bg-muted px-3 py-2"
       style={animStyle}
     >
       <div className="flex items-center gap-1.5 text-xs">

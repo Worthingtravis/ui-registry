@@ -17,7 +17,7 @@ export const config: PreviewLabConfig<Omit<TypingTextProps, "className">> = {
   tags: ["animation", "text", "typewriter"],
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
-    <div className="rounded-lg terminal bg-term-bg p-6 font-mono text-[13px] text-term-text">
+    <div className="rounded-lg bg-term-bg p-6 font-mono text-[13px] text-term-text">
       <div className="flex items-start gap-2">
         <span className="text-term-success shrink-0">$</span>
         <TypingText {...fixture} />
