@@ -1,6 +1,8 @@
 "use client";
 
+import React from "react";
 import { ToolCallBlock, type ToolCallBlockProps } from "@/registry/tool-call-block";
+import { ToolCallBlockInline } from "@/registry/tool-call-block-inline";
 import { ALL_FIXTURES } from "@/fixtures/tool-call-block.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
@@ -21,5 +23,25 @@ export const config: PreviewLabConfig<Omit<ToolCallBlockProps, "delay">> = {
       <ToolCallBlock {...fixture} delay={0} />
     </div>
   ),
+  variants: [
+    {
+      name: "Block",
+      component: ((props: Omit<ToolCallBlockProps, "delay">) => (
+        <div className="rounded-lg bg-zinc-900 p-4 font-mono text-[13px]">
+          <ToolCallBlock {...props} delay={0} />
+        </div>
+      )) as React.ComponentType<Omit<ToolCallBlockProps, "delay">>,
+      description: "Full block with indented args and result.",
+    },
+    {
+      name: "Inline",
+      component: ((props: Omit<ToolCallBlockProps, "delay">) => (
+        <div className="rounded-lg bg-zinc-900 p-4 font-mono text-[13px]">
+          <ToolCallBlockInline {...props} delay={0} />
+        </div>
+      )) as React.ComponentType<Omit<ToolCallBlockProps, "delay">>,
+      description: "Compact single-line display.",
+    },
+  ],
   propsMeta,
 };
