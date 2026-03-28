@@ -32,6 +32,32 @@ export const config: PreviewLabConfig<CopyableRowFixture> = {
     </div>
   ),
   propsMeta,
+  fixtureCode: `export interface CopyableRowFixture {
+  label: string;
+  rows: Array<{
+    text: string;
+    prefix?: string;
+    prefixColor?: string;
+    display: string;
+    displayColor?: string;
+  }>;
+}
+
+const BASE: CopyableRowFixture = {
+  label: "Terminal commands",
+  rows: [
+    { text: "npx shadcn@latest add step-flow", prefix: "$", prefixColor: "text-green-400", display: "npx shadcn@latest add step-flow" },
+    { text: "pnpm add lucide-react", prefix: "$", prefixColor: "text-green-400", display: "pnpm add lucide-react" },
+  ],
+};
+
+const fx = (o: Partial<CopyableRowFixture>) => ({ ...BASE, ...o });
+
+export const ALL_FIXTURES: Record<string, CopyableRowFixture> = {
+  "Commands": BASE,
+  "Key-Value pairs": fx({ label: "Configuration", rows: [...] }),
+  "Single row": fx({ label: "Single item", rows: [{ text: "npm install", ... }] }),
+};`,
   sourceCode: `export interface CopyableRowProps {
   text: string;        // Text to copy to clipboard on click
   children: ReactNode; // Row content

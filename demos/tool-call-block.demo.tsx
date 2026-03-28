@@ -35,6 +35,24 @@ export const config: PreviewLabConfig<Fixture> = {
     { name: "Inline", component: ((props: Fixture) => <ToolCallBlockInline {...props} delay={0} />) as ComponentType<Fixture>, description: "Compact single-line display." },
   ],
   propsMeta,
+  fixtureCode: `import type { ToolCallBlockProps } from "@/registry/tool-call-block";
+type Fixture = Omit<ToolCallBlockProps, "delay">;
+
+const BASE: Fixture = {
+  toolName: "search_docs",
+  args: { query: "button variants", limit: 5 },
+  result: "Found 3 matching components",
+};
+
+const fx = (o: Partial<Fixture>): Fixture => ({ ...BASE, ...o });
+
+export const ALL_FIXTURES: Record<string, Fixture> = {
+  "Search docs": BASE,
+  "Read file": fx({ toolName: "read_file", args: { path: "registry/step-flow.tsx" }, result: "148 lines" }),
+  "Write file": fx({ toolName: "write_file", args: { path: "card.tsx", lines: 42 }, result: "Written" }),
+  "Deploy": fx({ toolName: "deploy", args: { target: "production", force: true }, result: "Deployed" }),
+  "Many args": fx({ toolName: "create_poll", args: { title: "What game?", choices: [...] }, result: "Created" }),
+};`,
   sourceCode: `export interface ToolCallBlockProps {
   toolName: string;
   args: Record<string, string | number | boolean | string[]>;

@@ -49,6 +49,30 @@ export const config: PreviewLabConfig<TerminalChromeFixture> = {
     </TerminalChrome>
   ),
   propsMeta,
+  fixtureCode: `export interface TerminalChromeFixture {
+  title?: string;
+  hasRightSlot: boolean;
+  bodyLines: Array<{ text: string; color?: "green" | "zinc" | "cyan" | "muted" }>;
+}
+
+const BASE: TerminalChromeFixture = {
+  title: "~/projects/ui-registry",
+  hasRightSlot: false,
+  bodyLines: [
+    { text: "$ pnpm build", color: "green" },
+    { text: "Building registry...", color: "muted" },
+    { text: "Done in 1.2s", color: "green" },
+  ],
+};
+
+const fx = (o: Partial<TerminalChromeFixture>) => ({ ...BASE, ...o });
+
+export const ALL_FIXTURES: Record<string, TerminalChromeFixture> = {
+  "Build output": BASE,
+  "Dev server": fx({ title: "dev-server", hasRightSlot: true, bodyLines: [...] }),
+  "Empty terminal": fx({ title: "bash", bodyLines: [] }),
+  "Error output": fx({ title: "~/projects/broken-app", bodyLines: [...] }),
+};`,
   sourceCode: `export interface TerminalChromeProps {
   title?: string;
   children: ReactNode;

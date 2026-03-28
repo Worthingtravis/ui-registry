@@ -31,6 +31,19 @@ export const config: PreviewLabConfig<ScrollPromptProps> = {
     </div>
   ),
   propsMeta,
+  fixtureCode: `import type { ScrollPromptProps } from "@/registry/scroll-prompt";
+
+const BASE: ScrollPromptProps = {
+  targetId: "scroll-demo-target",
+  label: "Scroll to explore",
+};
+
+const fx = (o: Partial<ScrollPromptProps>) => ({ ...BASE, ...o });
+
+export const ALL_FIXTURES: Record<string, ScrollPromptProps> = {
+  "Default": BASE,
+  "Custom label": fx({ label: "See more below" }),
+};`,
   sourceCode: `export interface ScrollPromptProps {
   targetId: string; // DOM id of the element to observe
   label: string;    // Label text shown above the arrow
