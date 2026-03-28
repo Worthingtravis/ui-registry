@@ -2,6 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tool-call-block-inline",
   "title": "Tool Call Block Inline",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
   "description": "Inline single-line variant of ToolCallBlock — compact tool call display.",
   "registryDependencies": [
     "tool-call-block"
@@ -25,5 +26,9 @@
       }
     }
   },
+  "categories": [
+    "terminal",
+    "ai"
+  ],
   "type": "registry:component"
 }

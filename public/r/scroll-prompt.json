@@ -2,6 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "scroll-prompt",
   "title": "Scroll Prompt",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
   "description": "Animated scroll-down prompt that appears when a target section is out of view.",
   "files": [
     {
@@ -9,6 +10,9 @@
       "content": "\"use client\";\n\nimport { useEffect, useState } from \"react\";\n\nexport interface ScrollPromptProps {\n  /** DOM id of the element to observe */\n  targetId: string;\n  /** Label text shown above the arrow */\n  label: string;\n}\n\nexport function ScrollPrompt({\n  targetId,\n  label,\n}: ScrollPromptProps) {\n  const [visible, setVisible] = useState(false);\n\n  useEffect(() => {\n    const target = document.getElementById(targetId);\n    if (!target) return;\n\n    const observer = new IntersectionObserver(\n      ([entry]) => setVisible(!entry.isIntersecting),\n      { threshold: 0.1 }\n    );\n\n    observer.observe(target);\n    return () => observer.disconnect();\n  }, [targetId]);\n\n  if (!visible) return null;\n\n  return (\n    <a\n      href={`#${targetId}`}\n      className=\"group flex flex-col items-center gap-1 py-2 text-muted-foreground transition hover:text-foreground\"\n    >\n      <span className=\"text-xs font-medium\">{label}</span>\n      <svg\n        width=\"16\"\n        height=\"16\"\n        viewBox=\"0 0 24 24\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        strokeWidth=\"2\"\n        strokeLinecap=\"round\"\n        strokeLinejoin=\"round\"\n        className=\"animate-bounce\"\n      >\n        <polyline points=\"6 9 12 15 18 9\" />\n      </svg>\n    </a>\n  );\n}\n",
       "type": "registry:component"
     }
+  ],
+  "categories": [
+    "navigation"
   ],
   "type": "registry:component"
 }

@@ -2,6 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "terminal-demo",
   "title": "Terminal Demo",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
   "description": "Full animated terminal session with typing, tool calls, thinking indicators, memory blocks, and copyable rows.",
   "registryDependencies": [
     "terminal-chrome",
@@ -49,5 +50,11 @@
       }
     }
   },
+  "docs": "Use with zero config via `mcpEndpoint` prop, or pass a custom `script` array of `TerminalEntry` items for full control over the animation sequence.",
+  "categories": [
+    "terminal",
+    "animation",
+    "ai"
+  ],
   "type": "registry:block"
 }

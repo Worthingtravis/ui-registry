@@ -2,6 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tool-call-block",
   "title": "Tool Call Block",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
   "description": "MCP tool call display with name, arguments, and result.",
   "files": [
     {
@@ -22,5 +23,10 @@
       }
     }
   },
+  "docs": "Displays a tool call in the Claude Code style — tool name, arguments, and result. Set `delay` to 0 for instant render or use a ms value for fade-in animation.",
+  "categories": [
+    "terminal",
+    "ai"
+  ],
   "type": "registry:component"
 }

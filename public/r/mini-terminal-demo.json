@@ -2,6 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "mini-terminal-demo",
   "title": "Mini Terminal Demo",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
   "description": "Compact animated terminal card with copy-to-clipboard, pin support, and stagger delay. Exports DemoEntry and DemoScenario types.",
   "registryDependencies": [
     "terminal-chrome",
@@ -28,5 +29,10 @@
       }
     }
   },
+  "docs": "Define a `DemoScenario` with entries (input, output, tool-call, claude) and pass it as the `scenario` prop. Set `play` to true to start the animation.",
+  "categories": [
+    "terminal",
+    "animation"
+  ],
   "type": "registry:block"
 }
