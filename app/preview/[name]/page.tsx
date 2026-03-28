@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ name: str
 
 function readFile(relativePath: string): string | null {
   try {
-    return fs.readFileSync(path.join(process.cwd(), relativePath), "utf-8");
+    return fs.readFileSync(path.join(/* turbopackIgnore: true */ process.cwd(), relativePath), "utf-8");
   } catch {
     return null;
   }
