@@ -22,7 +22,7 @@ export function computeTimings<T extends { kind: string; pauseAfter: number }>(
 
 /** Shared color class map for terminal output lines. */
 export const TERMINAL_COLORS: Record<string, string> = {
-  green: "text-green-400",
-  zinc: "text-zinc-400",
-  purple: "text-[#9147ff]",
+  green: "text-[var(--term-success)]",
+  zinc: "text-[var(--term-text-muted)]",
+  purple: "text-[var(--term-accent)]",
 };

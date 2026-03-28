@@ -16,8 +16,8 @@ export const config: PreviewLabConfig<ScrollPromptProps> = {
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="space-y-6">
-      <div className="rounded-lg border border-zinc-700/40 bg-zinc-900/40 p-6 text-center">
-        <p className="text-sm text-zinc-400">
+      <div className="rounded-lg border border-border/40 bg-muted/40 p-6 text-center">
+        <p className="text-sm text-muted-foreground">
           The scroll prompt tracks whether a target element is in view.
           In a real page it appears when the target scrolls out of the viewport.
         </p>
@@ -25,8 +25,8 @@ export const config: PreviewLabConfig<ScrollPromptProps> = {
       <div className="flex justify-center">
         <ScrollPrompt {...fixture} />
       </div>
-      <div id={fixture.targetId} className="rounded-lg border border-zinc-700/40 bg-zinc-800/50 p-4 text-center">
-        <p className="text-xs text-zinc-500">Target section</p>
+      <div id={fixture.targetId} className="rounded-lg border border-border/40 bg-muted/50 p-4 text-center">
+        <p className="text-xs text-muted-foreground/70">Target section</p>
       </div>
     </div>
   ),

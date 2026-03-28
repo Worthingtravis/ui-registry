@@ -22,13 +22,13 @@ export function ToolCallBlockInline({
 
   return (
     <div
-      className="flex items-center gap-2 rounded-md border border-zinc-700 border-l-2 border-l-[#9147ff] bg-zinc-800/50 px-3 py-1.5 text-xs font-mono"
+      className="terminal flex items-center gap-2 rounded-md border border-[var(--term-border)] border-l-2 border-l-[var(--term-accent)] bg-[var(--term-bg-muted)] px-3 py-1.5 text-xs font-mono"
       style={animStyle}
     >
-      <span className="font-semibold text-[#9147ff]">{toolName}</span>
-      <span className="text-zinc-500 truncate max-w-[200px]">{argStr}</span>
-      <span className="text-zinc-600 mx-1">&rarr;</span>
-      <span className="text-green-400 truncate">{result}</span>
+      <span className="font-semibold text-[var(--term-accent)]">{toolName}</span>
+      <span className="text-[var(--term-text-muted)] truncate max-w-[200px]">{argStr}</span>
+      <span className="text-[var(--term-text-muted)] mx-1">&rarr;</span>
+      <span className="text-[var(--term-success)] truncate">{result}</span>
     </div>
   );
 }

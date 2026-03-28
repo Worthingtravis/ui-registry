@@ -75,7 +75,7 @@ export function TerminalDemo({
         <button
           type="button"
           onClick={() => setSessionKey((k) => k + 1)}
-          className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs text-zinc-400 transition hover:bg-white/10 hover:text-zinc-200"
+          className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs text-[var(--term-text-muted)] transition hover:bg-[var(--term-bg-muted)] hover:text-[var(--term-text)]"
         >
           <ReplayIcon />
           Replay
@@ -95,20 +95,20 @@ export function TerminalDemo({
                 <CopyableRow
                   key={i}
                   text={entry.text}
-                  className="items-center text-zinc-100"
+                  className="items-center text-[var(--term-text-bright)]"
                   style={{
                     opacity: 0,
                     animation: `fade-in 100ms ${entry.startMs}ms forwards`,
                   }}
                 >
-                  <span className="shrink-0 select-none text-green-400">
+                  <span className="shrink-0 select-none text-[var(--term-success)]">
                     {entry.prompt ?? "$"}{" "}
                   </span>
                   <TypingText
                     text={entry.text}
                     delay={entry.startMs}
                     duration={entry.typingMs}
-                    className="text-zinc-100"
+                    className="text-[var(--term-text-bright)]"
                   />
                 </CopyableRow>
               );
@@ -117,7 +117,7 @@ export function TerminalDemo({
               return (
                 <div
                   key={i}
-                  className={TERMINAL_COLORS[entry.color ?? "zinc"] ?? "text-zinc-400"}
+                  className={TERMINAL_COLORS[entry.color ?? "zinc"] ?? "text-[var(--term-text-muted)]"}
                   style={{
                     opacity: 0,
                     animation: `fade-in 300ms ${entry.startMs}ms forwards`,
@@ -152,13 +152,13 @@ export function TerminalDemo({
               return (
                 <div
                   key={i}
-                  className="flex items-start gap-2 text-zinc-300"
+                  className="flex items-start gap-2 text-[var(--term-text)]"
                   style={{
                     opacity: 0,
                     animation: `fade-in 300ms ${entry.startMs}ms forwards`,
                   }}
                 >
-                  <span className="shrink-0 text-[#9147ff]/60">✦</span>
+                  <span className="shrink-0 text-[var(--term-accent-muted)]">✦</span>
                   <span>{entry.text}</span>
                 </div>
               );
@@ -204,14 +204,14 @@ function PhaseLabel({
 }) {
   return (
     <div
-      className={`-mx-4 flex items-center gap-2.5 border-b border-zinc-700/60 bg-zinc-800/80 px-4 py-1.5 ${first ? "-mt-4" : "mt-2 border-t"}`}
+      className={`-mx-4 flex items-center gap-2.5 border-b border-[var(--term-border-muted)] bg-[var(--term-bg-header)]/80 px-4 py-1.5 ${first ? "-mt-4" : "mt-2 border-t"}`}
       style={{
         opacity: 0,
         animation: `fade-in 300ms ${startMs}ms forwards`,
       }}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-[#9147ff]" />
-      <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+      <span className="h-1.5 w-1.5 rounded-full bg-[var(--term-accent)]" />
+      <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--term-text-muted)]">
         {label}
       </span>
     </div>
@@ -238,10 +238,10 @@ function AskBlock({
     >
       {options.map((opt, j) => (
         <div key={j} className="flex items-start gap-2 text-xs">
-          <span className="mt-px shrink-0 rounded border border-zinc-500 bg-zinc-700/20 px-1.5 py-0.5 font-mono text-zinc-300">
+          <span className="mt-px shrink-0 rounded border border-[var(--term-text-muted)] bg-[var(--term-bg-muted)] px-1.5 py-0.5 font-mono text-[var(--term-text)]">
             {j + 1}
           </span>
-          <span className="text-zinc-300">{opt}</span>
+          <span className="text-[var(--term-text)]">{opt}</span>
         </div>
       ))}
     </div>
@@ -260,7 +260,7 @@ function MemoryBlock({
 }) {
   return (
     <div
-      className="flex items-start gap-2 rounded-md border border-orange-500/30 bg-orange-500/5 px-3 py-2"
+      className="flex items-start gap-2 rounded-md border border-[var(--term-warning)]/30 bg-[var(--term-warning)]/5 px-3 py-2"
       style={{
         opacity: 0,
         animation: `fade-in 300ms ${startMs}ms forwards`,
@@ -268,10 +268,10 @@ function MemoryBlock({
     >
       <span className="shrink-0 text-sm">🧠</span>
       <div className="min-w-0">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-orange-400/70">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--term-warning-muted)]">
           Core memory saved
         </span>
-        <p className="text-xs text-orange-300/90">{text}</p>
+        <p className="text-xs text-[var(--term-warning)]">{text}</p>
       </div>
     </div>
   );
@@ -304,14 +304,14 @@ function ThinkingBlock({
         {[0, 1, 2].map((dot) => (
           <span
             key={dot}
-            className="inline-block h-1 w-1 rounded-full bg-orange-400"
+            className="inline-block h-1 w-1 rounded-full bg-[var(--term-warning)]"
             style={{
               animation: `thinking-dot 1.2s ease-in-out ${dot * 200}ms infinite`,
             }}
           />
         ))}
       </span>
-      <span className="text-xs italic text-orange-400/80">{text}</span>
+      <span className="text-xs italic text-[var(--term-warning-muted)]">{text}</span>
     </div>
   );
 }

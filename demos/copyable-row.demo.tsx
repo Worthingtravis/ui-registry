@@ -17,14 +17,14 @@ export const config: PreviewLabConfig<CopyableRowFixture> = {
   tags: ["interactive", "clipboard", "copy"],
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
-    <div className="space-y-1 rounded-lg bg-zinc-900 p-4 font-mono text-[13px] text-zinc-300">
+    <div className="space-y-1 rounded-lg terminal bg-[var(--term-bg)] p-4 font-mono text-[13px] text-[var(--term-text)]">
       {fixture.label && (
-        <p className="text-xs text-zinc-500 mb-3">{fixture.label}</p>
+        <p className="text-xs text-[var(--term-text-muted)] mb-3">{fixture.label}</p>
       )}
       {fixture.rows.map((row, i) => (
         <CopyableRow key={i} text={row.text}>
           {row.prefix && (
-            <span className={row.prefixColor ?? "text-zinc-500"}>{row.prefix}</span>
+            <span className={row.prefixColor ?? "text-[var(--term-text-muted)]"}>{row.prefix}</span>
           )}{" "}
           <span className={row.displayColor}>{row.display}</span>
         </CopyableRow>

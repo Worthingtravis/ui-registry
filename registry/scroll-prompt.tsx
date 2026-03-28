@@ -33,7 +33,7 @@ export function ScrollPrompt({
   return (
     <a
       href={`#${targetId}`}
-      className="group flex flex-col items-center gap-1 py-2 text-zinc-400 transition hover:text-zinc-200"
+      className="group flex flex-col items-center gap-1 py-2 text-muted-foreground transition hover:text-foreground"
     >
       <span className="text-xs font-medium">{label}</span>
       <svg

@@ -130,11 +130,11 @@ export function MiniTerminalDemo({
     >
       {isPinned ? (
         <>
-          <span className="text-[#9147ff] group-hover/pin:hidden"><PinFilledIcon /></span>
-          <span className="hidden text-zinc-400 group-hover/pin:block"><UnpinIcon /></span>
+          <span className="text-[var(--term-accent)] group-hover/pin:hidden"><PinFilledIcon /></span>
+          <span className="hidden text-[var(--term-text-muted)] group-hover/pin:block"><UnpinIcon /></span>
         </>
       ) : (
-        <span className="text-zinc-500 hover:text-zinc-300"><PinOutlineIcon /></span>
+        <span className="text-[var(--term-text-muted)] hover:text-[var(--term-text)]"><PinOutlineIcon /></span>
       )}
     </button>
   ) : undefined;
@@ -142,20 +142,20 @@ export function MiniTerminalDemo({
   // Category badge + copy indicator for rightSlot
   const rightContent = (
     <div className="flex items-center gap-2">
-      <span className="rounded-full bg-zinc-700/50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-zinc-500">
+      <span className="rounded-full bg-[var(--term-bg-muted)] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[var(--term-text-muted)]">
         {scenario.category}
       </span>
       <span className="relative h-3 w-3 shrink-0 opacity-0 transition-opacity group-hover/card:opacity-100">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          className="absolute inset-0 text-zinc-500 transition-all duration-200"
+          className="absolute inset-0 text-[var(--term-text-muted)] transition-all duration-200"
           style={{ opacity: copied ? 0 : 1, transform: copied ? "scale(0.5)" : "scale(1)" }}>
           <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
         </svg>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          className="absolute inset-0 text-green-400 transition-all duration-300"
+          className="absolute inset-0 text-[var(--term-success)] transition-all duration-300"
           style={{
             opacity: copied ? 1 : 0, transform: copied ? "scale(1)" : "scale(0.5)",
             strokeDasharray: 24, strokeDashoffset: copied ? 0 : 24,
@@ -173,7 +173,7 @@ export function MiniTerminalDemo({
       tabIndex={0}
       onClick={() => copy(promptText)}
       onKeyDown={handleKeyDown}
-      className="group/card w-[340px] shrink-0 cursor-pointer text-left transition-colors hover:border-zinc-600 lg:w-full"
+      className="group/card w-[340px] shrink-0 cursor-pointer text-left transition-colors lg:w-full"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -199,14 +199,14 @@ export function MiniTerminalDemo({
             switch (entry.kind) {
               case "input":
                 return (
-                  <div key={i} className="flex items-start gap-1 min-w-0 text-zinc-100" style={entryStyle}>
-                    <span className="shrink-0 select-none text-green-400">{entry.prompt ?? ">"}{" "}</span>
+                  <div key={i} className="flex items-start gap-1 min-w-0 text-[var(--term-text-bright)]" style={entryStyle}>
+                    <span className="shrink-0 select-none text-[var(--term-success)]">{entry.prompt ?? ">"}{" "}</span>
                     <span className="flex-1" style={{ wordBreak: "break-word" }}>{entry.text}</span>
                   </div>
                 );
               case "output":
                 return (
-                  <div key={i} className={TERMINAL_COLORS[entry.color ?? "zinc"] ?? "text-zinc-400"} style={entryStyle}>
+                  <div key={i} className={TERMINAL_COLORS[entry.color ?? "zinc"] ?? "text-[var(--term-text-muted)]"} style={entryStyle}>
                     {entry.text}
                   </div>
                 );
@@ -218,8 +218,8 @@ export function MiniTerminalDemo({
                 );
               case "claude":
                 return (
-                  <div key={i} className="flex items-start gap-2 text-zinc-300" style={entryStyle}>
-                    <span className="shrink-0 text-[#9147ff]/60">✦</span>
+                  <div key={i} className="flex items-start gap-2 text-[var(--term-text)]" style={entryStyle}>
+                    <span className="shrink-0 text-[var(--term-accent-muted)]">✦</span>
                     <span>{entry.text}</span>
                   </div>
                 );

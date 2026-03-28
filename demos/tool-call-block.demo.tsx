@@ -25,7 +25,7 @@ export const config: PreviewLabConfig<Fixture> = {
       ? (props: Fixture) => <Variant {...props} />
       : (props: Fixture) => <ToolCallBlock {...props} delay={0} />;
     return (
-      <div className="rounded-lg bg-zinc-900 p-4 font-mono text-[13px]">
+      <div className="rounded-lg terminal bg-[var(--term-bg)] p-4 font-mono text-[13px]">
         <Comp {...fixture} />
       </div>
     );
