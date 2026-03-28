@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///mnt/ssd/development/ui-registry/demos/terminal-chrome.tsx"],"sourcesContent":["import { TerminalChrome } from \"@/registry/terminal-chrome\";\n\nexport default function TerminalChromeDemo() {\n  return (\n    <TerminalChrome title=\"~/projects/ui-registry\">\n      <div className=\"space-y-1 text-zinc-300\">\n        <p><span className=\"text-green-400\">$</span> pnpm build</p>\n        <p className=\"text-zinc-500\">Building registry...</p>\n        <p className=\"text-green-400\">Done in 1.2s</p>\n      </div>\n    </TerminalChrome>\n  );\n}\n"],"names":["TerminalChromeDemo","title","className"],"mappings":";;;;;AAAA;;;AAEe,SAASA;IACtB,qBACE,+YAAC,iJAAc;QAACC,OAAM;kBACpB,cAAA,+YAAC;YAAIC,WAAU;;8BACb,+YAAC;;sCAAE,+YAAC;4BAAKA,WAAU;sCAAiB;;;;;;wBAAQ;;;;;;;8BAC5C,+YAAC;oBAAEA,WAAU;8BAAgB;;;;;;8BAC7B,+YAAC;oBAAEA,WAAU;8BAAiB;;;;;;;;;;;;;;;;;AAItC"}}]
-}
