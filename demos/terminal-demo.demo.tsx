@@ -1,7 +1,7 @@
 "use client";
 
-import { TerminalDemo, type TerminalDemoProps } from "@/registry/terminal-demo";
-import { ALL_FIXTURES } from "@/fixtures/terminal-demo.fixtures";
+import { TerminalDemo } from "@/registry/terminal-demo";
+import { ALL_FIXTURES, type TerminalDemoFixture } from "@/fixtures/terminal-demo.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
 const propsMeta: PropMeta[] = [
@@ -9,29 +9,17 @@ const propsMeta: PropMeta[] = [
   { name: "script", type: "TerminalEntry[]", required: false, description: "Custom script entries (overrides default)" },
 ];
 
-export const config: PreviewLabConfig<TerminalDemoProps> = {
+export const config: PreviewLabConfig<TerminalDemoFixture> = {
   title: "Terminal Demo",
   description: "Full animated terminal session with typing, tool calls, thinking indicators, memory blocks, and copyable rows.",
   tags: ["terminal", "animation", "demo", "ai"],
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="max-w-2xl">
-      <TerminalDemo {...fixture} />
+      <TerminalDemo script={fixture.script} />
     </div>
   ),
   propsMeta,
-  fixtureCode: `import type { TerminalDemoProps } from "@/registry/terminal-demo";
-
-const BASE: TerminalDemoProps = {
-  mcpEndpoint: "https://your-app.vercel.app/api/mcp",
-};
-
-const fx = (o: Partial<TerminalDemoProps>) => ({ ...BASE, ...o });
-
-export const ALL_FIXTURES: Record<string, TerminalDemoProps> = {
-  "Default script": BASE,
-  "Custom endpoint": fx({ mcpEndpoint: "https://twitch-mcp.example.com/api/mcp" }),
-};`,
   sourceCode: `export type TerminalEntry =
   | { kind: "input"; text: string; prompt?: string; typingMs: number; pauseAfter: number }
   | { kind: "output"; text: string; color?: "green" | "zinc" | "purple"; pauseAfter: number }
@@ -43,13 +31,39 @@ export const ALL_FIXTURES: Record<string, TerminalDemoProps> = {
   | { kind: "memory"; text: string; pauseAfter: number };
 
 export interface TerminalDemoProps {
-  mcpEndpoint?: string;
-  script?: TerminalEntry[];
+  mcpEndpoint?: string;  // URL for default script
+  script?: TerminalEntry[];  // Custom script (overrides default)
 }
 
-export function TerminalDemo({ mcpEndpoint, script }: TerminalDemoProps) {
-  // Full animated terminal with TerminalChrome wrapper, TypingText,
-  // ToolCallBlock, CopyableRow, thinking dots, memory blocks.
-  // Uses computeTimings() and TERMINAL_COLORS from lib/terminal.ts
-}`,
+// Renders inside <TerminalChrome> with replay button.
+// Uses computeTimings() for staggered fade-in animations.
+// Supports 8 entry kinds: input, output, tool-call, phase,
+// thinking, claude, ask, and memory blocks.`,
+  fixtureCode: `import type { TerminalEntry } from "@/registry/terminal-demo";
+
+export interface TerminalDemoFixture {
+  script: TerminalEntry[];
+}
+
+const MCP_SETUP_SCRIPT: TerminalEntry[] = [
+  { kind: "phase", label: "Setup", pauseAfter: 300 },
+  { kind: "input", text: "claude mcp add ...", prompt: "$", typingMs: 1200, pauseAfter: 400 },
+  { kind: "output", text: "✓ Added twitch (143 tools)", color: "green", pauseAfter: 600 },
+  { kind: "tool-call", toolName: "create_poll", args: { ... }, result: "✓ Poll created", pauseAfter: 400 },
+  { kind: "memory", text: "Game poll prefs saved.", pauseAfter: 0 },
+];
+
+const CODE_REVIEW_SCRIPT: TerminalEntry[] = [
+  { kind: "thinking", text: "Analyzing diff...", durationMs: 1200, pauseAfter: 200 },
+  { kind: "tool-call", toolName: "read_file", args: { path: "src/auth/middleware.ts" }, ... },
+  { kind: "claude", text: "Two suggestions:", pauseAfter: 200 },
+  { kind: "ask", question: "Want me to fix these?", options: ["Yes", "Show diff", "Skip"] },
+];
+
+export const ALL_FIXTURES: Record<string, TerminalDemoFixture> = {
+  "MCP Setup + Poll": { script: MCP_SETUP_SCRIPT },
+  "Code Review": { script: CODE_REVIEW_SCRIPT },
+  "Deploy Pipeline": { script: DEPLOY_SCRIPT },
+  "Minimal Chat": { script: MINIMAL_SCRIPT },
+};`,
 };

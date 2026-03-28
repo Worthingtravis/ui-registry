@@ -252,7 +252,9 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
 
         {activeTab === "preview" && activeFixture !== undefined && (
           <div className="rounded-b-lg border border-t-0 border-border bg-background p-8 min-h-[140px] flex items-center justify-center">
-            <div className="w-full">{render(activeFixture, activeVariant)}</div>
+            <div className="w-full" key={`${fixtureIndex}-${variantIndex}`}>
+              {render(activeFixture, activeVariant)}
+            </div>
           </div>
         )}
 
