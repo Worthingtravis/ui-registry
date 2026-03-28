@@ -29,7 +29,7 @@ export default function HomePage() {
               {kebabToTitle(entry.name)}
             </h3>
             <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-              {entry.tags.join(" / ")}
+              {entry.description}
             </p>
           </Link>
         ))}

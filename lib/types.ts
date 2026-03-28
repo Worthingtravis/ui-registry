@@ -53,6 +53,8 @@ export interface PreviewLabConfig<TFixture> {
 export interface RegistryEntry {
   /** kebab-case name matching registry.json */
   name: string;
+  /** One-line description shown on the index page */
+  description: string;
   /** Dynamic import for the preview lab config */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   lab: () => Promise<{ config: PreviewLabConfig<any> }>;
