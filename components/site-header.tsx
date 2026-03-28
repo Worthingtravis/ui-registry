@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
   return (
@@ -20,7 +21,8 @@ export function SiteHeader() {
             GitHub
           </a>
         </nav>
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-1">
+          <ThemeToggle />
           <a
             href="https://github.com/Worthingtravis/ui-registry"
             target="_blank"
