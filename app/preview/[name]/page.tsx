@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import fs from "fs";
+import path from "path";
 import { REGISTRY, getEntry } from "@/lib/registry";
 import { kebabToTitle } from "@/lib/utils";
 import { PreviewClient } from "./preview-client";
@@ -15,18 +17,29 @@ export async function generateMetadata({ params }: { params: Promise<{ name: str
   return { title: `${kebabToTitle(name)} — UI Registry` };
 }
 
+function readFile(relativePath: string): string | null {
+  try {
+    return fs.readFileSync(path.join(process.cwd(), relativePath), "utf-8");
+  } catch {
+    return null;
+  }
+}
+
 export default async function PreviewPage({ params }: { params: Promise<{ name: string }> }) {
   const { name } = await params;
   const entry = getEntry(name);
   if (!entry) notFound();
 
+  // Load real source files server-side
+  const sourceCode = readFile(`registry/${name}.tsx`);
+  const fixtureCode = readFile(`fixtures/${name}.fixtures.ts`);
+
   return (
     <div className="max-w-3xl px-6 lg:px-8 py-10">
       <Suspense fallback={<div className="text-sm text-muted-foreground animate-pulse">Loading preview...</div>}>
-        <PreviewClient name={name} />
+        <PreviewClient name={name} sourceCode={sourceCode} fixtureCode={fixtureCode} />
       </Suspense>
 
-      {/* Footer */}
       <div className="mt-12 pt-6 border-t border-border/20 flex items-center justify-between text-xs text-muted-foreground">
         <a
           href={`https://github.com/Worthingtravis/ui-registry/blob/main/registry/${name}.tsx`}

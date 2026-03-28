@@ -73,8 +73,8 @@ function InstallTabs({ baseCommand }: { baseCommand: string }) {
               className={cn(
                 "px-3 py-2 text-xs font-medium transition-colors rounded-t",
                 pm === p
-                  ? "text-foreground bg-accent"
-                  : "text-muted-foreground hover:text-foreground",
+                  ? "text-code-text bg-term-bg-header"
+                  : "text-term-text-muted hover:text-code-text",
               )}
             >
               {p}
