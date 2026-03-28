@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { Copy, Check } from "lucide-react";
 import { useCopy } from "@/lib/use-copy";
+import { CodeHighlight } from "@/components/code-highlight";
 import type { PreviewLabConfig } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
@@ -286,29 +287,23 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
 
         {activeTab === "code" && sourceCode && (
           <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
-            <CodeBlock code={sourceCode} />
+            <CodeHighlight code={sourceCode} language="tsx" />
           </div>
         )}
 
         {activeTab === "fixtures" && (
           <div className="border border-t-0 border-border rounded-b-lg overflow-hidden space-y-0">
-            {/* Live fixture data */}
-            <div className="relative rounded-none border-b border-border/30 bg-code-bg">
-              <div className="flex items-center justify-between border-b border-border/30 px-4 py-2">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Active: {activeFixtureKey}
-                </span>
-              </div>
-              <CopyButton
-                text={JSON.stringify(activeFixture, null, 2)}
-                className="absolute top-2 right-3"
-              />
-              <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text max-h-[400px] overflow-y-auto">
-                <code>{JSON.stringify(activeFixture, null, 2)}</code>
-              </pre>
-            </div>
-            {/* Source code (if provided) */}
-            {fixtureCode && <CodeBlock code={fixtureCode} label="Source" />}
+            {/* Live fixture JSON */}
+            <CodeHighlight
+              code={JSON.stringify(activeFixture, null, 2)}
+              language="json"
+              label={`Active: ${activeFixtureKey}`}
+              className="rounded-none border-0 border-b border-code-border/30 max-h-[400px] overflow-y-auto"
+            />
+            {/* Fixture source */}
+            {fixtureCode && (
+              <CodeHighlight code={fixtureCode} language="tsx" label="Source" className="rounded-none border-0" />
+            )}
           </div>
         )}
 
