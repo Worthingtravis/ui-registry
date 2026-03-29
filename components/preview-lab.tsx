@@ -8,7 +8,7 @@ import { CodeHighlight } from "@/components/code-highlight";
 import type { PreviewLabConfig } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
-// CopyButton — used by InstallTabs (dark-bg context)
+// CopyButton
 // ---------------------------------------------------------------------------
 
 function CopyButton({ text, className }: { text: string; className?: string }) {
@@ -75,7 +75,7 @@ function InstallTabs({ baseCommand }: { baseCommand: string }) {
 }
 
 // ---------------------------------------------------------------------------
-// Tags to hide from consumers (internal dev categories)
+// Helpers
 // ---------------------------------------------------------------------------
 
 const INTERNAL_TAGS = new Set(["primitive", "composed"]);
@@ -103,7 +103,6 @@ function extractTypes(source: string): string | null {
       depth -= (line.match(/\}/g) || []).length;
 
       if (isUnion) {
-        // Union type ends when next line doesn't start with | or is blank/new declaration
         const next = lines[i + 1];
         if (!next || (!next.startsWith("  |") && !next.startsWith("  }"))) {
           blocks.push(current.join("\n"));
@@ -121,6 +120,32 @@ function extractTypes(source: string): string | null {
     }
   }
   return blocks.length > 0 ? blocks.join("\n\n") : null;
+}
+
+/** Convert title to PascalCase component name */
+function titleToComponent(title: string): string {
+  return title.replace(/[^a-zA-Z0-9 ]/g, "").replace(/\s+(.)/g, (_, c: string) => c.toUpperCase()).replace(/^\w/, (c) => c.toUpperCase());
+}
+
+/** Convert title to kebab-case for import path */
+function titleToKebab(title: string): string {
+  return title.toLowerCase().replace(/\s+/g, "-");
+}
+
+/** Generate a JSX usage snippet from component name + fixture data */
+function generateUsageSnippet(title: string, fixture: unknown): string {
+  const comp = titleToComponent(title);
+  const kebab = titleToKebab(title);
+  const importPath = `@/registry/new-york/${kebab}/${kebab}`;
+
+  const props = fixture as Record<string, unknown>;
+  const propLines = Object.entries(props).map(([key, value]) => {
+    if (typeof value === "string") return `  ${key}="${value}"`;
+    if (typeof value === "number" || typeof value === "boolean") return `  ${key}={${value}}`;
+    return `  ${key}={${JSON.stringify(value, null, 2).split("\n").join("\n  ")}}`;
+  });
+
+  return `import { ${comp} } from "${importPath}"\n\n<${comp}\n${propLines.join("\n")}\n/>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -146,7 +171,7 @@ interface PreviewLabComponentProps {
 export function PreviewLab({ config, installCommand }: PreviewLabComponentProps) {
   const {
     title, description, tags, fixtures, render, variants,
-    sourceCode, fixtureCode, propsMeta,
+    sourceCode, propsMeta,
   } = config;
 
   const fixtureKeys = useMemo(() => Object.keys(fixtures), [fixtures]);
@@ -156,11 +181,22 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
 
   const activeFixtureKey = fixtureKeys[fixtureIndex] ?? fixtureKeys[0];
   const activeFixture = activeFixtureKey ? fixtures[activeFixtureKey] : undefined;
-  const fixtureJson = useMemo(() => JSON.stringify(activeFixture, null, 2), [activeFixture]);
 
   const visibleTags = useMemo(
     () => tags?.filter((t) => !INTERNAL_TAGS.has(t)) ?? [],
     [tags],
+  );
+
+  // Usage tab: generated JSX snippet from active fixture
+  const usageSnippet = useMemo(
+    () => (activeFixture ? generateUsageSnippet(title, activeFixture) : null),
+    [title, activeFixture],
+  );
+
+  // Props tab: extracted TypeScript types from source
+  const typeSource = useMemo(
+    () => (sourceCode ? extractTypes(sourceCode) : null),
+    [sourceCode],
   );
 
   const handleKeyDown = useCallback(
@@ -202,20 +238,15 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
       ? variants[variantIndex]!.component
       : undefined;
 
-  const typeSource = useMemo(
-    () => (sourceCode ? extractTypes(sourceCode) : null),
-    [sourceCode],
-  );
-
   const availableTabs = useMemo(() =>
     TABS.filter((tab) => {
       if (tab === "preview") return true;
-      if (tab === "usage") return !!fixtureCode;
+      if (tab === "usage") return !!usageSnippet;
       if (tab === "source") return !!sourceCode;
       if (tab === "props") return !!typeSource || (propsMeta && propsMeta.length > 0);
       return false;
     }),
-    [sourceCode, fixtureCode, propsMeta, typeSource],
+    [usageSnippet, sourceCode, propsMeta, typeSource],
   );
 
   return (
@@ -235,7 +266,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
       </div>
 
-      {/* Install — first thing users want */}
+      {/* Install */}
       <div className="space-y-3">
         <h2 className="text-lg font-semibold">Installation</h2>
         <InstallTabs baseCommand={installCommand} />
@@ -267,7 +298,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
       )}
 
-      {/* Examples selector */}
+      {/* Examples */}
       {fixtureKeys.length > 1 && (
         <div className="space-y-3">
           <h2 className="text-sm font-semibold">Examples</h2>
@@ -290,7 +321,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
       )}
 
-      {/* Tabbed content */}
+      {/* Tabs */}
       <div className="space-y-0">
         <div className="flex items-center border-b border-border">
           {availableTabs.map((tab) => (
@@ -312,6 +343,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
           ))}
         </div>
 
+        {/* Preview: live render */}
         {activeTab === "preview" && activeFixture !== undefined && (
           <div className="rounded-b-lg border border-t-0 border-border bg-background p-4 sm:p-6 min-h-[100px]">
             <div className="w-full" key={`${fixtureIndex}-${variantIndex}`}>
@@ -320,28 +352,56 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
           </div>
         )}
 
+        {/* Usage: generated import + JSX for the active example */}
+        {activeTab === "usage" && usageSnippet && (
+          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
+            <CodeHighlight code={usageSnippet} language="tsx" />
+          </div>
+        )}
+
+        {/* Source: component implementation */}
         {activeTab === "source" && sourceCode && (
           <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
             <CodeHighlight code={sourceCode} language="tsx" />
           </div>
         )}
 
-        {activeTab === "usage" && fixtureCode && (
-          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
-            <CodeHighlight code={fixtureCode} language="tsx" />
-          </div>
-        )}
-
+        {/* Props: TypeScript types + prop reference table */}
         {activeTab === "props" && (
           <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
             {typeSource && (
               <CodeHighlight code={typeSource} language="tsx" />
             )}
+            {propsMeta && propsMeta.length > 0 && (
+              <div className="bg-code-bg border-t border-border/20">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-border/20 text-left">
+                        <th className="px-4 py-2 font-medium text-muted-foreground text-xs">Prop</th>
+                        <th className="px-4 py-2 font-medium text-muted-foreground text-xs">Default</th>
+                        <th className="px-4 py-2 font-medium text-muted-foreground text-xs">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-xs">
+                      {propsMeta.map((prop) => (
+                        <tr key={prop.name} className="border-b border-border/10">
+                          <td className="px-4 py-2">
+                            <code className="font-mono text-primary text-xs">{prop.name}</code>
+                            {prop.required && <span className="text-destructive ml-0.5">*</span>}
+                          </td>
+                          <td className="px-4 py-2 font-mono text-muted-foreground text-xs">{prop.defaultValue ?? "—"}</td>
+                          <td className="px-4 py-2 text-muted-foreground text-[11px]">{prop.description ?? ""}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
-
-      {/* Footer links */}
     </div>
   );
 }
