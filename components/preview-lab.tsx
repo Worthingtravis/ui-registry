@@ -75,16 +75,22 @@ function InstallTabs({ baseCommand }: { baseCommand: string }) {
 }
 
 // ---------------------------------------------------------------------------
+// Tags to hide from consumers (internal dev categories)
+// ---------------------------------------------------------------------------
+
+const INTERNAL_TAGS = new Set(["primitive", "composed"]);
+
+// ---------------------------------------------------------------------------
 // PreviewLab
 // ---------------------------------------------------------------------------
 
-const TABS = ["preview", "code", "fixtures", "props"] as const;
+const TABS = ["preview", "source", "data", "props"] as const;
 type Tab = (typeof TABS)[number];
 
 const TAB_LABELS: Record<Tab, string> = {
   preview: "Preview",
-  code: "Code",
-  fixtures: "Fixtures",
+  source: "Source",
+  data: "Data",
   props: "Props",
 };
 
@@ -108,6 +114,11 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
   const activeFixtureKey = fixtureKeys[fixtureIndex] ?? fixtureKeys[0];
   const activeFixture = activeFixtureKey ? fixtures[activeFixtureKey] : undefined;
   const fixtureJson = useMemo(() => JSON.stringify(activeFixture, null, 2), [activeFixture]);
+
+  const visibleTags = useMemo(
+    () => tags?.filter((t) => !INTERNAL_TAGS.has(t)) ?? [],
+    [tags],
+  );
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -151,8 +162,8 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
   const availableTabs = useMemo(() =>
     TABS.filter((tab) => {
       if (tab === "preview") return true;
-      if (tab === "code") return !!sourceCode;
-      if (tab === "fixtures") return true;
+      if (tab === "source") return !!sourceCode;
+      if (tab === "data") return true;
       if (tab === "props") return propsMeta && propsMeta.length > 0;
       return false;
     }),
@@ -161,12 +172,13 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
 
   return (
     <div className="space-y-10">
+      {/* Header */}
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
         <p className="text-base text-muted-foreground max-w-2xl">{description}</p>
-        {tags && tags.length > 0 && (
+        {visibleTags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 pt-2">
-            {tags.map((tag) => (
+            {visibleTags.map((tag) => (
               <span key={tag} className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
                 {tag}
               </span>
@@ -175,12 +187,16 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
       </div>
 
+      {/* Install — first thing users want */}
+      <div className="space-y-3">
+        <h2 className="text-lg font-semibold">Installation</h2>
+        <InstallTabs baseCommand={installCommand} />
+      </div>
+
+      {/* Variants */}
       {variants && variants.length > 1 && (
         <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <h2 className="text-sm font-semibold">Variants</h2>
-            <span className="text-[10px] text-muted-foreground/60">(Left/Right arrows)</span>
-          </div>
+          <h2 className="text-sm font-semibold">Variants</h2>
           <div className="flex flex-wrap gap-2">
             {variants.map((v, i) => (
               <button
@@ -203,12 +219,10 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
       )}
 
+      {/* Examples selector */}
       {fixtureKeys.length > 1 && (
         <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <h2 className="text-sm font-semibold">Fixtures</h2>
-            <span className="text-[10px] text-muted-foreground/60">(Up/Down arrows)</span>
-          </div>
+          <h2 className="text-sm font-semibold">Examples</h2>
           <div className="flex flex-wrap gap-1.5">
             {fixtureKeys.map((key, i) => (
               <button
@@ -228,6 +242,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         </div>
       )}
 
+      {/* Tabbed content */}
       <div className="space-y-0">
         <div className="flex items-center border-b border-border">
           {availableTabs.map((tab) => (
@@ -257,22 +272,22 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
           </div>
         )}
 
-        {activeTab === "code" && sourceCode && (
+        {activeTab === "source" && sourceCode && (
           <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
             <CodeHighlight code={sourceCode} language="tsx" />
           </div>
         )}
 
-        {activeTab === "fixtures" && (
+        {activeTab === "data" && (
           <div className="border border-t-0 border-border rounded-b-lg overflow-hidden space-y-0">
             <CodeHighlight
               code={fixtureJson}
               language="json"
-              label={`Active: ${activeFixtureKey}`}
+              label={activeFixtureKey}
               className="rounded-none border-0 border-b border-code-border/30 max-h-[400px] overflow-y-auto"
             />
             {fixtureCode && (
-              <CodeHighlight code={fixtureCode} language="tsx" label="Source" className="rounded-none border-0" />
+              <CodeHighlight code={fixtureCode} language="tsx" label="All examples" className="rounded-none border-0" />
             )}
           </div>
         )}
@@ -309,14 +324,10 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
       </div>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold">Installation</h2>
-        <InstallTabs baseCommand={installCommand} />
-      </div>
-
+      {/* All examples gallery */}
       {fixtureKeys.length > 1 && (
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">All States</h2>
+          <h2 className="text-lg font-semibold">All Examples</h2>
           <div className="space-y-4">
             {fixtureKeys.map((key) => (
               <div key={key} className="space-y-1.5">
