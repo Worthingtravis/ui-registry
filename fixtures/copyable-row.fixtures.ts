@@ -13,8 +13,8 @@ export interface CopyableRowFixture {
 const BASE: CopyableRowFixture = {
   label: "Terminal commands",
   rows: [
-    { text: "npx shadcn@latest add step-flow", prefix: "$", prefixColor: "text-term-success", display: "npx shadcn@latest add step-flow" },
-    { text: "pnpm add lucide-react", prefix: "$", prefixColor: "text-term-success", display: "pnpm add lucide-react" },
+    { text: "git status", prefix: "$", prefixColor: "text-term-success", display: "git status" },
+    { text: "pnpm install", prefix: "$", prefixColor: "text-term-success", display: "pnpm install" },
     { text: "npm run dev", prefix: "$", prefixColor: "text-term-success", display: "npm run dev" },
   ],
 };
