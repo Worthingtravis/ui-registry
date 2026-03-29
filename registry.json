@@ -216,6 +216,19 @@
       ]
     },
     {
+      "name": "grouped-sidebar",
+      "type": "registry:component",
+      "title": "Grouped Sidebar",
+      "description": "Grouped sidebar navigation with responsive mobile slide-over. Renders items under group headings with active state highlighting and custom link rendering.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["navigation", "layout"],
+      "docs": "Pass `groups` array with `title` and `items`. Use `activeId` for highlight state. Provide `renderLink` for framework-specific routing (e.g. Next.js Link). Set `mobileBreakpoint` to control responsive behavior.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/grouped-sidebar/grouped-sidebar.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "mini-terminal-demo",
       "type": "registry:block",
       "title": "Mini Terminal Demo",

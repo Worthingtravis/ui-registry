@@ -16,6 +16,7 @@ export const CATEGORY_ORDER: RegistryCategory[] = [
   "Profile & Avatar",
   "Progression",
   "Animation",
+  "Navigation",
   "Interactive",
 ];
 
@@ -105,6 +106,15 @@ export const REGISTRY: RegistryEntry[] = [
     lab: () => import("@/demos/scroll-prompt.demo"),
     tags: ["animation", "scroll", "navigation"],
     category: "Animation",
+  },
+
+  // --- Navigation ---
+  {
+    name: "grouped-sidebar",
+    description: "Grouped sidebar navigation with responsive slide-over for mobile.",
+    lab: () => import("@/demos/grouped-sidebar.demo"),
+    tags: ["navigation", "sidebar", "responsive", "layout"],
+    category: "Navigation",
   },
 
   // --- Interactive ---

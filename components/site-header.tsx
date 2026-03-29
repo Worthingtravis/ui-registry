@@ -2,13 +2,10 @@
 
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
-import { MobileNav } from "./mobile-nav";
-
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto max-w-7xl flex h-14 items-center px-6">
-        <MobileNav />
         <a
           href="https://laughingwhales.com"
           className="flex items-center gap-2 mr-4 text-xs font-black italic uppercase tracking-tighter text-foreground hover:text-purple-500 transition-all"

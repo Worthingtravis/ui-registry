@@ -55,6 +55,7 @@ export type RegistryCategory =
   | "Profile & Avatar"
   | "Progression"
   | "Animation"
+  | "Navigation"
   | "Interactive";
 
 /** Registry entry — config for one component in the index + preview system. */
