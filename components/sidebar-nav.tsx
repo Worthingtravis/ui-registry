@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn, kebabToTitle } from "@/lib/utils";
-import { REGISTRY } from "@/lib/registry";
+import { groupedRegistry } from "@/lib/registry";
 
 export function SidebarNav() {
   const pathname = usePathname();
+  const groups = groupedRegistry();
 
   return (
     <aside className="hidden lg:block w-[220px] shrink-0 border-r border-border/40">
@@ -30,29 +31,31 @@ export function SidebarNav() {
             </nav>
           </div>
 
-          {/* Components */}
-          <div>
-            <h4 className="mb-2 text-sm font-semibold">Components</h4>
-            <nav className="flex flex-col gap-0.5">
-              {REGISTRY.map((entry) => {
-                const isActive = pathname === `/preview/${entry.name}`;
-                return (
-                  <Link
-                    key={entry.name}
-                    href={`/preview/${entry.name}`}
-                    className={cn(
-                      "text-sm rounded-md px-2 py-1 transition-colors",
-                      isActive
-                        ? "text-foreground font-medium bg-muted"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
-                    )}
-                  >
-                    {kebabToTitle(entry.name)}
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
+          {/* Grouped Components */}
+          {groups.map(({ category, entries }) => (
+            <div key={category}>
+              <h4 className="mb-2 text-sm font-semibold">{category}</h4>
+              <nav className="flex flex-col gap-0.5">
+                {entries.map((entry) => {
+                  const isActive = pathname === `/preview/${entry.name}`;
+                  return (
+                    <Link
+                      key={entry.name}
+                      href={`/preview/${entry.name}`}
+                      className={cn(
+                        "text-sm rounded-md px-2 py-1 transition-colors",
+                        isActive
+                          ? "text-foreground font-medium bg-muted"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+                      )}
+                    >
+                      {kebabToTitle(entry.name)}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
+          ))}
         </div>
       </div>
     </aside>

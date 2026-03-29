@@ -49,6 +49,14 @@ export interface PreviewLabConfig<TFixture> {
   propsMeta?: PropMeta[];
 }
 
+/** Sidebar category for grouping components. */
+export type RegistryCategory =
+  | "Terminal"
+  | "Profile & Avatar"
+  | "Progression"
+  | "Animation"
+  | "Interactive";
+
 /** Registry entry — config for one component in the index + preview system. */
 export interface RegistryEntry {
   /** kebab-case name matching registry.json */
@@ -60,4 +68,6 @@ export interface RegistryEntry {
   lab: () => Promise<{ config: PreviewLabConfig<any> }>;
   /** Tags for index page filtering */
   tags: string[];
+  /** Sidebar group */
+  category: RegistryCategory;
 }
