@@ -59,10 +59,19 @@ function TerminalChromeMinimal(fixture: TerminalChromeFixture) {
   );
 }
 
+const USAGE = `import { TerminalChrome } from "@/registry/new-york/terminal-chrome/terminal-chrome"
+
+<TerminalChrome title="~/my-project">
+  <p className="text-term-success">$ pnpm build</p>
+  <p className="text-term-text-muted">Building...</p>
+  <p className="text-term-success">Done in 1.2s</p>
+</TerminalChrome>`;
+
 export const config: PreviewLabConfig<TerminalChromeFixture> = {
   title: "Terminal Chrome",
   description: "macOS-style terminal window shell with traffic light buttons and optional title bar.",
   tags: ["terminal", "shell", "chrome"],
+  usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture, Variant) => {
     if (Variant) return <Variant {...fixture} />;

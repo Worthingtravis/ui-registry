@@ -177,10 +177,21 @@ function EntryCard({ kind, fields, entry }: { kind: string; fields: string; entr
 // Config
 // ---------------------------------------------------------------------------
 
+const USAGE = `import { TerminalDemo, type TerminalEntry } from "@/registry/new-york/terminal-demo/terminal-demo"
+
+const entries: TerminalEntry[] = [
+  { kind: "phase", label: "Deploy", pauseAfter: 300 },
+  { kind: "input", text: "git push origin main", prompt: "$", typingMs: 800, pauseAfter: 400 },
+  { kind: "output", text: "✓ Deployed", color: "green", pauseAfter: 0 },
+]
+
+<TerminalDemo entries={entries} />`;
+
 export const config: PreviewLabConfig<TerminalDemoFixture> = {
   title: "Terminal Demo",
   description: "Full animated terminal session with typing, tool calls, thinking indicators, memory blocks, and copyable rows.",
   tags: ["terminal", "animation", "demo", "ai"],
+  usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="space-y-10">

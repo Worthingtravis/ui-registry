@@ -11,10 +11,17 @@ const propsMeta: PropMeta[] = [
   { name: "style", type: "React.CSSProperties", required: false, description: "Inline styles" },
 ];
 
+const USAGE = `import { CopyableRow } from "@/registry/new-york/copyable-row/copyable-row"
+
+<CopyableRow text="npm run dev">
+  <span className="text-term-success">$</span> npm run dev
+</CopyableRow>`;
+
 export const config: PreviewLabConfig<CopyableRowFixture> = {
   title: "Copyable Row",
   description: "Click-to-copy wrapper with hover highlight and copy/check icon transition.",
   tags: ["interactive", "clipboard", "copy"],
+  usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="space-y-1 rounded-lg bg-term-bg p-4 font-mono text-[13px] text-term-text">

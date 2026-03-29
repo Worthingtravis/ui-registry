@@ -9,10 +9,21 @@ const propsMeta: PropMeta[] = [
   { name: "label", type: "string", required: true, description: "Label text shown above the arrow" },
 ];
 
+const USAGE = `import { ScrollPrompt } from "@/registry/new-york/scroll-prompt/scroll-prompt"
+
+{/* Place the prompt anywhere on the page */}
+<ScrollPrompt targetId="features" label="Scroll to explore" />
+
+{/* The target element — prompt disappears when this is in view */}
+<section id="features">
+  ...
+</section>`;
+
 export const config: PreviewLabConfig<ScrollPromptFixture> = {
   title: "Scroll Prompt",
   description: "Animated scroll-down prompt that appears when a target section is out of view.",
   tags: ["animation", "scroll", "navigation"],
+  usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="space-y-6">

@@ -15,10 +15,20 @@ const propsMeta: PropMeta[] = [
   { name: "delay", type: "number", required: true, description: "Fade-in delay in ms (0 = no animation)" },
 ];
 
+const USAGE = `import { ToolCallBlock } from "@/registry/new-york/tool-call-block/tool-call-block"
+
+<ToolCallBlock
+  toolName="read_file"
+  args={{ path: "src/auth.ts" }}
+  result="234 lines read"
+  delay={300}
+/>`;
+
 export const config: PreviewLabConfig<Fixture> = {
   title: "Tool Call Block",
   description: "MCP tool call display with name, arguments, and result. Shows the familiar Claude Code tool call pattern.",
   tags: ["terminal", "mcp", "ai"],
+  usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture, Variant) => {
     const Comp = Variant

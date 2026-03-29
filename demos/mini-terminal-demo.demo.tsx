@@ -12,10 +12,25 @@ const propsMeta: PropMeta[] = [
   { name: "onTogglePin", type: "() => void", required: false, description: "Callback to toggle pin state" },
 ];
 
+const USAGE = `import { MiniTerminalDemo, type DemoScenario } from "@/registry/new-york/mini-terminal-demo/mini-terminal-demo"
+
+const scenario: DemoScenario = {
+  id: "deploy",
+  title: "Deploy",
+  category: "ops",
+  entries: [
+    { kind: "input", text: "vercel --prod", prompt: ">", typingMs: 600, pauseAfter: 400 },
+    { kind: "output", text: "Deployed!", color: "green", pauseAfter: 0 },
+  ],
+}
+
+<MiniTerminalDemo scenario={scenario} play={true} />`;
+
 export const config: PreviewLabConfig<MiniTerminalDemoFixture> = {
   title: "Mini Terminal Demo",
   description: "Compact animated terminal card with copy-to-clipboard, pin support, and stagger delay.",
   tags: ["terminal", "animation", "demo"],
+  usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="max-w-lg">

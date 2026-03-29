@@ -11,10 +11,19 @@ const propsMeta: PropMeta[] = [
   { name: "className", type: "string", required: false, defaultValue: '""', description: "Additional CSS classes" },
 ];
 
+const USAGE = `import { TypingText } from "@/registry/new-york/typing-text/typing-text"
+
+<TypingText
+  text="git commit -m 'initial commit'"
+  delay={300}
+  duration={1200}
+/>`;
+
 export const config: PreviewLabConfig<TypingTextFixture> = {
   title: "Typing Text",
   description: "CSS-only typewriter animation with blinking cursor. Uses CSS keyframes — no JS animation loop.",
   tags: ["animation", "text", "typewriter"],
+  usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="rounded-lg bg-term-bg p-6 font-mono text-[13px] text-term-text">

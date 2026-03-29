@@ -43,8 +43,10 @@ export interface PreviewLabConfig<TFixture> {
   variants?: Variant<TFixture>[];
   /** Raw source code string for code tab */
   sourceCode?: string;
-  /** Fixture source code string for fixtures tab */
+  /** Fixture source code string (legacy, unused by preview-lab) */
   fixtureCode?: string;
+  /** Custom usage code for the Usage tab (overrides auto-generated snippet) */
+  usageCode?: string;
   /** Prop definitions for the props tab */
   propsMeta?: PropMeta[];
 }

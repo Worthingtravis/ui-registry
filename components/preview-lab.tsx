@@ -171,7 +171,7 @@ interface PreviewLabComponentProps {
 export function PreviewLab({ config, installCommand }: PreviewLabComponentProps) {
   const {
     title, description, tags, fixtures, render, variants,
-    sourceCode, propsMeta,
+    sourceCode, usageCode, propsMeta,
   } = config;
 
   const fixtureKeys = useMemo(() => Object.keys(fixtures), [fixtures]);
@@ -187,10 +187,10 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
     [tags],
   );
 
-  // Usage tab: generated JSX snippet from active fixture
+  // Usage tab: custom usageCode or auto-generated from active fixture
   const usageSnippet = useMemo(
-    () => (activeFixture ? generateUsageSnippet(title, activeFixture) : null),
-    [title, activeFixture],
+    () => usageCode ?? (activeFixture ? generateUsageSnippet(title, activeFixture) : null),
+    [title, activeFixture, usageCode],
   );
 
   // Props tab: extracted TypeScript types from source

@@ -18,10 +18,23 @@ const propsMeta: PropMeta[] = [
   { name: "className", type: "string", required: false, description: "Additional CSS classes for root container" },
 ];
 
+const USAGE = `import { StepFlow } from "@/registry/new-york/step-flow/step-flow"
+
+<StepFlow
+  title="Checkout"
+  steps={[
+    { label: "Cart", description: "Review items" },
+    { label: "Shipping", description: "Enter address" },
+    { label: "Payment", description: "Add payment" },
+    { label: "Confirm", description: "Place order" },
+  ]}
+/>`;
+
 export const config: PreviewLabConfig<Fixture> = {
   title: "Step Flow",
   description: "Interactive multi-step flow visualizer with clickable step buttons, arrow connectors, detail panel, and back/next navigation.",
   tags: ["interactive", "flow", "stepper", "wizard"],
+  usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture, Variant) => {
     const Comp = Variant ?? StepFlow;
