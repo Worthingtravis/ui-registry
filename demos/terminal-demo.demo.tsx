@@ -9,46 +9,53 @@ const propsMeta: PropMeta[] = [
   { name: "entries", type: "TerminalEntry[]", required: false, description: "Terminal entries to animate (overrides default)" },
 ];
 
-/** One entry per kind so each renders in isolation */
-const ENTRY_CATALOG: Array<{ kind: string; description: string; entry: TerminalEntry }> = [
+/**
+ * One entry per kind. The `fields` string shows the type signature —
+ * what you pass when you pick this kind.
+ */
+const ENTRY_CATALOG: Array<{
+  kind: string;
+  fields: string;
+  entry: TerminalEntry;
+}> = [
   {
     kind: "input",
-    description: "Typed command with typewriter animation",
+    fields: "text: string, prompt?: string, typingMs: number",
     entry: { kind: "input", text: "git status", prompt: "$", typingMs: 600, pauseAfter: 0 },
   },
   {
     kind: "output",
-    description: "Static colored text line",
+    fields: 'text: string, color?: "green" | "zinc" | "purple"',
     entry: { kind: "output", text: "3 files changed, 42 insertions(+)", color: "green", pauseAfter: 0 },
   },
   {
     kind: "tool-call",
-    description: "MCP tool call with args and result",
+    fields: "toolName: string, args: Record<string, ...>, result: string",
     entry: { kind: "tool-call", toolName: "read_file", args: { path: "src/auth.ts" }, result: "234 lines read", pauseAfter: 0 },
   },
   {
     kind: "phase",
-    description: "Full-width section divider",
+    fields: "label: string",
     entry: { kind: "phase", label: "Setup", pauseAfter: 0 },
   },
   {
     kind: "thinking",
-    description: "Animated dots that disappear after durationMs",
+    fields: "text: string, durationMs: number",
     entry: { kind: "thinking", text: "Analyzing diff...", durationMs: 3000, pauseAfter: 0 },
   },
   {
     kind: "claude",
-    description: "AI response with sparkle icon",
+    fields: "text: string",
     entry: { kind: "claude", text: "The refresh token logic on line 42 doesn't handle clock skew.", pauseAfter: 0 },
   },
   {
     kind: "ask",
-    description: "Numbered option prompt",
+    fields: "question: string, options: string[]",
     entry: { kind: "ask", question: "How to proceed?", options: ["Apply fix", "Show diff first", "Skip"], pauseAfter: 0 },
   },
   {
     kind: "memory",
-    description: "Core memory saved indicator",
+    fields: "text: string",
     entry: { kind: "memory", text: "User prefers verbose error messages.", pauseAfter: 0 },
   },
 ];
@@ -60,26 +67,31 @@ export const config: PreviewLabConfig<TerminalDemoFixture> = {
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="space-y-10">
-      {/* Live demo */}
       <div className="max-w-2xl">
         <TerminalDemo entries={fixture.entries} />
       </div>
 
-      {/* Entry kind catalog — live rendered */}
-      <div className="space-y-4">
+      {/* Type catalog */}
+      <div className="space-y-3">
         <div>
-          <h3 className="text-sm font-semibold">Entry types</h3>
+          <h3 className="text-sm font-semibold">TerminalEntry variants</h3>
           <p className="text-xs text-muted-foreground mt-1">
-            Each <code className="text-primary">entries</code> item has a <code className="text-primary">kind</code>. All share <code className="text-primary">pauseAfter</code> (ms before next entry).
+            <code className="text-primary">entries</code> is an array. Each item picks a <code className="text-primary">kind</code> — the kind determines which fields are available.
           </p>
         </div>
-        <div className="grid gap-3">
+        <div className="grid gap-2">
           {ENTRY_CATALOG.map((item) => (
-            <div key={item.kind} className="rounded-lg border border-border/40 overflow-hidden">
-              <div className="px-3 py-2 bg-muted/20 border-b border-border/30">
-                <p className="text-[11px] text-muted-foreground mb-1.5">{item.description}</p>
-                <pre className="text-[11px] font-mono text-code-text leading-relaxed whitespace-pre-wrap">{JSON.stringify(item.entry, null, 2)}</pre>
+            <div key={item.kind} className="rounded-lg border border-border/40 overflow-hidden grid sm:grid-cols-[1fr_1fr]">
+              {/* Type signature */}
+              <div className="px-3 py-2.5 bg-muted/20 border-b sm:border-b-0 sm:border-r border-border/30 flex flex-col justify-center">
+                <code className="text-xs font-mono">
+                  <span className="text-primary font-semibold">kind: {item.kind}</span>
+                </code>
+                <code className="text-[11px] font-mono text-muted-foreground mt-0.5">
+                  {item.fields}
+                </code>
               </div>
+              {/* Live render */}
               <div className="bg-term-bg">
                 <TerminalDemo entries={[item.entry]} />
               </div>
