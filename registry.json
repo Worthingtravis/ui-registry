@@ -242,6 +242,19 @@
       ]
     },
     {
+      "name": "collapsible-group",
+      "type": "registry:component",
+      "title": "Collapsible Group",
+      "description": "Accordion-style collapsible section with smooth grid-row animation. Uses CSS grid-template-rows for height transitions without DOM measurement.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive"],
+      "docs": "Pass `open` boolean and `onToggle` callback for controlled expand/collapse. Set `active` for highlight state, `dimmed` for disabled. Customize animation with `duration` (ms).",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/collapsible-group/collapsible-group.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "mini-terminal-demo",
       "type": "registry:block",
       "title": "Mini Terminal Demo",

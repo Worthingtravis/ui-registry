@@ -126,6 +126,13 @@ export const REGISTRY: RegistryEntry[] = [
 
   // --- Interactive ---
   {
+    name: "collapsible-group",
+    description: "Accordion-style collapsible section with smooth grid-row animation.",
+    lab: () => import("@/demos/collapsible-group.demo"),
+    tags: ["accordion", "collapsible", "animation"],
+    category: "Interactive",
+  },
+  {
     name: "copyable-row",
     description: "Click-to-copy wrapper with hover highlight and copy/check icon transition.",
     lab: () => import("@/demos/copyable-row.demo"),
