@@ -54,7 +54,7 @@ export function InstallSection() {
             <div className="space-y-0.5">
               {REGISTRY.map((e) => (
                 <CopyableRow key={e.name} text={`npx shadcn@latest add @worthingtravis/${e.name}`}>
-                  <span className="text-term-success shrink-0">$</span>{" "}
+                  <span className="text-term-success shrink-0 select-none">$</span>{" "}
                   <span className="text-term-text-bright">npx shadcn@latest add @worthingtravis/{e.name}</span>
                 </CopyableRow>
               ))}
@@ -70,7 +70,7 @@ export function InstallSection() {
             <div className="space-y-0.5">
               {REGISTRY.map((e) => (
                 <CopyableRow key={e.name} text={installCommand(e.name)}>
-                  <span className="text-term-success shrink-0">$</span>{" "}
+                  <span className="text-term-success shrink-0 select-none">$</span>{" "}
                   <span className="text-term-text-bright">{installCommand(e.name)}</span>
                 </CopyableRow>
               ))}
@@ -80,7 +80,7 @@ export function InstallSection() {
           <p className="text-sm text-muted-foreground">Or pick one:</p>
           <TerminalChrome title="terminal">
             <CopyableRow text={installCommand("terminal-demo")}>
-              <span className="text-term-success shrink-0">$</span>{" "}
+              <span className="text-term-success shrink-0 select-none">$</span>{" "}
               <span className="text-term-text-bright">{installCommand("terminal-demo")}</span>
             </CopyableRow>
           </TerminalChrome>
