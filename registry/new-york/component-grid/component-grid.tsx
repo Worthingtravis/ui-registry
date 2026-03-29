@@ -169,12 +169,9 @@ export function ComponentGrid({
 
         return (
           <div key={item.id} className={cellClasses}>
-            <a
-              href={item.href}
-              className="group relative flex flex-col h-full overflow-hidden transition-colors hover:bg-muted/30"
-            >
+            <div className="group relative flex flex-col h-full overflow-hidden transition-colors hover:bg-muted/30">
               {content}
-            </a>
+            </div>
           </div>
         );
       })}
