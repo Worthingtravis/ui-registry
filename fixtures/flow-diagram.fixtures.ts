@@ -10,14 +10,9 @@ const BASE: Fixture = {
     { id: "db", label: "Database", description: "PostgreSQL" },
   ],
   edges: [
-    { id: "c-a", from: "client", to: "api", fromSide: "right", toSide: "left", label: "requests" },
-    { id: "a-d", from: "api", to: "db", fromSide: "right", toSide: "left", label: "queries" },
+    { id: "c-a", from: "client", to: "api", label: "requests" },
+    { id: "a-d", from: "api", to: "db", label: "queries" },
   ],
-  positions: {
-    client: { x: 15, y: 35 },
-    api: { x: 50, y: 35 },
-    db: { x: 85, y: 35 },
-  },
   height: 300,
 };
 
@@ -27,11 +22,29 @@ const fx = (overrides: Partial<Fixture> = {}): Fixture => ({
 });
 
 export const ALL_FIXTURES: Record<string, Fixture> = {
-  "Simple (3 nodes)": BASE,
+  "Simple (auto-layout)": BASE,
 
   "MCP Architecture": fx({
     nodes: [
-      { id: "you", label: "You", description: "" },
+      { id: "you", label: "You" },
+      { id: "ai", label: "Your AI", description: "Claude, Cursor, Windsurf", optional: true },
+      { id: "mcp", label: "MCP Server", description: "Your application" },
+      { id: "api", label: "External API", description: "Third-party service", live: true },
+      { id: "bot", label: "Chat Bot", description: "StreamElements, Nightbot" },
+    ],
+    edges: [
+      { id: "you-mcp", from: "you", to: "mcp", label: "use directly" },
+      { id: "you-ai", from: "you", to: "ai", label: "optionally", optional: true },
+      { id: "ai-mcp", from: "ai", to: "mcp", optional: true },
+      { id: "mcp-api", from: "mcp", to: "api", label: "calls API" },
+      { id: "mcp-bot", from: "mcp", to: "bot", label: "!quiz", bidirectional: true },
+    ],
+    height: 400,
+  }),
+
+  "MCP (manual positions)": fx({
+    nodes: [
+      { id: "you", label: "You" },
       { id: "ai", label: "Your AI", description: "Claude, Cursor, Windsurf", optional: true },
       { id: "mcp", label: "MCP Server", description: "Your application" },
       { id: "api", label: "External API", description: "Third-party service", live: true },
@@ -51,8 +64,6 @@ export const ALL_FIXTURES: Record<string, Fixture> = {
       api: { x: 80, y: 16 },
       bot: { x: 62, y: 68 },
     },
-    wideNodeId: "mcp",
-    wideNodeWidth: 220,
     height: 400,
   }),
 
@@ -64,16 +75,10 @@ export const ALL_FIXTURES: Record<string, Fixture> = {
       { id: "deploy", label: "Deploy", description: "Vercel" },
     ],
     edges: [
-      { id: "r-c", from: "repo", to: "ci", fromSide: "right", toSide: "left", label: "push" },
-      { id: "c-t", from: "ci", to: "test", fromSide: "bottom", toSide: "top", label: "run" },
-      { id: "c-d", from: "ci", to: "deploy", fromSide: "right", toSide: "left", label: "on success" },
+      { id: "r-c", from: "repo", to: "ci", label: "push" },
+      { id: "c-t", from: "ci", to: "test", label: "run" },
+      { id: "c-d", from: "ci", to: "deploy", label: "on success" },
     ],
-    positions: {
-      repo: { x: 12, y: 30 },
-      ci: { x: 42, y: 30 },
-      test: { x: 42, y: 70 },
-      deploy: { x: 80, y: 30 },
-    },
     height: 350,
   }),
 
@@ -86,20 +91,12 @@ export const ALL_FIXTURES: Record<string, Fixture> = {
       { id: "queue", label: "Message Queue", description: "Redis Streams" },
     ],
     edges: [
-      { id: "g-a", from: "gateway", to: "auth", fromSide: "right", toSide: "left", label: "verify" },
-      { id: "g-u", from: "gateway", to: "users", fromSide: "bottom", toSide: "top", label: "route" },
-      { id: "g-o", from: "gateway", to: "orders", fromSide: "right", toSide: "left" },
-      { id: "o-q", from: "orders", to: "queue", fromSide: "bottom", toSide: "top", label: "publish", bidirectional: true },
-      { id: "u-q", from: "users", to: "queue", fromSide: "right", toSide: "left", label: "subscribe", optional: true },
+      { id: "g-a", from: "gateway", to: "auth", label: "verify" },
+      { id: "g-u", from: "gateway", to: "users", label: "route" },
+      { id: "g-o", from: "gateway", to: "orders" },
+      { id: "o-q", from: "orders", to: "queue", label: "publish", bidirectional: true },
+      { id: "u-q", from: "users", to: "queue", label: "subscribe", optional: true },
     ],
-    positions: {
-      gateway: { x: 12, y: 25 },
-      auth: { x: 45, y: 10 },
-      users: { x: 30, y: 65 },
-      orders: { x: 70, y: 25 },
-      queue: { x: 70, y: 70 },
-    },
-    wideNodeId: "gateway",
     height: 400,
   }),
 

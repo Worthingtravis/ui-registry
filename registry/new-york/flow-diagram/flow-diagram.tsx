@@ -16,8 +16,6 @@ export interface FlowNode {
   label: string;
   /** Description text below the label. */
   description?: string;
-  /** Sub-labels rendered inside this node (e.g. feature list). */
-  internals?: string[];
   /** Render as optional/dimmed with dashed border. */
   optional?: boolean;
   /** Show a pulsing "LIVE" indicator on this node. */
@@ -35,10 +33,10 @@ export interface FlowEdge {
   from: string;
   /** ID of the target node. */
   to: string;
-  /** Side of the source node to attach. */
-  fromSide: FlowSide;
-  /** Side of the target node to attach. */
-  toSide: FlowSide;
+  /** Side of the source node to attach. Inferred if omitted. */
+  fromSide?: FlowSide;
+  /** Side of the target node to attach. Inferred if omitted. */
+  toSide?: FlowSide;
   /** Text label shown at the midpoint of the edge. */
   label?: string;
   /** Render as dashed/dimmed optional path. */
@@ -60,16 +58,10 @@ export interface FlowDiagramProps {
   nodes: FlowNode[];
   /** Array of edges connecting nodes. */
   edges: FlowEdge[];
-  /** Node positions keyed by node ID (percentage coordinates). */
-  positions: Record<string, FlowPosition>;
+  /** Node positions keyed by node ID. When omitted, positions are auto-computed from graph structure. */
+  positions?: Record<string, FlowPosition>;
   /** Height of the diagram container in pixels. */
   height?: number;
-  /** Base width for regular nodes in pixels. */
-  nodeWidth?: number;
-  /** Node ID that should be rendered wider (e.g. the central hub). */
-  wideNodeId?: string;
-  /** Width for the wide node in pixels. */
-  wideNodeWidth?: number;
   /** Duration of the draw-on animation in seconds. */
   drawDuration?: number;
   /** Whether to show dot grid background. */
@@ -81,12 +73,151 @@ export interface FlowDiagramProps {
 }
 
 // ---------------------------------------------------------------------------
+// Auto-layout: layered graph layout (Sugiyama-style)
+// ---------------------------------------------------------------------------
+
+/**
+ * Compute a layered layout from graph structure.
+ * 1. Topological sort to assign layers (BFS from roots)
+ * 2. Optional nodes are placed on a secondary row below their neighbors
+ * 3. Nodes are spaced evenly within their layer
+ */
+function autoLayout(
+  nodes: FlowNode[],
+  edges: FlowEdge[],
+): Record<string, FlowPosition> {
+  const nodeIds = new Set(nodes.map((n) => n.id));
+  const incoming = new Map<string, Set<string>>();
+  const outgoing = new Map<string, Set<string>>();
+  for (const n of nodes) {
+    incoming.set(n.id, new Set());
+    outgoing.set(n.id, new Set());
+  }
+  for (const e of edges) {
+    if (e.optional) continue;
+    outgoing.get(e.from)?.add(e.to);
+    incoming.get(e.to)?.add(e.from);
+  }
+
+  // Find roots (no non-optional incoming edges)
+  const roots = nodes.filter((n) => !n.optional && (incoming.get(n.id)?.size ?? 0) === 0);
+  if (roots.length === 0 && nodes.length > 0) roots.push(nodes[0]);
+
+  // BFS to assign layers
+  const layerOf = new Map<string, number>();
+  const queue: string[] = [];
+  for (const root of roots) {
+    layerOf.set(root.id, 0);
+    queue.push(root.id);
+  }
+  while (queue.length > 0) {
+    const id = queue.shift()!;
+    const layer = layerOf.get(id)!;
+    for (const next of outgoing.get(id) ?? []) {
+      if (!layerOf.has(next)) {
+        layerOf.set(next, layer + 1);
+        queue.push(next);
+      }
+    }
+  }
+
+  // Assign unvisited nodes (optional / disconnected)
+  for (const n of nodes) {
+    if (layerOf.has(n.id)) continue;
+    // Place optional nodes near their connected non-optional neighbor
+    let neighborLayer = 0;
+    for (const e of edges) {
+      if (e.from === n.id && layerOf.has(e.to)) {
+        neighborLayer = layerOf.get(e.to)! - 0.5;
+        break;
+      }
+      if (e.to === n.id && layerOf.has(e.from)) {
+        neighborLayer = layerOf.get(e.from)! + 0.5;
+        break;
+      }
+    }
+    layerOf.set(n.id, neighborLayer);
+  }
+
+  // Group nodes by layer
+  const layers = new Map<number, string[]>();
+  for (const [id, layer] of layerOf) {
+    if (!layers.has(layer)) layers.set(layer, []);
+    layers.get(layer)!.push(id);
+  }
+
+  const sortedLayers = [...layers.keys()].sort((a, b) => a - b);
+  const numLayers = sortedLayers.length;
+
+  // Padding from edges
+  const padX = 14;
+  const padY = 18;
+  const usableX = 100 - padX * 2;
+  const usableY = 100 - padY * 2;
+
+  const positions: Record<string, FlowPosition> = {};
+
+  for (let li = 0; li < numLayers; li++) {
+    const layerKey = sortedLayers[li];
+    const nodesInLayer = layers.get(layerKey)!;
+    const count = nodesInLayer.length;
+    const x = numLayers === 1 ? 50 : padX + (li / (numLayers - 1)) * usableX;
+
+    for (let ni = 0; ni < count; ni++) {
+      const y = count === 1 ? 50 - padY / 2 : padY + (ni / (count - 1)) * usableY;
+
+      // For fractional layers (optional nodes), offset vertically
+      const isFractional = layerKey % 1 !== 0;
+      positions[nodesInLayer[ni]] = {
+        x,
+        y: isFractional ? Math.min(y + 15, 80) : y,
+      };
+    }
+  }
+
+  return positions;
+}
+
+/**
+ * Infer the best attachment side based on relative node positions.
+ */
+function inferSide(
+  fromPos: FlowPosition,
+  toPos: FlowPosition,
+): { fromSide: FlowSide; toSide: FlowSide } {
+  const dx = toPos.x - fromPos.x;
+  const dy = toPos.y - fromPos.y;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    // Primarily horizontal
+    return dx > 0
+      ? { fromSide: "right", toSide: "left" }
+      : { fromSide: "left", toSide: "right" };
+  }
+  // Primarily vertical
+  return dy > 0
+    ? { fromSide: "bottom", toSide: "top" }
+    : { fromSide: "top", toSide: "bottom" };
+}
+
+// ---------------------------------------------------------------------------
 // Edge path computation
 // ---------------------------------------------------------------------------
 
 interface NodeDims {
   w: number;
   h: number;
+}
+
+interface ResolvedEdge {
+  id: string;
+  from: string;
+  to: string;
+  fromSide: FlowSide;
+  toSide: FlowSide;
+  label?: string;
+  optional?: boolean;
+  bidirectional?: boolean;
 }
 
 interface EdgePathData {
@@ -160,7 +291,7 @@ function computeBezierPath(
 }
 
 function computeEdgePaths(
-  edges: FlowEdge[],
+  edges: ResolvedEdge[],
   positions: Record<string, FlowPosition>,
   getNodeDims: (nodeId: string) => NodeDims,
 ): EdgePathData[] {
@@ -197,7 +328,7 @@ function computeEdgePaths(
   });
 }
 
-function getConnectedSides(edges: FlowEdge[], nodeId: string): Set<FlowSide> {
+function getConnectedSides(edges: ResolvedEdge[], nodeId: string): Set<FlowSide> {
   const sides = new Set<FlowSide>();
   for (const e of edges) {
     if (e.from === nodeId) sides.add(e.fromSide);
@@ -206,7 +337,7 @@ function getConnectedSides(edges: FlowEdge[], nodeId: string): Set<FlowSide> {
   return sides;
 }
 
-function getNodeEdgeIds(edges: FlowEdge[], nodeId: string): Set<string> {
+function getNodeEdgeIds(edges: ResolvedEdge[], nodeId: string): Set<string> {
   const ids = new Set<string>();
   for (const e of edges) {
     if (e.from === nodeId || e.to === nodeId) ids.add(e.id);
@@ -250,7 +381,7 @@ function NodeCard({
   dimmed,
   onPointerEnter,
   onPointerLeave,
-  isWide,
+  isHub,
 }: {
   node: FlowNode;
   delay: number;
@@ -258,7 +389,7 @@ function NodeCard({
   dimmed: boolean;
   onPointerEnter: () => void;
   onPointerLeave: () => void;
-  isWide: boolean;
+  isHub: boolean;
 }) {
   return (
     <motion.div
@@ -269,8 +400,8 @@ function NodeCard({
       onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
       className={cn(
-        "relative rounded-xl border bg-card p-3 sm:p-4 text-center cursor-default transition-opacity duration-200",
-        isWide ? "border-primary/40" : node.optional ? "border-dashed border-border/60 opacity-70" : "border-border",
+        "relative rounded-xl border bg-card px-4 py-3 text-center cursor-default transition-opacity duration-200 whitespace-nowrap",
+        isHub ? "border-primary/40" : node.optional ? "border-dashed border-border/60 opacity-70" : "border-border",
         dimmed && "!opacity-30",
       )}
     >
@@ -415,7 +546,9 @@ function Edges({
  * edges. Nodes highlight on hover with connected edges emphasized. Edges
  * animate with draw-on and flowing particle effects.
  *
- * All data is passed via props — define your own nodes, edges, and positions.
+ * Positions can be specified manually or auto-computed from graph structure.
+ * Edge attachment sides are inferred when not specified. Nodes auto-size
+ * based on their content.
  *
  * @example
  * ```tsx
@@ -426,21 +559,17 @@ function Edges({
  *     { id: "db", label: "Database", description: "PostgreSQL" },
  *   ]}
  *   edges={[
- *     { id: "c-a", from: "client", to: "api", fromSide: "right", toSide: "left", label: "requests" },
- *     { id: "a-d", from: "api", to: "db", fromSide: "right", toSide: "left", label: "queries" },
+ *     { id: "c-a", from: "client", to: "api", label: "requests" },
+ *     { id: "a-d", from: "api", to: "db", label: "queries" },
  *   ]}
- *   positions={{ client: { x: 15, y: 30 }, api: { x: 50, y: 30 }, db: { x: 85, y: 30 } }}
  * />
  * ```
  */
 export function FlowDiagram({
   nodes,
   edges,
-  positions,
+  positions: userPositions,
   height = 400,
-  nodeWidth = 180,
-  wideNodeId,
-  wideNodeWidth = 260,
   drawDuration = 0.8,
   showGrid = true,
   showGlow = true,
@@ -451,6 +580,44 @@ export function FlowDiagram({
   const [containerSize, setContainerSize] = useState({ w: 1100, h: height });
   const [nodeSizes, setNodeSizes] = useState<Record<string, { w: number; h: number }>>({});
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
+  // Auto-layout when no positions provided
+  const positions = useMemo(
+    () => userPositions ?? autoLayout(nodes, edges),
+    [userPositions, nodes, edges],
+  );
+
+  // Resolve edge sides: use explicit sides or infer from positions
+  const resolvedEdges: ResolvedEdge[] = useMemo(() => {
+    return edges.map((e) => {
+      const fromPos = positions[e.from];
+      const toPos = positions[e.to];
+      if (!fromPos || !toPos) {
+        return { ...e, fromSide: e.fromSide ?? "right", toSide: e.toSide ?? "left" };
+      }
+      const inferred = inferSide(fromPos, toPos);
+      return {
+        ...e,
+        fromSide: e.fromSide ?? inferred.fromSide,
+        toSide: e.toSide ?? inferred.toSide,
+      };
+    });
+  }, [edges, positions]);
+
+  // Detect the "hub" node — the one with the most connections
+  const hubNodeId = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const e of edges) {
+      counts.set(e.from, (counts.get(e.from) ?? 0) + 1);
+      counts.set(e.to, (counts.get(e.to) ?? 0) + 1);
+    }
+    let maxId = "";
+    let maxCount = 0;
+    for (const [id, count] of counts) {
+      if (count > maxCount) { maxId = id; maxCount = count; }
+    }
+    return maxCount >= 3 ? maxId : undefined;
+  }, [edges]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -468,7 +635,7 @@ export function FlowDiagram({
       if (el) sizes[id] = { w: el.offsetWidth, h: el.offsetHeight };
     }
     if (Object.keys(sizes).length > 0) setNodeSizes(sizes);
-  }, [containerSize]);
+  }, [containerSize, nodes]);
 
   const getNodeDims = useCallback(
     (nodeId: string): NodeDims => {
@@ -479,38 +646,37 @@ export function FlowDiagram({
           h: (measured.h / containerSize.h) * 100,
         };
       }
-      const w = nodeId === wideNodeId ? wideNodeWidth : nodeWidth;
-      const h = 65;
-      return { w: (w / containerSize.w) * 100, h: (h / containerSize.h) * 100 };
+      // Fallback before measurement
+      return { w: (160 / containerSize.w) * 100, h: (60 / containerSize.h) * 100 };
     },
-    [containerSize, nodeSizes, nodeWidth, wideNodeId, wideNodeWidth],
+    [containerSize, nodeSizes],
   );
 
   const edgePaths = useMemo(
-    () => computeEdgePaths(edges, positions, getNodeDims),
-    [edges, positions, getNodeDims],
+    () => computeEdgePaths(resolvedEdges, positions, getNodeDims),
+    [resolvedEdges, positions, getNodeDims],
   );
 
   const connectedSidesMap = useMemo(() => {
     const map: Record<string, Set<FlowSide>> = {};
-    for (const node of nodes) map[node.id] = getConnectedSides(edges, node.id);
+    for (const node of nodes) map[node.id] = getConnectedSides(resolvedEdges, node.id);
     return map;
-  }, [nodes, edges]);
+  }, [nodes, resolvedEdges]);
 
   const highlightedEdges = useMemo(() => {
     if (!hoveredNode) return undefined;
-    return getNodeEdgeIds(edges, hoveredNode);
-  }, [hoveredNode, edges]);
+    return getNodeEdgeIds(resolvedEdges, hoveredNode);
+  }, [hoveredNode, resolvedEdges]);
 
   const highlightedNodes = useMemo(() => {
     if (!hoveredNode) return undefined;
     const set = new Set<string>([hoveredNode]);
-    for (const e of edges) {
+    for (const e of resolvedEdges) {
       if (e.from === hoveredNode) set.add(e.to);
       if (e.to === hoveredNode) set.add(e.from);
     }
     return set;
-  }, [hoveredNode, edges]);
+  }, [hoveredNode, resolvedEdges]);
 
   const setNodeRef = useCallback(
     (id: string) => (el: HTMLDivElement | null) => {
@@ -593,18 +759,16 @@ export function FlowDiagram({
       {nodes.map((node, i) => {
         const pos = positions[node.id];
         if (!pos) return null;
-        const w = node.id === wideNodeId ? wideNodeWidth : nodeWidth;
         const isDimmed = highlightedNodes ? !highlightedNodes.has(node.id) : false;
         return (
           <div
             key={node.id}
             ref={setNodeRef(node.id)}
-            className="absolute transition-opacity duration-300"
+            className="absolute transition-opacity duration-300 w-auto"
             style={{
               left: `${pos.x}%`,
               top: `${pos.y}%`,
               transform: "translate(-50%, 0)",
-              width: w,
             }}
           >
             <NodeCard
@@ -614,7 +778,7 @@ export function FlowDiagram({
               dimmed={isDimmed}
               onPointerEnter={() => setHoveredNode(node.id)}
               onPointerLeave={() => setHoveredNode(null)}
-              isWide={node.id === wideNodeId}
+              isHub={node.id === hubNodeId}
             />
           </div>
         );
