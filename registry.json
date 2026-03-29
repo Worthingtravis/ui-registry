@@ -177,19 +177,6 @@
       ]
     },
     {
-      "name": "step-flow-vertical",
-      "type": "registry:component",
-      "title": "Step Flow Vertical",
-      "description": "Vertical timeline variant of StepFlow — same props, vertical layout with connecting lines.",
-      "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive", "navigation"],
-      "registryDependencies": ["button", "step-flow"],
-      "dependencies": ["clsx", "tailwind-merge"],
-      "files": [
-        { "path": "registry/new-york/step-flow-vertical/step-flow-vertical.tsx", "type": "registry:component" }
-      ]
-    },
-    {
       "name": "mini-terminal-demo",
       "type": "registry:block",
       "title": "Mini Terminal Demo",

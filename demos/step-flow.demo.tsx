@@ -1,8 +1,6 @@
 "use client";
 
-import type { ComponentType } from "react";
 import { StepFlow } from "@/registry/new-york/step-flow/step-flow";
-import { StepFlowVertical } from "@/registry/new-york/step-flow-vertical/step-flow-vertical";
 import { ALL_FIXTURES, type StepFlowFixture } from "@/fixtures/step-flow.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 import { ShoppingCart } from "lucide-react";
@@ -11,6 +9,7 @@ type Fixture = StepFlowFixture;
 
 const propsMeta: PropMeta[] = [
   { name: "steps", type: "StepFlowStep[]", required: true, description: "Ordered array of steps to display" },
+  { name: "layout", type: '"horizontal" | "vertical"', required: false, defaultValue: '"horizontal"', description: "Layout direction" },
   { name: "icon", type: "ReactNode", required: false, description: "Icon rendered before the title" },
   { name: "title", type: "string", required: false, description: "Title text above step buttons" },
   { name: "initialStep", type: "number", required: false, defaultValue: "0", description: "Index of the initially active step" },
@@ -22,13 +21,17 @@ const USAGE = `import { StepFlow } from "@/registry/new-york/step-flow/step-flow
 
 <StepFlow
   title="Checkout"
+  layout="horizontal"
   steps={[
     { label: "Cart", description: "Review items" },
     { label: "Shipping", description: "Enter address" },
     { label: "Payment", description: "Add payment" },
     { label: "Confirm", description: "Place order" },
   ]}
-/>`;
+/>
+
+{/* Or vertical timeline */}
+<StepFlow layout="vertical" steps={[...]} />`;
 
 export const config: PreviewLabConfig<Fixture> = {
   title: "Step Flow",
@@ -37,17 +40,25 @@ export const config: PreviewLabConfig<Fixture> = {
   usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture, Variant) => {
-    const Comp = Variant ?? StepFlow;
+    if (Variant) return <Variant {...fixture} icon={fixture.title ? <ShoppingCart className="size-4" /> : undefined} />;
     return (
-      <Comp
+      <StepFlow
         {...fixture}
         icon={fixture.title ? <ShoppingCart className="size-4" /> : undefined}
       />
     );
   },
   variants: [
-    { name: "Horizontal", component: StepFlow as ComponentType<Fixture>, description: "Default horizontal step row with arrow connectors." },
-    { name: "Vertical Timeline", component: StepFlowVertical as ComponentType<Fixture>, description: "Vertical timeline layout with dots and connecting lines." },
+    {
+      name: "Horizontal",
+      component: ((props: Fixture) => <StepFlow {...props} layout="horizontal" />) as React.ComponentType<Fixture>,
+      description: "Default step row with arrow connectors.",
+    },
+    {
+      name: "Vertical",
+      component: ((props: Fixture) => <StepFlow {...props} layout="vertical" />) as React.ComponentType<Fixture>,
+      description: "Timeline layout with dots and connecting lines.",
+    },
   ],
   propsMeta,
 };
