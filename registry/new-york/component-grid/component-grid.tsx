@@ -104,8 +104,8 @@ export function ComponentGrid({
       {items.map((item) => {
         const content = (
           <>
-            {/* Title — top on mobile */}
-            <div className="px-3 pt-3 sm:hidden">
+            {/* Title */}
+            <div className="px-3 pt-3">
               <h3 className="text-sm font-semibold group-hover:text-primary transition-colors">
                 {item.title}
               </h3>
@@ -140,17 +140,6 @@ export function ComponentGrid({
               )}
             </div>
 
-            {/* Title — bottom on desktop */}
-            <div className="hidden sm:block px-3 pb-3">
-              <h3 className="text-sm font-semibold group-hover:text-primary transition-colors">
-                {item.title}
-              </h3>
-              {item.description && (
-                <p className="text-[11px] text-muted-foreground mt-0.5 line-clamp-2">
-                  {item.description}
-                </p>
-              )}
-            </div>
           </>
         );
 
