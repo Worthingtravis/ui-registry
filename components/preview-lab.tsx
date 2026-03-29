@@ -279,13 +279,16 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
 
         {activeTab === "data" && (
-          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
+          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden space-y-0">
             <CodeHighlight
               code={fixtureJson}
               language="json"
               label={`Props for "${activeFixtureKey}"`}
-              className="rounded-none border-0 max-h-[500px] overflow-y-auto"
+              className="rounded-none border-0 border-b border-code-border/30 max-h-[400px] overflow-y-auto"
             />
+            {fixtureCode && (
+              <CodeHighlight code={fixtureCode} language="tsx" label="Usage examples" className="rounded-none border-0" />
+            )}
           </div>
         )}
 
