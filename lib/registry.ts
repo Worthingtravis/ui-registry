@@ -85,6 +85,13 @@ export const REGISTRY: RegistryEntry[] = [
     category: "Progression",
   },
   {
+    name: "onboarding-checklist",
+    description: "Linear onboarding checklist with progress bar, step locking, and dismissible success state.",
+    lab: () => import("@/demos/onboarding-checklist.demo"),
+    tags: ["onboarding", "checklist", "wizard", "progress"],
+    category: "Progression",
+  },
+  {
     name: "flow-diagram",
     description: "Animated architecture flow diagram with bezier-curved edges, flowing particles, and hover highlighting.",
     lab: () => import("@/demos/flow-diagram.demo"),

@@ -163,6 +163,19 @@
       ]
     },
     {
+      "name": "onboarding-checklist",
+      "type": "registry:component",
+      "title": "Onboarding Checklist",
+      "description": "Linear onboarding checklist with numbered steps, completion indicators, progress bar, step locking, and dismissible success state.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive", "navigation"],
+      "docs": "Pass `steps` array with `label`, `complete`, `href`, and optional `locked`. Use `onDismiss` for dismiss behavior. Provide `renderLink` for framework-specific routing.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/onboarding-checklist/onboarding-checklist.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "step-flow",
       "type": "registry:component",
       "title": "Step Flow",

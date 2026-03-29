@@ -24,6 +24,7 @@ Reusable UI components for [shadcn/ui](https://ui.shadcn.com). Browse live previ
 
 | Name | Type | Description |
 |---|---|---|
+| `onboarding-checklist` | `registry:component` | Linear onboarding checklist with progress bar and step locking |
 | `step-flow` | `registry:component` | Interactive multi-step flow visualizer with navigation |
 | `flow-diagram` | `registry:component` | Animated architecture diagram with bezier edges, particles, and auto-layout |
 
@@ -67,6 +68,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-regist
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/tool-call-block.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/avatar-picker.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/profile-editor.json
+npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/onboarding-checklist.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/step-flow.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/flow-diagram.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/typing-text.json
