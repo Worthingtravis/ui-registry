@@ -12,11 +12,11 @@ export default function HomePage() {
       </div>
 
       {/* Tic-tac-toe grid — shared borders between cells */}
-      <div className="grid grid-cols-1 gap-4 sm:gap-0 sm:grid-cols-2 lg:grid-cols-3 sm:border-t sm:border-border/40">
+      <div className="grid grid-cols-1 divide-y divide-border/40 sm:divide-y-0 sm:grid-cols-2 lg:grid-cols-3 sm:border-t sm:border-border/40">
         {REGISTRY.map((entry) => (
           <div
             key={entry.name}
-            className="border border-border/40 sm:border-0 sm:border-b sm:border-r sm:border-border/40 sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
+            className="sm:border-b sm:border-r sm:border-border/40 sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
           >
             <ComponentCell name={entry.name} description={entry.description} />
           </div>
