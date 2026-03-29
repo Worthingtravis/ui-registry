@@ -50,7 +50,7 @@
       }
     }
   },
-  "docs": "Use with zero config via `mcpEndpoint` prop, or pass a custom `script` array of `TerminalEntry` items for full control over the animation sequence.",
+  "docs": "Pass a `script` array of `TerminalEntry` items. Each entry has a `kind`: `input` (typed command), `output` (static line), `tool-call` (MCP call with args/result), `phase` (section divider), `thinking` (animated dots), `claude` (AI response), `ask` (option list), `memory` (saved block). All entries share `pauseAfter` (ms delay before next).",
   "categories": [
     "terminal",
     "animation",

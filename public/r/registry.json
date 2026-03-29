@@ -215,7 +215,7 @@
       "description": "Full animated terminal session with typing, tool calls, thinking indicators, memory blocks, and copyable rows.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
       "categories": ["terminal", "animation", "ai"],
-      "docs": "Use with zero config via `mcpEndpoint` prop, or pass a custom `script` array of `TerminalEntry` items for full control over the animation sequence.",
+      "docs": "Pass a `script` array of `TerminalEntry` items. Each entry has a `kind`: `input` (typed command), `output` (static line), `tool-call` (MCP call with args/result), `phase` (section divider), `thinking` (animated dots), `claude` (AI response), `ask` (option list), `memory` (saved block). All entries share `pauseAfter` (ms delay before next).",
       "registryDependencies": ["terminal-chrome", "typing-text", "tool-call-block", "copyable-row", "terminal-lib"],
       "files": [
         { "path": "registry/new-york/terminal-demo/terminal-demo.tsx", "type": "registry:component" }
