@@ -203,6 +203,19 @@
       ]
     },
     {
+      "name": "user-badge",
+      "type": "registry:component",
+      "title": "User Badge",
+      "description": "Compact user identity display with avatar (or initial fallback), display name, and optional username handle. Three sizes.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive"],
+      "docs": "Pass `name` for the display name, optional `username` for the handle, and `avatarUrl` for the image. Falls back to colored initial when no image. Use `size` for sm/md/lg.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/user-badge/user-badge.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "avatar-picker",
       "type": "registry:component",
       "title": "Avatar Picker",

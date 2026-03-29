@@ -17,6 +17,7 @@ Reusable UI components for [shadcn/ui](https://ui.shadcn.com). Browse live previ
 
 | Name | Type | Description |
 |---|---|---|
+| `user-badge` | `registry:component` | Compact user identity display with avatar, name, and optional handle |
 | `avatar-picker` | `registry:component` | DiceBear generated avatars with style pills, custom seed, and file upload |
 | `profile-editor` | `registry:component` | Profile editor card with avatar, status, editable fields, and save/cancel |
 
@@ -67,6 +68,7 @@ Reusable UI components for [shadcn/ui](https://ui.shadcn.com). Browse live previ
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/terminal-demo.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/terminal-chrome.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/tool-call-block.json
+npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/user-badge.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/avatar-picker.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/profile-editor.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/onboarding-checklist.json

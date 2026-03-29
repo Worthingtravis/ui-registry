@@ -62,6 +62,13 @@ export const REGISTRY: RegistryEntry[] = [
 
   // --- Profile & Avatar ---
   {
+    name: "user-badge",
+    description: "Compact user identity display with avatar, name, and optional handle.",
+    lab: () => import("@/demos/user-badge.demo"),
+    tags: ["user", "avatar", "badge", "identity"],
+    category: "Profile & Avatar",
+  },
+  {
     name: "avatar-picker",
     description: "Avatar picker with DiceBear generated avatars, style pills, custom seed, and file upload.",
     lab: () => import("@/demos/avatar-picker.demo"),
