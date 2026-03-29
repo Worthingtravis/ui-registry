@@ -4,6 +4,9 @@
   "title": "Tool Call Block",
   "author": "worthingtravis <https://github.com/Worthingtravis>",
   "description": "MCP tool call display with name, arguments, and result.",
+  "registryDependencies": [
+    "terminal-chrome"
+  ],
   "files": [
     {
       "path": "registry/new-york/tool-call-block/tool-call-block.tsx",
