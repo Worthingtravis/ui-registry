@@ -25,16 +25,19 @@ export default function HomePage() {
 
       <div className="px-6 lg:px-8 py-6 sm:py-0 sm:pt-4 space-y-4 sm:border-t sm:border-border/30">
         <h2 className="text-lg font-semibold">Installation</h2>
-        <p className="text-sm text-muted-foreground">
-          Install any component using the shadcn CLI:
-        </p>
-        <div className="relative rounded-lg border border-border/40 bg-code-bg overflow-hidden">
-          <div className="flex items-center border-b border-border/30 px-4 py-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Command</span>
+        <div className="space-y-3">
+          <p className="text-sm text-muted-foreground">Install everything:</p>
+          <div className="relative rounded-lg border border-border/40 bg-code-bg overflow-hidden">
+            <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
+              <code>{REGISTRY.map((e) => installCommand(e.name)).join("\n")}</code>
+            </pre>
           </div>
-          <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
-            <code>{installCommand("[component-name]")}</code>
-          </pre>
+          <p className="text-sm text-muted-foreground">Or pick one:</p>
+          <div className="relative rounded-lg border border-border/40 bg-code-bg overflow-hidden">
+            <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
+              <code>{installCommand("terminal-demo")}</code>
+            </pre>
+          </div>
         </div>
       </div>
     </div>
