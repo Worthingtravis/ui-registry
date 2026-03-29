@@ -128,7 +128,25 @@ pnpm run build:registry
 
 If either fails, fix the issues before proceeding.
 
-### 7. Verify the preview
+### 7. Update README.md
+
+Add the new component to the components table in `README.md`.
+
+- Add a row to the appropriate table (Components or Shared) matching the existing format:
+  ```
+  | `$ARGUMENTS` | `registry:component` | One-line description |
+  ```
+- Add a direct URL install line in the "Direct URL" section:
+  ```
+  npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/$ARGUMENTS.json
+  ```
+- Add a namespace install line in the "With namespace" section:
+  ```
+  npx shadcn@latest add @worthingtravis/$ARGUMENTS
+  ```
+- Keep alphabetical or categorical ordering consistent with existing entries
+
+### 8. Verify the preview
 
 Check that the component appears in the sidebar and renders correctly:
 - The component should show in the sidebar nav
@@ -143,6 +161,7 @@ Check that the component appears in the sidebar and renders correctly:
 - [ ] Demo at `demos/$ARGUMENTS.demo.tsx` with PreviewLabConfig
 - [ ] Entry in `lib/registry.ts` REGISTRY array
 - [ ] Entry in `registry.json` with all dependencies listed
+- [ ] README.md updated with component table row and install commands
 - [ ] `npx tsc --noEmit` passes
 - [ ] `pnpm run build:registry` passes
 - [ ] No `any` types
