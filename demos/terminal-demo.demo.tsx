@@ -72,22 +72,25 @@ function EntryCard({ kind, fields, entry }: { kind: string; fields: string; entr
   const json = JSON.stringify(entry, null, 2);
 
   return (
-    <div className="flex items-start justify-between gap-2 px-3 py-2.5 bg-muted/20">
-      <div className="min-w-0">
-        <code className="text-xs font-mono">
-          <span className="text-primary font-semibold">kind: {kind}</span>
-        </code>
-        <code className="block text-[11px] font-mono text-muted-foreground mt-0.5">
-          {fields}
-        </code>
+    <div className="bg-muted/20 space-y-2 px-3 py-2.5">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <code className="text-xs font-mono">
+            <span className="text-primary font-semibold">kind: {kind}</span>
+          </code>
+          <code className="block text-[11px] font-mono text-muted-foreground mt-0.5">
+            {fields}
+          </code>
+        </div>
+        <button
+          onClick={() => copy(json)}
+          className="shrink-0 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+          aria-label="Copy entry JSON"
+        >
+          {copied ? <Check className="size-3" /> : <Copy className="size-3" />}
+        </button>
       </div>
-      <button
-        onClick={() => copy(json)}
-        className="shrink-0 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
-        aria-label="Copy entry JSON"
-      >
-        {copied ? <Check className="size-3" /> : <Copy className="size-3" />}
-      </button>
+      <pre className="text-[11px] font-mono text-code-text leading-relaxed bg-code-bg rounded-md px-2.5 py-2 overflow-x-auto">{json}</pre>
     </div>
   );
 }
