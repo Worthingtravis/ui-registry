@@ -279,16 +279,13 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
 
         {activeTab === "data" && (
-          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden space-y-0">
+          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
             <CodeHighlight
               code={fixtureJson}
               language="json"
-              label={activeFixtureKey}
-              className="rounded-none border-0 border-b border-code-border/30 max-h-[400px] overflow-y-auto"
+              label={`Props for "${activeFixtureKey}"`}
+              className="rounded-none border-0 max-h-[500px] overflow-y-auto"
             />
-            {fixtureCode && (
-              <CodeHighlight code={fixtureCode} language="tsx" label="All examples" className="rounded-none border-0" />
-            )}
           </div>
         )}
 
@@ -324,22 +321,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         )}
       </div>
 
-      {/* All examples gallery */}
-      {fixtureKeys.length > 1 && (
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold">All Examples</h2>
-          <div className="space-y-4">
-            {fixtureKeys.map((key) => (
-              <div key={key} className="space-y-1.5">
-                <span className="text-xs font-medium text-muted-foreground">{key}</span>
-                <div className="rounded-lg border border-border bg-background p-6">
-                  {render(fixtures[key], activeVariant)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Footer links */}
     </div>
   );
 }
