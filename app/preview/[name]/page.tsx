@@ -30,14 +30,13 @@ export default async function PreviewPage({ params }: { params: Promise<{ name: 
   const entry = getEntry(name);
   if (!entry) notFound();
 
-  // Load real source files server-side
+  // Load source file server-side for Source tab
   const sourceCode = readFile(`registry/new-york/${name}/${name}.tsx`);
-  const fixtureCode = readFile(`fixtures/${name}.fixtures.ts`);
 
   return (
     <div className="max-w-3xl px-6 lg:px-8 py-10">
       <Suspense fallback={<div className="text-sm text-muted-foreground animate-pulse">Loading preview...</div>}>
-        <PreviewClient name={name} sourceCode={sourceCode} fixtureCode={fixtureCode} />
+        <PreviewClient name={name} sourceCode={sourceCode} />
       </Suspense>
 
       <div className="mt-12 pt-6 border-t border-border/20 flex items-center justify-between text-xs text-muted-foreground">

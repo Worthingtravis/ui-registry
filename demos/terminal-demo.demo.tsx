@@ -3,9 +3,8 @@
 import { useState, useCallback } from "react";
 import { Copy, Check } from "lucide-react";
 import { TerminalDemo, type TerminalEntry } from "@/registry/new-york/terminal-demo/terminal-demo";
-import { TerminalChrome } from "@/registry/new-york/terminal-chrome/terminal-chrome";
-import { TypingText } from "@/registry/new-york/typing-text/typing-text";
 import { ToolCallBlock } from "@/registry/new-york/tool-call-block/tool-call-block";
+import { TERMINAL_COLORS } from "@/registry/new-york/terminal-lib/terminal";
 import { ALL_FIXTURES, type TerminalDemoFixture } from "@/fixtures/terminal-demo.fixtures";
 import { useCopy } from "@/registry/new-york/use-copy/use-copy";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
@@ -69,12 +68,6 @@ const ENTRY_CATALOG: Array<{
 // ---------------------------------------------------------------------------
 // Bare entry renderer — no terminal chrome, just the content
 // ---------------------------------------------------------------------------
-
-const TERMINAL_COLORS: Record<string, string> = {
-  green: "text-term-success",
-  zinc: "text-term-text-muted",
-  purple: "text-term-accent",
-};
 
 function BareEntry({ entry }: { entry: TerminalEntry }) {
   switch (entry.kind) {
@@ -165,9 +158,7 @@ function EntryCard({ kind, fields, entry }: { kind: string; fields: string; entr
       </div>
       {/* Right: live render */}
       <div className="bg-term-bg p-3 font-mono text-[13px] leading-relaxed text-term-text flex items-center">
-        <div className="w-full">
-          <BareEntry entry={entry} />
-        </div>
+        <BareEntry entry={entry} />
       </div>
     </div>
   );
