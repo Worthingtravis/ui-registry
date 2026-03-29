@@ -8,7 +8,7 @@ const propsMeta: PropMeta[] = [
   { name: "text", type: "string", required: true, description: "The text string to type out" },
   { name: "delay", type: "number", required: true, description: "Delay in ms before typing starts" },
   { name: "duration", type: "number", required: true, description: "Duration in ms for typing animation" },
-  { name: "className", type: "string", required: false, description: "Additional CSS classes" },
+  { name: "className", type: "string", required: false, defaultValue: '""', description: "Additional CSS classes" },
 ];
 
 export const config: PreviewLabConfig<TypingTextFixture> = {

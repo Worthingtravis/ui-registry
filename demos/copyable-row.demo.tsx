@@ -7,8 +7,8 @@ import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 const propsMeta: PropMeta[] = [
   { name: "text", type: "string", required: true, description: "Text to copy to clipboard on click" },
   { name: "children", type: "ReactNode", required: true, description: "Row content" },
-  { name: "className", type: "string", required: false, description: "Additional CSS classes" },
-  { name: "style", type: "CSSProperties", required: false, description: "Inline styles" },
+  { name: "className", type: "string", required: false, defaultValue: '""', description: "Additional CSS classes" },
+  { name: "style", type: "React.CSSProperties", required: false, description: "Inline styles" },
 ];
 
 export const config: PreviewLabConfig<CopyableRowFixture> = {

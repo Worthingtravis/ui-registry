@@ -11,7 +11,7 @@ const propsMeta: PropMeta[] = [
   { name: "children", type: "ReactNode", required: true, description: "Terminal body content" },
   { name: "leftSlot", type: "ReactNode", required: false, description: "Slot rendered before the traffic lights" },
   { name: "rightSlot", type: "ReactNode", required: false, description: "Slot on right side of title bar" },
-  { name: "className", type: "string", required: false, description: "Additional class names for the outer container" },
+  { name: "className", type: "string", required: false, defaultValue: '""', description: "Additional class names for the outer container" },
 ];
 
 function renderBody(fixture: TerminalChromeFixture) {

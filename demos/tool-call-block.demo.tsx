@@ -12,7 +12,7 @@ const propsMeta: PropMeta[] = [
   { name: "toolName", type: "string", required: true, description: "Name of the tool being called" },
   { name: "args", type: "Record<string, string | number | boolean | string[]>", required: true, description: "Key-value argument pairs" },
   { name: "result", type: "string", required: true, description: "Result text shown at the bottom" },
-  { name: "delay", type: "number", required: true, description: "Fade-in delay in ms" },
+  { name: "delay", type: "number", required: true, description: "Fade-in delay in ms (0 = no animation)" },
 ];
 
 export const config: PreviewLabConfig<Fixture> = {
