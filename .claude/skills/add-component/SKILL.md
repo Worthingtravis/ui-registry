@@ -24,6 +24,24 @@ If no name is provided, ask the user what component they want to add.
 
 ## Step-by-step process
 
+### 0. Sanitize source material
+
+If copying or adapting a component from another project, review the source for anything that must NOT be carried over:
+
+- **API keys, tokens, secrets** — env vars, hardcoded credentials, auth headers
+- **Internal URLs** — staging endpoints, admin panels, internal API routes
+- **User data** — real names, emails, usernames, avatar URLs pointing to private storage
+- **Business logic** — auth checks, permission gates, billing code, analytics calls
+- **Platform-specific imports** — app-specific contexts, stores, services, or hooks that won't exist in the registry
+- **Licensed assets** — fonts, images, or icons with restricted licenses
+
+Replace all of the above with:
+- Generic placeholder data in fixtures (e.g. "Alice Smith", "https://example.com")
+- Standard imports from `@/lib/utils` or `lucide-react`
+- Props that let the consumer provide their own data
+
+If unsure whether something is sensitive, strip it and make it a prop.
+
 ### 1. Create the component
 
 **File:** `registry/new-york/$ARGUMENTS/$ARGUMENTS.tsx`
