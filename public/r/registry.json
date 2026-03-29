@@ -104,6 +104,7 @@
       "author": "worthingtravis <https://github.com/Worthingtravis>",
       "categories": ["terminal", "ai"],
       "docs": "Displays a tool call in the Claude Code style — tool name, arguments, and result. Set `delay` to 0 for instant render or use a ms value for fade-in animation.",
+      "registryDependencies": ["terminal-chrome"],
       "files": [
         { "path": "registry/new-york/tool-call-block/tool-call-block.tsx", "type": "registry:component" }
       ],
