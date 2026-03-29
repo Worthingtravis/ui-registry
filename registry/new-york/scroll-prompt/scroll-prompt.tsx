@@ -31,8 +31,9 @@ export function ScrollPrompt({
   if (!visible) return null;
 
   return (
-    <a
-      href={`#${targetId}`}
+    <button
+      type="button"
+      onClick={() => document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" })}
       className="group flex flex-col items-center gap-1 py-2 text-muted-foreground transition hover:text-foreground"
     >
       <span className="text-xs font-medium">{label}</span>
@@ -49,6 +50,6 @@ export function ScrollPrompt({
       >
         <polyline points="6 9 12 15 18 9" />
       </svg>
-    </a>
+    </button>
   );
 }
