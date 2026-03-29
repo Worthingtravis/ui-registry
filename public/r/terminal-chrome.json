@@ -11,7 +11,27 @@
       "type": "registry:component"
     }
   ],
-  "docs": "Wrap any content in a macOS-style terminal window. Supports title, left/right header slots, and custom className.",
+  "cssVars": {
+    "theme": {
+      "--color-term-bg": "oklch(0.145 0 0)",
+      "--color-term-bg-header": "oklch(0.205 0 0)",
+      "--color-term-bg-muted": "oklch(0.205 0 0 / 50%)",
+      "--color-term-border": "oklch(0.371 0 0)",
+      "--color-term-border-muted": "oklch(0.371 0 0 / 60%)",
+      "--color-term-text": "oklch(0.871 0 0)",
+      "--color-term-text-muted": "oklch(0.556 0 0)",
+      "--color-term-text-bright": "oklch(0.925 0 0)",
+      "--color-term-accent": "oklch(0.541 0.281 293)",
+      "--color-term-accent-muted": "oklch(0.541 0.281 293 / 60%)",
+      "--color-term-success": "oklch(0.696 0.17 162.48)",
+      "--color-term-warning": "oklch(0.75 0.183 55)",
+      "--color-term-warning-muted": "oklch(0.75 0.183 55 / 70%)",
+      "--color-term-dot-red": "oklch(0.637 0.237 25 / 80%)",
+      "--color-term-dot-yellow": "oklch(0.795 0.184 86 / 80%)",
+      "--color-term-dot-green": "oklch(0.696 0.17 162.48 / 80%)"
+    }
+  },
+  "docs": "Wrap any content in a macOS-style terminal window. Supports title, left/right header slots, and custom className.\n\nThis component requires the terminal color palette CSS variables. They are automatically added to your CSS when you install this component.",
   "categories": [
     "terminal"
   ],
