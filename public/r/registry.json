@@ -142,6 +142,11 @@
       "categories": ["interactive"],
       "docs": "Wrap any content to make it click-to-copy. Shows a subtle hover highlight and animated copy/check icon.",
       "registryDependencies": ["use-copy"],
+      "cssVars": {
+        "theme": {
+          "--color-success": "oklch(0.696 0.17 162.48)"
+        }
+      },
       "files": [
         { "path": "registry/new-york/copyable-row/copyable-row.tsx", "type": "registry:component" }
       ]

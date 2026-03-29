@@ -14,6 +14,11 @@
       "type": "registry:component"
     }
   ],
+  "cssVars": {
+    "theme": {
+      "--color-success": "oklch(0.696 0.17 162.48)"
+    }
+  },
   "docs": "Wrap any content to make it click-to-copy. Shows a subtle hover highlight and animated copy/check icon.",
   "categories": [
     "interactive"
