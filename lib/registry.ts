@@ -58,6 +58,12 @@ export const REGISTRY: RegistryEntry[] = [
   },
 
   {
+    name: "flow-diagram",
+    description: "Animated architecture flow diagram with bezier-curved edges, flowing particles, and hover highlighting.",
+    lab: () => import("@/demos/flow-diagram.demo"),
+    tags: ["architecture", "diagram", "flow", "animation", "interactive", "primitive"],
+  },
+  {
     name: "avatar-picker",
     description: "Avatar picker with DiceBear generated avatars, style pills, custom seed, and file upload.",
     lab: () => import("@/demos/avatar-picker.demo"),

@@ -177,6 +177,19 @@
       ]
     },
     {
+      "name": "flow-diagram",
+      "type": "registry:component",
+      "title": "Flow Diagram",
+      "description": "Animated architecture flow diagram with nodes connected by bezier-curved edges. Features draw-on animation, flowing particles, hover highlighting, dot grid background, and radial glow. All data-driven via props.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["animation", "interactive"],
+      "docs": "Pass arrays of `nodes`, `edges`, and `positions` (percentage coordinates). Use `wideNodeId` to make one node wider. Set `live: true` on a node for a pulsing indicator. Edges support `optional` (dashed) and `bidirectional` (reverse particles).",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge", "motion"],
+      "files": [
+        { "path": "registry/new-york/flow-diagram/flow-diagram.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "avatar-picker",
       "type": "registry:component",
       "title": "Avatar Picker",

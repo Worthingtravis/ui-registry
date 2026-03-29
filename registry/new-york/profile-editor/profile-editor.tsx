@@ -265,7 +265,7 @@ export function ProfileEditor({
   // ---- Compact layout (settings page) ----
   if (compact) {
     return (
-      <div className={cn("w-full max-w-md space-y-5", className)}>
+      <div className={cn("w-full space-y-5", className)}>
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6">
           <div className="shrink-0">{avatar}</div>
 
@@ -383,7 +383,7 @@ export function ProfileEditor({
   return (
     <div
       className={cn(
-        "w-full max-w-sm rounded-xl border border-border/50 bg-card p-6 shadow-sm space-y-6",
+        "w-full rounded-xl border border-border/50 bg-card p-6 shadow-sm space-y-6",
         className,
       )}
     >
