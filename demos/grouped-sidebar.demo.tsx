@@ -6,6 +6,7 @@ import {
   type GroupedSidebarFixture,
 } from "@/fixtures/grouped-sidebar.fixtures";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 type Fixture = GroupedSidebarFixture;
 
@@ -68,7 +69,21 @@ export const config: PreviewLabConfig<Fixture> = {
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="flex h-[400px] border border-border/40 rounded-lg overflow-hidden">
-      <GroupedSidebar {...fixture} />
+      <GroupedSidebar
+        {...fixture}
+        renderLink={(item, isActive) => (
+          <span
+            className={cn(
+              "block text-sm rounded-md px-2 py-1 transition-colors cursor-pointer",
+              isActive
+                ? "text-foreground font-medium bg-muted"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+            )}
+          >
+            {item.label}
+          </span>
+        )}
+      />
       <div className="flex-1 flex items-center justify-center text-muted-foreground text-sm">
         Main content area
       </div>
