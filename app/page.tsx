@@ -16,7 +16,7 @@ export default function HomePage() {
         {REGISTRY.map((entry) => (
           <div
             key={entry.name}
-            className="rounded-lg border border-border/40 sm:rounded-none sm:border-0 sm:border-b sm:border-r sm:border-border/40 sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
+            className="border border-border/40 sm:border-0 sm:border-b sm:border-r sm:border-border/40 sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
           >
             <ComponentCell name={entry.name} description={entry.description} />
           </div>
