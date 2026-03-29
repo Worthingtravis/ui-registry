@@ -3,8 +3,8 @@ import { ComponentCell } from "./component-card";
 
 export default function HomePage() {
   return (
-    <div className="py-10 space-y-10">
-      <div className="px-6 lg:px-8 space-y-2">
+    <div className="py-10 divide-y divide-border/40 sm:divide-y-0 sm:space-y-10">
+      <div className="px-6 lg:px-8 py-6 sm:py-0 space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Components</h1>
         <p className="text-muted-foreground text-base max-w-2xl">
           Beautifully designed components built with Tailwind CSS. Installable via the shadcn CLI.
@@ -23,7 +23,7 @@ export default function HomePage() {
         ))}
       </div>
 
-      <div className="px-6 lg:px-8 space-y-4 pt-4 border-t border-border/30">
+      <div className="px-6 lg:px-8 py-6 sm:py-0 sm:pt-4 space-y-4 sm:border-t sm:border-border/30">
         <h2 className="text-lg font-semibold">Installation</h2>
         <p className="text-sm text-muted-foreground">
           Install any component using the shadcn CLI:
