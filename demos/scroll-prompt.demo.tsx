@@ -21,9 +21,9 @@ export const config: PreviewLabConfig<ScrollPromptFixture> = {
         <ScrollPrompt {...fixture} />
       </div>
 
-      {/* Spacer content to push target off-screen */}
-      <div className="space-y-3">
-        {Array.from({ length: 8 }).map((_, i) => (
+      {/* Spacer — just tall enough to push target barely off-screen */}
+      <div className="min-h-[calc(100vh-300px)] space-y-3">
+        {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="rounded-md border border-border/20 bg-muted/10 p-4">
             <div className="h-2 w-3/4 rounded bg-muted/30" />
             <div className="mt-2 h-2 w-1/2 rounded bg-muted/20" />
