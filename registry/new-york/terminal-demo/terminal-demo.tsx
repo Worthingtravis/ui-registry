@@ -57,16 +57,16 @@ export function buildScript(mcpEndpoint: string): TerminalEntry[] {
 export interface TerminalDemoProps {
   /** MCP endpoint URL used in the default script */
   mcpEndpoint?: string;
-  /** Custom script entries (overrides default) */
-  script?: TerminalEntry[];
+  /** Terminal entries to animate (overrides default) */
+  entries?: TerminalEntry[];
 }
 
 export function TerminalDemo({
   mcpEndpoint = "https://your-app.vercel.app/api/mcp",
-  script,
+  entries,
 }: TerminalDemoProps) {
   const [sessionKey, setSessionKey] = useState(0);
-  const timed = computeTimings(script ?? buildScript(mcpEndpoint));
+  const timed = computeTimings(entries ?? buildScript(mcpEndpoint));
 
   return (
     <TerminalChrome

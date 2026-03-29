@@ -74,21 +74,21 @@ export default function Page() {
 }
 ```
 
-### Custom script
+### Custom entries
 
 ```tsx
 "use client";
 
 import { TerminalDemo, type TerminalEntry } from "@/registry/new-york/terminal-demo/terminal-demo";
 
-const myScript: TerminalEntry[] = [
+const myEntries: TerminalEntry[] = [
   { kind: "phase", label: "Setup", pauseAfter: 300 },
   { kind: "input", text: "hello world", prompt: "$", typingMs: 800, pauseAfter: 400 },
   { kind: "output", text: "Done!", color: "green", pauseAfter: 0 },
 ];
 
 export default function Page() {
-  return <TerminalDemo script={myScript} />;
+  return <TerminalDemo entries={myEntries} />;
 }
 ```
 

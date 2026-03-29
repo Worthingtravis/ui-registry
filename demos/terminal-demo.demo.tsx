@@ -5,55 +5,51 @@ import { ALL_FIXTURES, type TerminalDemoFixture } from "@/fixtures/terminal-demo
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
 const propsMeta: PropMeta[] = [
-  { name: "mcpEndpoint", type: "string", required: false, defaultValue: '"https://your-app.vercel.app/api/mcp"', description: "MCP endpoint URL used in the default script" },
-  { name: "script", type: "TerminalEntry[]", required: false, description: "Custom script entries (overrides default)" },
+  { name: "mcpEndpoint", type: "string", required: false, defaultValue: '"https://your-app.vercel.app/api/mcp"', description: "MCP endpoint URL used in the default entries" },
+  { name: "entries", type: "TerminalEntry[]", required: false, description: "Terminal entries to animate (overrides default)" },
 ];
 
-/** One mini-script per entry kind so each renders in isolation */
-const ENTRY_CATALOG: Array<{ kind: string; description: string; script: TerminalEntry[] }> = [
+/** One entry per kind so each renders in isolation */
+const ENTRY_CATALOG: Array<{ kind: string; description: string; entry: TerminalEntry }> = [
   {
     kind: "input",
     description: "Typed command with typewriter animation",
-    script: [{ kind: "input", text: "git status", prompt: "$", typingMs: 600, pauseAfter: 0 }],
+    entry: { kind: "input", text: "git status", prompt: "$", typingMs: 600, pauseAfter: 0 },
   },
   {
     kind: "output",
     description: "Static colored text line",
-    script: [
-      { kind: "output", text: "3 files changed, 42 insertions(+)", color: "green", pauseAfter: 0 },
-    ],
+    entry: { kind: "output", text: "3 files changed, 42 insertions(+)", color: "green", pauseAfter: 0 },
   },
   {
     kind: "tool-call",
     description: "MCP tool call with args and result",
-    script: [
-      { kind: "tool-call", toolName: "read_file", args: { path: "src/auth.ts" }, result: "234 lines read", pauseAfter: 0 },
-    ],
+    entry: { kind: "tool-call", toolName: "read_file", args: { path: "src/auth.ts" }, result: "234 lines read", pauseAfter: 0 },
   },
   {
     kind: "phase",
     description: "Full-width section divider",
-    script: [{ kind: "phase", label: "Setup", pauseAfter: 0 }],
+    entry: { kind: "phase", label: "Setup", pauseAfter: 0 },
   },
   {
     kind: "thinking",
     description: "Animated dots that disappear after durationMs",
-    script: [{ kind: "thinking", text: "Analyzing diff...", durationMs: 3000, pauseAfter: 0 }],
+    entry: { kind: "thinking", text: "Analyzing diff...", durationMs: 3000, pauseAfter: 0 },
   },
   {
     kind: "claude",
     description: "AI response with sparkle icon",
-    script: [{ kind: "claude", text: "The refresh token logic on line 42 doesn't handle clock skew.", pauseAfter: 0 }],
+    entry: { kind: "claude", text: "The refresh token logic on line 42 doesn't handle clock skew.", pauseAfter: 0 },
   },
   {
     kind: "ask",
     description: "Numbered option prompt",
-    script: [{ kind: "ask", question: "How to proceed?", options: ["Apply fix", "Show diff first", "Skip"], pauseAfter: 0 }],
+    entry: { kind: "ask", question: "How to proceed?", options: ["Apply fix", "Show diff first", "Skip"], pauseAfter: 0 },
   },
   {
     kind: "memory",
     description: "Core memory saved indicator",
-    script: [{ kind: "memory", text: "User prefers verbose error messages.", pauseAfter: 0 }],
+    entry: { kind: "memory", text: "User prefers verbose error messages.", pauseAfter: 0 },
   },
 ];
 
@@ -66,7 +62,7 @@ export const config: PreviewLabConfig<TerminalDemoFixture> = {
     <div className="space-y-10">
       {/* Live demo */}
       <div className="max-w-2xl">
-        <TerminalDemo script={fixture.script} />
+        <TerminalDemo entries={fixture.entries} />
       </div>
 
       {/* Entry kind catalog — live rendered */}
@@ -74,18 +70,18 @@ export const config: PreviewLabConfig<TerminalDemoFixture> = {
         <div>
           <h3 className="text-sm font-semibold">Entry types</h3>
           <p className="text-xs text-muted-foreground mt-1">
-            Each <code className="text-primary">script</code> entry has a <code className="text-primary">kind</code>. All share <code className="text-primary">pauseAfter</code> (ms before next entry).
+            Each <code className="text-primary">entries</code> item has a <code className="text-primary">kind</code>. All share <code className="text-primary">pauseAfter</code> (ms before next entry).
           </p>
         </div>
         <div className="grid gap-3">
-          {ENTRY_CATALOG.map((entry) => (
-            <div key={entry.kind} className="rounded-lg border border-border/40 overflow-hidden">
+          {ENTRY_CATALOG.map((item) => (
+            <div key={item.kind} className="rounded-lg border border-border/40 overflow-hidden">
               <div className="px-3 py-2 bg-muted/20 border-b border-border/30">
-                <p className="text-[11px] text-muted-foreground mb-1.5">{entry.description}</p>
-                <pre className="text-[11px] font-mono text-code-text leading-relaxed whitespace-pre-wrap">{JSON.stringify(entry.script[0], null, 2)}</pre>
+                <p className="text-[11px] text-muted-foreground mb-1.5">{item.description}</p>
+                <pre className="text-[11px] font-mono text-code-text leading-relaxed whitespace-pre-wrap">{JSON.stringify(item.entry, null, 2)}</pre>
               </div>
               <div className="bg-term-bg">
-                <TerminalDemo script={entry.script} />
+                <TerminalDemo entries={[item.entry]} />
               </div>
             </div>
           ))}

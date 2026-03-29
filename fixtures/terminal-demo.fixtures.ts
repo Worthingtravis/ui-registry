@@ -1,8 +1,8 @@
 import type { TerminalEntry } from "@/registry/new-york/terminal-demo/terminal-demo";
 
-/** Fixture shape: the actual script entries that drive the terminal animation. */
+/** Fixture shape: the entries that drive the terminal animation. */
 export interface TerminalDemoFixture {
-  script: TerminalEntry[];
+  entries: TerminalEntry[];
 }
 
 // ---------------------------------------------------------------------------
@@ -53,7 +53,7 @@ const MINIMAL_SCRIPT: TerminalEntry[] = [
 // ---------------------------------------------------------------------------
 
 const BASE: TerminalDemoFixture = {
-  script: MCP_SETUP_SCRIPT,
+  entries: MCP_SETUP_SCRIPT,
 };
 
 const fx = (overrides: Partial<TerminalDemoFixture>): TerminalDemoFixture => ({
@@ -63,7 +63,7 @@ const fx = (overrides: Partial<TerminalDemoFixture>): TerminalDemoFixture => ({
 
 export const ALL_FIXTURES: Record<string, TerminalDemoFixture> = {
   "MCP Setup + Poll": BASE,
-  "Code Review": fx({ script: CODE_REVIEW_SCRIPT }),
-  "Deploy Pipeline": fx({ script: DEPLOY_SCRIPT }),
-  "Minimal Chat": fx({ script: MINIMAL_SCRIPT }),
+  "Code Review": fx({ entries: CODE_REVIEW_SCRIPT }),
+  "Deploy Pipeline": fx({ entries: DEPLOY_SCRIPT }),
+  "Minimal Chat": fx({ entries: MINIMAL_SCRIPT }),
 };
