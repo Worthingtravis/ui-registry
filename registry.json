@@ -255,6 +255,19 @@
       ]
     },
     {
+      "name": "info-tip",
+      "type": "registry:component",
+      "title": "Info Tip",
+      "description": "Info icon with tooltip on hover (desktop) and tap toggle (mobile). Self-contained — no external tooltip library needed.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive"],
+      "docs": "Wrap tooltip content in `<InfoTip>`. Set `side` for placement, `maxWidth` for width constraint, `iconSize` for the icon.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/info-tip/info-tip.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "collapsible-group",
       "type": "registry:component",
       "title": "Collapsible Group",

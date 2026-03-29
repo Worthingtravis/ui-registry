@@ -134,6 +134,13 @@ export const REGISTRY: RegistryEntry[] = [
 
   // --- Interactive ---
   {
+    name: "info-tip",
+    description: "Info icon with tooltip on hover (desktop) and tap toggle (mobile).",
+    lab: () => import("@/demos/info-tip.demo"),
+    tags: ["tooltip", "info", "help"],
+    category: "Interactive",
+  },
+  {
     name: "collapsible-group",
     description: "Accordion-style collapsible section with smooth grid-row animation.",
     lab: () => import("@/demos/collapsible-group.demo"),

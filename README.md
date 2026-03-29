@@ -46,6 +46,7 @@ Reusable UI components for [shadcn/ui](https://ui.shadcn.com). Browse live previ
 
 | Name | Type | Description |
 |---|---|---|
+| `info-tip` | `registry:component` | Info icon with tooltip on hover and tap toggle on mobile |
 | `collapsible-group` | `registry:component` | Accordion-style collapsible section with smooth grid-row animation |
 | `copyable-row` | `registry:component` | Click-to-copy wrapper with hover highlight |
 
@@ -73,6 +74,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-regist
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/section-heading.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/component-grid.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/grouped-sidebar.json
+npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/info-tip.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/collapsible-group.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/copyable-row.json
 ```
