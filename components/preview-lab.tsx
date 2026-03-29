@@ -80,6 +80,49 @@ function InstallTabs({ baseCommand }: { baseCommand: string }) {
 
 const INTERNAL_TAGS = new Set(["primitive", "composed"]);
 
+/** Extract exported interfaces and types from source code */
+function extractTypes(source: string): string | null {
+  const lines = source.split("\n");
+  const blocks: string[] = [];
+  let current: string[] = [];
+  let depth = 0;
+  let capturing = false;
+  let isUnion = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]!;
+    if (!capturing && /^export (interface|type)\s/.test(line)) {
+      capturing = true;
+      isUnion = /^export type\s/.test(line) && !line.includes("{");
+      current = [];
+      depth = 0;
+    }
+    if (capturing) {
+      current.push(line);
+      depth += (line.match(/\{/g) || []).length;
+      depth -= (line.match(/\}/g) || []).length;
+
+      if (isUnion) {
+        // Union type ends when next line doesn't start with | or is blank/new declaration
+        const next = lines[i + 1];
+        if (!next || (!next.startsWith("  |") && !next.startsWith("  }"))) {
+          blocks.push(current.join("\n"));
+          current = [];
+          depth = 0;
+          capturing = false;
+          isUnion = false;
+        }
+      } else if (depth <= 0 && current.length > 0) {
+        blocks.push(current.join("\n"));
+        current = [];
+        depth = 0;
+        capturing = false;
+      }
+    }
+  }
+  return blocks.length > 0 ? blocks.join("\n\n") : null;
+}
+
 // ---------------------------------------------------------------------------
 // PreviewLab
 // ---------------------------------------------------------------------------
@@ -159,15 +202,20 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
       ? variants[variantIndex]!.component
       : undefined;
 
+  const typeSource = useMemo(
+    () => (sourceCode ? extractTypes(sourceCode) : null),
+    [sourceCode],
+  );
+
   const availableTabs = useMemo(() =>
     TABS.filter((tab) => {
       if (tab === "preview") return true;
       if (tab === "usage") return !!fixtureCode;
       if (tab === "source") return !!sourceCode;
-      if (tab === "props") return propsMeta && propsMeta.length > 0;
+      if (tab === "props") return !!typeSource || (propsMeta && propsMeta.length > 0);
       return false;
     }),
-    [sourceCode, propsMeta],
+    [sourceCode, fixtureCode, propsMeta, typeSource],
   );
 
   return (
@@ -284,34 +332,11 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
           </div>
         )}
 
-        {activeTab === "props" && propsMeta && propsMeta.length > 0 && (
-          <div className="border border-t-0 border-border rounded-b-lg bg-code-bg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border/20 text-left">
-                    <th className="px-4 py-3 font-medium text-muted-foreground">Prop</th>
-                    <th className="px-4 py-3 font-medium text-muted-foreground">Type</th>
-                    <th className="px-4 py-3 font-medium text-muted-foreground">Default</th>
-                  </tr>
-                </thead>
-                <tbody className="text-xs">
-                  {propsMeta.map((prop) => (
-                    <tr key={prop.name} className="border-b border-border/10">
-                      <td className="px-4 py-2.5">
-                        <code className="font-mono text-primary text-xs">{prop.name}</code>
-                        {prop.required && <span className="text-destructive ml-1">*</span>}
-                        {prop.description && (
-                          <p className="text-muted-foreground mt-0.5 text-[11px]">{prop.description}</p>
-                        )}
-                      </td>
-                      <td className="px-4 py-2.5 font-mono text-muted-foreground text-xs">{prop.type}</td>
-                      <td className="px-4 py-2.5 font-mono text-muted-foreground text-xs">{prop.defaultValue ?? "—"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+        {activeTab === "props" && (
+          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
+            {typeSource && (
+              <CodeHighlight code={typeSource} language="tsx" />
+            )}
           </div>
         )}
       </div>
