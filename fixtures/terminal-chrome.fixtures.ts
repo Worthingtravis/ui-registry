@@ -23,12 +23,11 @@ const fx = (overrides: Partial<TerminalChromeFixture>): TerminalChromeFixture =>
 });
 
 export const ALL_FIXTURES: Record<string, TerminalChromeFixture> = {
-  "Build output": BASE,
-  "Dev server": fx({
+  "With output": BASE,
+  "With status badge": fx({
     title: "dev-server",
     hasRightSlot: true,
     bodyLines: [
-      { text: "Next.js 16.2.1 (Turbopack)", color: "muted" },
       { text: "Local: http://localhost:3000", color: "cyan" },
       { text: "Ready in 280ms", color: "green" },
     ],
@@ -36,13 +35,5 @@ export const ALL_FIXTURES: Record<string, TerminalChromeFixture> = {
   "Empty terminal": fx({
     title: "bash",
     bodyLines: [],
-  }),
-  "Error output": fx({
-    title: "~/projects/broken-app",
-    bodyLines: [
-      { text: "$ npm run build", color: "green" },
-      { text: "Error: Module not found: '@/lib/missing'", color: "zinc" },
-      { text: "Build failed with 1 error", color: "zinc" },
-    ],
   }),
 };

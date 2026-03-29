@@ -23,7 +23,7 @@ export const config: PreviewLabConfig<Fixture> = {
   render: (fixture, Variant) => {
     const Comp = Variant
       ? (props: Fixture) => <Variant {...props} />
-      : (props: Fixture) => <ToolCallBlock {...props} delay={0} />;
+      : (props: Fixture) => <ToolCallBlock {...props} delay={300} />;
     return (
       <div className="rounded-lg bg-term-bg p-4 font-mono text-[13px]">
         <Comp {...fixture} />
@@ -31,8 +31,8 @@ export const config: PreviewLabConfig<Fixture> = {
     );
   },
   variants: [
-    { name: "Block", component: ((props: Fixture) => <ToolCallBlock {...props} delay={0} />) as ComponentType<Fixture>, description: "Full block with indented args and result." },
-    { name: "Inline", component: ((props: Fixture) => <ToolCallBlockInline {...props} delay={0} />) as ComponentType<Fixture>, description: "Compact single-line display." },
+    { name: "Block", component: ((props: Fixture) => <ToolCallBlock {...props} delay={300} />) as ComponentType<Fixture>, description: "Full block with indented args and result." },
+    { name: "Inline", component: ((props: Fixture) => <ToolCallBlockInline {...props} delay={300} />) as ComponentType<Fixture>, description: "Compact single-line display." },
   ],
   propsMeta,
 };
