@@ -22,10 +22,10 @@ export function ComponentCell({ name, description }: { name: string; description
   return (
     <Link
       href={`/preview/${name}`}
-      className="group relative block overflow-hidden transition-colors hover:bg-muted/30"
+      className="group relative flex flex-col h-full overflow-hidden transition-colors hover:bg-muted/30"
     >
       {/* Live preview */}
-      <div className="p-4 min-h-[120px] max-h-[180px] overflow-hidden pointer-events-none select-none">
+      <div className="flex-1 p-4 min-h-[120px] overflow-hidden pointer-events-none select-none">
         <div className="scale-[0.6] origin-top-left w-[167%]">
           {config && firstFixture ? (
             config.render(firstFixture)
