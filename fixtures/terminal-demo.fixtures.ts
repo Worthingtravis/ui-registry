@@ -11,8 +11,8 @@ export interface TerminalDemoFixture {
 
 const MCP_SETUP_SCRIPT: TerminalEntry[] = [
   { kind: "phase", label: "Setup", pauseAfter: 300 },
-  { kind: "input", text: "claude mcp add --transport http twitch https://your-app.vercel.app/api/mcp", prompt: "$", typingMs: 1200, pauseAfter: 400 },
-  { kind: "output", text: "✓ Added twitch (143 tools)", color: "green", pauseAfter: 600 },
+  { kind: "input", text: "claude mcp add --transport http laughingwhales https://laughingwhales.com/api/mcp", prompt: "$", typingMs: 1200, pauseAfter: 400 },
+  { kind: "output", text: "✓ Added laughingwhales (143 tools)", color: "green", pauseAfter: 600 },
   { kind: "input", text: "/mcp", prompt: "$", typingMs: 400, pauseAfter: 400 },
   { kind: "output", text: "✓ Connected as @your_channel", color: "green", pauseAfter: 600 },
   { kind: "phase", label: "Stream", pauseAfter: 300 },

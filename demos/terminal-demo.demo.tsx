@@ -10,7 +10,7 @@ import { useCopy } from "@/registry/new-york/use-copy/use-copy";
 import type { PreviewLabConfig, PropMeta } from "@/lib/types";
 
 const propsMeta: PropMeta[] = [
-  { name: "mcpEndpoint", type: "string", required: false, defaultValue: '"https://your-app.vercel.app/api/mcp"', description: "MCP endpoint URL used in the default entries" },
+  { name: "mcpEndpoint", type: "string", required: false, defaultValue: '"https://laughingwhales.com/api/mcp"', description: "MCP endpoint URL used in the default entries" },
   { name: "entries", type: "TerminalEntry[]", required: false, description: "Terminal entries to animate (overrides default)" },
 ];
 

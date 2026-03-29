@@ -1,6 +1,6 @@
 # @worthingtravis/ui-registry
 
-Animated terminal UI components for [shadcn/ui](https://ui.shadcn.com). Built for the [Twitch MCP](https://github.com/Worthingtravis/twitch-mcp) project.
+Animated terminal UI components for [shadcn/ui](https://ui.shadcn.com). Built for [laughingwhales.com](https://laughingwhales.com).
 
 ## Components
 
@@ -70,7 +70,7 @@ npx shadcn@latest add @worthingtravis/step-flow
 import { TerminalDemo } from "@/registry/new-york/terminal-demo/terminal-demo";
 
 export default function Page() {
-  return <TerminalDemo mcpEndpoint="https://your-app.vercel.app/api/mcp" />;
+  return <TerminalDemo mcpEndpoint="https://laughingwhales.com/api/mcp" />;
 }
 ```
 

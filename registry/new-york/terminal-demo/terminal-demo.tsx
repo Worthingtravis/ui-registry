@@ -27,8 +27,8 @@ export function buildScript(mcpEndpoint: string): TerminalEntry[] {
   return [
   // Setup
   { kind: "phase", label: "Setup", pauseAfter: 300 },
-  { kind: "input", text: `claude mcp add --transport http twitch ${mcpEndpoint}`, prompt: "$", typingMs: 1200, pauseAfter: 400 },
-  { kind: "output", text: "✓ Added twitch (143 tools)", color: "green", pauseAfter: 600 },
+  { kind: "input", text: `claude mcp add --transport http laughingwhales ${mcpEndpoint}`, prompt: "$", typingMs: 1200, pauseAfter: 400 },
+  { kind: "output", text: "✓ Added laughingwhales (143 tools)", color: "green", pauseAfter: 600 },
   { kind: "input", text: "/mcp", prompt: "$", typingMs: 400, pauseAfter: 400 },
   { kind: "output", text: "✓ Connected as @your_channel", color: "green", pauseAfter: 600 },
 
@@ -62,7 +62,7 @@ export interface TerminalDemoProps {
 }
 
 export function TerminalDemo({
-  mcpEndpoint = "https://your-app.vercel.app/api/mcp",
+  mcpEndpoint = "https://laughingwhales.com/api/mcp",
   entries,
 }: TerminalDemoProps) {
   const [sessionKey, setSessionKey] = useState(0);
