@@ -1,14 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
+import { MobileNav } from "./mobile-nav";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-14 items-center px-6">
+      <div className="mx-auto max-w-7xl flex h-14 items-center px-6">
+        <MobileNav />
         <Link href="/" className="flex items-center gap-2 mr-6">
           <span className="font-bold text-sm">UI Registry</span>
         </Link>
-        <nav className="flex items-center gap-4 text-sm">
+        <nav className="hidden sm:flex items-center gap-4 text-sm">
           <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">
             Components
           </Link>
