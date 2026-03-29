@@ -216,6 +216,19 @@
       ]
     },
     {
+      "name": "component-grid",
+      "type": "registry:component",
+      "title": "Component Grid",
+      "description": "Tic-tac-toe grid of component cards with scaled live preview thumbnails. Shared borders between cells for documentation-style layouts.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["navigation", "layout"],
+      "docs": "Pass `items` array with `id`, `title`, `description`, `href`, and optional `preview` ReactNode. Use `renderLink` for framework routing. Adjust `columns` (2/3/4), `previewScale`, and height constraints.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/component-grid/component-grid.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "grouped-sidebar",
       "type": "registry:component",
       "title": "Grouped Sidebar",

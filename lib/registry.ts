@@ -110,6 +110,13 @@ export const REGISTRY: RegistryEntry[] = [
 
   // --- Navigation ---
   {
+    name: "component-grid",
+    description: "Tic-tac-toe grid of component cards with scaled live preview thumbnails.",
+    lab: () => import("@/demos/component-grid.demo"),
+    tags: ["navigation", "layout", "grid", "preview"],
+    category: "Navigation",
+  },
+  {
     name: "grouped-sidebar",
     description: "Grouped sidebar navigation with responsive slide-over for mobile.",
     lab: () => import("@/demos/grouped-sidebar.demo"),
