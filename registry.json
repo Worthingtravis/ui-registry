@@ -177,6 +177,32 @@
       ]
     },
     {
+      "name": "avatar-picker",
+      "type": "registry:component",
+      "title": "Avatar Picker",
+      "description": "Avatar picker with DiceBear generated avatars (8 styles), paginated grid, custom seed input, and drag-and-drop file upload. Self-contained — bundles its own DiceBear URL builder.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive", "form"],
+      "docs": "Pass `currentSeed` (e.g. \"pixel-art:my-seed\") and wire up `onSelectGenerated`. Set `allowUpload` to false to hide the upload tab. Customize grid with `gridCount` and `columns`.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/avatar-picker/avatar-picker.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "profile-editor",
+      "type": "registry:component",
+      "title": "Profile Editor",
+      "description": "Profile editor card with avatar, status indicator, editable name/bio fields, and save/cancel actions. Supports compact (settings) and full (onboarding) layouts.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive", "form"],
+      "docs": "Pass `displayName`, `status`, and optional `avatarUrl`, `username`, `bio`. Set `editing` to enable editable fields and wire up `onDisplayNameChange`, `onSave`, etc. Use `compact` for inline settings layout.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/profile-editor/profile-editor.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "mini-terminal-demo",
       "type": "registry:block",
       "title": "Mini Terminal Demo",

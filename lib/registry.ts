@@ -57,6 +57,19 @@ export const REGISTRY: RegistryEntry[] = [
     tags: ["interactive", "flow", "stepper", "wizard", "primitive"],
   },
 
+  {
+    name: "avatar-picker",
+    description: "Avatar picker with DiceBear generated avatars, style pills, custom seed, and file upload.",
+    lab: () => import("@/demos/avatar-picker.demo"),
+    tags: ["avatar", "picker", "dicebear", "upload", "interactive", "primitive"],
+  },
+  {
+    name: "profile-editor",
+    description: "Profile editor card with avatar, status indicator, editable fields, and save/cancel actions.",
+    lab: () => import("@/demos/profile-editor.demo"),
+    tags: ["profile", "avatar", "editor", "form", "interactive", "primitive"],
+  },
+
   // --- Compositions (built from primitives above) ---
   {
     name: "mini-terminal-demo",
