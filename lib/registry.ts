@@ -108,6 +108,14 @@ export const REGISTRY: RegistryEntry[] = [
     category: "Animation",
   },
 
+  {
+    name: "section-heading",
+    description: "Heading with auto-generated anchor link and click-to-copy URL.",
+    lab: () => import("@/demos/section-heading.demo"),
+    tags: ["heading", "anchor", "navigation", "documentation"],
+    category: "Navigation",
+  },
+
   // --- Navigation ---
   {
     name: "component-grid",

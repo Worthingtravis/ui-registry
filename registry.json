@@ -216,6 +216,19 @@
       ]
     },
     {
+      "name": "section-heading",
+      "type": "registry:component",
+      "title": "Section Heading",
+      "description": "Heading with auto-generated anchor link. Click to copy the section URL. Anchor symbol appears on hover, positioned on whichever side has more space.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["navigation"],
+      "docs": "Pass `id` for the anchor slug and heading content as `children`. Use `as` to change the heading level (h1-h6). Set `scrollMargin` to match your sticky header height.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/section-heading/section-heading.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "component-grid",
       "type": "registry:component",
       "title": "Component Grid",

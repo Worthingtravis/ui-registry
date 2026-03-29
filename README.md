@@ -38,6 +38,7 @@ Reusable UI components for [shadcn/ui](https://ui.shadcn.com). Browse live previ
 
 | Name | Type | Description |
 |---|---|---|
+| `section-heading` | `registry:component` | Heading with auto-generated anchor link and click-to-copy URL |
 | `component-grid` | `registry:component` | Tic-tac-toe grid of component cards with scaled live previews |
 | `grouped-sidebar` | `registry:component` | Grouped sidebar navigation with responsive mobile slide-over |
 
@@ -69,6 +70,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-regist
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/flow-diagram.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/typing-text.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/scroll-prompt.json
+npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/section-heading.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/component-grid.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/grouped-sidebar.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/collapsible-group.json
