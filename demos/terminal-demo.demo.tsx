@@ -80,9 +80,9 @@ export const config: PreviewLabConfig<TerminalDemoFixture> = {
         <div className="grid gap-3">
           {ENTRY_CATALOG.map((entry) => (
             <div key={entry.kind} className="rounded-lg border border-border/40 overflow-hidden">
-              <div className="flex items-baseline gap-2 px-3 py-2 bg-muted/20 border-b border-border/30">
-                <code className="text-xs font-mono font-semibold text-primary">{`"${entry.kind}"`}</code>
-                <span className="text-[11px] text-muted-foreground">{entry.description}</span>
+              <div className="px-3 py-2 bg-muted/20 border-b border-border/30">
+                <p className="text-[11px] text-muted-foreground mb-1.5">{entry.description}</p>
+                <pre className="text-[11px] font-mono text-code-text leading-relaxed whitespace-pre-wrap">{JSON.stringify(entry.script[0], null, 2)}</pre>
               </div>
               <div className="bg-term-bg">
                 <TerminalDemo script={entry.script} />
