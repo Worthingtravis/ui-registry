@@ -268,6 +268,19 @@
       ]
     },
     {
+      "name": "feature-pill",
+      "type": "registry:component",
+      "title": "Feature Pill",
+      "description": "Small rounded pill badge for feature labels, tags, or categories. Supports static and clickable variants with multiple color options.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive"],
+      "docs": "Pass `label` for the text. Use `variant` for color (default, primary, success, destructive, outline). Set `href` + `renderLink` for clickable pills.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/feature-pill/feature-pill.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "info-tip",
       "type": "registry:component",
       "title": "Info Tip",

@@ -141,6 +141,13 @@ export const REGISTRY: RegistryEntry[] = [
 
   // --- Interactive ---
   {
+    name: "feature-pill",
+    description: "Rounded pill badge for feature labels, tags, or categories with variant colors.",
+    lab: () => import("@/demos/feature-pill.demo"),
+    tags: ["badge", "pill", "tag", "label"],
+    category: "Interactive",
+  },
+  {
     name: "info-tip",
     description: "Info icon with tooltip on hover (desktop) and tap toggle (mobile).",
     lab: () => import("@/demos/info-tip.demo"),
