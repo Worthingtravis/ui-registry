@@ -84,13 +84,13 @@ const INTERNAL_TAGS = new Set(["primitive", "composed"]);
 // PreviewLab
 // ---------------------------------------------------------------------------
 
-const TABS = ["preview", "source", "data", "props"] as const;
+const TABS = ["preview", "usage", "source", "props"] as const;
 type Tab = (typeof TABS)[number];
 
 const TAB_LABELS: Record<Tab, string> = {
   preview: "Preview",
+  usage: "Usage",
   source: "Source",
-  data: "Data",
   props: "Props",
 };
 
@@ -162,8 +162,8 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
   const availableTabs = useMemo(() =>
     TABS.filter((tab) => {
       if (tab === "preview") return true;
+      if (tab === "usage") return !!fixtureCode;
       if (tab === "source") return !!sourceCode;
-      if (tab === "data") return true;
       if (tab === "props") return propsMeta && propsMeta.length > 0;
       return false;
     }),
@@ -278,17 +278,9 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
           </div>
         )}
 
-        {activeTab === "data" && (
-          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden space-y-0">
-            <CodeHighlight
-              code={fixtureJson}
-              language="json"
-              label={`Props for "${activeFixtureKey}"`}
-              className="rounded-none border-0 border-b border-code-border/30 max-h-[400px] overflow-y-auto"
-            />
-            {fixtureCode && (
-              <CodeHighlight code={fixtureCode} language="tsx" label="Usage examples" className="rounded-none border-0" />
-            )}
+        {activeTab === "usage" && fixtureCode && (
+          <div className="border border-t-0 border-border rounded-b-lg overflow-hidden">
+            <CodeHighlight code={fixtureCode} language="tsx" />
           </div>
         )}
 
