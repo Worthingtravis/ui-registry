@@ -16,17 +16,26 @@ export const config: PreviewLabConfig<ScrollPromptFixture> = {
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="space-y-6">
-      <div className="rounded-lg border border-border/40 bg-muted/40 p-6 text-center">
-        <p className="text-sm text-muted-foreground">
-          The scroll prompt tracks whether a target element is in view.
-          In a real page it appears when the target scrolls out of the viewport.
-        </p>
-      </div>
-      <div className="flex justify-center">
+      {/* The prompt — visible because target is far below viewport */}
+      <div className="sticky top-4 z-10 flex justify-center">
         <ScrollPrompt {...fixture} />
       </div>
-      <div id={fixture.targetId} className="rounded-lg border border-border/40 bg-muted/50 p-4 text-center">
-        <p className="text-xs text-muted-foreground/70">Target section</p>
+
+      {/* Spacer content to push target off-screen */}
+      <div className="space-y-3">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={i} className="rounded-md border border-border/20 bg-muted/10 p-4">
+            <div className="h-2 w-3/4 rounded bg-muted/30" />
+            <div className="mt-2 h-2 w-1/2 rounded bg-muted/20" />
+          </div>
+        ))}
+      </div>
+
+      {/* Target — scroll here to dismiss the prompt */}
+      <div id={fixture.targetId} className="rounded-lg border border-primary/30 bg-primary/5 p-6 text-center">
+        <p className="text-sm font-medium text-primary/80">
+          Target section — prompt disappears when this is in view
+        </p>
       </div>
     </div>
   ),
