@@ -1,5 +1,3 @@
-"use client";
-
 import type { ToolCallBlockProps } from "@/registry/new-york/tool-call-block/tool-call-block";
 
 /**

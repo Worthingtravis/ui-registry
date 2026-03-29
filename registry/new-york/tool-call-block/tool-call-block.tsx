@@ -1,5 +1,3 @@
-"use client";
-
 export interface ToolCallBlockProps {
   /** Name of the tool being called */
   toolName: string;
