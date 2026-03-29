@@ -1,23 +1,29 @@
 import { REGISTRY, installCommand } from "@/lib/registry";
-import { ComponentCard } from "./component-card";
+import { ComponentCell } from "./component-card";
 
 export default function HomePage() {
   return (
-    <div className="max-w-3xl px-6 lg:px-8 py-10 space-y-10">
-      <div className="space-y-2">
+    <div className="py-10 space-y-10">
+      <div className="px-6 lg:px-8 space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Components</h1>
         <p className="text-muted-foreground text-base max-w-2xl">
           Beautifully designed components built with Tailwind CSS. Installable via the shadcn CLI.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Tic-tac-toe grid — shared borders between cells */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-border/40">
         {REGISTRY.map((entry) => (
-          <ComponentCard key={entry.name} name={entry.name} description={entry.description} />
+          <div
+            key={entry.name}
+            className="border-b border-r border-border/40 sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
+          >
+            <ComponentCell name={entry.name} description={entry.description} />
+          </div>
         ))}
       </div>
 
-      <div className="space-y-4 pt-4 border-t border-border/30">
+      <div className="px-6 lg:px-8 space-y-4 pt-4 border-t border-border/30">
         <h2 className="text-lg font-semibold">Installation</h2>
         <p className="text-sm text-muted-foreground">
           Install any component using the shadcn CLI:
