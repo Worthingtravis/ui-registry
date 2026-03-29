@@ -9,6 +9,15 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto max-w-7xl flex h-14 items-center px-6">
         <MobileNav />
+        <a
+          href="https://laughingwhales.com"
+          className="flex items-center gap-2 mr-4 text-xs font-black italic uppercase tracking-tighter text-foreground hover:text-purple-500 transition-all"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/ui/laughingwhales.png" alt="Laughing Whales" width={28} height={28} className="rounded-full" />
+          laughingwhales<span className="text-purple-500">.com</span>
+        </a>
+        <span className="h-4 w-px bg-border/60 mr-4 hidden sm:block" />
         <Link href="/" className="flex items-center gap-2 mr-6">
           <span className="font-bold text-sm">UI Registry</span>
         </Link>
