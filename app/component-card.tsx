@@ -25,7 +25,7 @@ export function ComponentCell({ name, description }: { name: string; description
       className="group relative flex flex-col h-full overflow-hidden transition-colors hover:bg-muted/30"
     >
       {/* Live preview */}
-      <div className="flex-1 p-4 min-h-[120px] max-h-[200px] overflow-hidden pointer-events-none select-none">
+      <div className="flex-1 min-h-[120px] max-h-[200px] overflow-hidden pointer-events-none select-none">
         <div className="scale-[0.6] origin-top-left w-[167%]">
           {config && firstFixture ? (
             config.render(firstFixture)
@@ -37,7 +37,7 @@ export function ComponentCell({ name, description }: { name: string; description
         </div>
       </div>
       {/* Label */}
-      <div className="px-4 pb-4">
+      <div className="px-3 pb-3">
         <h3 className="text-sm font-semibold group-hover:text-primary transition-colors">
           {kebabToTitle(name)}
         </h3>
