@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen">
         <ThemeProvider>
           <SiteHeader />
-          <div className="flex min-h-[calc(100vh-3.5rem)]">
+          <div className="mx-auto max-w-7xl flex min-h-[calc(100vh-3.5rem)]">
             <SidebarNav />
             <main className="flex-1 min-w-0">{children}</main>
           </div>
