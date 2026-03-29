@@ -1,5 +1,6 @@
-import { REGISTRY, installCommand } from "@/lib/registry";
+import { REGISTRY } from "@/lib/registry";
 import { ComponentCell } from "./component-card";
+import { InstallSection } from "./install-section";
 
 export default function HomePage() {
   return (
@@ -23,22 +24,8 @@ export default function HomePage() {
         ))}
       </div>
 
-      <div className="px-6 lg:px-8 py-6 sm:py-0 sm:pt-4 space-y-4 sm:border-t sm:border-border/30">
-        <h2 className="text-lg font-semibold">Installation</h2>
-        <div className="space-y-3">
-          <p className="text-sm text-muted-foreground">Install everything:</p>
-          <div className="relative rounded-lg border border-border/40 bg-code-bg overflow-hidden">
-            <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
-              <code>{REGISTRY.map((e) => installCommand(e.name)).join("\n")}</code>
-            </pre>
-          </div>
-          <p className="text-sm text-muted-foreground">Or pick one:</p>
-          <div className="relative rounded-lg border border-border/40 bg-code-bg overflow-hidden">
-            <pre className="p-4 overflow-x-auto text-[13px] leading-relaxed font-mono text-code-text">
-              <code>{installCommand("terminal-demo")}</code>
-            </pre>
-          </div>
-        </div>
+      <div className="px-6 lg:px-8 py-6 sm:py-0 sm:pt-4 sm:border-t sm:border-border/30">
+        <InstallSection />
       </div>
     </div>
   );
