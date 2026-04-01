@@ -46,8 +46,9 @@ export interface PerkPickerProps {
 
 const ALL_PERKS: Perk[] = perksData as Perk[];
 const PERK_BY_ID = new Map(ALL_PERKS.map((p) => [p.id, p]));
+const PERK_BY_NAME = new Map(ALL_PERKS.map((p) => [p.name.toLowerCase(), p]));
 
-export { ALL_PERKS, PERK_BY_ID, getPerkIconUrl };
+export { ALL_PERKS, PERK_BY_ID, PERK_BY_NAME, getPerkIconUrl };
 
 function getPerkIconUrl(perk: Perk): string {
   if (!perk.iconFile) return "";

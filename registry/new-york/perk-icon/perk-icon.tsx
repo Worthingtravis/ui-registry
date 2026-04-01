@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import type { Perk } from "@/registry/new-york/perk-picker/perk-picker";
-import { PERK_BY_ID, getPerkIconUrl } from "@/registry/new-york/perk-picker/perk-picker";
-import perksData from "@/registry/new-york/perk-picker/perks.json";
+import { PERK_BY_ID, PERK_BY_NAME, getPerkIconUrl } from "@/registry/new-york/perk-picker/perk-picker";
 
 // ---------------------------------------------------------------------------
-// Fallback lookup by name (for legacy data without perkId)
+// Perk lookup — prefers ID, falls back to name (for legacy data)
 // ---------------------------------------------------------------------------
-
-const ALL_PERKS = perksData as Perk[];
-const PERK_BY_NAME = new Map(ALL_PERKS.map((p) => [p.name.toLowerCase(), p]));
 
 function resolvePerk(perkId?: string | null, name?: string | null): Perk | null {
   if (perkId) {

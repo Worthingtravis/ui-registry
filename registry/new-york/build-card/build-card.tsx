@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { Plus } from "lucide-react";
 import { PerkPickerDialog } from "@/registry/new-york/perk-picker/perk-picker-dialog";
 import type { SelectedPerk } from "@/registry/new-york/perk-picker/perk-picker";
-import { PERK_BY_ID } from "@/registry/new-york/perk-picker/perk-picker";
 import { PerkIcon, resolvePerk } from "@/registry/new-york/perk-icon/perk-icon";
 
 // ---------------------------------------------------------------------------
@@ -44,17 +44,8 @@ export interface BuildCardProps {
 }
 
 // ---------------------------------------------------------------------------
-// Perk lookup — prefers perkId, falls back to name
-// ---------------------------------------------------------------------------
-
-function lookupPerkForItem(item: CreatorBuildItemData) {
-  return resolvePerk(item.perkId, item.label);
-}
-
-// ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
 
 function RoleBadge({ role }: { role: string }) {
   const isKiller = role.toLowerCase() === "killer";
@@ -135,10 +126,7 @@ function EmptySlot({ index, onClick }: { index: number; onClick?: () => void }) 
           "group-hover:border-primary/40 group-hover:bg-primary/5 group-hover:text-primary/50",
         )}
       >
-        <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-          <line x1="12" y1="5" x2="12" y2="19" />
-          <line x1="5" y1="12" x2="19" y2="12" />
-        </svg>
+        <Plus className="size-4" />
       </div>
       <span className="text-[11px] text-muted-foreground/30">
         Perk {index + 1}
@@ -164,21 +152,22 @@ function BuildEntry({
   const [pickerOpen, setPickerOpen] = useState(false);
 
   const perks = build.items.filter((i) => i.slot.startsWith("perk")).slice(0, 4);
-  const addons = build.items.filter((i) => i.slot.startsWith("addon")).slice(0, 2);
-  const otherItems = build.items.filter(
-    (i) => !i.slot.startsWith("perk") && !i.slot.startsWith("addon"),
-  );
+  const nonPerkItems = build.items.filter((i) => !i.slot.startsWith("perk"));
 
   const role = build.role?.toLowerCase() as "killer" | "survivor" | undefined;
   const validRole = role === "killer" || role === "survivor" ? role : undefined;
 
-  // Build initial value for the picker — look up real perk data by ID or name
-  const initialPickerValue: SelectedPerk[] = perks
-    .map((item, index) => {
-      const perk = lookupPerkForItem(item);
-      return perk ? { slot: index, perk } : null;
-    })
-    .filter((x): x is SelectedPerk => x !== null);
+  const initialPickerValue = useMemo<SelectedPerk[]>(
+    () =>
+      perks
+        .map((item, index) => {
+          const perk = resolvePerk(item.perkId, item.label);
+          return perk ? { slot: index, perk } : null;
+        })
+        .filter((x): x is SelectedPerk => x !== null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [build.items],
+  );
 
   const handleOpenPicker = useCallback(() => {
     if (isOwner) setPickerOpen(true);
@@ -267,13 +256,13 @@ function BuildEntry({
           </div>
 
           {/* Addons + other items (non-interactive, below perks) */}
-          {[...addons, ...otherItems].length > 0 && (
+          {nonPerkItems.length > 0 && (
             <div className="mt-4">
               <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">
                 Other
               </p>
               <div className="grid grid-cols-3 gap-3 @xs:grid-cols-4">
-                {[...addons, ...otherItems].map((item) => (
+                {nonPerkItems.map((item) => (
                   <ItemSlot key={item.id} item={item} />
                 ))}
               </div>
@@ -380,7 +369,6 @@ export function BuildCard({ builds, isOwner, onPerksChange, onAddBuild, classNam
     <div
       className={cn(
         "grid grid-cols-1 gap-6",
-        builds.length === 1 && "@sm:grid-cols-1",
         builds.length === 2 && "@sm:grid-cols-2",
         builds.length >= 3 && "@sm:grid-cols-2 @2xl:grid-cols-3",
         className,
