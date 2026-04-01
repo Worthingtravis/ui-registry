@@ -105,6 +105,13 @@ export const REGISTRY: RegistryEntry[] = [
     tags: ["architecture", "diagram", "flow"],
     category: "Progression",
   },
+  {
+    name: "welcome-banner",
+    description: "First-time welcome banner with greeting, progress bar, and step cards.",
+    lab: () => import("@/demos/welcome-banner.demo"),
+    tags: ["onboarding", "welcome", "banner", "progress"],
+    category: "Progression",
+  },
 
   // --- Animation ---
   {
@@ -173,6 +180,48 @@ export const REGISTRY: RegistryEntry[] = [
     description: "Click-to-copy wrapper with hover highlight and copy/check icon transition.",
     lab: () => import("@/demos/copyable-row.demo"),
     tags: ["interactive", "clipboard", "copy"],
+    category: "Interactive",
+  },
+  {
+    name: "social-card",
+    description: "Grid of social platform cards with inline SVG icons, platform name, description, and external link. Supports 8 named platforms with a generic link icon fallback.",
+    lab: () => import("@/demos/social-card.demo"),
+    tags: ["social", "links", "grid", "creator"],
+    category: "Interactive",
+  },
+  {
+    name: "support-card",
+    description: "Grid of support cards by type: creator-code (with copy button), donation, affiliate, and merch — each with distinct icons.",
+    lab: () => import("@/demos/support-card.demo"),
+    tags: ["support", "creator", "copy", "grid", "links"],
+    category: "Interactive",
+  },
+  {
+    name: "build-card",
+    description: "Character build cards with large character image, role badge, item slot grid with hover tooltips, and optional description.",
+    lab: () => import("@/demos/build-card.demo"),
+    tags: ["build", "loadout", "game", "creator", "grid"],
+    category: "Interactive",
+  },
+  {
+    name: "guide-tabs",
+    description: "Tabbed guide viewer with intro text, category tabs, and a responsive video card grid with 16:9 thumbnails and hover play overlay.",
+    lab: () => import("@/demos/guide-tabs.demo"),
+    tags: ["tabs", "video", "guides", "creator", "interactive"],
+    category: "Interactive",
+  },
+  {
+    name: "faq-accordion",
+    description: "FAQ list using native HTML details/summary for progressive enhancement, with animated chevron indicator.",
+    lab: () => import("@/demos/faq-accordion.demo"),
+    tags: ["faq", "accordion", "details", "creator"],
+    category: "Interactive",
+  },
+  {
+    name: "creator-card",
+    description: "Grid of recommended creator cards with rounded profile image (or initials fallback), display name, handle, description, and Twitch link.",
+    lab: () => import("@/demos/creator-card.demo"),
+    tags: ["creator", "profile", "recommendations", "grid"],
     category: "Interactive",
   },
 ];

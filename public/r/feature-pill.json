@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "feature-pill",
+  "title": "Feature Pill",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
+  "description": "Small rounded pill badge for feature labels, tags, or categories. Supports static and clickable variants with multiple color options.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/feature-pill/feature-pill.tsx",
+      "content": "import React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n// ---------------------------------------------------------------------------\n// Types\n// ---------------------------------------------------------------------------\n\n/** Visual variant for the pill. */\nexport type FeaturePillVariant = \"default\" | \"primary\" | \"success\" | \"destructive\" | \"outline\";\n\nexport interface FeaturePillProps {\n  /** Text label displayed inside the pill. */\n  label: string;\n  /** Navigation URL. When provided, the pill becomes clickable. */\n  href?: string;\n  /** Visual variant. */\n  variant?: FeaturePillVariant;\n  /** Render function for the link wrapper (e.g. Next.js Link). */\n  renderLink?: (props: { href: string; className: string; children: React.ReactNode }) => React.ReactNode;\n  /** Additional class names. */\n  className?: string;\n}\n\n// ---------------------------------------------------------------------------\n// Variant styles\n// ---------------------------------------------------------------------------\n\nconst VARIANT_CLASSES: Record<FeaturePillVariant, string> = {\n  default:\n    \"border-border bg-background text-muted-foreground hover:border-primary/30 hover:text-primary\",\n  primary:\n    \"border-primary/30 bg-primary/10 text-primary hover:border-primary/50 hover:bg-primary/15\",\n  success:\n    \"border-success/30 bg-success/10 text-success hover:border-success/50 hover:bg-success/15\",\n  destructive:\n    \"border-destructive/30 bg-destructive/10 text-destructive hover:border-destructive/50 hover:bg-destructive/15\",\n  outline:\n    \"border-border bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground\",\n};\n\n// ---------------------------------------------------------------------------\n// Component\n// ---------------------------------------------------------------------------\n\n/**\n * Small rounded pill badge for feature labels, tags, or categories.\n * Supports static display and clickable link variants.\n *\n * @example\n * ```tsx\n * <FeaturePill label=\"New\" variant=\"primary\" />\n * <FeaturePill label=\"Docs\" href=\"/docs\" />\n * <FeaturePill label=\"Beta\" variant=\"success\" />\n * ```\n */\nexport function FeaturePill({\n  label,\n  href,\n  variant = \"default\",\n  renderLink,\n  className,\n}: FeaturePillProps) {\n  const classes = cn(\n    \"inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider transition-colors\",\n    VARIANT_CLASSES[variant],\n    href && \"cursor-pointer\",\n    className,\n  );\n\n  if (href && renderLink) {\n    return <>{renderLink({ href, className: classes, children: label })}</>;\n  }\n\n  if (href) {\n    return (\n      <span role=\"link\" tabIndex={0} className={classes}>\n        {label}\n      </span>\n    );\n  }\n\n  return <span className={classes}>{label}</span>;\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "docs": "Pass `label` for the text. Use `variant` for color (default, primary, success, destructive, outline). Set `href` + `renderLink` for clickable pills.",
+  "categories": [
+    "interactive"
+  ],
+  "type": "registry:component"
+}

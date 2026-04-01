@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "user-badge",
+  "title": "User Badge",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
+  "description": "Compact user identity display with avatar (or initial fallback), display name, and optional username handle. Three sizes.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/user-badge/user-badge.tsx",
+      "content": "import React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n// ---------------------------------------------------------------------------\n// Types\n// ---------------------------------------------------------------------------\n\n/** Size variant for the badge. */\nexport type UserBadgeSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface UserBadgeProps {\n  /** Primary display name. */\n  name: string;\n  /** Username or handle shown in parentheses when different from name. */\n  username?: string;\n  /** Avatar image URL. Falls back to initial when empty. */\n  avatarUrl?: string | null;\n  /** Size of the avatar and text. */\n  size?: UserBadgeSize;\n  /** Additional class names for the root element. */\n  className?: string;\n}\n\n// ---------------------------------------------------------------------------\n// Size config\n// ---------------------------------------------------------------------------\n\nconst AVATAR_SIZES: Record<UserBadgeSize, string> = {\n  sm: \"size-5 text-[9px]\",\n  md: \"size-6 text-[10px]\",\n  lg: \"size-8 text-xs\",\n};\n\nconst TEXT_SIZES: Record<UserBadgeSize, string> = {\n  sm: \"text-xs\",\n  md: \"text-sm\",\n  lg: \"text-sm\",\n};\n\n// ---------------------------------------------------------------------------\n// Component\n// ---------------------------------------------------------------------------\n\n/**\n * Compact user identity display with avatar (or initial fallback),\n * display name, and optional username handle.\n *\n * @example\n * ```tsx\n * <UserBadge name=\"Alice Smith\" username=\"alice\" avatarUrl=\"/avatar.png\" />\n * <UserBadge name=\"Bob\" size=\"sm\" />\n * ```\n */\nexport function UserBadge({\n  name,\n  username,\n  avatarUrl,\n  size = \"md\",\n  className,\n}: UserBadgeProps) {\n  const initial = name.charAt(0).toUpperCase();\n  const showUsername = username && username !== name;\n\n  return (\n    <span className={cn(\"inline-flex items-center gap-1.5 min-w-0\", className)}>\n      {avatarUrl ? (\n        // eslint-disable-next-line @next/next/no-img-element\n        <img\n          src={avatarUrl}\n          alt=\"\"\n          className={cn(AVATAR_SIZES[size], \"rounded-full object-cover shrink-0\")}\n        />\n      ) : (\n        <span\n          className={cn(\n            AVATAR_SIZES[size],\n            \"rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center shrink-0\",\n          )}\n        >\n          {initial}\n        </span>\n      )}\n      <span className={cn(\"truncate\", TEXT_SIZES[size])}>{name}</span>\n      {showUsername && (\n        <span className=\"truncate text-muted-foreground text-xs\">\n          (@{username})\n        </span>\n      )}\n    </span>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "docs": "Pass `name` for the display name, optional `username` for the handle, and `avatarUrl` for the image. Falls back to colored initial when no image. Use `size` for sm/md/lg.",
+  "categories": [
+    "interactive"
+  ],
+  "type": "registry:component"
+}

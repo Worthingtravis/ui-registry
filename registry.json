@@ -203,6 +203,19 @@
       ]
     },
     {
+      "name": "welcome-banner",
+      "type": "registry:component",
+      "title": "Welcome Banner",
+      "description": "First-time welcome banner with greeting, tagline, progress bar, and dismissible step cards for onboarding flows.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["onboarding", "progression"],
+      "docs": "Pass `greeting`, `tagline`, and `steps` array with `title`, `description`, `ctaLabel`, `ctaHref`, and `done`. Use `onDismiss` for dismiss behavior. Provide `renderLink` for framework-specific routing.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/welcome-banner/welcome-banner.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "user-badge",
       "type": "registry:component",
       "title": "User Badge",

@@ -163,6 +163,19 @@
       ]
     },
     {
+      "name": "onboarding-checklist",
+      "type": "registry:component",
+      "title": "Onboarding Checklist",
+      "description": "Linear onboarding checklist with numbered steps, completion indicators, progress bar, step locking, and dismissible success state.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive", "navigation"],
+      "docs": "Pass `steps` array with `label`, `complete`, `href`, and optional `locked`. Use `onDismiss` for dismiss behavior. Provide `renderLink` for framework-specific routing.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/onboarding-checklist/onboarding-checklist.tsx", "type": "registry:component" }
+      ]
+    },
+    {
       "name": "step-flow",
       "type": "registry:component",
       "title": "Step Flow",
@@ -174,6 +187,149 @@
       "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
       "files": [
         { "path": "registry/new-york/step-flow/step-flow.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "flow-diagram",
+      "type": "registry:component",
+      "title": "Flow Diagram",
+      "description": "Animated architecture flow diagram with nodes connected by bezier-curved edges. Features draw-on animation, flowing particles, hover highlighting, dot grid background, and radial glow. All data-driven via props.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["animation", "interactive"],
+      "docs": "Pass arrays of `nodes`, `edges`, and `positions` (percentage coordinates). Use `wideNodeId` to make one node wider. Set `live: true` on a node for a pulsing indicator. Edges support `optional` (dashed) and `bidirectional` (reverse particles).",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge", "motion"],
+      "files": [
+        { "path": "registry/new-york/flow-diagram/flow-diagram.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "welcome-banner",
+      "type": "registry:component",
+      "title": "Welcome Banner",
+      "description": "First-time welcome banner with greeting, tagline, progress bar, and dismissible step cards for onboarding flows.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["onboarding", "progression"],
+      "docs": "Pass `greeting`, `tagline`, and `steps` array with `title`, `description`, `ctaLabel`, `ctaHref`, and `done`. Use `onDismiss` for dismiss behavior. Provide `renderLink` for framework-specific routing.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/welcome-banner/welcome-banner.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "user-badge",
+      "type": "registry:component",
+      "title": "User Badge",
+      "description": "Compact user identity display with avatar (or initial fallback), display name, and optional username handle. Three sizes.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive"],
+      "docs": "Pass `name` for the display name, optional `username` for the handle, and `avatarUrl` for the image. Falls back to colored initial when no image. Use `size` for sm/md/lg.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/user-badge/user-badge.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "avatar-picker",
+      "type": "registry:component",
+      "title": "Avatar Picker",
+      "description": "Avatar picker with DiceBear generated avatars (8 styles), paginated grid, custom seed input, and drag-and-drop file upload. Self-contained — bundles its own DiceBear URL builder.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive", "form"],
+      "docs": "Pass `currentSeed` (e.g. \"pixel-art:my-seed\") and wire up `onSelectGenerated`. Set `allowUpload` to false to hide the upload tab. Customize grid with `gridCount` and `columns`.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/avatar-picker/avatar-picker.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "profile-editor",
+      "type": "registry:component",
+      "title": "Profile Editor",
+      "description": "Profile editor card with avatar, status indicator, editable name/bio fields, and save/cancel actions. Supports compact (settings) and full (onboarding) layouts.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive", "form"],
+      "docs": "Pass `displayName`, `status`, and optional `avatarUrl`, `username`, `bio`. Set `editing` to enable editable fields and wire up `onDisplayNameChange`, `onSave`, etc. Use `compact` for inline settings layout.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/profile-editor/profile-editor.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "section-heading",
+      "type": "registry:component",
+      "title": "Section Heading",
+      "description": "Heading with auto-generated anchor link. Click to copy the section URL. Anchor symbol appears on hover, positioned on whichever side has more space.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["navigation"],
+      "docs": "Pass `id` for the anchor slug and heading content as `children`. Use `as` to change the heading level (h1-h6). Set `scrollMargin` to match your sticky header height.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/section-heading/section-heading.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "component-grid",
+      "type": "registry:component",
+      "title": "Component Grid",
+      "description": "Tic-tac-toe grid of component cards with scaled live preview thumbnails. Shared borders between cells for documentation-style layouts.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["navigation", "layout"],
+      "docs": "Pass `items` array with `id`, `title`, `description`, `href`, and optional `preview` ReactNode. Use `renderLink` for framework routing. Adjust `columns` (2/3/4), `previewScale`, and height constraints.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/component-grid/component-grid.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "grouped-sidebar",
+      "type": "registry:component",
+      "title": "Grouped Sidebar",
+      "description": "Grouped sidebar navigation with responsive mobile slide-over. Renders items under group headings with active state highlighting and custom link rendering.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["navigation", "layout"],
+      "docs": "Pass `groups` array with `title` and `items`. Use `activeId` for highlight state. Provide `renderLink` for framework-specific routing (e.g. Next.js Link). Set `mobileBreakpoint` to control responsive behavior.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/grouped-sidebar/grouped-sidebar.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "feature-pill",
+      "type": "registry:component",
+      "title": "Feature Pill",
+      "description": "Small rounded pill badge for feature labels, tags, or categories. Supports static and clickable variants with multiple color options.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive"],
+      "docs": "Pass `label` for the text. Use `variant` for color (default, primary, success, destructive, outline). Set `href` + `renderLink` for clickable pills.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/feature-pill/feature-pill.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "info-tip",
+      "type": "registry:component",
+      "title": "Info Tip",
+      "description": "Info icon with tooltip on hover (desktop) and tap toggle (mobile). Self-contained — no external tooltip library needed.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive"],
+      "docs": "Wrap tooltip content in `<InfoTip>`. Set `side` for placement, `maxWidth` for width constraint, `iconSize` for the icon.",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/info-tip/info-tip.tsx", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "collapsible-group",
+      "type": "registry:component",
+      "title": "Collapsible Group",
+      "description": "Accordion-style collapsible section with smooth grid-row animation. Uses CSS grid-template-rows for height transitions without DOM measurement.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": ["interactive"],
+      "docs": "Pass `open` boolean and `onToggle` callback for controlled expand/collapse. Set `active` for highlight state, `dimmed` for disabled. Customize animation with `duration` (ms).",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        { "path": "registry/new-york/collapsible-group/collapsible-group.tsx", "type": "registry:component" }
       ]
     },
     {

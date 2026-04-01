@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "info-tip",
+  "title": "Info Tip",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
+  "description": "Info icon with tooltip on hover (desktop) and tap toggle (mobile). Self-contained — no external tooltip library needed.",
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/info-tip/info-tip.tsx",
+      "content": "\"use client\";\n\nimport React, { useState, useRef, useEffect, useCallback } from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { Info } from \"lucide-react\";\n\n// ---------------------------------------------------------------------------\n// Types\n// ---------------------------------------------------------------------------\n\n/** Placement of the tooltip relative to the trigger. */\nexport type InfoTipSide = \"top\" | \"bottom\" | \"left\" | \"right\";\n\nexport interface InfoTipProps {\n  /** Content shown in the tooltip/popover. */\n  children: React.ReactNode;\n  /** Preferred placement of the tooltip. */\n  side?: InfoTipSide;\n  /** Maximum width of the tooltip in pixels. */\n  maxWidth?: number;\n  /** Size of the info icon in pixels. */\n  iconSize?: number;\n  /** Additional class names for the trigger button. */\n  className?: string;\n}\n\n// ---------------------------------------------------------------------------\n// Placement styles\n// ---------------------------------------------------------------------------\n\nconst SIDE_CLASSES: Record<InfoTipSide, string> = {\n  top: \"bottom-full left-1/2 -translate-x-1/2 mb-2\",\n  bottom: \"top-full left-1/2 -translate-x-1/2 mt-2\",\n  left: \"right-full top-1/2 -translate-y-1/2 mr-2\",\n  right: \"left-full top-1/2 -translate-y-1/2 ml-2\",\n};\n\n// ---------------------------------------------------------------------------\n// Component\n// ---------------------------------------------------------------------------\n\n/**\n * Info icon that shows a tooltip on hover (desktop) and toggles on tap\n * (mobile). Self-contained — no external tooltip/popover library needed.\n *\n * @example\n * ```tsx\n * <InfoTip>\n *   This field is required for API authentication.\n * </InfoTip>\n *\n * <InfoTip side=\"right\" maxWidth={300}>\n *   <p>Supports rich content like <strong>bold</strong> text.</p>\n * </InfoTip>\n * ```\n */\nexport function InfoTip({\n  children,\n  side = \"top\",\n  maxWidth = 256,\n  iconSize = 14,\n  className,\n}: InfoTipProps) {\n  const [open, setOpen] = useState(false);\n  const ref = useRef<HTMLDivElement>(null);\n\n  // Close on outside click (mobile tap-to-toggle)\n  const handleClickOutside = useCallback((e: MouseEvent) => {\n    if (ref.current && !ref.current.contains(e.target as Node)) {\n      setOpen(false);\n    }\n  }, []);\n\n  useEffect(() => {\n    if (open) {\n      document.addEventListener(\"mousedown\", handleClickOutside);\n      return () => document.removeEventListener(\"mousedown\", handleClickOutside);\n    }\n  }, [open, handleClickOutside]);\n\n  return (\n    <div ref={ref} className=\"relative inline-flex\">\n      <button\n        type=\"button\"\n        onClick={() => setOpen((o) => !o)}\n        onMouseEnter={() => setOpen(true)}\n        onMouseLeave={() => setOpen(false)}\n        className={cn(\n          \"inline-flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors\",\n          \"focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-full\",\n          className,\n        )}\n        aria-label=\"More info\"\n      >\n        <Info style={{ width: iconSize, height: iconSize }} />\n      </button>\n\n      {open && (\n        <div\n          role=\"tooltip\"\n          className={cn(\n            \"absolute z-50 rounded-lg border border-border bg-card px-3 py-2 text-xs text-card-foreground shadow-md\",\n            \"animate-in fade-in-0 zoom-in-95 duration-150\",\n            SIDE_CLASSES[side],\n          )}\n          style={{ maxWidth }}\n        >\n          {children}\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "docs": "Wrap tooltip content in `<InfoTip>`. Set `side` for placement, `maxWidth` for width constraint, `iconSize` for the icon.",
+  "categories": [
+    "interactive"
+  ],
+  "type": "registry:component"
+}

@@ -28,6 +28,7 @@ Reusable UI components for [shadcn/ui](https://ui.shadcn.com). Browse live previ
 | `onboarding-checklist` | `registry:component` | Linear onboarding checklist with progress bar and step locking |
 | `step-flow` | `registry:component` | Interactive multi-step flow visualizer with navigation |
 | `flow-diagram` | `registry:component` | Animated architecture diagram with bezier edges, particles, and auto-layout |
+| `welcome-banner` | `registry:component` | First-time welcome banner with greeting, progress bar, and step cards |
 
 ### Animation
 
@@ -83,6 +84,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-regist
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/info-tip.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/collapsible-group.json
 npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/copyable-row.json
+npx shadcn@latest add https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/welcome-banner.json
 ```
 
 ### With namespace (one-time setup)
@@ -106,6 +108,7 @@ npx shadcn@latest add @worthingtravis/terminal-demo
 npx shadcn@latest add @worthingtravis/flow-diagram
 npx shadcn@latest add @worthingtravis/avatar-picker
 npx shadcn@latest add @worthingtravis/step-flow
+npx shadcn@latest add @worthingtravis/welcome-banner
 # etc.
 ```
 

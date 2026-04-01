@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section-heading",
+  "title": "Section Heading",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
+  "description": "Heading with auto-generated anchor link. Click to copy the section URL. Anchor symbol appears on hover, positioned on whichever side has more space.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/section-heading/section-heading.tsx",
+      "content": "\"use client\";\n\nimport React, { useRef, useState, useEffect, useCallback } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n// ---------------------------------------------------------------------------\n// Types\n// ---------------------------------------------------------------------------\n\n/** HTML heading level (h1–h6). */\nexport type HeadingLevel = \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\";\n\nexport interface SectionHeadingProps {\n  /** Anchor ID for the heading (auto-slugified). */\n  id: string;\n  /** Heading content. */\n  children: React.ReactNode;\n  /** HTML heading level. */\n  as?: HeadingLevel;\n  /** Scroll margin offset in pixels (matches sticky header height). */\n  scrollMargin?: number;\n  /** Additional class names. */\n  className?: string;\n}\n\n// ---------------------------------------------------------------------------\n// Helpers\n// ---------------------------------------------------------------------------\n\n/** Convert an ID string to a URL-safe slug. */\nfunction toSlug(id: string): string {\n  return id\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, \"-\")\n    .replace(/^-|-$/g, \"\");\n}\n\n// ---------------------------------------------------------------------------\n// Component\n// ---------------------------------------------------------------------------\n\n/**\n * Section heading with auto-generated anchor link. Click the heading to\n * copy the section URL to clipboard and update the URL hash. The anchor\n * symbol (#) appears on hover, positioned on whichever side has more space.\n *\n * @example\n * ```tsx\n * <SectionHeading id=\"installation\">\n *   Installation\n * </SectionHeading>\n *\n * <SectionHeading id=\"api-reference\" as=\"h3\" scrollMargin={80}>\n *   API Reference\n * </SectionHeading>\n * ```\n */\nexport function SectionHeading({\n  id,\n  children,\n  as: Tag = \"h2\",\n  scrollMargin = 96,\n  className,\n}: SectionHeadingProps) {\n  const slug = toSlug(id);\n  const ref = useRef<HTMLHeadingElement>(null);\n  const [anchorSide, setAnchorSide] = useState<\"left\" | \"right\">(\"left\");\n  const [copied, setCopied] = useState(false);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el) return;\n\n    function update() {\n      if (!el) return;\n      const rect = el.getBoundingClientRect();\n      const spaceRight = window.innerWidth - rect.right;\n      setAnchorSide(spaceRight > rect.left ? \"right\" : \"left\");\n    }\n\n    update();\n    window.addEventListener(\"resize\", update);\n    return () => window.removeEventListener(\"resize\", update);\n  }, []);\n\n  const copyLink = useCallback(async () => {\n    const url = `${window.location.origin}${window.location.pathname}#${slug}`;\n    await navigator.clipboard.writeText(url);\n    window.history.replaceState(null, \"\", `#${slug}`);\n    setCopied(true);\n    setTimeout(() => setCopied(false), 1500);\n  }, [slug]);\n\n  return (\n    <Tag\n      ref={ref}\n      id={slug}\n      className={cn(\"group relative cursor-pointer\", className)}\n      style={{ scrollMarginTop: scrollMargin }}\n      onClick={copyLink}\n    >\n      <span\n        className={cn(\n          \"absolute top-1/2 -translate-y-1/2 transition-colors select-none\",\n          copied\n            ? \"text-primary\"\n            : \"text-muted-foreground/0 group-hover:text-muted-foreground/40\",\n          anchorSide === \"right\" ? \"-right-6\" : \"-left-6\",\n        )}\n        aria-hidden=\"true\"\n      >\n        {copied ? \"\\u2713\" : \"#\"}\n      </span>\n      {children}\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "docs": "Pass `id` for the anchor slug and heading content as `children`. Use `as` to change the heading level (h1-h6). Set `scrollMargin` to match your sticky header height.",
+  "categories": [
+    "navigation"
+  ],
+  "type": "registry:component"
+}

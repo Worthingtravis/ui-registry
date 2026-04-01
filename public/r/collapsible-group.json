@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible-group",
+  "title": "Collapsible Group",
+  "author": "worthingtravis <https://github.com/Worthingtravis>",
+  "description": "Accordion-style collapsible section with smooth grid-row animation. Uses CSS grid-template-rows for height transitions without DOM measurement.",
+  "dependencies": [
+    "lucide-react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/collapsible-group/collapsible-group.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { ChevronRight } from \"lucide-react\";\n\n// ---------------------------------------------------------------------------\n// Types\n// ---------------------------------------------------------------------------\n\nexport interface CollapsibleGroupProps {\n  /** Heading text for the collapsible section. */\n  label: string;\n  /** Optional icon rendered before the label. */\n  icon?: React.ReactNode;\n  /** Whether the group is in an \"active\" highlight state. */\n  active?: boolean;\n  /** Whether the group content is expanded. */\n  open: boolean;\n  /** Called when the header is clicked to toggle open/closed. */\n  onToggle: () => void;\n  /** Content revealed when the group is open. */\n  children: React.ReactNode;\n  /** Render the header and content in a dimmed state. */\n  dimmed?: boolean;\n  /** Duration of the expand/collapse animation in milliseconds. */\n  duration?: number;\n  /** Additional class names for the root container. */\n  className?: string;\n}\n\n// ---------------------------------------------------------------------------\n// Component\n// ---------------------------------------------------------------------------\n\n/**\n * Accordion-style collapsible section with smooth grid-row animation.\n *\n * Uses `grid-template-rows: 0fr → 1fr` for a clean height transition\n * without measuring DOM height. Supports active/dimmed states,\n * optional icon, and configurable animation duration.\n *\n * @example\n * ```tsx\n * const [open, setOpen] = useState(false);\n *\n * <CollapsibleGroup\n *   label=\"Advanced Settings\"\n *   open={open}\n *   onToggle={() => setOpen(!open)}\n * >\n *   <div className=\"py-2 space-y-2\">\n *     <p>Hidden content here</p>\n *   </div>\n * </CollapsibleGroup>\n * ```\n */\nexport function CollapsibleGroup({\n  label,\n  icon,\n  active = false,\n  open,\n  onToggle,\n  children,\n  dimmed = false,\n  duration = 200,\n  className,\n}: CollapsibleGroupProps) {\n  return (\n    <div className={className}>\n      <button\n        type=\"button\"\n        onClick={onToggle}\n        aria-expanded={open}\n        className={cn(\n          \"flex w-full items-center gap-1.5 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors\",\n          dimmed\n            ? \"text-muted-foreground/50 hover:text-muted-foreground\"\n            : active\n              ? \"text-foreground\"\n              : \"text-muted-foreground hover:text-foreground\",\n        )}\n      >\n        <ChevronRight\n          className={cn(\n            \"size-3 shrink-0 transition-transform\",\n            open && \"rotate-90\",\n            active && \"text-primary\",\n          )}\n          strokeWidth={3}\n        />\n        {icon && (\n          <div\n            className={cn(\n              \"shrink-0 transition-colors\",\n              active ? \"text-primary\" : \"text-muted-foreground/60\",\n            )}\n          >\n            {icon}\n          </div>\n        )}\n        <span className=\"truncate\">{label}</span>\n      </button>\n      <div\n        aria-hidden={!open}\n        className={cn(\n          \"grid transition-[grid-template-rows]\",\n          open ? \"grid-rows-[1fr]\" : \"grid-rows-[0fr] invisible\",\n        )}\n        style={{ transitionDuration: `${duration}ms` }}\n      >\n        <div className=\"overflow-hidden\">{children}</div>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "docs": "Pass `open` boolean and `onToggle` callback for controlled expand/collapse. Set `active` for highlight state, `dimmed` for disabled. Customize animation with `duration` (ms).",
+  "categories": [
+    "interactive"
+  ],
+  "type": "registry:component"
+}
