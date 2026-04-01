@@ -9,20 +9,30 @@
       "title": "useCopy",
       "description": "Clipboard copy hook with copied-state feedback timer.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["hooks"],
+      "categories": [
+        "hooks"
+      ],
       "files": [
-        { "path": "registry/new-york/use-copy/use-copy.ts", "type": "registry:hook" }
+        {
+          "path": "registry/new-york/use-copy/use-copy.ts",
+          "type": "registry:hook"
+        }
       ]
     },
     {
       "name": "terminal-lib",
       "type": "registry:lib",
       "title": "Terminal Utilities",
-      "description": "Shared terminal utilities — timing computation and color class map.",
+      "description": "Shared terminal utilities \u2014 timing computation and color class map.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["terminal"],
+      "categories": [
+        "terminal"
+      ],
       "files": [
-        { "path": "registry/new-york/terminal-lib/terminal.ts", "type": "registry:lib" }
+        {
+          "path": "registry/new-york/terminal-lib/terminal.ts",
+          "type": "registry:lib"
+        }
       ]
     },
     {
@@ -31,7 +41,9 @@
       "title": "Terminal Chrome",
       "description": "macOS-style terminal window shell with traffic light buttons and optional title bar.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["terminal"],
+      "categories": [
+        "terminal"
+      ],
       "docs": "Wrap any content in a macOS-style terminal window. Supports title, left/right header slots, and custom className.\n\nThis component requires the terminal color palette CSS variables. They are automatically added to your CSS when you install this component.",
       "cssVars": {
         "theme": {
@@ -54,7 +66,10 @@
         }
       },
       "files": [
-        { "path": "registry/new-york/terminal-chrome/terminal-chrome.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/terminal-chrome/terminal-chrome.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -63,29 +78,53 @@
       "title": "Typing Text",
       "description": "CSS-only typewriter animation with blinking cursor.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["animation", "terminal"],
-      "docs": "Pure CSS typewriter effect — no JS animation loop. Set `text`, `delay`, and `duration` props to control timing.",
+      "categories": [
+        "animation",
+        "terminal"
+      ],
+      "docs": "Pure CSS typewriter effect \u2014 no JS animation loop. Set `text`, `delay`, and `duration` props to control timing.",
       "files": [
-        { "path": "registry/new-york/typing-text/typing-text.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/typing-text/typing-text.tsx",
+          "type": "registry:component"
+        }
       ],
       "css": {
         "@keyframes typing": {
-          "from": { "width": "0" },
-          "to": { "width": "var(--chars)" }
+          "from": {
+            "width": "0"
+          },
+          "to": {
+            "width": "var(--chars)"
+          }
         },
         "@keyframes fade-in": {
-          "from": { "opacity": "0", "transform": "translateY(4px)" },
-          "to": { "opacity": "1", "transform": "translateY(0)" }
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(4px)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
         },
         "@keyframes blink": {
-          "0%, 100%": { "border-color": "currentColor" },
-          "50%": { "border-color": "transparent" }
+          "0%, 100%": {
+            "border-color": "currentColor"
+          },
+          "50%": {
+            "border-color": "transparent"
+          }
         },
         "@keyframes cursor-hide": {
-          "to": { "border-color": "transparent" }
+          "to": {
+            "border-color": "transparent"
+          }
         },
         "@keyframes typing-settle": {
-          "to": { "width": "fit-content" }
+          "to": {
+            "width": "fit-content"
+          }
         },
         ".scrollbar-none": {
           "scrollbar-width": "none",
@@ -102,16 +141,30 @@
       "title": "Tool Call Block",
       "description": "MCP tool call display with name, arguments, and result.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["terminal", "ai"],
-      "docs": "Displays a tool call in the Claude Code style — tool name, arguments, and result. Set `delay` to 0 for instant render or use a ms value for fade-in animation.",
-      "registryDependencies": ["terminal-chrome"],
+      "categories": [
+        "terminal",
+        "ai"
+      ],
+      "docs": "Displays a tool call in the Claude Code style \u2014 tool name, arguments, and result. Set `delay` to 0 for instant render or use a ms value for fade-in animation.",
+      "registryDependencies": [
+        "terminal-chrome"
+      ],
       "files": [
-        { "path": "registry/new-york/tool-call-block/tool-call-block.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/tool-call-block/tool-call-block.tsx",
+          "type": "registry:component"
+        }
       ],
       "css": {
         "@keyframes fade-in": {
-          "from": { "opacity": "0", "transform": "translateY(4px)" },
-          "to": { "opacity": "1", "transform": "translateY(0)" }
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(4px)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
         }
       }
     },
@@ -119,17 +172,31 @@
       "name": "tool-call-block-inline",
       "type": "registry:component",
       "title": "Tool Call Block Inline",
-      "description": "Inline single-line variant of ToolCallBlock — compact tool call display.",
+      "description": "Inline single-line variant of ToolCallBlock \u2014 compact tool call display.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["terminal", "ai"],
-      "registryDependencies": ["tool-call-block"],
+      "categories": [
+        "terminal",
+        "ai"
+      ],
+      "registryDependencies": [
+        "tool-call-block"
+      ],
       "files": [
-        { "path": "registry/new-york/tool-call-block-inline/tool-call-block-inline.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/tool-call-block-inline/tool-call-block-inline.tsx",
+          "type": "registry:component"
+        }
       ],
       "css": {
         "@keyframes fade-in": {
-          "from": { "opacity": "0", "transform": "translateY(4px)" },
-          "to": { "opacity": "1", "transform": "translateY(0)" }
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(4px)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
         }
       }
     },
@@ -139,16 +206,23 @@
       "title": "Copyable Row",
       "description": "Click-to-copy wrapper with hover highlight and copy/check icon transition.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive"],
+      "categories": [
+        "interactive"
+      ],
       "docs": "Wrap any content to make it click-to-copy. Shows a subtle hover highlight and animated copy/check icon.",
-      "registryDependencies": ["use-copy"],
+      "registryDependencies": [
+        "use-copy"
+      ],
       "cssVars": {
         "theme": {
           "--color-success": "oklch(0.696 0.17 162.48)"
         }
       },
       "files": [
-        { "path": "registry/new-york/copyable-row/copyable-row.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/copyable-row/copyable-row.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -157,9 +231,14 @@
       "title": "Scroll Prompt",
       "description": "Animated scroll-down prompt that appears when a target section is out of view.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["navigation"],
+      "categories": [
+        "navigation"
+      ],
       "files": [
-        { "path": "registry/new-york/scroll-prompt/scroll-prompt.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/scroll-prompt/scroll-prompt.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -168,11 +247,21 @@
       "title": "Onboarding Checklist",
       "description": "Linear onboarding checklist with numbered steps, completion indicators, progress bar, step locking, and dismissible success state.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive", "navigation"],
+      "categories": [
+        "interactive",
+        "navigation"
+      ],
       "docs": "Pass `steps` array with `label`, `complete`, `href`, and optional `locked`. Use `onDismiss` for dismiss behavior. Provide `renderLink` for framework-specific routing.",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/onboarding-checklist/onboarding-checklist.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/onboarding-checklist/onboarding-checklist.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -181,12 +270,24 @@
       "title": "Step Flow",
       "description": "Interactive multi-step flow visualizer with clickable step buttons, arrow connectors, detail panel, and back/next navigation. Great for checkout flows, onboarding wizards, or any sequential process.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive", "navigation"],
+      "categories": [
+        "interactive",
+        "navigation"
+      ],
       "docs": "Pass an array of `steps` with `label` and `description`. Use `initialStep` to set the starting position and `onStepChange` for controlled navigation.",
-      "registryDependencies": ["button"],
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/step-flow/step-flow.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/step-flow/step-flow.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -195,11 +296,22 @@
       "title": "Flow Diagram",
       "description": "Animated architecture flow diagram with nodes connected by bezier-curved edges. Features draw-on animation, flowing particles, hover highlighting, dot grid background, and radial glow. All data-driven via props.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["animation", "interactive"],
+      "categories": [
+        "animation",
+        "interactive"
+      ],
       "docs": "Pass arrays of `nodes`, `edges`, and `positions` (percentage coordinates). Use `wideNodeId` to make one node wider. Set `live: true` on a node for a pulsing indicator. Edges support `optional` (dashed) and `bidirectional` (reverse particles).",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge", "motion"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge",
+        "motion"
+      ],
       "files": [
-        { "path": "registry/new-york/flow-diagram/flow-diagram.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/flow-diagram/flow-diagram.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -208,11 +320,21 @@
       "title": "Welcome Banner",
       "description": "First-time welcome banner with greeting, tagline, progress bar, and dismissible step cards for onboarding flows.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["onboarding", "progression"],
+      "categories": [
+        "onboarding",
+        "progression"
+      ],
       "docs": "Pass `greeting`, `tagline`, and `steps` array with `title`, `description`, `ctaLabel`, `ctaHref`, and `done`. Use `onDismiss` for dismiss behavior. Provide `renderLink` for framework-specific routing.",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/welcome-banner/welcome-banner.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/welcome-banner/welcome-banner.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -221,24 +343,42 @@
       "title": "User Badge",
       "description": "Compact user identity display with avatar (or initial fallback), display name, and optional username handle. Three sizes.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive"],
+      "categories": [
+        "interactive"
+      ],
       "docs": "Pass `name` for the display name, optional `username` for the handle, and `avatarUrl` for the image. Falls back to colored initial when no image. Use `size` for sm/md/lg.",
-      "dependencies": ["clsx", "tailwind-merge"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/user-badge/user-badge.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/user-badge/user-badge.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
       "name": "avatar-picker",
       "type": "registry:component",
       "title": "Avatar Picker",
-      "description": "Avatar picker with DiceBear generated avatars (8 styles), paginated grid, custom seed input, and drag-and-drop file upload. Self-contained — bundles its own DiceBear URL builder.",
+      "description": "Avatar picker with DiceBear generated avatars (8 styles), paginated grid, custom seed input, and drag-and-drop file upload. Self-contained \u2014 bundles its own DiceBear URL builder.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive", "form"],
+      "categories": [
+        "interactive",
+        "form"
+      ],
       "docs": "Pass `currentSeed` (e.g. \"pixel-art:my-seed\") and wire up `onSelectGenerated`. Set `allowUpload` to false to hide the upload tab. Customize grid with `gridCount` and `columns`.",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/avatar-picker/avatar-picker.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/avatar-picker/avatar-picker.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -247,11 +387,21 @@
       "title": "Profile Editor",
       "description": "Profile editor card with avatar, status indicator, editable name/bio fields, and save/cancel actions. Supports compact (settings) and full (onboarding) layouts.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive", "form"],
+      "categories": [
+        "interactive",
+        "form"
+      ],
       "docs": "Pass `displayName`, `status`, and optional `avatarUrl`, `username`, `bio`. Set `editing` to enable editable fields and wire up `onDisplayNameChange`, `onSave`, etc. Use `compact` for inline settings layout.",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/profile-editor/profile-editor.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/profile-editor/profile-editor.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -260,11 +410,19 @@
       "title": "Section Heading",
       "description": "Heading with auto-generated anchor link. Click to copy the section URL. Anchor symbol appears on hover, positioned on whichever side has more space.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["navigation"],
+      "categories": [
+        "navigation"
+      ],
       "docs": "Pass `id` for the anchor slug and heading content as `children`. Use `as` to change the heading level (h1-h6). Set `scrollMargin` to match your sticky header height.",
-      "dependencies": ["clsx", "tailwind-merge"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/section-heading/section-heading.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/section-heading/section-heading.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -273,11 +431,21 @@
       "title": "Component Grid",
       "description": "Tic-tac-toe grid of component cards with scaled live preview thumbnails. Shared borders between cells for documentation-style layouts.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["navigation", "layout"],
+      "categories": [
+        "navigation",
+        "layout"
+      ],
       "docs": "Pass `items` array with `id`, `title`, `description`, `href`, and optional `preview` ReactNode. Use `renderLink` for framework routing. Adjust `columns` (2/3/4), `previewScale`, and height constraints.",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/component-grid/component-grid.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/component-grid/component-grid.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -286,11 +454,21 @@
       "title": "Grouped Sidebar",
       "description": "Grouped sidebar navigation with responsive mobile slide-over. Renders items under group headings with active state highlighting and custom link rendering.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["navigation", "layout"],
+      "categories": [
+        "navigation",
+        "layout"
+      ],
       "docs": "Pass `groups` array with `title` and `items`. Use `activeId` for highlight state. Provide `renderLink` for framework-specific routing (e.g. Next.js Link). Set `mobileBreakpoint` to control responsive behavior.",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/grouped-sidebar/grouped-sidebar.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/grouped-sidebar/grouped-sidebar.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -299,24 +477,41 @@
       "title": "Feature Pill",
       "description": "Small rounded pill badge for feature labels, tags, or categories. Supports static and clickable variants with multiple color options.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive"],
+      "categories": [
+        "interactive"
+      ],
       "docs": "Pass `label` for the text. Use `variant` for color (default, primary, success, destructive, outline). Set `href` + `renderLink` for clickable pills.",
-      "dependencies": ["clsx", "tailwind-merge"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/feature-pill/feature-pill.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/feature-pill/feature-pill.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
       "name": "info-tip",
       "type": "registry:component",
       "title": "Info Tip",
-      "description": "Info icon with tooltip on hover (desktop) and tap toggle (mobile). Self-contained — no external tooltip library needed.",
+      "description": "Info icon with tooltip on hover (desktop) and tap toggle (mobile). Self-contained \u2014 no external tooltip library needed.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive"],
+      "categories": [
+        "interactive"
+      ],
       "docs": "Wrap tooltip content in `<InfoTip>`. Set `side` for placement, `maxWidth` for width constraint, `iconSize` for the icon.",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/info-tip/info-tip.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/info-tip/info-tip.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -325,11 +520,20 @@
       "title": "Collapsible Group",
       "description": "Accordion-style collapsible section with smooth grid-row animation. Uses CSS grid-template-rows for height transitions without DOM measurement.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["interactive"],
+      "categories": [
+        "interactive"
+      ],
       "docs": "Pass `open` boolean and `onToggle` callback for controlled expand/collapse. Set `active` for highlight state, `dimmed` for disabled. Customize animation with `duration` (ms).",
-      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
-        { "path": "registry/new-york/collapsible-group/collapsible-group.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/collapsible-group/collapsible-group.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -338,16 +542,33 @@
       "title": "Mini Terminal Demo",
       "description": "Compact animated terminal card with copy-to-clipboard, pin support, and stagger delay. Exports DemoEntry and DemoScenario types.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["terminal", "animation"],
+      "categories": [
+        "terminal",
+        "animation"
+      ],
       "docs": "Define a `DemoScenario` with entries (input, output, tool-call, claude) and pass it as the `scenario` prop. Set `play` to true to start the animation.",
-      "registryDependencies": ["terminal-chrome", "tool-call-block", "terminal-lib", "use-copy"],
+      "registryDependencies": [
+        "terminal-chrome",
+        "tool-call-block",
+        "terminal-lib",
+        "use-copy"
+      ],
       "files": [
-        { "path": "registry/new-york/mini-terminal-demo/mini-terminal-demo.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/mini-terminal-demo/mini-terminal-demo.tsx",
+          "type": "registry:component"
+        }
       ],
       "css": {
         "@keyframes fade-in": {
-          "from": { "opacity": "0", "transform": "translateY(4px)" },
-          "to": { "opacity": "1", "transform": "translateY(0)" }
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(4px)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
         }
       }
     },
@@ -357,26 +578,210 @@
       "title": "Terminal Demo",
       "description": "Full animated terminal session with typing, tool calls, thinking indicators, memory blocks, and copyable rows.",
       "author": "worthingtravis <https://github.com/Worthingtravis>",
-      "categories": ["terminal", "animation", "ai"],
+      "categories": [
+        "terminal",
+        "animation",
+        "ai"
+      ],
       "docs": "Pass a `script` array of `TerminalEntry` items. Each entry has a `kind`: `input` (typed command), `output` (static line), `tool-call` (MCP call with args/result), `phase` (section divider), `thinking` (animated dots), `claude` (AI response), `ask` (option list), `memory` (saved block). All entries share `pauseAfter` (ms delay before next).",
-      "registryDependencies": ["terminal-chrome", "typing-text", "tool-call-block", "copyable-row", "terminal-lib"],
+      "registryDependencies": [
+        "terminal-chrome",
+        "typing-text",
+        "tool-call-block",
+        "copyable-row",
+        "terminal-lib"
+      ],
       "files": [
-        { "path": "registry/new-york/terminal-demo/terminal-demo.tsx", "type": "registry:component" }
+        {
+          "path": "registry/new-york/terminal-demo/terminal-demo.tsx",
+          "type": "registry:component"
+        }
       ],
       "css": {
         "@keyframes fade-in": {
-          "from": { "opacity": "0", "transform": "translateY(4px)" },
-          "to": { "opacity": "1", "transform": "translateY(0)" }
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(4px)"
+          },
+          "to": {
+            "opacity": "1",
+            "transform": "translateY(0)"
+          }
         },
         "@keyframes thinking-dot": {
-          "0%, 20%": { "opacity": "0.2" },
-          "50%": { "opacity": "1" },
-          "80%, 100%": { "opacity": "0.2" }
+          "0%, 20%": {
+            "opacity": "0.2"
+          },
+          "50%": {
+            "opacity": "1"
+          },
+          "80%, 100%": {
+            "opacity": "0.2"
+          }
         },
         "@keyframes thinking-hide": {
-          "to": { "display": "none", "height": "0", "margin": "0", "padding": "0", "overflow": "hidden" }
+          "to": {
+            "display": "none",
+            "height": "0",
+            "margin": "0",
+            "padding": "0",
+            "overflow": "hidden"
+          }
         }
       }
+    },
+    {
+      "name": "page-builder-lib",
+      "type": "registry:lib",
+      "title": "Page Builder Lib",
+      "description": "Pure TypeScript types and layout operations for the page builder system.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": [
+        "layout"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/page-builder-lib/types.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/new-york/page-builder-lib/layout-operations.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/new-york/page-builder-lib/index.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-layout-editor",
+      "type": "registry:hook",
+      "title": "useLayoutEditor",
+      "description": "Edit mode state machine for the page builder.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": [
+        "layout",
+        "hooks"
+      ],
+      "registryDependencies": [
+        "page-builder-lib"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/use-layout-editor/use-layout-editor.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-page-layout",
+      "type": "registry:hook",
+      "title": "usePageLayout",
+      "description": "Fetch and persist a custom page layout with abstract persistence callbacks.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": [
+        "layout",
+        "hooks"
+      ],
+      "registryDependencies": [
+        "page-builder-lib"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/use-page-layout/use-page-layout.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "layout-editor-bar",
+      "type": "registry:component",
+      "title": "Layout Editor Bar",
+      "description": "Floating sidebar toolbar for the page layout editor.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": [
+        "layout",
+        "interactive"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/layout-editor-bar/layout-editor-bar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "layout-grid-editor",
+      "type": "registry:component",
+      "title": "Layout Grid Editor",
+      "description": "Visual grid editor for page layouts with click-to-swap sections.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": [
+        "layout",
+        "interactive"
+      ],
+      "registryDependencies": [
+        "page-builder-lib"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/layout-grid-editor/layout-grid-editor.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sortable-section",
+      "type": "registry:component",
+      "title": "Sortable Section",
+      "description": "Per-section editor wrapper with controls overlay.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": [
+        "layout",
+        "interactive"
+      ],
+      "registryDependencies": [
+        "page-builder-lib"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/sortable-section/sortable-section.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "page-renderer",
+      "type": "registry:component",
+      "title": "Page Renderer",
+      "description": "Live page renderer applying a PageLayout to a SectionRegistry.",
+      "author": "worthingtravis <https://github.com/Worthingtravis>",
+      "categories": [
+        "layout"
+      ],
+      "registryDependencies": [
+        "page-builder-lib",
+        "sortable-section"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/page-renderer/page-renderer.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
