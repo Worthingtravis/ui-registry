@@ -120,56 +120,68 @@ export function GuideTabs({ categories, introText, isOwner, className }: GuideTa
   const activeCategory = categories.find((c) => c.id === activeId) ?? categories[0]!;
 
   return (
-    <div className={cn("@container", className)}>
-      <div className="flex flex-col gap-5">
-        {introText && (
+    <div className={cn("flex flex-col gap-5", className)}>
+      {introText && (
           <p className="text-sm leading-relaxed text-muted-foreground">{introText}</p>
         )}
 
-        {/* Tab bar */}
-        <div className="flex flex-wrap gap-1.5 border-b border-border pb-0" role="tablist" aria-label="Guide categories">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              role="tab"
-              aria-selected={cat.id === activeCategory.id}
-              onClick={() => setActiveId(cat.id)}
-              className={cn(
-                "relative min-h-[44px] rounded-t-lg px-4 py-2 text-sm font-medium transition-all duration-150",
-                cat.id === activeCategory.id
-                  ? "text-foreground after:absolute after:inset-x-0 after:bottom-[-1px] after:h-px after:bg-foreground"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {cat.title}
-              {cat.links.length > 0 && (
-                <span className="ml-2 inline-flex min-w-[1.25rem] items-center justify-center rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
-                  {cat.links.length}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
+        {/* Tab bar + content — vertical layout at narrow widths, horizontal at wider */}
+        <div className="flex flex-col @sm:flex-col">
+          {/* Tabs — vertical list when narrow, horizontal bar when wide */}
+          <div
+            className="flex flex-col gap-0.5 border-b border-border @sm:flex-row @sm:flex-wrap @sm:gap-1.5 @sm:border-b @sm:pb-0"
+            role="tablist"
+            aria-label="Guide categories"
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                role="tab"
+                aria-selected={cat.id === activeCategory.id}
+                onClick={() => setActiveId(cat.id)}
+                className={cn(
+                  "relative flex items-center gap-2 text-left text-sm font-medium transition-all duration-150",
+                  // Vertical (narrow): full-width buttons with left border indicator
+                  "min-h-[40px] rounded-lg px-3 py-2",
+                  "@sm:min-h-[44px] @sm:rounded-t-lg @sm:rounded-b-none @sm:px-4",
+                  cat.id === activeCategory.id
+                    ? cn(
+                        "bg-muted/50 text-foreground",
+                        // Horizontal underline at wider sizes
+                        "@sm:bg-transparent @sm:after:absolute @sm:after:inset-x-0 @sm:after:bottom-[-1px] @sm:after:h-px @sm:after:bg-foreground",
+                      )
+                    : "text-muted-foreground hover:bg-muted/30 hover:text-foreground @sm:hover:bg-transparent",
+                )}
+              >
+                <span className="truncate">{cat.title}</span>
+                {cat.links.length > 0 && (
+                  <span className="inline-flex min-w-[1.25rem] shrink-0 items-center justify-center rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
+                    {cat.links.length}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
 
-        {/* Active tab content */}
-        <div role="tabpanel">
-          {activeCategory.description && (
-            <p className="mb-4 text-xs text-muted-foreground">{activeCategory.description}</p>
-          )}
-          {activeCategory.links.length === 0 ? (
-            <p className="py-6 text-center text-sm text-muted-foreground/60">
-              No guides in this category yet.
-            </p>
-          ) : (
-            <div className="grid grid-cols-1 gap-4 @md:grid-cols-2 @xl:grid-cols-3">
-              {activeCategory.links.map((link) => (
-                <VideoCard key={link.id} link={link} />
-              ))}
-            </div>
-          )}
+          {/* Active tab content */}
+          <div role="tabpanel" className="mt-5">
+            {activeCategory.description && (
+              <p className="mb-4 text-xs text-muted-foreground">{activeCategory.description}</p>
+            )}
+            {activeCategory.links.length === 0 ? (
+              <p className="py-6 text-center text-sm text-muted-foreground/60">
+                No guides in this category yet.
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 gap-4 @md:grid-cols-2 @xl:grid-cols-3">
+                {activeCategory.links.map((link) => (
+                  <VideoCard key={link.id} link={link} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
     </div>
   );
 }

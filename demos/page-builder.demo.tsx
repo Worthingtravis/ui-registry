@@ -14,6 +14,7 @@ import { LayoutGridEditor } from "@/registry/new-york/layout-grid-editor/layout-
 import { PageRenderer } from "@/registry/new-york/page-renderer/page-renderer";
 import {
   DEFAULT_DEMO_LAYOUT,
+  DEFAULT_DATA_CONTEXT,
   DEMO_PREVIEW_FIXTURES,
   buildDemoRegistry,
 } from "@/fixtures/page-builder.fixtures";
@@ -147,7 +148,7 @@ function PageBuilderDemo({ fixture }: { fixture: DemoFixture }) {
         customizeLabel="Customize"
       />
 
-      <div className="pr-16 space-y-6">
+      <div className={cn("space-y-6", editor.editMode && "pr-16")}>
         {/* Grid editor panel (edit mode, not previewing) */}
         {editor.editMode && !editor.previewing && (
           <LayoutGridEditor
@@ -163,7 +164,7 @@ function PageBuilderDemo({ fixture }: { fixture: DemoFixture }) {
         <PageRenderer
           layout={activeLayout}
           registry={registry}
-          dataContext={{}}
+          dataContext={DEFAULT_DATA_CONTEXT}
           editMode={editor.editMode && !editor.previewing}
           previewMode={editor.editMode && editor.previewing}
           onLayoutChange={handleLayoutChange}

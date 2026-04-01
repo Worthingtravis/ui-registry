@@ -38,7 +38,7 @@ function CreatorCodeCard({ link }: { link: CreatorSupportData }) {
   const [copied, copy] = useCopy();
 
   return (
-    <div className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm">
+    <div className="flex flex-col gap-2.5 rounded-xl border border-border/60 bg-card/50 p-3 backdrop-blur-sm @xs:gap-3 @xs:p-4">
       <div className="flex items-center gap-2.5">
         <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
           <svg className="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -66,10 +66,10 @@ function CreatorCodeCard({ link }: { link: CreatorSupportData }) {
           )}
           aria-label={`Copy creator code ${link.code}`}
         >
-          <span className="font-mono text-base font-bold tracking-wider text-foreground">
+          <span className="truncate font-mono text-sm font-bold tracking-wider text-foreground @xs:text-base">
             {link.code}
           </span>
-          <span className="relative ml-3 flex size-5 shrink-0 items-center justify-center">
+          <span className="relative ml-2 flex size-5 shrink-0 items-center justify-center @xs:ml-3">
             <svg
               className="absolute inset-0 text-muted-foreground transition-all duration-200"
               style={{ opacity: copied ? 0 : 1, transform: copied ? "scale(0.5)" : "scale(1)" }}
@@ -226,15 +226,13 @@ export function SupportCard({ links, isOwner, className }: SupportCardProps) {
   }
 
   return (
-    <div className={cn("@container", className)}>
-      <div className="grid grid-cols-1 gap-4 @sm:grid-cols-2 @lg:grid-cols-3">
-        {links.map((link) => {
-          if (link.type === "creator-code") return <CreatorCodeCard key={link.id} link={link} />;
-          if (link.type === "donation") return <DonationCard key={link.id} link={link} />;
-          if (link.type === "merch") return <MerchCard key={link.id} link={link} />;
-          return <AffiliateCard key={link.id} link={link} />;
-        })}
-      </div>
+    <div className={cn("grid grid-cols-1 gap-4 @sm:grid-cols-2 @lg:grid-cols-3", className)}>
+      {links.map((link) => {
+        if (link.type === "creator-code") return <CreatorCodeCard key={link.id} link={link} />;
+        if (link.type === "donation") return <DonationCard key={link.id} link={link} />;
+        if (link.type === "merch") return <MerchCard key={link.id} link={link} />;
+        return <AffiliateCard key={link.id} link={link} />;
+      })}
     </div>
   );
 }

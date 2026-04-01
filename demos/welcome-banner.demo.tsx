@@ -56,7 +56,7 @@ function InteractiveDemo({ fixture }: { fixture: Fixture }) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-3">
+    <div className="w-full space-y-3">
       <WelcomeBanner
         {...fixture}
         steps={steps}

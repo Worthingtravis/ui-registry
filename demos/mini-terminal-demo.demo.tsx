@@ -33,7 +33,7 @@ export const config: PreviewLabConfig<MiniTerminalDemoFixture> = {
   usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
-    <div className="max-w-lg">
+    <div className="w-full">
       <MiniTerminalDemo
         scenario={fixture.scenario}
         play={fixture.play}

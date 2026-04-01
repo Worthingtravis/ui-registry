@@ -48,9 +48,8 @@ export function FaqAccordion({ items, isOwner, className }: FaqAccordionProps) {
   }
 
   return (
-    <div className={cn("@container", className)}>
-      <div className="divide-y divide-border overflow-hidden rounded-xl border border-border/60">
-        {items.map((item) => (
+    <div className={cn("divide-y divide-border overflow-hidden rounded-xl border border-border/60", className)}>
+      {items.map((item) => (
           <details
             key={item.id}
             className="group bg-card/50 backdrop-blur-sm transition-colors duration-150 open:bg-card"
@@ -82,7 +81,6 @@ export function FaqAccordion({ items, isOwner, className }: FaqAccordionProps) {
             </div>
           </details>
         ))}
-      </div>
     </div>
   );
 }

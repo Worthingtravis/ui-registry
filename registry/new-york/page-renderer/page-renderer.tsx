@@ -181,7 +181,7 @@ const ColumnSections = React.memo(function ColumnSections({
           | undefined;
 
         const sectionContent = (
-          <section id={config.sectionKey} className="space-y-8">
+          <section id={config.sectionKey} className="@container space-y-8">
             {/* Section header — skipped when component renders its own */}
             {!definition.hideHeader && (effectiveVisible || editMode) && (
               <SectionHeader label={definition.label} />
@@ -418,12 +418,12 @@ export function PageRenderer({
             style={{ "--split": splitTemplate } as React.CSSProperties}
           >
             {/* Left column */}
-            <div className="min-w-0">
+            <div className="@container/col-left min-w-0">
               <ColumnSections configs={row.left} column="left" {...sharedColumnProps} />
             </div>
 
             {/* Right column */}
-            <div className="min-w-0">
+            <div className="@container/col-right min-w-0">
               <ColumnSections configs={row.right} column="right" {...sharedColumnProps} />
             </div>
           </div>

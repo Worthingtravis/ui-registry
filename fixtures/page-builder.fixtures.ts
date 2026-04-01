@@ -1,36 +1,33 @@
 /**
- * Generic fixtures for the page-builder demo.
+ * Page-builder demo fixtures.
  *
- * Uses simple placeholder section components so the demo has no external
- * dependencies. Real apps replace these with their own SectionRegistry.
+ * Combines generic placeholder sections (hero, stats-bar, footer) with real
+ * creator section components (social, support, builds, guides, faq, creators).
  */
 import React from "react";
 import type { PageLayout, SectionRegistry } from "@/registry/new-york/page-builder-lib/types";
 
-// ---------------------------------------------------------------------------
-// Placeholder section components
-// ---------------------------------------------------------------------------
-// These are defined as plain functions returning JSX-compatible objects.
-// In a real app you'd import your own section components here.
+// -- Creator components -------------------------------------------------------
+import { SocialCard } from "@/registry/new-york/social-card/social-card";
+import type { CreatorSocialData } from "@/registry/new-york/social-card/social-card";
+import { SupportCard } from "@/registry/new-york/support-card/support-card";
+import type { CreatorSupportData } from "@/registry/new-york/support-card/support-card";
+import { BuildCard } from "@/registry/new-york/build-card/build-card";
+import type { CreatorBuildData } from "@/registry/new-york/build-card/build-card";
+import { GuideTabs } from "@/registry/new-york/guide-tabs/guide-tabs";
+import type { CreatorGuideCategoryData } from "@/registry/new-york/guide-tabs/guide-tabs";
+import { FaqAccordion } from "@/registry/new-york/faq-accordion/faq-accordion";
+import type { CreatorFaqData } from "@/registry/new-york/faq-accordion/faq-accordion";
+import { CreatorCard } from "@/registry/new-york/creator-card/creator-card";
+import type { CreatorRecommendationData } from "@/registry/new-york/creator-card/creator-card";
 
-function makePlaceholder(label: string, color: string) {
-  // Return a function component that renders a colored placeholder box
-  const Component = () => null;
-  Component.displayName = label;
-  // We'll render these via the demo component which has access to React
-  return { label, color, Component };
-}
-
-export const PLACEHOLDER_SECTIONS = {
-  header: makePlaceholder("Header", "bg-blue-500/10 border-blue-500/20"),
-  "content-a": makePlaceholder("Content A", "bg-green-500/10 border-green-500/20"),
-  "content-b": makePlaceholder("Content B", "bg-purple-500/10 border-purple-500/20"),
-  sidebar: makePlaceholder("Sidebar", "bg-orange-500/10 border-orange-500/20"),
-  footer: makePlaceholder("Footer", "bg-rose-500/10 border-rose-500/20"),
-  hero: makePlaceholder("Hero", "bg-cyan-500/10 border-cyan-500/20"),
-  "stats-bar": makePlaceholder("Stats Bar", "bg-yellow-500/10 border-yellow-500/20"),
-  feed: makePlaceholder("Feed", "bg-indigo-500/10 border-indigo-500/20"),
-} as const;
+// -- Fixture data -------------------------------------------------------------
+import { ALL_FIXTURES as SOCIAL_FX } from "@/fixtures/social-card.fixtures";
+import { ALL_FIXTURES as SUPPORT_FX } from "@/fixtures/support-card.fixtures";
+import { ALL_FIXTURES as BUILD_FX } from "@/fixtures/build-card.fixtures";
+import { ALL_FIXTURES as GUIDE_FX } from "@/fixtures/guide-tabs.fixtures";
+import { ALL_FIXTURES as FAQ_FX } from "@/fixtures/faq-accordion.fixtures";
+import { ALL_FIXTURES as CREATOR_FX } from "@/fixtures/creator-card.fixtures";
 
 // ---------------------------------------------------------------------------
 // Default layout
@@ -40,28 +37,40 @@ export const DEFAULT_DEMO_LAYOUT: PageLayout = {
   schemaVersion: 1,
   pageKey: "demo",
   sections: [
-    { sectionKey: "hero",       variant: "default", visible: true,  column: "full" },
-    { sectionKey: "stats-bar",  variant: "default", visible: true,  column: "full" },
-    { sectionKey: "content-a",  variant: "default", visible: true,  column: "left",  split: "2-1" },
-    { sectionKey: "sidebar",    variant: "compact",  visible: true,  column: "right", split: "2-1" },
-    { sectionKey: "content-b",  variant: "default", visible: true,  column: "left",  split: "1-1" },
-    { sectionKey: "feed",       variant: "default", visible: true,  column: "right", split: "1-1" },
-    { sectionKey: "footer",     variant: "default", visible: true,  column: "full" },
+    { sectionKey: "hero",      variant: "default", visible: true, column: "full" },
+    { sectionKey: "stats-bar", variant: "default", visible: true, column: "full" },
+    { sectionKey: "social",    variant: "default", visible: true, column: "left",  split: "2-1" },
+    { sectionKey: "support",   variant: "default", visible: true, column: "right", split: "2-1" },
+    { sectionKey: "builds",    variant: "default", visible: true, column: "full" },
+    { sectionKey: "guides",    variant: "default", visible: true, column: "left",  split: "2-1" },
+    { sectionKey: "faq",       variant: "default", visible: true, column: "right", split: "2-1" },
+    { sectionKey: "creators",  variant: "default", visible: true, column: "full" },
+    { sectionKey: "footer",    variant: "default", visible: true, column: "full" },
   ],
 };
 
 // ---------------------------------------------------------------------------
-// Section registry (generic, no real data dependencies)
+// Default data context — real fixture data for each section
 // ---------------------------------------------------------------------------
 
-/**
- * Build a generic section registry using React component factories.
- * Call this from the demo component where React is available.
- */
+export const DEFAULT_DATA_CONTEXT: Record<string, Record<string, unknown>> = {
+  social:   SOCIAL_FX["Public"] as unknown as Record<string, unknown>,
+  support:  SUPPORT_FX["Public"] as unknown as Record<string, unknown>,
+  builds:   BUILD_FX["Public (2 builds)"] as unknown as Record<string, unknown>,
+  guides:   GUIDE_FX["Public (3 categories)"] as unknown as Record<string, unknown>,
+  faq:      FAQ_FX["Public"] as unknown as Record<string, unknown>,
+  creators: CREATOR_FX["Public"] as unknown as Record<string, unknown>,
+};
+
+// ---------------------------------------------------------------------------
+// Section registry
+// ---------------------------------------------------------------------------
+
 export function buildDemoRegistry(
   PlaceholderCard: (props: { label: string; color: string; description?: string }) => React.ReactElement | null,
 ): SectionRegistry {
-  function section(
+  // Helper for placeholder sections (hero, stats-bar, footer)
+  function placeholder(
     key: string,
     label: string,
     color: string,
@@ -86,7 +95,6 @@ export function buildDemoRegistry(
           description: String(props["description"] ?? "Compact layout"),
         }),
     };
-
     return {
       key,
       label,
@@ -103,54 +111,179 @@ export function buildDemoRegistry(
   }
 
   return {
-    "hero": section("hero", "Hero", "bg-cyan-500/10 border-cyan-500/20", "full", {
+    // -- Placeholder sections -------------------------------------------------
+    hero: placeholder("hero", "Hero", "bg-cyan-500/10 border-cyan-500/20", "full", {
       allowedColumns: ["full"],
       alwaysVisible: true,
       sizeHint: "md",
     }),
-    "stats-bar": section("stats-bar", "Stats Bar", "bg-yellow-500/10 border-yellow-500/20", "full", {
+    "stats-bar": placeholder("stats-bar", "Stats Bar", "bg-yellow-500/10 border-yellow-500/20", "full", {
       allowedColumns: ["full"],
       sizeHint: "sm",
     }),
-    "content-a": section("content-a", "Content A", "bg-green-500/10 border-green-500/20", "left", {
-      sizeHint: "lg",
-    }),
-    "content-b": section("content-b", "Content B", "bg-purple-500/10 border-purple-500/20", "left", {
-      sizeHint: "md",
-    }),
-    "sidebar": section("sidebar", "Sidebar", "bg-orange-500/10 border-orange-500/20", "right", {
-      sizeHint: "md",
-    }),
-    "feed": section("feed", "Feed", "bg-indigo-500/10 border-indigo-500/20", "right", {
-      sizeHint: "lg",
-    }),
-    "footer": section("footer", "Footer", "bg-rose-500/10 border-rose-500/20", "full", {
+    footer: placeholder("footer", "Footer", "bg-rose-500/10 border-rose-500/20", "full", {
       allowedColumns: ["full"],
       sizeHint: "sm",
     }),
+
+    // -- Real creator sections ------------------------------------------------
+    social: {
+      key: "social",
+      label: "Social Links",
+      column: "left",
+      variants: {
+        default: (props: Record<string, unknown>) =>
+          React.createElement(SocialCard, {
+            socials: (props.socials ?? []) as CreatorSocialData[],
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+        compact: (props: Record<string, unknown>) =>
+          React.createElement(SocialCard, {
+            socials: ((props.socials ?? []) as CreatorSocialData[]).slice(0, 3),
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+      },
+      defaultVariant: "default",
+      variantMeta: {
+        default: { label: "Full", sizeHint: "md" },
+        compact: { label: "Top 3", sizeHint: "sm" },
+      },
+    },
+    support: {
+      key: "support",
+      label: "Support Links",
+      column: "right",
+      variants: {
+        default: (props: Record<string, unknown>) =>
+          React.createElement(SupportCard, {
+            links: (props.links ?? []) as CreatorSupportData[],
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+        compact: (props: Record<string, unknown>) =>
+          React.createElement(SupportCard, {
+            links: ((props.links ?? []) as CreatorSupportData[]).slice(0, 3),
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+      },
+      defaultVariant: "default",
+      variantMeta: {
+        default: { label: "Full", sizeHint: "md" },
+        compact: { label: "Top 3", sizeHint: "sm" },
+      },
+    },
+    builds: {
+      key: "builds",
+      label: "Builds",
+      column: "full",
+      variants: {
+        default: (props: Record<string, unknown>) =>
+          React.createElement(BuildCard, {
+            builds: (props.builds ?? []) as CreatorBuildData[],
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+        compact: (props: Record<string, unknown>) =>
+          React.createElement(BuildCard, {
+            builds: ((props.builds ?? []) as CreatorBuildData[]).slice(0, 1),
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+      },
+      defaultVariant: "default",
+      variantMeta: {
+        default: { label: "All Builds", sizeHint: "lg" },
+        compact: { label: "Featured Build", sizeHint: "md" },
+      },
+    },
+    guides: {
+      key: "guides",
+      label: "Guide Tabs",
+      column: "left",
+      variants: {
+        default: (props: Record<string, unknown>) =>
+          React.createElement(GuideTabs, {
+            categories: (props.categories ?? []) as CreatorGuideCategoryData[],
+            introText: (props.introText ?? null) as string | null,
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+        compact: (props: Record<string, unknown>) =>
+          React.createElement(GuideTabs, {
+            categories: ((props.categories ?? []) as CreatorGuideCategoryData[]).slice(0, 1),
+            introText: null,
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+      },
+      defaultVariant: "default",
+      variantMeta: {
+        default: { label: "All Categories", sizeHint: "lg" },
+        compact: { label: "Single Category", sizeHint: "md" },
+      },
+    },
+    faq: {
+      key: "faq",
+      label: "FAQ",
+      column: "right",
+      variants: {
+        default: (props: Record<string, unknown>) =>
+          React.createElement(FaqAccordion, {
+            items: (props.items ?? []) as CreatorFaqData[],
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+        compact: (props: Record<string, unknown>) =>
+          React.createElement(FaqAccordion, {
+            items: ((props.items ?? []) as CreatorFaqData[]).slice(0, 3),
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+      },
+      defaultVariant: "default",
+      variantMeta: {
+        default: { label: "Full", sizeHint: "md" },
+        compact: { label: "Top 3", sizeHint: "sm" },
+      },
+    },
+    creators: {
+      key: "creators",
+      label: "Recommended Creators",
+      column: "full",
+      variants: {
+        default: (props: Record<string, unknown>) =>
+          React.createElement(CreatorCard, {
+            recommendations: (props.recommendations ?? []) as CreatorRecommendationData[],
+            introText: (props.introText ?? null) as string | null,
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+        compact: (props: Record<string, unknown>) =>
+          React.createElement(CreatorCard, {
+            recommendations: ((props.recommendations ?? []) as CreatorRecommendationData[]).slice(0, 2),
+            introText: null,
+            isOwner: (props.isOwner ?? false) as boolean,
+          }),
+      },
+      defaultVariant: "default",
+      variantMeta: {
+        default: { label: "Full", sizeHint: "md" },
+        compact: { label: "Top 2", sizeHint: "sm" },
+      },
+    },
   };
 }
 
 // ---------------------------------------------------------------------------
-// Preview fixtures (generic, for fixture picker in edit mode)
+// Preview fixtures (for fixture picker in edit mode)
 // ---------------------------------------------------------------------------
+
+function toRecord(fx: Record<string, unknown>): Record<string, Record<string, unknown>> {
+  return Object.fromEntries(
+    Object.entries(fx).map(([k, v]) => [k, v as Record<string, unknown>]),
+  );
+}
 
 export const DEMO_PREVIEW_FIXTURES: Record<
   string,
   Record<string, Record<string, unknown>>
 > = {
-  "content-a": {
-    "Long Content": { description: "Article with many paragraphs" },
-    "Short Content": { description: "Brief one-liner" },
-    "Empty State": { description: "No content yet" },
-  },
-  "feed": {
-    "Active Feed (10 items)": { description: "10 feed items" },
-    "Empty Feed": { description: "No items yet" },
-    "Error State": { description: "Failed to load" },
-  },
-  "sidebar": {
-    "Full Sidebar": { description: "All widgets visible" },
-    "Minimal Sidebar": { description: "Only essential items" },
-  },
+  social:   toRecord(SOCIAL_FX),
+  support:  toRecord(SUPPORT_FX),
+  builds:   toRecord(BUILD_FX),
+  guides:   toRecord(GUIDE_FX),
+  faq:      toRecord(FAQ_FX),
+  creators: toRecord(CREATOR_FX),
 };

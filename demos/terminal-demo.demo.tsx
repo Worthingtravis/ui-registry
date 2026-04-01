@@ -186,7 +186,7 @@ export const config: PreviewLabConfig<TerminalDemoFixture> = {
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
     <div className="space-y-10">
-      <div className="max-w-2xl">
+      <div className="w-full">
         <TerminalDemo entries={fixture.entries} />
       </div>
 

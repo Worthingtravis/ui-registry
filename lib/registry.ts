@@ -225,6 +225,13 @@ export const REGISTRY: RegistryEntry[] = [
     category: "Interactive",
   },
   {
+    name: "perk-picker",
+    description: "Searchable perk selector for Dead by Daylight builds with role filters, icon previews, and slot management.",
+    lab: () => import("@/demos/perk-picker.demo"),
+    tags: ["picker", "game", "build", "dbd", "interactive"],
+    category: "Interactive",
+  },
+  {
     name: "page-builder",
     description: "Full dashboard customization system — section reordering, variant switching, visibility toggles, column layout, preview with fixtures, shuffle, save/cancel/reset.",
     lab: () => import("@/demos/page-builder.demo"),

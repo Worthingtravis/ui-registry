@@ -56,7 +56,7 @@ function InteractiveDemo({ fixture }: { fixture: Fixture }) {
   };
 
   return (
-    <div className="max-w-md mx-auto space-y-3">
+    <div className="w-full space-y-3">
       <OnboardingChecklist
         {...fixture}
         steps={steps}

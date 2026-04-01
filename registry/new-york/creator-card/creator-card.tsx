@@ -120,17 +120,15 @@ export function CreatorCard({ recommendations, introText, isOwner, className }: 
   }
 
   return (
-    <div className={cn("@container", className)}>
-      <div className="flex flex-col gap-5">
-        {introText && (
-          <p className="text-sm leading-relaxed text-muted-foreground">{introText}</p>
-        )}
+    <div className={cn("flex flex-col gap-5", className)}>
+      {introText && (
+        <p className="text-sm leading-relaxed text-muted-foreground">{introText}</p>
+      )}
 
-        <div className="grid grid-cols-1 gap-4 @md:grid-cols-2 @xl:grid-cols-3">
-          {recommendations.map((rec) => (
-            <CreatorEntry key={rec.id} rec={rec} />
-          ))}
-        </div>
+      <div className="grid grid-cols-1 gap-4 @md:grid-cols-2 @xl:grid-cols-3">
+        {recommendations.map((rec) => (
+          <CreatorEntry key={rec.id} rec={rec} />
+        ))}
       </div>
     </div>
   );

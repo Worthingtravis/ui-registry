@@ -75,7 +75,7 @@ function ItemSlot({ item }: { item: CreatorBuildItemData }) {
           <span className="px-0.5 text-center leading-tight">{item.label.slice(0, 3)}</span>
         )}
       </div>
-      <span className="w-full text-center text-[11px] leading-tight text-muted-foreground">
+      <span className="w-full truncate text-center text-[11px] leading-tight text-muted-foreground">
         {item.label}
       </span>
       {item.description && (
@@ -125,7 +125,7 @@ function BuildEntry({ build }: { build: CreatorBuildData }) {
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="mb-1 text-sm font-bold text-foreground">{build.title}</h3>
+        <h3 className="mb-1 truncate text-sm font-bold text-foreground" title={build.title}>{build.title}</h3>
         {build.description && (
           <p className="mb-3 line-clamp-3 text-xs text-muted-foreground">{build.description}</p>
         )}
@@ -184,12 +184,18 @@ export function BuildCard({ builds, isOwner, className }: BuildCardProps) {
   }
 
   return (
-    <div className={cn("@container", className)}>
-      <div className="grid grid-cols-1 gap-6 @md:grid-cols-2 @xl:grid-cols-3">
-        {builds.map((build) => (
-          <BuildEntry key={build.id} build={build} />
-        ))}
-      </div>
+    <div
+      className={cn(
+        "grid grid-cols-1 gap-6",
+        builds.length === 1 && "@sm:grid-cols-1",
+        builds.length === 2 && "@sm:grid-cols-2",
+        builds.length >= 3 && "@sm:grid-cols-2 @2xl:grid-cols-3",
+        className,
+      )}
+    >
+      {builds.map((build) => (
+        <BuildEntry key={build.id} build={build} />
+      ))}
     </div>
   );
 }

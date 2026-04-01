@@ -59,7 +59,7 @@ function InteractiveDemo({ fixture }: { fixture: Fixture }) {
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
 
   return (
-    <div className="w-full max-w-sm space-y-1">
+    <div className="w-full space-y-1">
       <CollapsibleGroup
         {...fixture}
         label="Settings"

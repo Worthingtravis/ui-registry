@@ -41,7 +41,7 @@ export const config: PreviewLabConfig<Fixture> = {
   usageCode: USAGE,
   fixtures: ALL_FIXTURES,
   render: (fixture) => (
-    <div className="w-full max-w-2xl">
+    <div className="w-full">
       <SupportCard {...fixture} />
     </div>
   ),

@@ -152,6 +152,19 @@ function generateUsageSnippet(title: string, fixture: unknown): string {
 // PreviewLab
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Container size presets (simulate page builder slot widths)
+// ---------------------------------------------------------------------------
+
+const CONTAINER_SIZES = [
+  { label: "Full", value: "full", maxWidth: undefined },
+  { label: "2/3", value: "2-3", maxWidth: "66%" },
+  { label: "1/2", value: "1-2", maxWidth: "50%" },
+  { label: "1/3", value: "1-3", maxWidth: "33%" },
+] as const;
+
+type ContainerSize = (typeof CONTAINER_SIZES)[number]["value"];
+
 const TABS = ["preview", "usage", "source", "props"] as const;
 type Tab = (typeof TABS)[number];
 
@@ -178,6 +191,7 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
   const [fixtureIndex, setFixtureIndex] = useState(0);
   const [variantIndex, setVariantIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<Tab>("preview");
+  const [containerSize, setContainerSize] = useState<ContainerSize>("full");
 
   const activeFixtureKey = fixtureKeys[fixtureIndex] ?? fixtureKeys[0];
   const activeFixture = activeFixtureKey ? fixtures[activeFixtureKey] : undefined;
@@ -346,7 +360,37 @@ export function PreviewLab({ config, installCommand }: PreviewLabComponentProps)
         {/* Preview: live render */}
         {activeTab === "preview" && activeFixture !== undefined && (
           <div className="rounded-b-lg border border-t-0 border-border bg-background p-4 sm:p-6 min-h-[100px]">
-            <div className="w-full" key={`${fixtureIndex}-${variantIndex}`}>
+            {/* Container size controls */}
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">
+                Container
+              </span>
+              <div className="flex gap-1">
+                {CONTAINER_SIZES.map((size) => (
+                  <button
+                    key={size.value}
+                    onClick={() => setContainerSize(size.value)}
+                    className={cn(
+                      "px-2 py-0.5 rounded text-[11px] font-medium transition-all border",
+                      containerSize === size.value
+                        ? "bg-foreground text-background border-foreground"
+                        : "bg-transparent text-muted-foreground/60 border-border/60 hover:border-border hover:text-muted-foreground",
+                    )}
+                  >
+                    {size.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Container query wrapper */}
+            <div
+              className="@container transition-all duration-300"
+              style={{
+                maxWidth: CONTAINER_SIZES.find((s) => s.value === containerSize)?.maxWidth,
+              }}
+              key={`${fixtureIndex}-${variantIndex}`}
+            >
               {render(activeFixture, activeVariant)}
             </div>
           </div>
