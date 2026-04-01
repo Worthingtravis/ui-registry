@@ -35,6 +35,8 @@ export interface BuildCardProps {
   isOwner: boolean;
   /** Called when a build's perks are updated (owner only) */
   onPerksChange?: (buildId: string, perks: SelectedPerk[]) => void;
+  /** Called when the owner adds a new build from the empty state */
+  onAddBuild?: (role: "killer" | "survivor") => void;
   /** Additional CSS classes for the root container */
   className?: string;
 }
@@ -46,9 +48,18 @@ export interface BuildCardProps {
 const ALL_PERKS = perksData as Perk[];
 const PERK_BY_NAME = new Map(ALL_PERKS.map((p) => [p.name.toLowerCase(), p]));
 
-/** Look up a real Perk by label, falling back to a stub if not found */
+/** Look up a real Perk by label, with fuzzy fallback for common aliases */
 function lookupPerk(label: string, role: "killer" | "survivor"): Perk {
-  return PERK_BY_NAME.get(label.toLowerCase()) ?? {
+  const key = label.toLowerCase();
+  // Exact match first
+  const exact = PERK_BY_NAME.get(key);
+  if (exact) return exact;
+  // Fuzzy: find a perk whose name contains the label or vice versa
+  const fuzzy = ALL_PERKS.find(
+    (p) => p.name.toLowerCase().includes(key) || key.includes(p.name.toLowerCase()),
+  );
+  if (fuzzy) return fuzzy;
+  return {
     name: label,
     role,
     type: "unique",
@@ -349,13 +360,41 @@ function BuildEntry({
  * />
  * ```
  */
-export function BuildCard({ builds, isOwner, onPerksChange, className }: BuildCardProps) {
+export function BuildCard({ builds, isOwner, onPerksChange, onAddBuild, className }: BuildCardProps) {
   if (builds.length === 0) {
     return (
       <div className={cn("rounded-lg border border-dashed border-border p-8 text-center", className)}>
-        <p className="text-sm text-muted-foreground">
-          {isOwner ? "Add your builds to share your favorite loadouts." : "No builds added yet."}
-        </p>
+        {isOwner ? (
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-sm text-muted-foreground">Add a build to share your favorite loadouts.</p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => onAddBuild?.("killer")}
+                className={cn(
+                  "flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/5 px-4 py-2.5",
+                  "text-sm font-medium text-red-400 transition-all",
+                  "hover:border-red-500/50 hover:bg-red-500/10",
+                )}
+              >
+                <span className="text-[10px] font-bold uppercase tracking-wider">+ Killer Build</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onAddBuild?.("survivor")}
+                className={cn(
+                  "flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-4 py-2.5",
+                  "text-sm font-medium text-emerald-400 transition-all",
+                  "hover:border-emerald-500/50 hover:bg-emerald-500/10",
+                )}
+              >
+                <span className="text-[10px] font-bold uppercase tracking-wider">+ Survivor Build</span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <p className="text-sm text-muted-foreground">No builds added yet.</p>
+        )}
       </div>
     );
   }

@@ -10,7 +10,7 @@ const SPRINGTRAP: CreatorBuildData = {
   items: [
     { id: "bi1", slot: "perk-1", label: "Corrupt Intervention", imageUrl: null, description: "Blocks 3 furthest gens for 120s" },
     { id: "bi2", slot: "perk-2", label: "Pop Goes the Weasel", imageUrl: null, description: "Kick gen for 25% regression" },
-    { id: "bi3", slot: "perk-3", label: "BBQ & Chilli", imageUrl: null, description: "See auras after hooking" },
+    { id: "bi3", slot: "perk-3", label: "Barbecue & Chilli", imageUrl: null, description: "See auras after hooking" },
     { id: "bi4", slot: "perk-4", label: "Lethal Pursuer", imageUrl: null, description: "See survivors at start" },
   ],
 };
@@ -34,15 +34,14 @@ const EMPTY_BUILD: CreatorBuildData = {
 
 const fx = (overrides: Partial<Fixture> = {}): Fixture => ({
   builds: [SPRINGTRAP, SABLE],
-  isOwner: false,
+  isOwner: true,
   ...overrides,
 });
 
 export const ALL_FIXTURES: Record<string, Fixture> = {
-  "Public (2 builds)": fx(),
-  "Owner": fx({ isOwner: true }),
-  "Empty — Public": fx({ builds: [] }),
-  "Empty — Owner": fx({ builds: [], isOwner: true }),
+  "Owner (2 builds)": fx(),
+  "Viewer (read-only)": fx({ isOwner: false }),
   "Single Build": fx({ builds: [SPRINGTRAP] }),
-  "Build Without Items": fx({ builds: [EMPTY_BUILD] }),
+  "No Perks Yet": fx({ builds: [EMPTY_BUILD] }),
+  "Empty — Add Build": fx({ builds: [] }),
 };

@@ -81,12 +81,26 @@ function BuildCardDemo({ fixture }: { fixture: Fixture }) {
     );
   }, []);
 
+  const handleAddBuild = useCallback((role: "killer" | "survivor") => {
+    const newBuild: CreatorBuildData = {
+      id: `new-${Date.now()}`,
+      game: "dbd",
+      title: `New ${role.charAt(0).toUpperCase() + role.slice(1)} Build`,
+      role,
+      characterImageUrl: null,
+      description: null,
+      items: [],
+    };
+    setBuilds((prev) => [...prev, newBuild]);
+  }, []);
+
   return (
     <div className="w-full">
       <BuildCard
         builds={builds}
         isOwner={fixture.isOwner}
         onPerksChange={handlePerksChange}
+        onAddBuild={handleAddBuild}
       />
     </div>
   );
