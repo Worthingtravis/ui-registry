@@ -224,6 +224,13 @@ export const REGISTRY: RegistryEntry[] = [
     tags: ["creator", "profile", "recommendations", "grid"],
     category: "Interactive",
   },
+  {
+    name: "page-builder",
+    description: "Full dashboard customization system — section reordering, variant switching, visibility toggles, column layout, preview with fixtures, shuffle, save/cancel/reset.",
+    lab: () => import("@/demos/page-builder.demo"),
+    tags: ["layout", "editor", "dashboard", "customization"],
+    category: "Interactive",
+  },
 ];
 
 /** Lookup a registry entry by name. */
