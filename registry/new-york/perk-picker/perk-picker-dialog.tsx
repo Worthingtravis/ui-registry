@@ -108,8 +108,10 @@ export function PerkPickerDialog({
       onClose={handleDialogClose}
       onClick={handleBackdropClick}
       className={cn(
-        // Reset native dialog styles
-        "m-0 max-h-[90dvh] w-full max-w-2xl rounded-2xl border border-border bg-background p-0 shadow-2xl shadow-black/40",
+        // Reset native dialog styles + responsive sizing
+        "m-0 w-[calc(100vw-2rem)] max-w-3xl rounded-2xl border border-border bg-background p-0 shadow-2xl shadow-black/40",
+        // Height: use most of the viewport, flexbox inside handles scroll
+        "h-[calc(100dvh-4rem)] max-h-[800px]",
         // Center via fixed positioning
         "fixed inset-0 mx-auto my-auto",
         // Backdrop
@@ -118,9 +120,9 @@ export function PerkPickerDialog({
         "open:animate-in open:fade-in-0 open:zoom-in-95",
       )}
     >
-      <div className="flex flex-col" onClick={(e) => e.stopPropagation()}>
+      <div className="flex h-full flex-col" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-border px-6 py-4">
+        <div className="flex shrink-0 items-center justify-between border-b border-border px-6 py-4">
           <div>
             <h2 className="text-base font-bold text-foreground">
               {title ?? "Select Perks"}
@@ -144,8 +146,8 @@ export function PerkPickerDialog({
           </button>
         </div>
 
-        {/* Picker body — scrollable */}
-        <div className="@container max-h-[calc(90dvh-8rem)] overflow-y-auto px-6 py-5">
+        {/* Picker body — single scroll container */}
+        <div className="@container min-h-0 flex-1 overflow-y-auto px-6 py-5">
           <PerkPicker
             value={draft}
             onChange={setDraft}
@@ -155,7 +157,7 @@ export function PerkPickerDialog({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between border-t border-border px-6 py-4">
+        <div className="flex shrink-0 items-center justify-between border-t border-border px-6 py-4">
           <p className="text-xs text-muted-foreground">
             {draft.length}/{maxSlots} perks selected
           </p>

@@ -3,7 +3,8 @@
 import React, { useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { PerkPickerDialog } from "@/registry/new-york/perk-picker/perk-picker-dialog";
-import type { SelectedPerk } from "@/registry/new-york/perk-picker/perk-picker";
+import type { SelectedPerk, Perk } from "@/registry/new-york/perk-picker/perk-picker";
+import perksData from "@/registry/new-york/perk-picker/perks.json";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -36,6 +37,28 @@ export interface BuildCardProps {
   onPerksChange?: (buildId: string, perks: SelectedPerk[]) => void;
   /** Additional CSS classes for the root container */
   className?: string;
+}
+
+// ---------------------------------------------------------------------------
+// Perk lookup
+// ---------------------------------------------------------------------------
+
+const ALL_PERKS = perksData as Perk[];
+const PERK_BY_NAME = new Map(ALL_PERKS.map((p) => [p.name.toLowerCase(), p]));
+
+/** Look up a real Perk by label, falling back to a stub if not found */
+function lookupPerk(label: string, role: "killer" | "survivor"): Perk {
+  return PERK_BY_NAME.get(label.toLowerCase()) ?? {
+    name: label,
+    role,
+    type: "unique",
+    character: null,
+    description: "",
+    tierValues: null,
+    quote: null,
+    iconFile: null,
+    iconPath: null,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -163,20 +186,10 @@ function BuildEntry({
   const role = build.role?.toLowerCase() as "killer" | "survivor" | undefined;
   const validRole = role === "killer" || role === "survivor" ? role : undefined;
 
-  // Build initial value for the picker from current perk items
+  // Build initial value for the picker — look up real perk data for icons
   const initialPickerValue: SelectedPerk[] = perks.map((item, index) => ({
     slot: index,
-    perk: {
-      name: item.label,
-      role: validRole ?? ("killer" as const),
-      type: "unique" as const,
-      character: null,
-      description: item.description ?? "",
-      tierValues: null,
-      quote: null,
-      iconFile: null,
-      iconPath: null,
-    },
+    perk: lookupPerk(item.label, validRole ?? "killer"),
   }));
 
   const handleOpenPicker = useCallback(() => {
