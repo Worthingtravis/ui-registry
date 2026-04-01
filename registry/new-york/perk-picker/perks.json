@@ -1,5 +1,6 @@
 [
   {
+    "id": "a-nurses-calling",
     "name": "A Nurse's Calling",
     "role": "killer",
     "type": "unique",
@@ -18,6 +19,7 @@
     "iconPath": "/images/IconPerks_aNursesCalling.png"
   },
   {
+    "id": "agitation",
     "name": "Agitation",
     "role": "killer",
     "type": "unique",
@@ -36,6 +38,7 @@
     "iconPath": "/images/IconPerks_agitation.png"
   },
   {
+    "id": "alien-instinct",
     "name": "Alien Instinct",
     "role": "killer",
     "type": "unique",
@@ -54,6 +57,7 @@
     "iconPath": "/images/IconPerks_alienInstinct.png"
   },
   {
+    "id": "all-shaking-thunder",
     "name": "All-Shaking Thunder",
     "role": "killer",
     "type": "unique",
@@ -72,6 +76,7 @@
     "iconPath": "/images/IconPerks_allShakingThunder.png"
   },
   {
+    "id": "awakened-awareness",
     "name": "Awakened Awareness",
     "role": "killer",
     "type": "unique",
@@ -90,6 +95,7 @@
     "iconPath": "/images/IconPerks_awakenedAwareness.png"
   },
   {
+    "id": "bamboozle",
     "name": "Bamboozle",
     "role": "killer",
     "type": "unique",
@@ -114,6 +120,7 @@
     "iconPath": "/images/IconPerks_bamboozle.png"
   },
   {
+    "id": "barbecue-and-chilli",
     "name": "Barbecue & Chilli",
     "role": "killer",
     "type": "unique",
@@ -132,6 +139,7 @@
     "iconPath": "/images/IconPerks_barbecueAndChilli.png"
   },
   {
+    "id": "batteries-included",
     "name": "Batteries Included",
     "role": "killer",
     "type": "unique",
@@ -150,6 +158,7 @@
     "iconPath": "/images/IconPerks_batteriesIncluded.png"
   },
   {
+    "id": "beast-of-prey",
     "name": "Beast of Prey",
     "role": "killer",
     "type": "unique",
@@ -168,6 +177,7 @@
     "iconPath": "/images/IconPerks_beastOfPrey.png"
   },
   {
+    "id": "bitter-murmur",
     "name": "Bitter Murmur",
     "role": "killer",
     "type": "general",
@@ -186,6 +196,7 @@
     "iconPath": "/images/IconPerks_bitterMurmur.png"
   },
   {
+    "id": "blood-echo",
     "name": "Blood Echo",
     "role": "killer",
     "type": "unique",
@@ -204,6 +215,7 @@
     "iconPath": "/images/IconPerks_bloodEcho.png"
   },
   {
+    "id": "blood-warden",
     "name": "Blood Warden",
     "role": "killer",
     "type": "unique",
@@ -222,6 +234,7 @@
     "iconPath": "/images/IconPerks_bloodWarden.png"
   },
   {
+    "id": "bloodhound",
     "name": "Bloodhound",
     "role": "killer",
     "type": "unique",
@@ -240,6 +253,7 @@
     "iconPath": "/images/IconPerks_bloodhound.png"
   },
   {
+    "id": "brutal-strength",
     "name": "Brutal Strength",
     "role": "killer",
     "type": "unique",
@@ -258,6 +272,7 @@
     "iconPath": "/images/IconPerks_brutalStrength.png"
   },
   {
+    "id": "call-of-brine",
     "name": "Call of Brine",
     "role": "killer",
     "type": "unique",
@@ -276,6 +291,7 @@
     "iconPath": "/images/IconPerks_callOfBrine.png"
   },
   {
+    "id": "corrupt-intervention",
     "name": "Corrupt Intervention",
     "role": "killer",
     "type": "unique",
@@ -294,6 +310,7 @@
     "iconPath": "/images/IconPerks_corruptIntervention.png"
   },
   {
+    "id": "coulrophobia",
     "name": "Coulrophobia",
     "role": "killer",
     "type": "unique",
@@ -312,6 +329,7 @@
     "iconPath": "/images/IconPerks_coulrophobia.png"
   },
   {
+    "id": "coup-de-grace",
     "name": "Coup de Grâce",
     "role": "killer",
     "type": "unique",
@@ -330,6 +348,7 @@
     "iconPath": "/images/IconPerks_coupDeGr%C3%A2ce.png"
   },
   {
+    "id": "cruel-limits",
     "name": "Cruel Limits",
     "role": "killer",
     "type": "unique",
@@ -348,6 +367,7 @@
     "iconPath": "/images/IconPerks_cruelLimits.png"
   },
   {
+    "id": "cull-the-weak",
     "name": "Cull the Weak",
     "role": "killer",
     "type": "general",
@@ -372,6 +392,7 @@
     "iconPath": "/images/IconPerks_dyingLight.png"
   },
   {
+    "id": "dark-arrogance",
     "name": "Dark Arrogance",
     "role": "killer",
     "type": "unique",
@@ -390,6 +411,7 @@
     "iconPath": "/images/IconPerks_darkArrogance.png"
   },
   {
+    "id": "dark-devotion",
     "name": "Dark Devotion",
     "role": "killer",
     "type": "unique",
@@ -408,6 +430,7 @@
     "iconPath": "/images/IconPerks_darkDevotion.png"
   },
   {
+    "id": "darkness-revealed",
     "name": "Darkness Revealed",
     "role": "killer",
     "type": "unique",
@@ -426,6 +449,7 @@
     "iconPath": "/images/IconPerks_darknessRevealed.png"
   },
   {
+    "id": "dead-mans-switch",
     "name": "Dead Man's Switch",
     "role": "killer",
     "type": "unique",
@@ -444,6 +468,7 @@
     "iconPath": "/images/IconPerks_deadMansSwitch.png"
   },
   {
+    "id": "deadlock",
     "name": "Deadlock",
     "role": "killer",
     "type": "unique",
@@ -455,6 +480,7 @@
     "iconPath": "/images/IconPerks_deadlock.png"
   },
   {
+    "id": "deathbound",
     "name": "Deathbound",
     "role": "killer",
     "type": "unique",
@@ -473,6 +499,7 @@
     "iconPath": "/images/IconPerks_deathbound.png"
   },
   {
+    "id": "deerstalker",
     "name": "Deerstalker",
     "role": "killer",
     "type": "general",
@@ -491,6 +518,7 @@
     "iconPath": "/images/IconPerks_deerstalker.png"
   },
   {
+    "id": "discordance",
     "name": "Discordance",
     "role": "killer",
     "type": "unique",
@@ -509,6 +537,7 @@
     "iconPath": "/images/IconPerks_discordance.png"
   },
   {
+    "id": "dissolution",
     "name": "Dissolution",
     "role": "killer",
     "type": "unique",
@@ -527,6 +556,7 @@
     "iconPath": "/images/IconPerks_dissolution.png"
   },
   {
+    "id": "distressing",
     "name": "Distressing",
     "role": "killer",
     "type": "general",
@@ -545,6 +575,7 @@
     "iconPath": "/images/IconPerks_distressing.png"
   },
   {
+    "id": "dominance",
     "name": "Dominance",
     "role": "killer",
     "type": "unique",
@@ -563,6 +594,7 @@
     "iconPath": "/images/IconPerks_Dominance.png"
   },
   {
+    "id": "dragons-grip",
     "name": "Dragon's Grip",
     "role": "killer",
     "type": "unique",
@@ -581,6 +613,7 @@
     "iconPath": "/images/IconPerks_dragonsGrip.png"
   },
   {
+    "id": "dying-light",
     "name": "Dying Light",
     "role": "killer",
     "type": "unique",
@@ -592,6 +625,7 @@
     "iconPath": "/images/IconPerks_dyingLight.png"
   },
   {
+    "id": "enduring",
     "name": "Enduring",
     "role": "killer",
     "type": "unique",
@@ -610,6 +644,7 @@
     "iconPath": "/images/IconPerks_enduring.png"
   },
   {
+    "id": "eruption",
     "name": "Eruption",
     "role": "killer",
     "type": "unique",
@@ -628,6 +663,7 @@
     "iconPath": "/images/IconPerks_eruption.png"
   },
   {
+    "id": "fire-up",
     "name": "Fire Up",
     "role": "killer",
     "type": "unique",
@@ -652,6 +688,7 @@
     "iconPath": "/images/IconPerks_fireUp.png"
   },
   {
+    "id": "forced-hesitation",
     "name": "Forced Hesitation",
     "role": "killer",
     "type": "unique",
@@ -670,6 +707,7 @@
     "iconPath": "/images/IconPerks_forcedHesitation.png"
   },
   {
+    "id": "forced-penance",
     "name": "Forced Penance",
     "role": "killer",
     "type": "unique",
@@ -688,6 +726,7 @@
     "iconPath": "/images/IconPerks_forcedPenance.png"
   },
   {
+    "id": "forever-entwined",
     "name": "Forever Entwined",
     "role": "killer",
     "type": "unique",
@@ -712,6 +751,7 @@
     "iconPath": "/images/T_UI_iconPerks_ForeverEntwined.png"
   },
   {
+    "id": "franklins-demise",
     "name": "Franklin's Demise",
     "role": "killer",
     "type": "unique",
@@ -730,6 +770,7 @@
     "iconPath": "/images/IconPerks_franklinsDemise.png"
   },
   {
+    "id": "friends-til-the-end",
     "name": "Friends 'til the End",
     "role": "killer",
     "type": "unique",
@@ -748,6 +789,7 @@
     "iconPath": "/images/IconPerks_friendsTilTheEnd.png"
   },
   {
+    "id": "furtive-chase",
     "name": "Furtive Chase",
     "role": "killer",
     "type": "unique",
@@ -766,6 +808,7 @@
     "iconPath": "/images/IconPerks_furtiveChase.png"
   },
   {
+    "id": "game-afoot",
     "name": "Game Afoot",
     "role": "killer",
     "type": "unique",
@@ -784,6 +827,7 @@
     "iconPath": "/images/IconPerks_gameAfoot.png"
   },
   {
+    "id": "gearhead",
     "name": "Gearhead",
     "role": "killer",
     "type": "unique",
@@ -802,6 +846,7 @@
     "iconPath": "/images/IconPerks_gearhead.png"
   },
   {
+    "id": "genetic-limits",
     "name": "Genetic Limits",
     "role": "killer",
     "type": "unique",
@@ -820,6 +865,7 @@
     "iconPath": "/images/IconPerks_geneticLimits.png"
   },
   {
+    "id": "grim-embrace",
     "name": "Grim Embrace",
     "role": "killer",
     "type": "unique",
@@ -838,6 +884,7 @@
     "iconPath": "/images/IconPerks_grimEmbrace.png"
   },
   {
+    "id": "haywire",
     "name": "Haywire",
     "role": "killer",
     "type": "unique",
@@ -856,6 +903,7 @@
     "iconPath": "/images/IconPerks_Haywire.png"
   },
   {
+    "id": "help-wanted",
     "name": "Help Wanted",
     "role": "killer",
     "type": "unique",
@@ -874,6 +922,7 @@
     "iconPath": "/images/IconPerks_HelpWanted.png"
   },
   {
+    "id": "hex-blood-favour",
     "name": "Hex: Blood Favour",
     "role": "killer",
     "type": "unique",
@@ -892,6 +941,7 @@
     "iconPath": "/images/IconPerks_hexBloodFavour.png"
   },
   {
+    "id": "hex-crowd-control",
     "name": "Hex: Crowd Control",
     "role": "killer",
     "type": "unique",
@@ -910,6 +960,7 @@
     "iconPath": "/images/IconPerks_hexCrowdControl.png"
   },
   {
+    "id": "hex-devour-hope",
     "name": "Hex: Devour Hope",
     "role": "killer",
     "type": "unique",
@@ -928,6 +979,7 @@
     "iconPath": "/images/IconPerks_hexDevourHope.png"
   },
   {
+    "id": "hex-face-the-darkness",
     "name": "Hex: Face the Darkness",
     "role": "killer",
     "type": "unique",
@@ -946,6 +998,7 @@
     "iconPath": "/images/IconPerks_hexFaceTheDarkness.png"
   },
   {
+    "id": "hex-fortunes-fool",
     "name": "Hex: Fortune's Fool",
     "role": "killer",
     "type": "general",
@@ -964,6 +1017,7 @@
     "iconPath": "/images/IconPerks_hexPlaything.png"
   },
   {
+    "id": "hex-haunted-ground",
     "name": "Hex: Haunted Ground",
     "role": "killer",
     "type": "unique",
@@ -982,6 +1036,7 @@
     "iconPath": "/images/IconPerks_hexHauntedGround.png"
   },
   {
+    "id": "hex-hive-mind",
     "name": "Hex: Hive Mind",
     "role": "killer",
     "type": "unique",
@@ -1000,6 +1055,7 @@
     "iconPath": "/images/IconsPerks_HexHiveMind.png"
   },
   {
+    "id": "hex-huntress-lullaby",
     "name": "Hex: Huntress Lullaby",
     "role": "killer",
     "type": "unique",
@@ -1018,6 +1074,7 @@
     "iconPath": "/images/IconPerks_hexHuntressLullaby.png"
   },
   {
+    "id": "hex-no-one-escapes-death",
     "name": "Hex: No One Escapes Death",
     "role": "killer",
     "type": "general",
@@ -1036,6 +1093,7 @@
     "iconPath": "/images/IconPerks_hexNoOneEscapesDeath.png"
   },
   {
+    "id": "hex-nothing-but-misery",
     "name": "Hex: Nothing but Misery",
     "role": "killer",
     "type": "unique",
@@ -1054,6 +1112,7 @@
     "iconPath": "/images/T_UI_iconPerks_NothingButMisery.png"
   },
   {
+    "id": "hex-overture-of-doom",
     "name": "Hex: Overture of Doom",
     "role": "killer",
     "type": "unique",
@@ -1072,6 +1131,7 @@
     "iconPath": "/images/IconPerks_HexOvertureOfDoom.png"
   },
   {
+    "id": "hex-pentimento",
     "name": "Hex: Pentimento",
     "role": "killer",
     "type": "unique",
@@ -1096,6 +1156,7 @@
     "iconPath": "/images/IconPerks_hexPentimento.png"
   },
   {
+    "id": "hex-plaything",
     "name": "Hex: Plaything",
     "role": "killer",
     "type": "unique",
@@ -1107,6 +1168,7 @@
     "iconPath": "/images/IconPerks_hexPlaything.png"
   },
   {
+    "id": "hex-retribution",
     "name": "Hex: Retribution",
     "role": "killer",
     "type": "unique",
@@ -1125,6 +1187,7 @@
     "iconPath": "/images/IconPerks_hexRetribution.png"
   },
   {
+    "id": "hex-ruin",
     "name": "Hex: Ruin",
     "role": "killer",
     "type": "unique",
@@ -1143,6 +1206,7 @@
     "iconPath": "/images/IconPerks_hexRuin.png"
   },
   {
+    "id": "hex-the-third-seal",
     "name": "Hex: The Third Seal",
     "role": "killer",
     "type": "unique",
@@ -1161,6 +1225,7 @@
     "iconPath": "/images/IconPerks_hexTheThirdSeal.png"
   },
   {
+    "id": "hex-thrill-of-the-hunt",
     "name": "Hex: Thrill of the Hunt",
     "role": "killer",
     "type": "general",
@@ -1185,6 +1250,7 @@
     "iconPath": "/images/IconPerks_hexThrillOfTheHunt.png"
   },
   {
+    "id": "hex-two-can-play",
     "name": "Hex: Two Can Play",
     "role": "killer",
     "type": "unique",
@@ -1203,6 +1269,7 @@
     "iconPath": "/images/IconPerks_hexTwoCanPlay.png"
   },
   {
+    "id": "hex-undying",
     "name": "Hex: Undying",
     "role": "killer",
     "type": "unique",
@@ -1221,6 +1288,7 @@
     "iconPath": "/images/IconPerks_hexUndying.png"
   },
   {
+    "id": "hex-wretched-fate",
     "name": "Hex: Wretched Fate",
     "role": "killer",
     "type": "unique",
@@ -1239,6 +1307,7 @@
     "iconPath": "/images/IconPerks_HexWretchedFate.png"
   },
   {
+    "id": "hoarder",
     "name": "Hoarder",
     "role": "killer",
     "type": "unique",
@@ -1257,6 +1326,7 @@
     "iconPath": "/images/IconPerks_hoarder.png"
   },
   {
+    "id": "hubris",
     "name": "Hubris",
     "role": "killer",
     "type": "unique",
@@ -1275,6 +1345,7 @@
     "iconPath": "/images/IconPerks_hubris.png"
   },
   {
+    "id": "human-greed",
     "name": "Human Greed",
     "role": "killer",
     "type": "unique",
@@ -1293,6 +1364,7 @@
     "iconPath": "/images/IconPerks_HumanGreed.png"
   },
   {
+    "id": "hysteria",
     "name": "Hysteria",
     "role": "killer",
     "type": "unique",
@@ -1311,6 +1383,7 @@
     "iconPath": "/images/IconPerks_hysteria.png"
   },
   {
+    "id": "im-all-ears",
     "name": "I'm All Ears",
     "role": "killer",
     "type": "unique",
@@ -1329,6 +1402,7 @@
     "iconPath": "/images/IconPerks_imAllEars.png"
   },
   {
+    "id": "infectious-fright",
     "name": "Infectious Fright",
     "role": "killer",
     "type": "unique",
@@ -1347,6 +1421,7 @@
     "iconPath": "/images/IconPerks_infectiousFright.png"
   },
   {
+    "id": "insidious",
     "name": "Insidious",
     "role": "killer",
     "type": "general",
@@ -1365,6 +1440,7 @@
     "iconPath": "/images/IconPerks_insidious.png"
   },
   {
+    "id": "iron-grasp",
     "name": "Iron Grasp",
     "role": "killer",
     "type": "general",
@@ -1383,6 +1459,7 @@
     "iconPath": "/images/IconPerks_ironGrasp.png"
   },
   {
+    "id": "iron-maiden",
     "name": "Iron Maiden",
     "role": "killer",
     "type": "unique",
@@ -1401,6 +1478,7 @@
     "iconPath": "/images/IconPerks_ironMaiden.png"
   },
   {
+    "id": "keep-them-waiting",
     "name": "Keep Them Waiting",
     "role": "killer",
     "type": "general",
@@ -1425,6 +1503,7 @@
     "iconPath": "/images/IconPerks_saveTheBestForLast_noLicense.png"
   },
   {
+    "id": "knock-out",
     "name": "Knock Out",
     "role": "killer",
     "type": "unique",
@@ -1443,6 +1522,7 @@
     "iconPath": "/images/IconPerks_knockOut.png"
   },
   {
+    "id": "languid-touch",
     "name": "Languid Touch",
     "role": "killer",
     "type": "unique",
@@ -1461,6 +1541,7 @@
     "iconPath": "/images/IconPerks_languidTouch.png"
   },
   {
+    "id": "lethal-pursuer",
     "name": "Lethal Pursuer",
     "role": "killer",
     "type": "unique",
@@ -1479,6 +1560,7 @@
     "iconPath": "/images/IconPerks_lethalPursuer.png"
   },
   {
+    "id": "leverage",
     "name": "Leverage",
     "role": "killer",
     "type": "unique",
@@ -1497,6 +1579,7 @@
     "iconPath": "/images/IconPerks_leverage.png"
   },
   {
+    "id": "lightborn",
     "name": "Lightborn",
     "role": "killer",
     "type": "unique",
@@ -1515,6 +1598,7 @@
     "iconPath": "/images/IconPerks_lightborn.png"
   },
   {
+    "id": "machine-learning",
     "name": "Machine Learning",
     "role": "killer",
     "type": "unique",
@@ -1533,6 +1617,7 @@
     "iconPath": "/images/IconPerks_machineLearning.png"
   },
   {
+    "id": "mad-grit",
     "name": "Mad Grit",
     "role": "killer",
     "type": "unique",
@@ -1551,6 +1636,7 @@
     "iconPath": "/images/IconPerks_madGrit.png"
   },
   {
+    "id": "make-your-choice",
     "name": "Make Your Choice",
     "role": "killer",
     "type": "unique",
@@ -1575,6 +1661,7 @@
     "iconPath": "/images/IconPerks_makeYourChoice.png"
   },
   {
+    "id": "merciless-storm",
     "name": "Merciless Storm",
     "role": "killer",
     "type": "unique",
@@ -1593,6 +1680,7 @@
     "iconPath": "/images/IconPerks_mercilessStorm.png"
   },
   {
+    "id": "mindbreaker",
     "name": "Mindbreaker",
     "role": "killer",
     "type": "unique",
@@ -1611,6 +1699,7 @@
     "iconPath": "/images/IconPerks_mindbreaker.png"
   },
   {
+    "id": "monitor-and-abuse",
     "name": "Monitor & Abuse",
     "role": "killer",
     "type": "unique",
@@ -1635,6 +1724,7 @@
     "iconPath": "/images/IconPerks_monitorAndAbuse.png"
   },
   {
+    "id": "nemesis",
     "name": "Nemesis",
     "role": "killer",
     "type": "unique",
@@ -1653,6 +1743,7 @@
     "iconPath": "/images/IconPerks_nemesis.png"
   },
   {
+    "id": "no-holds-barred",
     "name": "No Holds Barred",
     "role": "killer",
     "type": "general",
@@ -1671,6 +1762,7 @@
     "iconPath": "/images/IconPerks_NoHoldsBarred.png"
   },
   {
+    "id": "no-quarter",
     "name": "No Quarter",
     "role": "killer",
     "type": "unique",
@@ -1689,6 +1781,7 @@
     "iconPath": "/images/IconPerks_noQuarter.png"
   },
   {
+    "id": "no-way-out",
     "name": "No Way Out",
     "role": "killer",
     "type": "unique",
@@ -1713,6 +1806,7 @@
     "iconPath": "/images/IconPerks_noWayOut.png"
   },
   {
+    "id": "none-are-free",
     "name": "None Are Free",
     "role": "killer",
     "type": "unique",
@@ -1737,6 +1831,7 @@
     "iconPath": "/images/T_UI_iconPerks_NoneAreFree.png"
   },
   {
+    "id": "nowhere-to-hide",
     "name": "Nowhere to Hide",
     "role": "killer",
     "type": "unique",
@@ -1755,6 +1850,7 @@
     "iconPath": "/images/IconPerks_nowhereToHide.png"
   },
   {
+    "id": "oppression",
     "name": "Oppression",
     "role": "killer",
     "type": "unique",
@@ -1773,6 +1869,7 @@
     "iconPath": "/images/IconPerks_oppression.png"
   },
   {
+    "id": "overcharge",
     "name": "Overcharge",
     "role": "killer",
     "type": "unique",
@@ -1791,6 +1888,7 @@
     "iconPath": "/images/IconPerks_overcharge.png"
   },
   {
+    "id": "overwhelming-presence",
     "name": "Overwhelming Presence",
     "role": "killer",
     "type": "unique",
@@ -1809,6 +1907,7 @@
     "iconPath": "/images/IconPerks_overwhelmingPresence.png"
   },
   {
+    "id": "phantom-fear",
     "name": "Phantom Fear",
     "role": "killer",
     "type": "unique",
@@ -1827,6 +1926,7 @@
     "iconPath": "/images/IconPerks_PhantomFear.png"
   },
   {
+    "id": "play-with-your-food",
     "name": "Play with Your Food",
     "role": "killer",
     "type": "unique",
@@ -1838,6 +1938,7 @@
     "iconPath": "/images/IconPerks_playWithYourFood.png"
   },
   {
+    "id": "pop-goes-the-weasel",
     "name": "Pop Goes the Weasel",
     "role": "killer",
     "type": "unique",
@@ -1856,6 +1957,7 @@
     "iconPath": "/images/IconPerks_popGoesTheWeasel.png"
   },
   {
+    "id": "predator",
     "name": "Predator",
     "role": "killer",
     "type": "unique",
@@ -1874,6 +1976,7 @@
     "iconPath": "/images/IconPerks_predator.png"
   },
   {
+    "id": "rancor",
     "name": "Rancor",
     "role": "killer",
     "type": "unique",
@@ -1892,6 +1995,7 @@
     "iconPath": "/images/IconPerks_rancor.png"
   },
   {
+    "id": "rapid-brutality",
     "name": "Rapid Brutality",
     "role": "killer",
     "type": "unique",
@@ -1910,6 +2014,7 @@
     "iconPath": "/images/IconPerks_rapidBrutality.png"
   },
   {
+    "id": "ravenous",
     "name": "Ravenous",
     "role": "killer",
     "type": "unique",
@@ -1928,6 +2033,7 @@
     "iconPath": "/images/IconPerks_Ravenous.png"
   },
   {
+    "id": "remember-me",
     "name": "Remember Me",
     "role": "killer",
     "type": "unique",
@@ -1958,6 +2064,7 @@
     "iconPath": "/images/IconPerks_rememberMe.png"
   },
   {
+    "id": "save-the-best-for-last",
     "name": "Save the Best for Last",
     "role": "killer",
     "type": "unique",
@@ -1969,6 +2076,7 @@
     "iconPath": "/images/IconPerks_saveTheBestForLast.png"
   },
   {
+    "id": "scourge-hook-floods-of-rage",
     "name": "Scourge Hook: Floods of Rage",
     "role": "killer",
     "type": "unique",
@@ -1987,6 +2095,7 @@
     "iconPath": "/images/IconPerks_scourgeHookFloodsOfRage.png"
   },
   {
+    "id": "scourge-hook-gift-of-pain",
     "name": "Scourge Hook: Gift of Pain",
     "role": "killer",
     "type": "unique",
@@ -1998,6 +2107,7 @@
     "iconPath": "/images/IconPerks_scourgeHookGiftOfPain.png"
   },
   {
+    "id": "scourge-hook-hangmans-trick",
     "name": "Scourge Hook: Hangman's Trick",
     "role": "killer",
     "type": "unique",
@@ -2016,6 +2126,7 @@
     "iconPath": "/images/IconPerks_scourgeHookHangmansTrick.png"
   },
   {
+    "id": "scourge-hook-jagged-compass",
     "name": "Scourge Hook: Jagged Compass",
     "role": "killer",
     "type": "unique",
@@ -2034,6 +2145,7 @@
     "iconPath": "/images/IconPerks_scourgeHookJaggedCompass.png"
   },
   {
+    "id": "scourge-hook-monstrous-shrine",
     "name": "Scourge Hook: Monstrous Shrine",
     "role": "killer",
     "type": "general",
@@ -2052,6 +2164,7 @@
     "iconPath": "/images/IconPerks_scourgeHookMonstrousShrine.png"
   },
   {
+    "id": "scourge-hook-pain-resonance",
     "name": "Scourge Hook: Pain Resonance",
     "role": "killer",
     "type": "unique",
@@ -2070,6 +2183,7 @@
     "iconPath": "/images/IconPerks_scourgeHookPainResonance.png"
   },
   {
+    "id": "scourge-hook-weeping-wounds",
     "name": "Scourge Hook: Weeping Wounds",
     "role": "killer",
     "type": "general",
@@ -2088,6 +2202,7 @@
     "iconPath": "/images/IconPerks_scourgeHookWeepingWounds.png"
   },
   {
+    "id": "secret-project",
     "name": "Secret Project",
     "role": "killer",
     "type": "unique",
@@ -2106,6 +2221,7 @@
     "iconPath": "/images/IconsPerks_SecretProject.png"
   },
   {
+    "id": "see-how-they-run",
     "name": "See How They Run",
     "role": "killer",
     "type": "general",
@@ -2130,6 +2246,7 @@
     "iconPath": "/images/IconPerks_playWithYourFood.png"
   },
   {
+    "id": "septic-touch",
     "name": "Septic Touch",
     "role": "killer",
     "type": "unique",
@@ -2148,6 +2265,7 @@
     "iconPath": "/images/IconPerks_septicTouch.png"
   },
   {
+    "id": "shadowborn",
     "name": "Shadowborn",
     "role": "killer",
     "type": "unique",
@@ -2166,6 +2284,7 @@
     "iconPath": "/images/IconPerks_shadowborn.png"
   },
   {
+    "id": "shattered-hope",
     "name": "Shattered Hope",
     "role": "killer",
     "type": "general",
@@ -2184,6 +2303,7 @@
     "iconPath": "/images/IconPerks_shatteredHope.png"
   },
   {
+    "id": "sloppy-butcher",
     "name": "Sloppy Butcher",
     "role": "killer",
     "type": "general",
@@ -2208,6 +2328,7 @@
     "iconPath": "/images/IconPerks_sloppyButcher.png"
   },
   {
+    "id": "spies-from-the-shadows",
     "name": "Spies from the Shadows",
     "role": "killer",
     "type": "general",
@@ -2226,6 +2347,7 @@
     "iconPath": "/images/IconPerks_spiesFromTheShadows.png"
   },
   {
+    "id": "spirit-fury",
     "name": "Spirit Fury",
     "role": "killer",
     "type": "unique",
@@ -2244,6 +2366,7 @@
     "iconPath": "/images/IconPerks_spiritFury.png"
   },
   {
+    "id": "starstruck",
     "name": "Starstruck",
     "role": "killer",
     "type": "unique",
@@ -2262,6 +2385,7 @@
     "iconPath": "/images/IconPerks_starstruck.png"
   },
   {
+    "id": "stridor",
     "name": "Stridor",
     "role": "killer",
     "type": "unique",
@@ -2286,6 +2410,7 @@
     "iconPath": "/images/IconPerks_stridor.png"
   },
   {
+    "id": "superior-anatomy",
     "name": "Superior Anatomy",
     "role": "killer",
     "type": "unique",
@@ -2304,6 +2429,7 @@
     "iconPath": "/images/IconPerks_superiorAnatomy.png"
   },
   {
+    "id": "surge",
     "name": "Surge",
     "role": "killer",
     "type": "unique",
@@ -2322,6 +2448,7 @@
     "iconPath": "/images/IconPerks_surge.png"
   },
   {
+    "id": "surveillance",
     "name": "Surveillance",
     "role": "killer",
     "type": "unique",
@@ -2340,6 +2467,7 @@
     "iconPath": "/images/IconPerks_surveillance.png"
   },
   {
+    "id": "thwack",
     "name": "THWACK!",
     "role": "killer",
     "type": "unique",
@@ -2358,6 +2486,7 @@
     "iconPath": "/images/IconPerks_thwack.png"
   },
   {
+    "id": "terminus",
     "name": "Terminus",
     "role": "killer",
     "type": "unique",
@@ -2376,6 +2505,7 @@
     "iconPath": "/images/IconPerks_terminus.png"
   },
   {
+    "id": "territorial-imperative",
     "name": "Territorial Imperative",
     "role": "killer",
     "type": "unique",
@@ -2394,6 +2524,7 @@
     "iconPath": "/images/IconPerks_territorialImperative.png"
   },
   {
+    "id": "thanatophobia",
     "name": "Thanatophobia",
     "role": "killer",
     "type": "unique",
@@ -2424,6 +2555,7 @@
     "iconPath": "/images/IconPerks_thanatophobia.png"
   },
   {
+    "id": "thrilling-tremors",
     "name": "Thrilling Tremors",
     "role": "killer",
     "type": "unique",
@@ -2442,6 +2574,7 @@
     "iconPath": "/images/IconPerks_thrillingTremors.png"
   },
   {
+    "id": "tinkerer",
     "name": "Tinkerer",
     "role": "killer",
     "type": "unique",
@@ -2460,6 +2593,7 @@
     "iconPath": "/images/IconPerks_tinkerer.png"
   },
   {
+    "id": "trail-of-torment",
     "name": "Trail of Torment",
     "role": "killer",
     "type": "unique",
@@ -2478,6 +2612,7 @@
     "iconPath": "/images/IconPerks_trailOfTorment.png"
   },
   {
+    "id": "turn-back-the-clock",
     "name": "Turn Back the Clock",
     "role": "killer",
     "type": "unique",
@@ -2496,6 +2631,7 @@
     "iconPath": "/images/IconsPerks_TurnBackTheClock.png"
   },
   {
+    "id": "ultimate-weapon",
     "name": "Ultimate Weapon",
     "role": "killer",
     "type": "unique",
@@ -2514,6 +2650,7 @@
     "iconPath": "/images/IconPerks_ultimateWeapon.png"
   },
   {
+    "id": "unbound",
     "name": "Unbound",
     "role": "killer",
     "type": "unique",
@@ -2538,6 +2675,7 @@
     "iconPath": "/images/IconPerks_unbound.png"
   },
   {
+    "id": "undone",
     "name": "Undone",
     "role": "killer",
     "type": "unique",
@@ -2574,6 +2712,7 @@
     "iconPath": "/images/IconPerks_undone.png"
   },
   {
+    "id": "unforeseen",
     "name": "Unforeseen",
     "role": "killer",
     "type": "unique",
@@ -2598,6 +2737,7 @@
     "iconPath": "/images/IconPerks_unforeseen.png"
   },
   {
+    "id": "unnerving-presence",
     "name": "Unnerving Presence",
     "role": "killer",
     "type": "unique",
@@ -2616,6 +2756,7 @@
     "iconPath": "/images/IconPerks_unnervingPresence.png"
   },
   {
+    "id": "unrelenting",
     "name": "Unrelenting",
     "role": "killer",
     "type": "general",
@@ -2634,6 +2775,7 @@
     "iconPath": "/images/IconPerks_unrelenting.png"
   },
   {
+    "id": "wandering-eye",
     "name": "Wandering Eye",
     "role": "killer",
     "type": "unique",
@@ -2652,6 +2794,7 @@
     "iconPath": "/images/IconPerks_WanderingEye.png"
   },
   {
+    "id": "weave-attunement",
     "name": "Weave Attunement",
     "role": "killer",
     "type": "unique",
@@ -2670,6 +2813,7 @@
     "iconPath": "/images/IconPerks_weaveAttunement.png"
   },
   {
+    "id": "whispers",
     "name": "Whispers",
     "role": "killer",
     "type": "general",
@@ -2688,6 +2832,7 @@
     "iconPath": "/images/IconPerks_whispers.png"
   },
   {
+    "id": "zanshin-tactics",
     "name": "Zanshin Tactics",
     "role": "killer",
     "type": "unique",
@@ -2706,6 +2851,7 @@
     "iconPath": "/images/IconPerks_zanshinTactics.png"
   },
   {
+    "id": "a-place-for-us",
     "name": "A Place For Us",
     "role": "survivor",
     "type": "unique",
@@ -2724,6 +2870,7 @@
     "iconPath": "/images/IconsPerks_aPlaceForUs.png"
   },
   {
+    "id": "ace-in-the-hole",
     "name": "Ace in the Hole",
     "role": "survivor",
     "type": "unique",
@@ -2742,6 +2889,7 @@
     "iconPath": "/images/IconPerks_aceInTheHole.png"
   },
   {
+    "id": "adrenaline",
     "name": "Adrenaline",
     "role": "survivor",
     "type": "unique",
@@ -2760,6 +2908,7 @@
     "iconPath": "/images/IconPerks_adrenaline.png"
   },
   {
+    "id": "aftercare",
     "name": "Aftercare",
     "role": "survivor",
     "type": "unique",
@@ -2778,6 +2927,7 @@
     "iconPath": "/images/IconPerks_aftercare.png"
   },
   {
+    "id": "alert",
     "name": "Alert",
     "role": "survivor",
     "type": "unique",
@@ -2796,6 +2946,7 @@
     "iconPath": "/images/IconPerks_alert.png"
   },
   {
+    "id": "any-means-necessary",
     "name": "Any Means Necessary",
     "role": "survivor",
     "type": "unique",
@@ -2814,6 +2965,7 @@
     "iconPath": "/images/IconPerks_anyMeansNecessary.png"
   },
   {
+    "id": "apocalyptic-ingenuity",
     "name": "Apocalyptic Ingenuity",
     "role": "survivor",
     "type": "unique",
@@ -2832,6 +2984,7 @@
     "iconPath": "/images/IconPerks_apocalypticIngenuity.png"
   },
   {
+    "id": "appraisal",
     "name": "Appraisal",
     "role": "survivor",
     "type": "unique",
@@ -2850,6 +3003,7 @@
     "iconPath": "/images/IconPerks_appraisal.png"
   },
   {
+    "id": "autodidact",
     "name": "Autodidact",
     "role": "survivor",
     "type": "unique",
@@ -2868,6 +3022,7 @@
     "iconPath": "/images/IconPerks_autodidact.png"
   },
   {
+    "id": "babysitter",
     "name": "Babysitter",
     "role": "survivor",
     "type": "unique",
@@ -2886,6 +3041,7 @@
     "iconPath": "/images/IconPerks_babysitter.png"
   },
   {
+    "id": "background-player",
     "name": "Background Player",
     "role": "survivor",
     "type": "unique",
@@ -2904,6 +3060,7 @@
     "iconPath": "/images/IconPerks_backgroundPlayer.png"
   },
   {
+    "id": "bada-bada-boom",
     "name": "Bada Bada Boom",
     "role": "survivor",
     "type": "unique",
@@ -2922,6 +3079,7 @@
     "iconPath": "/images/IconsPerks_BadaBadaBoom.png"
   },
   {
+    "id": "balanced-landing",
     "name": "Balanced Landing",
     "role": "survivor",
     "type": "unique",
@@ -2940,6 +3098,7 @@
     "iconPath": "/images/IconPerks_balancedLanding.png"
   },
   {
+    "id": "bardic-inspiration",
     "name": "Bardic Inspiration",
     "role": "survivor",
     "type": "unique",
@@ -2958,6 +3117,7 @@
     "iconPath": "/images/IconPerks_bardicInspiration.png"
   },
   {
+    "id": "better-together",
     "name": "Better Together",
     "role": "survivor",
     "type": "unique",
@@ -2976,6 +3136,7 @@
     "iconPath": "/images/IconPerks_betterTogether.png"
   },
   {
+    "id": "better-than-new",
     "name": "Better than New",
     "role": "survivor",
     "type": "unique",
@@ -2994,6 +3155,7 @@
     "iconPath": "/images/IconPerks_betterThanNew.png"
   },
   {
+    "id": "bite-the-bullet",
     "name": "Bite the Bullet",
     "role": "survivor",
     "type": "unique",
@@ -3012,6 +3174,7 @@
     "iconPath": "/images/IconPerks_biteTheBullet.png"
   },
   {
+    "id": "blast-mine",
     "name": "Blast Mine",
     "role": "survivor",
     "type": "unique",
@@ -3030,6 +3193,7 @@
     "iconPath": "/images/IconPerks_blastMine.png"
   },
   {
+    "id": "blood-pact",
     "name": "Blood Pact",
     "role": "survivor",
     "type": "unique",
@@ -3048,6 +3212,7 @@
     "iconPath": "/images/IconPerks_bloodPact.png"
   },
   {
+    "id": "blood-rush",
     "name": "Blood Rush",
     "role": "survivor",
     "type": "unique",
@@ -3066,6 +3231,7 @@
     "iconPath": "/images/IconPerks_bloodRush.png"
   },
   {
+    "id": "boil-over",
     "name": "Boil Over",
     "role": "survivor",
     "type": "unique",
@@ -3084,6 +3250,7 @@
     "iconPath": "/images/IconPerks_boilOver.png"
   },
   {
+    "id": "bond",
     "name": "Bond",
     "role": "survivor",
     "type": "unique",
@@ -3102,6 +3269,7 @@
     "iconPath": "/images/IconPerks_bond.png"
   },
   {
+    "id": "boon-circle-of-healing",
     "name": "Boon: Circle of Healing",
     "role": "survivor",
     "type": "unique",
@@ -3120,6 +3288,7 @@
     "iconPath": "/images/IconPerks_boonCircleOfHealing.png"
   },
   {
+    "id": "boon-dark-theory",
     "name": "Boon: Dark Theory",
     "role": "survivor",
     "type": "unique",
@@ -3138,6 +3307,7 @@
     "iconPath": "/images/IconPerks_boonDarkTheory.png"
   },
   {
+    "id": "boon-exponential",
     "name": "Boon: Exponential",
     "role": "survivor",
     "type": "unique",
@@ -3156,6 +3326,7 @@
     "iconPath": "/images/IconPerks_boonExponential.png"
   },
   {
+    "id": "boon-illumination",
     "name": "Boon: Illumination",
     "role": "survivor",
     "type": "unique",
@@ -3174,6 +3345,7 @@
     "iconPath": "/images/IconPerks_boonIllumination.png"
   },
   {
+    "id": "boon-shadow-step",
     "name": "Boon: Shadow Step",
     "role": "survivor",
     "type": "unique",
@@ -3192,6 +3364,7 @@
     "iconPath": "/images/IconPerks_boonShadowStep.png"
   },
   {
+    "id": "borrowed-time",
     "name": "Borrowed Time",
     "role": "survivor",
     "type": "unique",
@@ -3216,6 +3389,7 @@
     "iconPath": "/images/IconPerks_borrowedTime.png"
   },
   {
+    "id": "botany-knowledge",
     "name": "Botany Knowledge",
     "role": "survivor",
     "type": "unique",
@@ -3234,6 +3408,7 @@
     "iconPath": "/images/IconPerks_botanyKnowledge.png"
   },
   {
+    "id": "bound-by-obsession",
     "name": "Bound by Obsession",
     "role": "survivor",
     "type": "general",
@@ -3252,6 +3427,7 @@
     "iconPath": "/images/IconPerks_objectOfObsession.png"
   },
   {
+    "id": "breakdown",
     "name": "Breakdown",
     "role": "survivor",
     "type": "unique",
@@ -3270,6 +3446,7 @@
     "iconPath": "/images/IconPerks_breakdown.png"
   },
   {
+    "id": "breakout",
     "name": "Breakout",
     "role": "survivor",
     "type": "unique",
@@ -3288,6 +3465,7 @@
     "iconPath": "/images/IconPerks_breakout.png"
   },
   {
+    "id": "buckle-up",
     "name": "Buckle Up",
     "role": "survivor",
     "type": "unique",
@@ -3306,6 +3484,7 @@
     "iconPath": "/images/IconPerks_buckleUp.png"
   },
   {
+    "id": "built-to-last",
     "name": "Built to Last",
     "role": "survivor",
     "type": "unique",
@@ -3324,6 +3503,7 @@
     "iconPath": "/images/IconPerks_builtToLast.png"
   },
   {
+    "id": "calm-spirit",
     "name": "Calm Spirit",
     "role": "survivor",
     "type": "unique",
@@ -3342,6 +3522,7 @@
     "iconPath": "/images/IconPerks_calmSpirit.png"
   },
   {
+    "id": "camaraderie",
     "name": "Camaraderie",
     "role": "survivor",
     "type": "unique",
@@ -3360,6 +3541,7 @@
     "iconPath": "/images/IconPerks_camaraderie.png"
   },
   {
+    "id": "champion-of-light",
     "name": "Champion of Light",
     "role": "survivor",
     "type": "unique",
@@ -3378,6 +3560,7 @@
     "iconPath": "/images/IconPerks_championOfLight.png"
   },
   {
+    "id": "change-of-plan",
     "name": "Change of Plan",
     "role": "survivor",
     "type": "unique",
@@ -3396,6 +3579,7 @@
     "iconPath": "/images/IconsPerks_ChangeOfPlan.png"
   },
   {
+    "id": "chemical-trap",
     "name": "Chemical Trap",
     "role": "survivor",
     "type": "unique",
@@ -3414,6 +3598,7 @@
     "iconPath": "/images/IconPerks_chemicalTrap.png"
   },
   {
+    "id": "clairvoyance",
     "name": "Clairvoyance",
     "role": "survivor",
     "type": "unique",
@@ -3432,6 +3617,7 @@
     "iconPath": "/images/IconPerks_clairvoyance.png"
   },
   {
+    "id": "clean-break",
     "name": "Clean Break",
     "role": "survivor",
     "type": "unique",
@@ -3450,6 +3636,7 @@
     "iconPath": "/images/IconPerks_cleanBreak.png"
   },
   {
+    "id": "come-and-get-me",
     "name": "Come and Get Me!",
     "role": "survivor",
     "type": "unique",
@@ -3468,6 +3655,7 @@
     "iconPath": "/images/IconPerks_comeAndGetMe.png"
   },
   {
+    "id": "conviction",
     "name": "Conviction",
     "role": "survivor",
     "type": "unique",
@@ -3486,6 +3674,7 @@
     "iconPath": "/images/IconPerks_conviction.png"
   },
   {
+    "id": "corrective-action",
     "name": "Corrective Action",
     "role": "survivor",
     "type": "unique",
@@ -3504,6 +3693,7 @@
     "iconPath": "/images/IconPerks_correctiveAction.png"
   },
   {
+    "id": "counterforce",
     "name": "Counterforce",
     "role": "survivor",
     "type": "unique",
@@ -3522,6 +3712,7 @@
     "iconPath": "/images/IconPerks_counterforce.png"
   },
   {
+    "id": "cut-loose",
     "name": "Cut Loose",
     "role": "survivor",
     "type": "unique",
@@ -3540,6 +3731,7 @@
     "iconPath": "/images/IconPerks_cutLoose.png"
   },
   {
+    "id": "dance-with-me",
     "name": "Dance With Me",
     "role": "survivor",
     "type": "unique",
@@ -3558,6 +3750,7 @@
     "iconPath": "/images/IconPerks_danceWithMe.png"
   },
   {
+    "id": "dark-sense",
     "name": "Dark Sense",
     "role": "survivor",
     "type": "general",
@@ -3576,6 +3769,7 @@
     "iconPath": "/images/IconPerks_darkSense.png"
   },
   {
+    "id": "dead-hard",
     "name": "Dead Hard",
     "role": "survivor",
     "type": "unique",
@@ -3594,6 +3788,7 @@
     "iconPath": "/images/IconPerks_deadHard.png"
   },
   {
+    "id": "deadline",
     "name": "Deadline",
     "role": "survivor",
     "type": "unique",
@@ -3612,6 +3807,7 @@
     "iconPath": "/images/IconPerks_deadline.png"
   },
   {
+    "id": "deception",
     "name": "Deception",
     "role": "survivor",
     "type": "unique",
@@ -3630,6 +3826,7 @@
     "iconPath": "/images/IconPerks_deception.png"
   },
   {
+    "id": "decisive-strike",
     "name": "Decisive Strike",
     "role": "survivor",
     "type": "unique",
@@ -3641,6 +3838,7 @@
     "iconPath": "/images/IconPerks_decisiveStrike.png"
   },
   {
+    "id": "deliverance",
     "name": "Deliverance",
     "role": "survivor",
     "type": "unique",
@@ -3659,6 +3857,7 @@
     "iconPath": "/images/IconPerks_deliverance.png"
   },
   {
+    "id": "desperate-measures",
     "name": "Desperate Measures",
     "role": "survivor",
     "type": "unique",
@@ -3683,6 +3882,7 @@
     "iconPath": "/images/IconPerks_desperateMeasures.png"
   },
   {
+    "id": "detectives-hunch",
     "name": "Detective's Hunch",
     "role": "survivor",
     "type": "unique",
@@ -3701,6 +3901,7 @@
     "iconPath": "/images/IconPerks_detectivesHunch.png"
   },
   {
+    "id": "distortion",
     "name": "Distortion",
     "role": "survivor",
     "type": "unique",
@@ -3719,6 +3920,7 @@
     "iconPath": "/images/IconPerks_distortion.png"
   },
   {
+    "id": "diversion",
     "name": "Diversion",
     "role": "survivor",
     "type": "unique",
@@ -3737,6 +3939,7 @@
     "iconPath": "/images/IconPerks_diversion.png"
   },
   {
+    "id": "do-no-harm",
     "name": "Do No Harm",
     "role": "survivor",
     "type": "unique",
@@ -3761,6 +3964,7 @@
     "iconPath": "/images/T_UI_iconsPerks_DoNoHarm.png"
   },
   {
+    "id": "down-to-the-last",
     "name": "Down to the Last",
     "role": "survivor",
     "type": "general",
@@ -3785,6 +3989,7 @@
     "iconPath": "/images/IconPerks_soleSurvivor_noLicense.png"
   },
   {
+    "id": "dramaturgy",
     "name": "Dramaturgy",
     "role": "survivor",
     "type": "unique",
@@ -3803,6 +4008,7 @@
     "iconPath": "/images/IconPerks_dramaturgy.png"
   },
   {
+    "id": "duty-of-care",
     "name": "Duty of Care",
     "role": "survivor",
     "type": "unique",
@@ -3821,6 +4027,7 @@
     "iconPath": "/images/T_UI_iconsPerks_DutyOfCare.png"
   },
   {
+    "id": "deja-vu",
     "name": "Déjà Vu",
     "role": "survivor",
     "type": "general",
@@ -3839,6 +4046,7 @@
     "iconPath": "/images/IconPerks_dejaVu.png"
   },
   {
+    "id": "empathic-connection",
     "name": "Empathic Connection",
     "role": "survivor",
     "type": "unique",
@@ -3857,6 +4065,7 @@
     "iconPath": "/images/IconPerks_empathicConnection.png"
   },
   {
+    "id": "empathy",
     "name": "Empathy",
     "role": "survivor",
     "type": "unique",
@@ -3875,6 +4084,7 @@
     "iconPath": "/images/IconPerks_empathy.png"
   },
   {
+    "id": "extrasensory-perception",
     "name": "Extrasensory Perception",
     "role": "survivor",
     "type": "unique",
@@ -3893,6 +4103,7 @@
     "iconPath": "/images/IconsPerks_ExtrasensoryPerception.png"
   },
   {
+    "id": "exultation",
     "name": "Exultation",
     "role": "survivor",
     "type": "unique",
@@ -3911,6 +4122,7 @@
     "iconPath": "/images/IconPerks_Exultation.png"
   },
   {
+    "id": "eyes-of-belmont",
     "name": "Eyes of Belmont",
     "role": "survivor",
     "type": "unique",
@@ -3929,6 +4141,7 @@
     "iconPath": "/images/IconPerks_EyesOfBelmont.png"
   },
   {
+    "id": "fast-track",
     "name": "Fast Track",
     "role": "survivor",
     "type": "unique",
@@ -3947,6 +4160,7 @@
     "iconPath": "/images/IconPerks_fastTrack.png"
   },
   {
+    "id": "finesse",
     "name": "Finesse",
     "role": "survivor",
     "type": "unique",
@@ -3965,6 +4179,7 @@
     "iconPath": "/images/IconPerks_finesse.png"
   },
   {
+    "id": "five-moves-ahead",
     "name": "Five Moves Ahead",
     "role": "survivor",
     "type": "unique",
@@ -3983,6 +4198,7 @@
     "iconPath": "/images/IconsPerks_FiveMovesAhead.png"
   },
   {
+    "id": "fixated",
     "name": "Fixated",
     "role": "survivor",
     "type": "unique",
@@ -4001,6 +4217,7 @@
     "iconPath": "/images/IconPerks_fixated.png"
   },
   {
+    "id": "flashbang",
     "name": "Flashbang",
     "role": "survivor",
     "type": "unique",
@@ -4019,6 +4236,7 @@
     "iconPath": "/images/IconPerks_flashbang.png"
   },
   {
+    "id": "flip-flop",
     "name": "Flip-Flop",
     "role": "survivor",
     "type": "unique",
@@ -4037,6 +4255,7 @@
     "iconPath": "/images/IconPerks_flip-Flop.png"
   },
   {
+    "id": "flow-state",
     "name": "Flow State",
     "role": "survivor",
     "type": "unique",
@@ -4067,6 +4286,7 @@
     "iconPath": "/images/IconsPerks_FlowState.png"
   },
   {
+    "id": "fogwise",
     "name": "Fogwise",
     "role": "survivor",
     "type": "unique",
@@ -4085,6 +4305,7 @@
     "iconPath": "/images/IconPerks_fogwise.png"
   },
   {
+    "id": "for-the-people",
     "name": "For the People",
     "role": "survivor",
     "type": "unique",
@@ -4103,6 +4324,7 @@
     "iconPath": "/images/IconPerks_forThePeople.png"
   },
   {
+    "id": "friendly-competition",
     "name": "Friendly Competition",
     "role": "survivor",
     "type": "unique",
@@ -4121,6 +4343,7 @@
     "iconPath": "/images/IconPerks_friendlyCompetition.png"
   },
   {
+    "id": "ghost-notes",
     "name": "Ghost Notes",
     "role": "survivor",
     "type": "unique",
@@ -4139,6 +4362,7 @@
     "iconPath": "/images/IconPerks_GhostNotes.png"
   },
   {
+    "id": "hardened",
     "name": "Hardened",
     "role": "survivor",
     "type": "unique",
@@ -4157,6 +4381,7 @@
     "iconPath": "/images/IconPerks_hardened.png"
   },
   {
+    "id": "head-on",
     "name": "Head On",
     "role": "survivor",
     "type": "unique",
@@ -4175,6 +4400,7 @@
     "iconPath": "/images/IconPerks_headOn.png"
   },
   {
+    "id": "hope",
     "name": "Hope",
     "role": "survivor",
     "type": "general",
@@ -4193,6 +4419,7 @@
     "iconPath": "/images/IconPerks_hope.png"
   },
   {
+    "id": "hyperfocus",
     "name": "Hyperfocus",
     "role": "survivor",
     "type": "unique",
@@ -4217,6 +4444,7 @@
     "iconPath": "/images/IconPerks_hyperfocus.png"
   },
   {
+    "id": "inner-focus",
     "name": "Inner Focus",
     "role": "survivor",
     "type": "unique",
@@ -4235,6 +4463,7 @@
     "iconPath": "/images/IconPerks_innerFocus.png"
   },
   {
+    "id": "inner-strength",
     "name": "Inner Strength",
     "role": "survivor",
     "type": "unique",
@@ -4253,6 +4482,7 @@
     "iconPath": "/images/IconPerks_innerStrength.png"
   },
   {
+    "id": "invocation-treacherous-crows",
     "name": "Invocation: Treacherous Crows",
     "role": "survivor",
     "type": "unique",
@@ -4271,6 +4501,7 @@
     "iconPath": "/images/IconPerks_invocationTreacherousCrows.png"
   },
   {
+    "id": "invocation-weaving-spiders",
     "name": "Invocation: Weaving Spiders",
     "role": "survivor",
     "type": "unique",
@@ -4289,6 +4520,7 @@
     "iconPath": "/images/IconPerks_invocationWeavingSpiders.png"
   },
   {
+    "id": "iron-will",
     "name": "Iron Will",
     "role": "survivor",
     "type": "unique",
@@ -4307,6 +4539,7 @@
     "iconPath": "/images/IconPerks_ironWill.png"
   },
   {
+    "id": "kindred",
     "name": "Kindred",
     "role": "survivor",
     "type": "general",
@@ -4325,6 +4558,7 @@
     "iconPath": "/images/IconPerks_kindred.png"
   },
   {
+    "id": "last-stand",
     "name": "Last Stand",
     "role": "survivor",
     "type": "unique",
@@ -4343,6 +4577,7 @@
     "iconPath": "/images/IconPerks_lastStand.png"
   },
   {
+    "id": "leader",
     "name": "Leader",
     "role": "survivor",
     "type": "unique",
@@ -4361,6 +4596,7 @@
     "iconPath": "/images/IconPerks_leader.png"
   },
   {
+    "id": "left-behind",
     "name": "Left Behind",
     "role": "survivor",
     "type": "unique",
@@ -4379,6 +4615,7 @@
     "iconPath": "/images/IconPerks_leftBehind.png"
   },
   {
+    "id": "light-footed",
     "name": "Light-Footed",
     "role": "survivor",
     "type": "unique",
@@ -4397,6 +4634,7 @@
     "iconPath": "/images/IconPerks_light-Footed.png"
   },
   {
+    "id": "lightweight",
     "name": "Lightweight",
     "role": "survivor",
     "type": "general",
@@ -4415,6 +4653,7 @@
     "iconPath": "/images/IconPerks_lightweight.png"
   },
   {
+    "id": "lithe",
     "name": "Lithe",
     "role": "survivor",
     "type": "unique",
@@ -4433,6 +4672,7 @@
     "iconPath": "/images/IconPerks_lithe.png"
   },
   {
+    "id": "low-profile",
     "name": "Low Profile",
     "role": "survivor",
     "type": "unique",
@@ -4451,6 +4691,7 @@
     "iconPath": "/images/IconPerks_lowProfile.png"
   },
   {
+    "id": "lucky-break",
     "name": "Lucky Break",
     "role": "survivor",
     "type": "unique",
@@ -4469,6 +4710,7 @@
     "iconPath": "/images/IconPerks_luckyBreak.png"
   },
   {
+    "id": "lucky-star",
     "name": "Lucky Star",
     "role": "survivor",
     "type": "unique",
@@ -4487,6 +4729,7 @@
     "iconPath": "/images/IconPerks_luckyStar.png"
   },
   {
+    "id": "made-for-this",
     "name": "Made for This",
     "role": "survivor",
     "type": "unique",
@@ -4511,6 +4754,7 @@
     "iconPath": "/images/IconPerks_madeForThis.png"
   },
   {
+    "id": "mettle-of-man",
     "name": "Mettle of Man",
     "role": "survivor",
     "type": "unique",
@@ -4529,6 +4773,7 @@
     "iconPath": "/images/IconPerks_mettleOfMan.png"
   },
   {
+    "id": "mirrored-illusion",
     "name": "Mirrored Illusion",
     "role": "survivor",
     "type": "unique",
@@ -4547,6 +4792,7 @@
     "iconPath": "/images/IconPerks_mirroredIllusion.png"
   },
   {
+    "id": "moment-of-glory",
     "name": "Moment of Glory",
     "role": "survivor",
     "type": "unique",
@@ -4565,6 +4811,7 @@
     "iconPath": "/images/IconPerks_MomentOfGlory.png"
   },
   {
+    "id": "no-mither",
     "name": "No Mither",
     "role": "survivor",
     "type": "unique",
@@ -4583,6 +4830,7 @@
     "iconPath": "/images/IconPerks_noMither.png"
   },
   {
+    "id": "no-one-left-behind",
     "name": "No One Left Behind",
     "role": "survivor",
     "type": "general",
@@ -4601,6 +4849,7 @@
     "iconPath": "/images/IconPerks_noOneLeftBehind.png"
   },
   {
+    "id": "object-of-obsession",
     "name": "Object of Obsession",
     "role": "survivor",
     "type": "unique",
@@ -4612,6 +4861,7 @@
     "iconPath": "/images/IconPerks_objectOfObsession.png"
   },
   {
+    "id": "off-the-record",
     "name": "Off the Record",
     "role": "survivor",
     "type": "unique",
@@ -4630,6 +4880,7 @@
     "iconPath": "/images/IconPerks_offTheRecord.png"
   },
   {
+    "id": "one-two-three-four",
     "name": "One-Two-Three-Four!",
     "role": "survivor",
     "type": "unique",
@@ -4648,6 +4899,7 @@
     "iconPath": "/images/IconPerks_OneTwoThreeFour.png"
   },
   {
+    "id": "open-handed",
     "name": "Open-Handed",
     "role": "survivor",
     "type": "unique",
@@ -4666,6 +4918,7 @@
     "iconPath": "/images/IconPerks_open-Handed.png"
   },
   {
+    "id": "overcome",
     "name": "Overcome",
     "role": "survivor",
     "type": "unique",
@@ -4684,6 +4937,7 @@
     "iconPath": "/images/IconPerks_overcome.png"
   },
   {
+    "id": "overzealous",
     "name": "Overzealous",
     "role": "survivor",
     "type": "unique",
@@ -4708,6 +4962,7 @@
     "iconPath": "/images/IconPerks_overzealous.png"
   },
   {
+    "id": "parental-guidance",
     "name": "Parental Guidance",
     "role": "survivor",
     "type": "unique",
@@ -4726,6 +4981,7 @@
     "iconPath": "/images/IconPerks_parentalGuidance.png"
   },
   {
+    "id": "pharmacy",
     "name": "Pharmacy",
     "role": "survivor",
     "type": "unique",
@@ -4744,6 +5000,7 @@
     "iconPath": "/images/IconPerks_pharmacy.png"
   },
   {
+    "id": "plot-twist",
     "name": "Plot Twist",
     "role": "survivor",
     "type": "unique",
@@ -4762,6 +5019,7 @@
     "iconPath": "/images/IconPerks_plotTwist.png"
   },
   {
+    "id": "plunderers-instinct",
     "name": "Plunderer's Instinct",
     "role": "survivor",
     "type": "general",
@@ -4780,6 +5038,7 @@
     "iconPath": "/images/IconPerks_plunderersInstinct.png"
   },
   {
+    "id": "poised",
     "name": "Poised",
     "role": "survivor",
     "type": "unique",
@@ -4798,6 +5057,7 @@
     "iconPath": "/images/IconPerks_poised.png"
   },
   {
+    "id": "potential-energy",
     "name": "Potential Energy",
     "role": "survivor",
     "type": "unique",
@@ -4816,6 +5076,7 @@
     "iconPath": "/images/IconPerks_potentialEnergy.png"
   },
   {
+    "id": "power-struggle",
     "name": "Power Struggle",
     "role": "survivor",
     "type": "unique",
@@ -4834,6 +5095,7 @@
     "iconPath": "/images/IconPerks_powerStruggle.png"
   },
   {
+    "id": "premonition",
     "name": "Premonition",
     "role": "survivor",
     "type": "general",
@@ -4852,6 +5114,7 @@
     "iconPath": "/images/IconPerks_premonition.png"
   },
   {
+    "id": "prove-thyself",
     "name": "Prove Thyself",
     "role": "survivor",
     "type": "unique",
@@ -4876,6 +5139,7 @@
     "iconPath": "/images/IconPerks_proveThyself.png"
   },
   {
+    "id": "quick-and-quiet",
     "name": "Quick & Quiet",
     "role": "survivor",
     "type": "unique",
@@ -4894,6 +5158,7 @@
     "iconPath": "/images/IconPerks_quickAndQuiet.png"
   },
   {
+    "id": "quick-gambit",
     "name": "Quick Gambit",
     "role": "survivor",
     "type": "unique",
@@ -4912,6 +5177,7 @@
     "iconPath": "/images/IconPerks_quickGambit.png"
   },
   {
+    "id": "rapid-response",
     "name": "Rapid Response",
     "role": "survivor",
     "type": "unique",
@@ -4930,6 +5196,7 @@
     "iconPath": "/images/T_UI_iconsPerks_RapidResponse.png"
   },
   {
+    "id": "reactive-healing",
     "name": "Reactive Healing",
     "role": "survivor",
     "type": "unique",
@@ -4948,6 +5215,7 @@
     "iconPath": "/images/IconPerks_reactiveHealing.png"
   },
   {
+    "id": "reassurance",
     "name": "Reassurance",
     "role": "survivor",
     "type": "unique",
@@ -4966,6 +5234,7 @@
     "iconPath": "/images/IconPerks_reassurance.png"
   },
   {
+    "id": "red-herring",
     "name": "Red Herring",
     "role": "survivor",
     "type": "unique",
@@ -4984,6 +5253,7 @@
     "iconPath": "/images/IconPerks_redHerring.png"
   },
   {
+    "id": "repressed-alliance",
     "name": "Repressed Alliance",
     "role": "survivor",
     "type": "unique",
@@ -5002,6 +5272,7 @@
     "iconPath": "/images/IconPerks_repressedAlliance.png"
   },
   {
+    "id": "residual-manifest",
     "name": "Residual Manifest",
     "role": "survivor",
     "type": "unique",
@@ -5020,6 +5291,7 @@
     "iconPath": "/images/IconPerks_residualManifest.png"
   },
   {
+    "id": "resilience",
     "name": "Resilience",
     "role": "survivor",
     "type": "general",
@@ -5038,6 +5310,7 @@
     "iconPath": "/images/IconPerks_resilience.png"
   },
   {
+    "id": "resurgence",
     "name": "Resurgence",
     "role": "survivor",
     "type": "unique",
@@ -5056,6 +5329,7 @@
     "iconPath": "/images/IconPerks_resurgence.png"
   },
   {
+    "id": "road-life",
     "name": "Road Life",
     "role": "survivor",
     "type": "unique",
@@ -5074,6 +5348,7 @@
     "iconPath": "/images/IconPerks_RoadLife.png"
   },
   {
+    "id": "rookie-spirit",
     "name": "Rookie Spirit",
     "role": "survivor",
     "type": "unique",
@@ -5092,6 +5367,7 @@
     "iconPath": "/images/IconPerks_rookieSpirit.png"
   },
   {
+    "id": "saboteur",
     "name": "Saboteur",
     "role": "survivor",
     "type": "unique",
@@ -5110,6 +5386,7 @@
     "iconPath": "/images/IconPerks_saboteur.png"
   },
   {
+    "id": "scavenger",
     "name": "Scavenger",
     "role": "survivor",
     "type": "unique",
@@ -5128,6 +5405,7 @@
     "iconPath": "/images/IconPerks_scavenger.png"
   },
   {
+    "id": "scene-partner",
     "name": "Scene Partner",
     "role": "survivor",
     "type": "unique",
@@ -5146,6 +5424,7 @@
     "iconPath": "/images/IconPerks_scenePartner.png"
   },
   {
+    "id": "second-wind",
     "name": "Second Wind",
     "role": "survivor",
     "type": "unique",
@@ -5164,6 +5443,7 @@
     "iconPath": "/images/IconPerks_secondWind.png"
   },
   {
+    "id": "self-care",
     "name": "Self-Care",
     "role": "survivor",
     "type": "unique",
@@ -5182,6 +5462,7 @@
     "iconPath": "/images/IconPerks_self-Care.png"
   },
   {
+    "id": "self-preservation",
     "name": "Self-Preservation",
     "role": "survivor",
     "type": "unique",
@@ -5200,6 +5481,7 @@
     "iconPath": "/images/IconPerks_self-Preservation.png"
   },
   {
+    "id": "shoulder-the-burden",
     "name": "Shoulder the Burden",
     "role": "survivor",
     "type": "unique",
@@ -5218,6 +5500,7 @@
     "iconPath": "/images/IconPerks_shoulderTheBurden.png"
   },
   {
+    "id": "slippery-meat",
     "name": "Slippery Meat",
     "role": "survivor",
     "type": "general",
@@ -5236,6 +5519,7 @@
     "iconPath": "/images/IconPerks_slipperyMeat.png"
   },
   {
+    "id": "small-game",
     "name": "Small Game",
     "role": "survivor",
     "type": "general",
@@ -5260,6 +5544,7 @@
     "iconPath": "/images/IconPerks_smallGame.png"
   },
   {
+    "id": "smash-hit",
     "name": "Smash Hit",
     "role": "survivor",
     "type": "unique",
@@ -5278,6 +5563,7 @@
     "iconPath": "/images/IconPerks_smashHit.png"
   },
   {
+    "id": "sole-survivor",
     "name": "Sole Survivor",
     "role": "survivor",
     "type": "unique",
@@ -5289,6 +5575,7 @@
     "iconPath": "/images/IconPerks_soleSurvivor.png"
   },
   {
+    "id": "solidarity",
     "name": "Solidarity",
     "role": "survivor",
     "type": "unique",
@@ -5307,6 +5594,7 @@
     "iconPath": "/images/IconPerks_solidarity.png"
   },
   {
+    "id": "soul-guard",
     "name": "Soul Guard",
     "role": "survivor",
     "type": "unique",
@@ -5325,6 +5613,7 @@
     "iconPath": "/images/IconPerks_soulGuard.png"
   },
   {
+    "id": "specialist",
     "name": "Specialist",
     "role": "survivor",
     "type": "unique",
@@ -5349,6 +5638,7 @@
     "iconPath": "/images/IconPerks_specialist.png"
   },
   {
+    "id": "spine-chill",
     "name": "Spine Chill",
     "role": "survivor",
     "type": "general",
@@ -5367,6 +5657,7 @@
     "iconPath": "/images/IconPerks_spineChill.png"
   },
   {
+    "id": "sprint-burst",
     "name": "Sprint Burst",
     "role": "survivor",
     "type": "unique",
@@ -5385,6 +5676,7 @@
     "iconPath": "/images/IconPerks_sprintBurst.png"
   },
   {
+    "id": "stake-out",
     "name": "Stake Out",
     "role": "survivor",
     "type": "unique",
@@ -5403,6 +5695,7 @@
     "iconPath": "/images/IconPerks_stakeOut.png"
   },
   {
+    "id": "still-sight",
     "name": "Still Sight",
     "role": "survivor",
     "type": "unique",
@@ -5421,6 +5714,7 @@
     "iconPath": "/images/IconPerks_stillSight.png"
   },
   {
+    "id": "streetwise",
     "name": "Streetwise",
     "role": "survivor",
     "type": "unique",
@@ -5439,6 +5733,7 @@
     "iconPath": "/images/IconPerks_streetwise.png"
   },
   {
+    "id": "strength-in-shadows",
     "name": "Strength in Shadows",
     "role": "survivor",
     "type": "unique",
@@ -5457,6 +5752,7 @@
     "iconPath": "/images/IconPerks_strengthInShadows.png"
   },
   {
+    "id": "teamwork-collective-stealth",
     "name": "Teamwork: Collective Stealth",
     "role": "survivor",
     "type": "unique",
@@ -5475,6 +5771,7 @@
     "iconPath": "/images/IconPerks_teamworkCollectiveStealth.png"
   },
   {
+    "id": "teamwork-full-circuit",
     "name": "Teamwork: Full Circuit",
     "role": "survivor",
     "type": "unique",
@@ -5493,6 +5790,7 @@
     "iconPath": "/images/IconsPerks_TeamworkFullCircuit.png"
   },
   {
+    "id": "teamwork-power-of-two",
     "name": "Teamwork: Power of Two",
     "role": "survivor",
     "type": "unique",
@@ -5511,6 +5809,7 @@
     "iconPath": "/images/IconPerks_teamworkPowerOfTwo.png"
   },
   {
+    "id": "teamwork-soft-spoken",
     "name": "Teamwork: Soft-Spoken",
     "role": "survivor",
     "type": "unique",
@@ -5529,6 +5828,7 @@
     "iconPath": "/images/IconsPerks_TeamworkSoftSpoken.png"
   },
   {
+    "id": "teamwork-throw-down",
     "name": "Teamwork: Throw Down",
     "role": "survivor",
     "type": "unique",
@@ -5547,6 +5847,7 @@
     "iconPath": "/images/IconPerks_teamworkThrowDown.png"
   },
   {
+    "id": "teamwork-toughen-up",
     "name": "Teamwork: Toughen Up",
     "role": "survivor",
     "type": "unique",
@@ -5565,6 +5866,7 @@
     "iconPath": "/images/IconPerks_teamworkToughenUp.png"
   },
   {
+    "id": "technician",
     "name": "Technician",
     "role": "survivor",
     "type": "unique",
@@ -5583,6 +5885,7 @@
     "iconPath": "/images/IconPerks_technician.png"
   },
   {
+    "id": "tenacity",
     "name": "Tenacity",
     "role": "survivor",
     "type": "unique",
@@ -5601,6 +5904,7 @@
     "iconPath": "/images/IconPerks_tenacity.png"
   },
   {
+    "id": "this-is-not-happening",
     "name": "This Is Not Happening",
     "role": "survivor",
     "type": "general",
@@ -5619,6 +5923,7 @@
     "iconPath": "/images/IconPerks_thisIsNotHappening.png"
   },
   {
+    "id": "troubleshooter",
     "name": "Troubleshooter",
     "role": "survivor",
     "type": "unique",
@@ -5643,6 +5948,7 @@
     "iconPath": "/images/IconPerks_troubleshooter.png"
   },
   {
+    "id": "unbreakable",
     "name": "Unbreakable",
     "role": "survivor",
     "type": "unique",
@@ -5661,6 +5967,7 @@
     "iconPath": "/images/IconPerks_unbreakable.png"
   },
   {
+    "id": "up-the-ante",
     "name": "Up the Ante",
     "role": "survivor",
     "type": "unique",
@@ -5685,6 +5992,7 @@
     "iconPath": "/images/IconPerks_upTheAnte.png"
   },
   {
+    "id": "urban-evasion",
     "name": "Urban Evasion",
     "role": "survivor",
     "type": "unique",
@@ -5703,6 +6011,7 @@
     "iconPath": "/images/IconPerks_urbanEvasion.png"
   },
   {
+    "id": "vigil",
     "name": "Vigil",
     "role": "survivor",
     "type": "unique",
@@ -5721,6 +6030,7 @@
     "iconPath": "/images/IconPerks_vigil.png"
   },
   {
+    "id": "visionary",
     "name": "Visionary",
     "role": "survivor",
     "type": "unique",
@@ -5739,6 +6049,7 @@
     "iconPath": "/images/IconPerks_visionary.png"
   },
   {
+    "id": "wake-up",
     "name": "Wake Up!",
     "role": "survivor",
     "type": "unique",
@@ -5763,6 +6074,7 @@
     "iconPath": "/images/IconPerks_wakeUp.png"
   },
   {
+    "id": "we-see-you",
     "name": "We See You",
     "role": "survivor",
     "type": "unique",
@@ -5781,6 +6093,7 @@
     "iconPath": "/images/IconsPerks_WeSeeYou.png"
   },
   {
+    "id": "well-make-it",
     "name": "We'll Make It",
     "role": "survivor",
     "type": "general",
@@ -5799,6 +6112,7 @@
     "iconPath": "/images/IconPerks_wellMakeIt.png"
   },
   {
+    "id": "were-gonna-live-forever",
     "name": "We're Gonna Live Forever",
     "role": "survivor",
     "type": "unique",
@@ -5817,6 +6131,7 @@
     "iconPath": "/images/IconPerks_wereGonnaLiveForever.png"
   },
   {
+    "id": "wicked",
     "name": "Wicked",
     "role": "survivor",
     "type": "unique",
@@ -5835,6 +6150,7 @@
     "iconPath": "/images/IconPerks_wicked.png"
   },
   {
+    "id": "will-to-live",
     "name": "Will to Live",
     "role": "survivor",
     "type": "general",
@@ -5853,6 +6169,7 @@
     "iconPath": "/images/IconPerks_decisiveStrike.png"
   },
   {
+    "id": "windows-of-opportunity",
     "name": "Windows of Opportunity",
     "role": "survivor",
     "type": "unique",
@@ -5871,6 +6188,7 @@
     "iconPath": "/images/IconPerks_windowsOfOpportunity.png"
   },
   {
+    "id": "wiretap",
     "name": "Wiretap",
     "role": "survivor",
     "type": "unique",

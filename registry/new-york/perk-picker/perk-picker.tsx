@@ -10,6 +10,7 @@ import perksData from "./perks.json";
 // ---------------------------------------------------------------------------
 
 export type Perk = {
+  id: string;
   name: string;
   role: "killer" | "survivor";
   type: "unique" | "general";
@@ -44,6 +45,9 @@ export interface PerkPickerProps {
 // ---------------------------------------------------------------------------
 
 const ALL_PERKS: Perk[] = perksData as Perk[];
+const PERK_BY_ID = new Map(ALL_PERKS.map((p) => [p.id, p]));
+
+export { ALL_PERKS, PERK_BY_ID, getPerkIconUrl };
 
 function getPerkIconUrl(perk: Perk): string {
   if (!perk.iconFile) return "";
@@ -195,8 +199,8 @@ export function PerkPicker({
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState<RoleFilter>(role ?? "all");
 
-  const selectedNames = useMemo(
-    () => new Set(value.map((s) => s.perk.name)),
+  const selectedIds = useMemo(
+    () => new Set(value.map((s) => s.perk.id)),
     [value],
   );
 
@@ -228,14 +232,14 @@ export function PerkPicker({
 
   const handleSelect = useCallback(
     (perk: Perk) => {
-      if (selectedNames.has(perk.name) || isFull) return;
+      if (selectedIds.has(perk.id) || isFull) return;
       // Find first empty slot
       const usedSlots = new Set(value.map((s) => s.slot));
       let slot = 0;
       while (usedSlots.has(slot)) slot++;
       onChange([...value, { slot, perk }]);
     },
-    [value, onChange, selectedNames, isFull],
+    [value, onChange, selectedIds, isFull],
   );
 
   const handleClear = useCallback(
@@ -328,10 +332,10 @@ export function PerkPicker({
       <div className="grid grid-cols-1 gap-2 @sm:grid-cols-2 @lg:grid-cols-3">
         {filtered.map((perk) => (
           <PerkGridItem
-            key={`${perk.role}-${perk.name}`}
+            key={perk.id}
             perk={perk}
-            isSelected={selectedNames.has(perk.name)}
-            isDisabled={isFull && !selectedNames.has(perk.name)}
+            isSelected={selectedIds.has(perk.id)}
+            isDisabled={isFull && !selectedIds.has(perk.id)}
             onSelect={() => handleSelect(perk)}
           />
         ))}

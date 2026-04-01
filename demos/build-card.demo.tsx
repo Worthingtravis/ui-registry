@@ -66,6 +66,7 @@ function BuildCardDemo({ fixture }: { fixture: Fixture }) {
                 ...perks.map((p, i) => ({
                   id: `perk-new-${i}`,
                   slot: `perk-${i + 1}`,
+                  perkId: p.perk.id,
                   label: p.perk.name,
                   imageUrl: p.perk.iconFile
                     ? `/dbd-perks/icons/${decodeURIComponent(p.perk.iconFile)}`

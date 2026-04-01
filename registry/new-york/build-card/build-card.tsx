@@ -3,8 +3,9 @@
 import React, { useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { PerkPickerDialog } from "@/registry/new-york/perk-picker/perk-picker-dialog";
-import type { SelectedPerk, Perk } from "@/registry/new-york/perk-picker/perk-picker";
-import perksData from "@/registry/new-york/perk-picker/perks.json";
+import type { SelectedPerk } from "@/registry/new-york/perk-picker/perk-picker";
+import { PERK_BY_ID } from "@/registry/new-york/perk-picker/perk-picker";
+import { PerkIcon, resolvePerk } from "@/registry/new-york/perk-icon/perk-icon";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -13,6 +14,7 @@ import perksData from "@/registry/new-york/perk-picker/perks.json";
 export type CreatorBuildItemData = {
   id: string;
   slot: string;
+  perkId: string | null;
   label: string;
   imageUrl: string | null;
   description: string | null;
@@ -42,34 +44,11 @@ export interface BuildCardProps {
 }
 
 // ---------------------------------------------------------------------------
-// Perk lookup
+// Perk lookup — prefers perkId, falls back to name
 // ---------------------------------------------------------------------------
 
-const ALL_PERKS = perksData as Perk[];
-const PERK_BY_NAME = new Map(ALL_PERKS.map((p) => [p.name.toLowerCase(), p]));
-
-/** Look up a real Perk by label, with fuzzy fallback for common aliases */
-function lookupPerk(label: string, role: "killer" | "survivor"): Perk {
-  const key = label.toLowerCase();
-  // Exact match first
-  const exact = PERK_BY_NAME.get(key);
-  if (exact) return exact;
-  // Fuzzy: find a perk whose name contains the label or vice versa
-  const fuzzy = ALL_PERKS.find(
-    (p) => p.name.toLowerCase().includes(key) || key.includes(p.name.toLowerCase()),
-  );
-  if (fuzzy) return fuzzy;
-  return {
-    name: label,
-    role,
-    type: "unique",
-    character: null,
-    description: "",
-    tierValues: null,
-    quote: null,
-    iconFile: null,
-    iconPath: null,
-  };
+function lookupPerkForItem(item: CreatorBuildItemData) {
+  return resolvePerk(item.perkId, item.label);
 }
 
 // ---------------------------------------------------------------------------
@@ -102,8 +81,7 @@ function ItemSlot({
   interactive?: boolean;
   onClick?: () => void;
 }) {
-  const [imgError, setImgError] = useState(false);
-
+  const hasPerk = !!(item.perkId || item.slot.startsWith("perk"));
   const Wrapper = interactive ? "button" : "div";
 
   return (
@@ -117,20 +95,17 @@ function ItemSlot({
     >
       <div
         className={cn(
-          "flex size-14 items-center justify-center rounded-lg border border-border/60 bg-muted/50 text-xs font-semibold text-muted-foreground transition-colors group-hover:border-border group-hover:bg-muted",
+          "flex size-14 items-center justify-center rounded-lg border border-border/60 bg-muted/50 transition-colors group-hover:border-border group-hover:bg-muted",
           interactive && "ring-primary/0 transition-all group-hover:ring-2 group-hover:ring-primary/40",
         )}
       >
-        {item.imageUrl && !imgError ? (
+        {hasPerk ? (
+          <PerkIcon perkId={item.perkId} name={item.label} size="lg" className="size-full rounded-lg" />
+        ) : item.imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={item.imageUrl}
-            alt={item.label}
-            className="size-full rounded-lg object-cover"
-            onError={() => setImgError(true)}
-          />
+          <img src={item.imageUrl} alt={item.label} className="size-full rounded-lg object-cover" />
         ) : (
-          <span className="px-0.5 text-center leading-tight">{item.label.slice(0, 3)}</span>
+          <span className="px-0.5 text-center text-xs font-semibold leading-tight text-muted-foreground">{item.label.slice(0, 3)}</span>
         )}
       </div>
       <span className="w-full truncate text-center text-[11px] leading-tight text-muted-foreground">
@@ -197,11 +172,13 @@ function BuildEntry({
   const role = build.role?.toLowerCase() as "killer" | "survivor" | undefined;
   const validRole = role === "killer" || role === "survivor" ? role : undefined;
 
-  // Build initial value for the picker — look up real perk data for icons
-  const initialPickerValue: SelectedPerk[] = perks.map((item, index) => ({
-    slot: index,
-    perk: lookupPerk(item.label, validRole ?? "killer"),
-  }));
+  // Build initial value for the picker — look up real perk data by ID or name
+  const initialPickerValue: SelectedPerk[] = perks
+    .map((item, index) => {
+      const perk = lookupPerkForItem(item);
+      return perk ? { slot: index, perk } : null;
+    })
+    .filter((x): x is SelectedPerk => x !== null);
 
   const handleOpenPicker = useCallback(() => {
     if (isOwner) setPickerOpen(true);
