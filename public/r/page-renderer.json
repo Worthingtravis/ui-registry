@@ -8,8 +8,8 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "page-builder-lib",
-    "sortable-section"
+    "https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/page-builder-lib.json",
+    "https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/sortable-section.json"
   ],
   "files": [
     {

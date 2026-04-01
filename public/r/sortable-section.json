@@ -8,7 +8,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "page-builder-lib"
+    "https://raw.githubusercontent.com/Worthingtravis/ui-registry/main/public/r/page-builder-lib.json"
   ],
   "files": [
     {
