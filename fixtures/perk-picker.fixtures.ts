@@ -7,11 +7,15 @@ export type PerkPickerFixture = Omit<PerkPickerProps, "onChange">;
 type Fixture = PerkPickerFixture;
 
 // Grab some well-known perks for fixtures
-const find = (name: string) => ALL_PERKS.find((p) => p.name === name)!;
+const find = (name: string): Perk => {
+  const found = ALL_PERKS.find((p) => p.name === name);
+  if (!found) throw new Error(`Perk "${name}" not found in perks.json`);
+  return found;
+};
 
 const CORRUPT = find("Corrupt Intervention");
 const POP = find("Pop Goes the Weasel");
-const BBQ = find("BBQ & Chilli");
+const BBQ = find("Barbecue & Chilli");
 const LETHAL = find("Lethal Pursuer");
 const WINDOWS = find("Windows of Opportunity");
 const SPRINT = find("Sprint Burst");
