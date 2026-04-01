@@ -39,6 +39,8 @@ export interface GuideTabsProps {
 // ---------------------------------------------------------------------------
 
 function VideoCard({ link }: { link: CreatorGuideLinkData }) {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <a
       href={link.url}
@@ -47,13 +49,14 @@ function VideoCard({ link }: { link: CreatorGuideLinkData }) {
       className="group flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:bg-card hover:shadow-lg hover:shadow-black/10"
     >
       {/* 16:9 thumbnail */}
-      <div className="relative aspect-video bg-muted/50 overflow-hidden">
-        {link.thumbnailUrl ? (
+      <div className="relative aspect-video overflow-hidden bg-muted/50">
+        {link.thumbnailUrl && !imgError ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={link.thumbnailUrl}
-            alt={link.title}
+            alt=""
             className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className="flex size-full items-center justify-center">
@@ -66,15 +69,15 @@ function VideoCard({ link }: { link: CreatorGuideLinkData }) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col gap-1.5 p-3">
+      <div className="flex flex-1 flex-col gap-1.5 p-3">
         <div className="flex items-start justify-between gap-2">
-          <h4 className="line-clamp-2 text-sm font-semibold text-foreground leading-snug">
+          <h4 className="line-clamp-2 text-sm font-semibold leading-snug text-foreground">
             {link.title}
           </h4>
           <ExternalLink className="mt-0.5 size-3.5 shrink-0 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground" aria-hidden="true" />
         </div>
         {link.description && (
-          <p className="line-clamp-2 text-xs text-muted-foreground">{link.description}</p>
+          <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
         )}
       </div>
     </a>
@@ -117,53 +120,55 @@ export function GuideTabs({ categories, introText, isOwner, className }: GuideTa
   const activeCategory = categories.find((c) => c.id === activeId) ?? categories[0]!;
 
   return (
-    <div className={cn("flex flex-col gap-5", className)}>
-      {introText && (
-        <p className="text-sm text-muted-foreground leading-relaxed">{introText}</p>
-      )}
-
-      {/* Tab bar */}
-      <div className="flex flex-wrap gap-1.5 border-b border-border pb-0" role="tablist" aria-label="Guide categories">
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            role="tab"
-            aria-selected={cat.id === activeCategory.id}
-            onClick={() => setActiveId(cat.id)}
-            className={cn(
-              "relative rounded-t-lg px-4 py-2 text-sm font-medium transition-all duration-150",
-              cat.id === activeCategory.id
-                ? "text-foreground after:absolute after:inset-x-0 after:bottom-[-1px] after:h-px after:bg-foreground"
-                : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {cat.title}
-            {cat.links.length > 0 && (
-              <span className="ml-1.5 text-[10px] text-muted-foreground/60">
-                {cat.links.length}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Active tab content */}
-      <div role="tabpanel">
-        {activeCategory.description && (
-          <p className="mb-4 text-xs text-muted-foreground">{activeCategory.description}</p>
+    <div className={cn("@container", className)}>
+      <div className="flex flex-col gap-5">
+        {introText && (
+          <p className="text-sm leading-relaxed text-muted-foreground">{introText}</p>
         )}
-        {activeCategory.links.length === 0 ? (
-          <p className="py-6 text-center text-sm text-muted-foreground/60">
-            No guides in this category yet.
-          </p>
-        ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {activeCategory.links.map((link) => (
-              <VideoCard key={link.id} link={link} />
-            ))}
-          </div>
-        )}
+
+        {/* Tab bar */}
+        <div className="flex flex-wrap gap-1.5 border-b border-border pb-0" role="tablist" aria-label="Guide categories">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              role="tab"
+              aria-selected={cat.id === activeCategory.id}
+              onClick={() => setActiveId(cat.id)}
+              className={cn(
+                "relative min-h-[44px] rounded-t-lg px-4 py-2 text-sm font-medium transition-all duration-150",
+                cat.id === activeCategory.id
+                  ? "text-foreground after:absolute after:inset-x-0 after:bottom-[-1px] after:h-px after:bg-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {cat.title}
+              {cat.links.length > 0 && (
+                <span className="ml-2 inline-flex min-w-[1.25rem] items-center justify-center rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
+                  {cat.links.length}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Active tab content */}
+        <div role="tabpanel">
+          {activeCategory.description && (
+            <p className="mb-4 text-xs text-muted-foreground">{activeCategory.description}</p>
+          )}
+          {activeCategory.links.length === 0 ? (
+            <p className="py-6 text-center text-sm text-muted-foreground/60">
+              No guides in this category yet.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 @md:grid-cols-2 @xl:grid-cols-3">
+              {activeCategory.links.map((link) => (
+                <VideoCard key={link.id} link={link} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

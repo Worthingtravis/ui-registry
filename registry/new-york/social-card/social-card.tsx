@@ -165,38 +165,40 @@ export function SocialCard({ socials, isOwner, className }: SocialCardProps) {
   }
 
   return (
-    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3", className)}>
-      {socials.map((social) => (
-        <a
-          key={social.id}
-          href={social.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            "group flex flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4",
-            "backdrop-blur-sm transition-all duration-200",
-            "hover:-translate-y-0.5 hover:border-border hover:bg-card hover:shadow-lg hover:shadow-black/10",
-          )}
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className={cn("size-6 shrink-0", platformColor(social.platform))}>
-                <PlatformIcon platform={social.platform} className="size-full" />
+    <div className={cn("@container", className)}>
+      <div className="grid grid-cols-1 gap-4 @sm:grid-cols-2 @lg:grid-cols-3">
+        {socials.map((social) => (
+          <a
+            key={social.id}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              "group flex min-h-[44px] flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4",
+              "backdrop-blur-sm transition-all duration-200",
+              "hover:-translate-y-0.5 hover:border-border hover:bg-card hover:shadow-lg hover:shadow-black/10",
+            )}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <div className={cn("size-6 shrink-0", platformColor(social.platform))}>
+                  <PlatformIcon platform={social.platform} className="size-full" />
+                </div>
+                <span className="text-sm font-semibold text-foreground">
+                  {formatPlatformName(social.platform)}
+                </span>
               </div>
-              <span className="text-sm font-semibold text-foreground">
-                {formatPlatformName(social.platform)}
-              </span>
+              <ExternalLink
+                className="size-3.5 shrink-0 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground"
+                aria-hidden="true"
+              />
             </div>
-            <ExternalLink
-              className="size-3.5 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground"
-              aria-hidden="true"
-            />
-          </div>
-          {social.description && (
-            <p className="line-clamp-2 text-xs text-muted-foreground">{social.description}</p>
-          )}
-        </a>
-      ))}
+            {social.description && (
+              <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">{social.description}</p>
+            )}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }

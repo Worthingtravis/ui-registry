@@ -34,7 +34,7 @@ export default async function PreviewPage({ params }: { params: Promise<{ name: 
   const sourceCode = readFile(`registry/new-york/${name}/${name}.tsx`);
 
   return (
-    <div className="max-w-3xl px-6 lg:px-8 py-10">
+    <div className="max-w-6xl px-6 lg:px-8 py-10">
       <Suspense fallback={<div className="text-sm text-muted-foreground animate-pulse">Loading preview...</div>}>
         <PreviewClient name={name} sourceCode={sourceCode} />
       </Suspense>

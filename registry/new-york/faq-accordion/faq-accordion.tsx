@@ -48,39 +48,41 @@ export function FaqAccordion({ items, isOwner, className }: FaqAccordionProps) {
   }
 
   return (
-    <div className={cn("divide-y divide-border overflow-hidden rounded-xl border border-border/60", className)}>
-      {items.map((item) => (
-        <details
-          key={item.id}
-          className="group bg-card/50 backdrop-blur-sm open:bg-card transition-colors duration-150"
-        >
-          <summary
-            className={cn(
-              "flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4",
-              "text-sm font-semibold text-foreground transition-colors",
-              "hover:text-foreground/80 [&::-webkit-details-marker]:hidden",
-            )}
+    <div className={cn("@container", className)}>
+      <div className="divide-y divide-border overflow-hidden rounded-xl border border-border/60">
+        {items.map((item) => (
+          <details
+            key={item.id}
+            className="group bg-card/50 backdrop-blur-sm transition-colors duration-150 open:bg-card"
           >
-            <span>{item.question}</span>
-            {/* Animated chevron */}
-            <svg
-              className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
+            <summary
+              className={cn(
+                "flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 px-5 py-4",
+                "text-sm font-semibold text-foreground transition-colors",
+                "hover:text-foreground/80 [&::-webkit-details-marker]:hidden",
+              )}
             >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </summary>
-          <div className="px-5 pb-5 pt-1">
-            <p className="text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
-          </div>
-        </details>
-      ))}
+              <span className="leading-relaxed">{item.question}</span>
+              {/* Animated chevron */}
+              <svg
+                className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </summary>
+            <div className="px-5 pb-5 pt-2">
+              <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
     </div>
   );
 }

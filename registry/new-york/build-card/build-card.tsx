@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
 // ---------------------------------------------------------------------------
@@ -53,24 +55,27 @@ function RoleBadge({ role }: { role: string }) {
 }
 
 function ItemSlot({ item }: { item: CreatorBuildItemData }) {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div
       className="group relative flex flex-col items-center gap-1.5"
       title={item.description ?? item.label}
     >
-      <div className="flex size-12 items-center justify-center rounded-lg border border-border/60 bg-muted/50 text-[10px] font-semibold text-muted-foreground transition-colors group-hover:border-border group-hover:bg-muted">
-        {item.imageUrl ? (
+      <div className="flex size-14 items-center justify-center rounded-lg border border-border/60 bg-muted/50 text-xs font-semibold text-muted-foreground transition-colors group-hover:border-border group-hover:bg-muted">
+        {item.imageUrl && !imgError ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={item.imageUrl}
             alt={item.label}
             className="size-full rounded-lg object-cover"
+            onError={() => setImgError(true)}
           />
         ) : (
-          <span className="px-0.5 text-center leading-tight">{item.label.slice(0, 2)}</span>
+          <span className="px-0.5 text-center leading-tight">{item.label.slice(0, 3)}</span>
         )}
       </div>
-      <span className="line-clamp-1 w-full text-center text-[10px] text-muted-foreground">
+      <span className="w-full text-center text-[11px] leading-tight text-muted-foreground">
         {item.label}
       </span>
       {item.description && (
@@ -84,6 +89,7 @@ function ItemSlot({ item }: { item: CreatorBuildItemData }) {
 }
 
 function BuildEntry({ build }: { build: CreatorBuildData }) {
+  const [imgError, setImgError] = useState(false);
   const perks = build.items.filter((i) => i.slot.startsWith("perk")).slice(0, 4);
   const addons = build.items.filter((i) => i.slot.startsWith("addon")).slice(0, 2);
   const otherItems = build.items.filter(
@@ -94,13 +100,14 @@ function BuildEntry({ build }: { build: CreatorBuildData }) {
   return (
     <div className="overflow-hidden rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm transition-all duration-200 hover:border-border hover:shadow-lg hover:shadow-black/10">
       {/* Character image */}
-      <div className="relative h-36 bg-muted/50 sm:h-44">
-        {build.characterImageUrl ? (
+      <div className="relative h-44 bg-muted/50 @sm:h-52">
+        {build.characterImageUrl && !imgError ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={build.characterImageUrl}
             alt={build.title}
             className="size-full object-cover object-top"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className="flex size-full items-center justify-center">
@@ -120,7 +127,7 @@ function BuildEntry({ build }: { build: CreatorBuildData }) {
       <div className="p-4">
         <h3 className="mb-1 text-sm font-bold text-foreground">{build.title}</h3>
         {build.description && (
-          <p className="mb-3 text-xs text-muted-foreground">{build.description}</p>
+          <p className="mb-3 line-clamp-3 text-xs text-muted-foreground">{build.description}</p>
         )}
 
         {/* Item grid */}
@@ -129,7 +136,7 @@ function BuildEntry({ build }: { build: CreatorBuildData }) {
             <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">
               Build
             </p>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-3 gap-3 @xs:grid-cols-4">
               {displayItems.map((item) => (
                 <ItemSlot key={item.id} item={item} />
               ))}
@@ -177,10 +184,12 @@ export function BuildCard({ builds, isOwner, className }: BuildCardProps) {
   }
 
   return (
-    <div className={cn("grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3", className)}>
-      {builds.map((build) => (
-        <BuildEntry key={build.id} build={build} />
-      ))}
+    <div className={cn("@container", className)}>
+      <div className="grid grid-cols-1 gap-6 @md:grid-cols-2 @xl:grid-cols-3">
+        {builds.map((build) => (
+          <BuildEntry key={build.id} build={build} />
+        ))}
+      </div>
     </div>
   );
 }

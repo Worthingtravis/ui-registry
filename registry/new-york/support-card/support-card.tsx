@@ -39,21 +39,21 @@ function CreatorCodeCard({ link }: { link: CreatorSupportData }) {
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm">
-      <div className="flex items-center gap-2">
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <div className="flex items-center gap-2.5">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <svg className="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <polyline points="16 18 22 12 16 6" />
             <polyline points="8 6 2 12 8 18" />
           </svg>
         </div>
         <div className="min-w-0">
-          <p className="truncate text-sm font-semibold text-foreground">{link.label}</p>
+          <p className="text-sm font-semibold leading-snug text-foreground">{link.label}</p>
           <p className="text-xs text-muted-foreground">Creator Code</p>
         </div>
       </div>
 
       {link.description && (
-        <p className="text-xs text-muted-foreground">{link.description}</p>
+        <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
       )}
 
       {link.code && (
@@ -61,15 +61,15 @@ function CreatorCodeCard({ link }: { link: CreatorSupportData }) {
           type="button"
           onClick={() => copy(link.code!)}
           className={cn(
-            "flex items-center justify-between rounded-lg border border-border/80 bg-muted/50 px-3 py-2",
+            "flex min-h-[44px] items-center justify-between rounded-lg border border-border/80 bg-muted/50 px-3.5 py-2.5",
             "transition-all duration-150 hover:bg-muted",
           )}
           aria-label={`Copy creator code ${link.code}`}
         >
-          <span className="font-mono text-sm font-bold tracking-wider text-foreground">
+          <span className="font-mono text-base font-bold tracking-wider text-foreground">
             {link.code}
           </span>
-          <span className="relative ml-2 size-4 shrink-0">
+          <span className="relative ml-3 flex size-5 shrink-0 items-center justify-center">
             <svg
               className="absolute inset-0 text-muted-foreground transition-all duration-200"
               style={{ opacity: copied ? 0 : 1, transform: copied ? "scale(0.5)" : "scale(1)" }}
@@ -87,12 +87,16 @@ function CreatorCodeCard({ link }: { link: CreatorSupportData }) {
                 strokeDashoffset: copied ? 0 : 24,
                 transitionProperty: "opacity, transform, stroke-dashoffset",
               }}
-              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </span>
         </button>
+      )}
+
+      {copied && (
+        <p className="text-xs font-medium text-green-500">Copied to clipboard!</p>
       )}
     </div>
   );
@@ -105,24 +109,24 @@ function DonationCard({ link }: { link: CreatorSupportData }) {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group flex flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm",
+        "group flex min-h-[44px] flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm",
         "transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:bg-card hover:shadow-lg hover:shadow-black/10",
       )}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-rose-500/10 text-rose-400">
-            <Heart className="size-4" />
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-rose-500/10 text-rose-400">
+            <Heart className="size-4.5" />
           </div>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-foreground">{link.label}</p>
+            <p className="text-sm font-semibold leading-snug text-foreground">{link.label}</p>
             <p className="text-xs text-muted-foreground">Donation</p>
           </div>
         </div>
-        <ExternalLink className="size-3.5 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground" aria-hidden="true" />
+        <ExternalLink className="size-3.5 shrink-0 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground" aria-hidden="true" />
       </div>
       {link.description && (
-        <p className="text-xs text-muted-foreground">{link.description}</p>
+        <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
       )}
     </a>
   );
@@ -135,24 +139,24 @@ function AffiliateCard({ link }: { link: CreatorSupportData }) {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group flex flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm",
+        "group flex min-h-[44px] flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm",
         "transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:bg-card hover:shadow-lg hover:shadow-black/10",
       )}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
-            <ExternalLink className="size-4" />
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
+            <ExternalLink className="size-4.5" />
           </div>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-foreground">{link.label}</p>
+            <p className="text-sm font-semibold leading-snug text-foreground">{link.label}</p>
             <p className="text-xs text-muted-foreground">Affiliate</p>
           </div>
         </div>
-        <ExternalLink className="size-3.5 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground" aria-hidden="true" />
+        <ExternalLink className="size-3.5 shrink-0 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground" aria-hidden="true" />
       </div>
       {link.description && (
-        <p className="text-xs text-muted-foreground">{link.description}</p>
+        <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
       )}
       {link.code && (
         <p className="text-xs text-muted-foreground">
@@ -170,24 +174,24 @@ function MerchCard({ link }: { link: CreatorSupportData }) {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group flex flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm",
+        "group flex min-h-[44px] flex-col gap-3 rounded-xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm",
         "transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:bg-card hover:shadow-lg hover:shadow-black/10",
       )}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
-            <ShoppingBag className="size-4" />
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
+            <ShoppingBag className="size-4.5" />
           </div>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-foreground">{link.label}</p>
+            <p className="text-sm font-semibold leading-snug text-foreground">{link.label}</p>
             <p className="text-xs text-muted-foreground">Merch</p>
           </div>
         </div>
-        <ExternalLink className="size-3.5 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground" aria-hidden="true" />
+        <ExternalLink className="size-3.5 shrink-0 text-muted-foreground/40 transition-colors group-hover:text-muted-foreground" aria-hidden="true" />
       </div>
       {link.description && (
-        <p className="text-xs text-muted-foreground">{link.description}</p>
+        <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
       )}
     </a>
   );
@@ -222,13 +226,15 @@ export function SupportCard({ links, isOwner, className }: SupportCardProps) {
   }
 
   return (
-    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3", className)}>
-      {links.map((link) => {
-        if (link.type === "creator-code") return <CreatorCodeCard key={link.id} link={link} />;
-        if (link.type === "donation") return <DonationCard key={link.id} link={link} />;
-        if (link.type === "merch") return <MerchCard key={link.id} link={link} />;
-        return <AffiliateCard key={link.id} link={link} />;
-      })}
+    <div className={cn("@container", className)}>
+      <div className="grid grid-cols-1 gap-4 @sm:grid-cols-2 @lg:grid-cols-3">
+        {links.map((link) => {
+          if (link.type === "creator-code") return <CreatorCodeCard key={link.id} link={link} />;
+          if (link.type === "donation") return <DonationCard key={link.id} link={link} />;
+          if (link.type === "merch") return <MerchCard key={link.id} link={link} />;
+          return <AffiliateCard key={link.id} link={link} />;
+        })}
+      </div>
     </div>
   );
 }
