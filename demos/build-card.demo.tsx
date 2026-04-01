@@ -1,4 +1,8 @@
-import { BuildCard } from "@/registry/new-york/build-card/build-card";
+"use client";
+
+import React, { useState, useCallback } from "react";
+import { BuildCard, type CreatorBuildData } from "@/registry/new-york/build-card/build-card";
+import type { SelectedPerk } from "@/registry/new-york/perk-picker/perk-picker";
 import {
   ALL_FIXTURES,
   type BuildCardFixture,
@@ -9,45 +13,92 @@ type Fixture = BuildCardFixture;
 
 const propsMeta: PropMeta[] = [
   { name: "builds", type: "CreatorBuildData[]", required: true, description: "Array of character builds to display" },
-  { name: "isOwner", type: "boolean", required: true, description: "Whether the viewer is the owner — affects empty state message" },
+  { name: "isOwner", type: "boolean", required: true, description: "Whether the viewer is the owner — enables perk editing" },
+  { name: "onPerksChange", type: "(buildId, perks) => void", required: false, description: "Called when perks are updated via the picker dialog" },
   { name: "className", type: "string", required: false, description: "Additional CSS classes for the root container" },
 ];
 
 const USAGE = `import { BuildCard } from "@/registry/new-york/build-card/build-card"
+import type { SelectedPerk } from "@/registry/new-york/perk-picker/perk-picker"
 
-<BuildCard
-  builds={[{
-    id: "1",
-    game: "dbd",
-    title: "Main Killer — Springtrap",
-    role: "killer",
-    characterImageUrl: null,
-    description: null,
-    items: [
-      { id: "i1", slot: "perk-1", label: "Corrupt Intervention", imageUrl: null, description: "Blocks 3 furthest gens for 120s" },
-      { id: "i2", slot: "perk-2", label: "Pop Goes the Weasel", imageUrl: null, description: "Kick gen for 25% regression" },
-      { id: "i3", slot: "perk-3", label: "BBQ & Chilli", imageUrl: null, description: "See auras after hooking" },
-      { id: "i4", slot: "perk-4", label: "Lethal Pursuer", imageUrl: null, description: "See survivors at start" },
-    ],
-  }]}
-  isOwner={false}
-/>
+function MyBuilds() {
+  const [builds, setBuilds] = useState(initialBuilds);
 
-{/* Items: slot names starting with "perk" (up to 4) shown first, then "addon" (up to 2) */}
-{/* Hover any item slot to see its description tooltip */}
-{/* role="killer" → red badge, role="survivor" → green badge */}`;
+  const handlePerksChange = (buildId: string, perks: SelectedPerk[]) => {
+    setBuilds(prev => prev.map(b =>
+      b.id === buildId
+        ? { ...b, items: perks.map((p, i) => ({
+            id: \`perk-\${i}\`,
+            slot: \`perk-\${i + 1}\`,
+            label: p.perk.name,
+            imageUrl: p.perk.iconFile ? \`/dbd-perks/icons/\${p.perk.iconFile}\` : null,
+            description: p.perk.description,
+          }))}
+        : b
+    ));
+  };
+
+  return (
+    <BuildCard
+      builds={builds}
+      isOwner={true}
+      onPerksChange={handlePerksChange}
+    />
+  );
+}`;
+
+function BuildCardDemo({ fixture }: { fixture: Fixture }) {
+  const [builds, setBuilds] = useState<CreatorBuildData[]>(fixture.builds);
+
+  // Reset builds when fixture changes
+  React.useEffect(() => {
+    setBuilds(fixture.builds);
+  }, [fixture.builds]);
+
+  const handlePerksChange = useCallback((buildId: string, perks: SelectedPerk[]) => {
+    setBuilds((prev) =>
+      prev.map((b) =>
+        b.id === buildId
+          ? {
+              ...b,
+              items: [
+                // Replace perks
+                ...perks.map((p, i) => ({
+                  id: `perk-new-${i}`,
+                  slot: `perk-${i + 1}`,
+                  label: p.perk.name,
+                  imageUrl: p.perk.iconFile
+                    ? `/dbd-perks/icons/${decodeURIComponent(p.perk.iconFile)}`
+                    : null,
+                  description: p.perk.description,
+                })),
+                // Keep non-perk items
+                ...b.items.filter((item) => !item.slot.startsWith("perk")),
+              ],
+            }
+          : b,
+      ),
+    );
+  }, []);
+
+  return (
+    <div className="w-full">
+      <BuildCard
+        builds={builds}
+        isOwner={fixture.isOwner}
+        onPerksChange={handlePerksChange}
+      />
+    </div>
+  );
+}
 
 export const config: PreviewLabConfig<Fixture> = {
   title: "Build Card",
   description:
-    "Character build cards with a large character image, role badge (killer/survivor), item slot grid with hover tooltips, and optional description.",
+    "Character build cards with a large character image, role badge (killer/survivor), item slot grid with hover tooltips, and optional description. When isOwner is true, perk slots are interactive — click to open the perk picker dialog.",
   tags: ["build", "loadout", "game", "creator", "grid"],
   usageCode: USAGE,
   fixtures: ALL_FIXTURES,
-  render: (fixture) => (
-    <div className="w-full">
-      <BuildCard {...fixture} />
-    </div>
-  ),
+  render: (fixture) => <BuildCardDemo fixture={fixture} />,
   propsMeta,
 };
